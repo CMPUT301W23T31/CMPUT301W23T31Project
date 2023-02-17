@@ -75,7 +75,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:textSize="36dp"
-            android:text="123.4 m N/NW"
+            android:text="123.4m N/NW"
 
             app:layout_constraintTop_toBottomOf="@id/home_screen_nearest_code_text"
             app:layout_constraintBottom_toTopOf="@id/home_screen_quick_access_text"
@@ -107,8 +107,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:columnCount="2"
-        android:rowCount="3"
-        android:maxWidth="@dimen/cardview_compat_inset_shadow">
+        android:rowCount="3">
 
         <Button
             android:id="@+id/home_screen_explore_button"
