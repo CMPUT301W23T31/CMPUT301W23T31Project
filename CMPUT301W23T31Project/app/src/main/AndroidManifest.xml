@@ -32,7 +32,7 @@
                 android:value="" />
         </activity>
 
-        <activity android:name=".HomeScreenActivity"></activity>
+        <activity android:name=".MainActivity"></activity>
 
     </application>
 

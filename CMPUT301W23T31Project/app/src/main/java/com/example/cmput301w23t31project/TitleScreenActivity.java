@@ -15,7 +15,7 @@ public class TitleScreenActivity extends AppCompatActivity {
         setContentView(R.layout.fragment_title_screen);
     }
     public void onTap(View view){
-        Intent intent = new Intent(this, HomeScreenActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 }
