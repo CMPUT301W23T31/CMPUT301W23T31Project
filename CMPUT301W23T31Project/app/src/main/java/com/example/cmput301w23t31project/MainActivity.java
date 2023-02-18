@@ -2,6 +2,7 @@ package com.example.cmput301w23t31project;
 
 
 import android.content.Intent;
+import android.net.wifi.ScanResult;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,11 +12,12 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
 // implements onClickListener for the onclick behaviour of button
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements ScanResultsFragment.OnFragmentInteractionListener {
     Button scanBtn;
     TextView messageText, messageFormat;
 
@@ -59,15 +61,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             } else {
                 // if the intentResult is not null we'll set
                 // the content and format of scan message
-                TextView results = findViewById(R.id.Results);
                 String n = resultCode + ", " + requestCode;
-                results.setText(n);
+                new ScanResultsFragment(n).show(getSupportFragmentManager(), "SCAN RESULTS");
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);
-            TextView results = findViewById(R.id.Results);
             String n = resultCode + ", " + requestCode;
-            results.setText(n);
+            new ScanResultsFragment(n).show(getSupportFragmentManager(), "SCAN RESULTS");
         }
+    }
+
+    @Override
+    public void onOkPressed(){
     }
 }
