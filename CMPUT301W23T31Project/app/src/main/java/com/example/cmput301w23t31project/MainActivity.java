@@ -22,13 +22,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.fragment_home_screen);
+        Intent intent = getIntent();
 
         // referencing and initializing
         // the button and textviews
-        scanBtn = findViewById(R.id.scanBtn);
-        messageText = findViewById(R.id.textContent);
-        messageFormat = findViewById(R.id.textFormat);
+        scanBtn = findViewById(R.id.home_screen_scan_code_button);
+        //messageText = findViewById(R.id.textContent);
+        //messageFormat = findViewById(R.id.textFormat);
 
         // adding listener to the button
         scanBtn.setOnClickListener(this);
