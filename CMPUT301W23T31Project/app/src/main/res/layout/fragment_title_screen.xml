@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-black"
+        android:text="QR Hunter"
+        android:gravity="center_horizontal"
+        android:layout_gravity="center"
+        android:textSize="48dp">
+
+    </TextView>
+    <ImageView
+        android:id="@+id/title_screen_icon"
+        android:paddingTop="300dp"
+        android:paddingBottom="300dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"></ImageView>
+    <TextView
+        android:id="@+id/tap_to_enter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:fontFamily="sans-serif-black"
+        android:gravity="center_horizontal"
+
+        android:text="Tap to enter"
+        android:textSize="40dp"
+        android:onClick="onTap">
+
+    </TextView>
+
+</LinearLayout>
