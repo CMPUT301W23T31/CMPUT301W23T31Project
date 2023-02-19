@@ -16,12 +16,16 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 // implements onClickListener for the onclick behaviour of button
@@ -29,14 +33,15 @@ import java.util.Arrays;
 public class MainActivity extends AppCompatActivity implements ScanResultsFragment.OnFragmentInteractionListener {
     Button scanBtn,playerInfoBtn,exploreBtn;
     TextView messageText, messageFormat;
+    FirebaseFirestore QRdb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_home_screen);
         Intent intent = getIntent();
-
-
+        QRdb = FirebaseFirestore.getInstance();
+        CollectionReference collectionReference = QRdb.collection("QRCodes");
         // referencing and initializing
         // the button and textviews
         scanBtn = findViewById(R.id.home_screen_scan_code_button);
@@ -162,7 +167,13 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
                 }
                 int score = Utilities.getQRScore(hash);
                 String n = ""+hash;
-                new ScanResultsFragment(n, score).show(getSupportFragmentManager(), "SCAN RESULTS");
+                String name = null;
+                try {
+                    name = Utilities.getQRCodeName(hash, getApplicationContext());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                new ScanResultsFragment(name, score).show(getSupportFragmentManager(), "SCAN RESULTS");
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);
@@ -174,4 +185,5 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
     @Override
     public void onOkPressed(){
     }
+
 }
