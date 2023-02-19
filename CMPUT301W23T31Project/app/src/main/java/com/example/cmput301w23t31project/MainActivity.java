@@ -4,6 +4,9 @@ package com.example.cmput301w23t31project;
 import android.content.Intent;
 import android.net.wifi.ScanResult;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -40,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
         //messageFormat = findViewById(R.id.textFormat);
 
         // adding listener to the button
+
         scanBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,7 +58,66 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
         });
 
     }
+    public void onClickAppInfo(View view){
+        Intent intent = new Intent(this, AppInfoScreenActivity.class);
+        startActivity(intent);
+    }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.hamburger_menu,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch(item.getItemId()){
+            case R.id.item2: {
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+                return true;
+            }
+            /*
+            case R.id.item3: {
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+                return true;
+            }
+            case R.id.item4: {
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+                return true;
+            }
+            case R.id.item5: {
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+                return true;
+            }
+            case R.id.item6: {
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+                return true;
+            }
+            case R.id.item7: {
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+                return true;
+            }
+            */
+            case R.id.item8: {
+                Intent intent = new Intent(this, AppInfoScreenActivity.class);
+                startActivity(intent);
+                return true;
+            }
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+    }
+
+    }
+    
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -87,5 +150,4 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
     @Override
     public void onOkPressed(){
     }
-
 }
