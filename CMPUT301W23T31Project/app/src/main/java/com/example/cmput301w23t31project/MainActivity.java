@@ -115,8 +115,6 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
         }
 
     }
-
-    }
     
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
