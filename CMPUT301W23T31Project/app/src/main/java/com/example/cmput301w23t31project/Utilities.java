@@ -50,4 +50,8 @@ public class Utilities {
         }
         return hexString.toString();
     }
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 }
