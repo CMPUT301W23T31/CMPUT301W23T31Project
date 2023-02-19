@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">CMPUT301W23T31Project</string>
+    <string name="title_activity_explore_screen">ExploreScreenActivity</string>
 </resources>
