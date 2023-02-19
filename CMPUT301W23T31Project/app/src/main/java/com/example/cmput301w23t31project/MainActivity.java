@@ -31,7 +31,7 @@ import java.util.Arrays;
 // implements onClickListener for the onclick behaviour of button
 
 public class MainActivity extends AppCompatActivity implements ScanResultsFragment.OnFragmentInteractionListener {
-    Button scanBtn,playerInfoBtn,exploreBtn;
+    Button scanBtn,playerInfoBtn,exploreBtn,myScanBtn;
     TextView messageText, messageFormat;
     FirebaseFirestore QRdb;
 
@@ -55,6 +55,9 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
 
         //referencing and initializing the Explore Button
         exploreBtn = findViewById(R.id.home_screen_explore_button);
+
+        //referencing and initializing the My Scans Button
+        myScanBtn = findViewById(R.id.home_screen_my_scans_button);
 
 
         scanBtn.setOnClickListener(new View.OnClickListener() {
@@ -82,6 +85,14 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, ExploreScreenActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        myScanBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,MyScansScreenActivity.class);
                 startActivity(intent);
             }
         });
