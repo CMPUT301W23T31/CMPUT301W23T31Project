@@ -49,7 +49,7 @@ public class ScanResultsFragment extends DialogFragment {
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_scan_results, null);
         resultView = view.findViewById(R.id.scan_results_data);
         scoreView = view.findViewById(R.id.scan_results_score);
-        resultView.setText("");
+        resultView.setText(result);
         String s = "QR Code Score: " + score;
         scoreView.setText(s);
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());

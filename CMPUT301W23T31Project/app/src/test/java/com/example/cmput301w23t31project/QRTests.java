@@ -14,4 +14,6 @@ public class QRTests {
         int expected = 111;
         assertEquals(expected, Utilities.getQRScore(contents));
     }
+
+
 }
