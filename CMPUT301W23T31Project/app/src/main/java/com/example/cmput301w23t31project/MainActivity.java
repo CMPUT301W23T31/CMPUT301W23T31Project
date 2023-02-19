@@ -1,6 +1,7 @@
 package com.example.cmput301w23t31project;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.wifi.ScanResult;
 import android.os.Bundle;
@@ -21,27 +22,39 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 // implements onClickListener for the onclick behaviour of button
-
+// https://www.youtube.com/watch?v=UIIpCt2S5Ls
 public class MainActivity extends AppCompatActivity implements ScanResultsFragment.OnFragmentInteractionListener {
     Button scanBtn,playerInfoBtn,exploreBtn,myScanBtn;
     TextView messageText, messageFormat;
+
     FirebaseFirestore QRdb;
+
+    CollectionReference collectionReference;
+    String[] QRNames = new String[100];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_home_screen);
         Intent intent = getIntent();
+
         QRdb = FirebaseFirestore.getInstance();
-        CollectionReference collectionReference = QRdb.collection("QRCodes");
+        collectionReference = QRdb.collection("QRCodes");
+
         // referencing and initializing
         // the button and textviews
         scanBtn = findViewById(R.id.home_screen_scan_code_button);
@@ -55,6 +68,22 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
 
         //referencing and initializing the Explore Button
         exploreBtn = findViewById(R.id.home_screen_explore_button);
+        
+        String data = "";
+        InputStream is = this.getResources().openRawResource(R.raw.qrcode);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+        int count = 0;
+        if (is != null) {
+            try {
+                while ((data = reader.readLine()) != null) {
+                    QRNames[count] = data;
+                    count++;
+                }
+                is.close();
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
+        }
 
         //referencing and initializing the My Scans Button
         myScanBtn = findViewById(R.id.home_screen_my_scans_button);
@@ -178,12 +207,16 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
                 }
                 int score = Utilities.getQRScore(hash);
                 String n = ""+hash;
+
                 String name = null;
                 try {
-                    name = Utilities.getQRCodeName(hash, getApplicationContext());
+                    name = getQRCodeName(hash);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+                HashMap<String, QRCode> QRData = new HashMap<>();
+                QRData.put("Code Info", new QRCode(name, score));
+                collectionReference.document(name).set(QRData);
                 new ScanResultsFragment(name, score).show(getSupportFragmentManager(), "SCAN RESULTS");
             }
         } else {
@@ -195,6 +228,19 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
 
     @Override
     public void onOkPressed(){
+    }
+
+    public String getQRCodeName(String hash) throws IOException {
+        String name = "";
+        for (int i = 0; i < hash.length(); i += 8) {
+            int tempScore = 0;
+            for (int j = 0; j < i + 8; j++) {
+                tempScore += hash.charAt(j);
+            }
+            tempScore %= QRNames.length;
+            name = name + QRNames[tempScore];
+        }
+        return name;
     }
 
 }
