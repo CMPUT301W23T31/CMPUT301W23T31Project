@@ -37,11 +37,7 @@ public class PlayerInfoScreenActivity extends AppCompatActivity {
                 startActivity(intent);
                 return true;
             }
-            case R.id.item4: {
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
-                return true;
-            }
+
             case R.id.item5: {
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
@@ -54,6 +50,11 @@ public class PlayerInfoScreenActivity extends AppCompatActivity {
                 return true;
             }
             */
+            case R.id.item4: {
+                Intent intent = new Intent(this, ExploreScreenActivity.class);
+                startActivity(intent);
+                return true;
+            }
             case R.id.item6: {
                 Intent intent = new Intent(this, PlayerInfoScreenActivity.class);
                 startActivity(intent);

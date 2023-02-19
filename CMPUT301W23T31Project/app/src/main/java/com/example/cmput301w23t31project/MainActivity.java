@@ -31,7 +31,7 @@ import java.util.Arrays;
 // implements onClickListener for the onclick behaviour of button
 
 public class MainActivity extends AppCompatActivity implements ScanResultsFragment.OnFragmentInteractionListener {
-    Button scanBtn,playerInfoBtn;
+    Button scanBtn,playerInfoBtn,exploreBtn;
     TextView messageText, messageFormat;
     FirebaseFirestore QRdb;
 
@@ -53,6 +53,9 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
         //referencing and initializing the Player Info Button
         playerInfoBtn = findViewById(R.id.home_screen_player_info_button);
 
+        //referencing and initializing the Explore Button
+        exploreBtn = findViewById(R.id.home_screen_explore_button);
+
 
         scanBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,6 +74,14 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this,PlayerInfoScreenActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        exploreBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ExploreScreenActivity.class);
                 startActivity(intent);
             }
         });
@@ -102,11 +113,7 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
                 startActivity(intent);
                 return true;
             }
-            case R.id.item4: {
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
-                return true;
-            }
+
             case R.id.item5: {
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
@@ -119,7 +126,11 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
                 return true;
             }
             */
-
+            case R.id.item4: {
+                Intent intent = new Intent(this, ExploreScreenActivity.class);
+                startActivity(intent);
+                return true;
+            }
             case R.id.item6: {
                 Intent intent = new Intent(this, PlayerInfoScreenActivity.class);
                 startActivity(intent);
