@@ -148,12 +148,13 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
                 return true;
             }
 
-            case R.id.item7: {
-                Intent intent = new Intent(this, MainActivity.class);
+
+             */
+            case R.id.item5: {
+                Intent intent = new Intent(this, LeaderboardActivity.class);
                 startActivity(intent);
                 return true;
             }
-            */
             case R.id.item4: {
                 Intent intent = new Intent(this, ExploreScreenActivity.class);
                 startActivity(intent);
