@@ -45,17 +45,18 @@ public class AppInfoScreenActivity extends AppCompatActivity {
                 startActivity(intent);
                 return true;
             }
-            case R.id.item6: {
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
-                return true;
-            }
+
             case R.id.item7: {
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
                 return true;
             }
             */
+            case R.id.item6: {
+                Intent intent = new Intent(this, PlayerInfoScreenActivity.class);
+                startActivity(intent);
+                return true;
+            }
             case R.id.item8: {
                 Intent intent = new Intent(this, AppInfoScreenActivity.class);
                 startActivity(intent);
