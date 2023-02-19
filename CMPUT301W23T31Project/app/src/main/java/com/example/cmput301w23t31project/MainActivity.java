@@ -27,7 +27,7 @@ import java.util.Arrays;
 // implements onClickListener for the onclick behaviour of button
 
 public class MainActivity extends AppCompatActivity implements ScanResultsFragment.OnFragmentInteractionListener {
-    Button scanBtn;
+    Button scanBtn,playerInfoBtn;
     TextView messageText, messageFormat;
 
     @Override
@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
         setContentView(R.layout.fragment_home_screen);
         Intent intent = getIntent();
 
+
         // referencing and initializing
         // the button and textviews
         scanBtn = findViewById(R.id.home_screen_scan_code_button);
@@ -43,6 +44,10 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
         //messageFormat = findViewById(R.id.textFormat);
 
         // adding listener to the button
+
+        //referencing and initializing the Player Info Button
+        playerInfoBtn = findViewById(R.id.home_screen_player_info_button);
+
 
         scanBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,6 +59,14 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
                 intentIntegrator.setPrompt("Scan a barcode or QR Code");
                 intentIntegrator.setOrientationLocked(false);
                 intentIntegrator.initiateScan();
+            }
+        });
+
+        playerInfoBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,PlayerInfoScreenActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -94,17 +107,19 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
                 startActivity(intent);
                 return true;
             }
-            case R.id.item6: {
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
-                return true;
-            }
+
             case R.id.item7: {
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
                 return true;
             }
             */
+
+            case R.id.item6: {
+                Intent intent = new Intent(this, PlayerInfoScreenActivity.class);
+                startActivity(intent);
+                return true;
+            }
             case R.id.item8: {
                 Intent intent = new Intent(this, AppInfoScreenActivity.class);
                 startActivity(intent);

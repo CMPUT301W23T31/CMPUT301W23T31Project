@@ -1,19 +1,21 @@
 package com.example.cmput301w23t31project;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import androidx.appcompat.app.AppCompatActivity;
+public class PlayerInfoScreenActivity extends AppCompatActivity {
 
-public class AppInfoScreenActivity extends AppCompatActivity {
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_app_info_screen);
-        Intent intent = getIntent();
+        setContentView(R.layout.activity_player_info_screen);
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
