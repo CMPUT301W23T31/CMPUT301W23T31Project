@@ -126,7 +126,10 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
         inflater.inflate(R.menu.hamburger_menu,menu);
         return true;
     }
-
+    public void onClickLeaderboard(View view){
+        Intent intent = new Intent(this, LeaderboardActivity.class);
+        startActivity(intent);
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         switch(item.getItemId()){
