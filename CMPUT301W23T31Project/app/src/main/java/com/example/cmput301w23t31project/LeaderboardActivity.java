@@ -33,10 +33,10 @@ public class LeaderboardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_leaderboard_screen);
         Intent intent = getIntent();
         dataList = new ArrayList<>();
-        highScoreBtn = findViewById(R.id.high_score_button);
-        countBtn = findViewById(R.id.count_button);
-        totalScoreBtn = findViewById(R.id.total_score_button);
-        regionalBtn = findViewById(R.id.regional_button);
+        highScoreBtn = findViewById(R.id.leaderboard_by_high_score_button);
+        countBtn = findViewById(R.id.leaderboard_by_count_button);
+        totalScoreBtn = findViewById(R.id.leaderboard_by_total_score_button);
+        regionalBtn = findViewById(R.id.leaderboard_by_regional_button);
         LeaderboardList = findViewById(R.id.leaderboard_list);
         leaderboardArrayAdapter = new LeaderboardArrayAdapter(this, dataList);
         LeaderboardList.setAdapter(leaderboardArrayAdapter);

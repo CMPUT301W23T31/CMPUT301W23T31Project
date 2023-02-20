@@ -24,17 +24,17 @@ public class LeaderboardArrayAdapter extends ArrayAdapter<Player> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View view;
         if (convertView == null) {
-            view = LayoutInflater.from(context).inflate(R.layout.leaderboard_list_content, parent, false);
+            view = LayoutInflater.from(context).inflate(R.layout.content_leaderboard_list, parent, false);
         } else {
             view = convertView;
         }
 
         Player player = getItem(position);
 
-        TextView playerName = view.findViewById(R.id.player_name_text);
-        TextView score = view.findViewById(R.id.score);
-        TextView usernameText = view.findViewById(R.id.user_name);
-        Button profileBtn = view.findViewById(R.id.profile_button);
+        TextView playerName = view.findViewById(R.id.leaderboard_content_player_name_text);
+        TextView score = view.findViewById(R.id.leaderboard_content_relevant_stat);
+        TextView usernameText = view.findViewById(R.id.leaderboard_content_user_name);
+        Button profileBtn = view.findViewById(R.id.leaderboard_content_profile_button);
         playerName.setText(player.getPlayerName());
 
         score.setText(String.valueOf(player.getScore()));
