@@ -73,6 +73,7 @@
         </activity>
         <activity android:name=".MainActivity" />
         <activity android:name=".AppInfoScreenActivity" />
+        <activity android:name=".LeaderboardActivity" />
     </application>
 
 </manifest>

@@ -41,7 +41,7 @@ public class LeaderboardActivity extends AppCompatActivity {
         leaderboardArrayAdapter = new LeaderboardArrayAdapter(this, dataList);
         LeaderboardList.setAdapter(leaderboardArrayAdapter);
         dataList.add(0, new Player("DonKrieg", "Joshu", 20, 2500));
-        dataList.add(1, new Player("Average", "Saumya", 25, 2400));
+        dataList.add(1, new Player("Average", "Saumya", 25, 2000));
         dataList.add(2, new Player("LongDongLyndom", "Lyndon", 40, 3500));
         dataList.add(3, new Player("LongTanHandsome", "Carson", 15, 1500));
         dataList.add(4, new Player("BigPapi", "RJ", 30, 3000));
@@ -180,6 +180,7 @@ public class LeaderboardActivity extends AppCompatActivity {
                             dataList.set(j + 1, temp);
 
                         }
+                break;
             }
             case "Count": {
                 for (int i = 0; i < dataList.size() - 1; i++)
@@ -189,12 +190,12 @@ public class LeaderboardActivity extends AppCompatActivity {
                             dataList.set(j, dataList.get(j + 1));
                             dataList.set(j + 1, temp);
                         }
-
+                break;
             }
 
-            leaderboardArrayAdapter.notifyDataSetChanged();
-        }
 
+        }
+        leaderboardArrayAdapter.notifyDataSetChanged();
     }
 }
 
