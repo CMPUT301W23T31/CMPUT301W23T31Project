@@ -8,6 +8,13 @@ package com.example.cmput301w23t31project;
 // 3. https://www.geeksforgeeks.org/different-ways-reading-text-file-java/
 
 
+import android.content.Context;
+import android.content.res.Resources;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -70,13 +77,65 @@ public class Utilities {
      */
     private static String bytesToHex(byte[] hash) {
         StringBuilder hexString = new StringBuilder(2 * hash.length);
-        for (int i = 0; i < hash.length; i++) {
-            String hex = Integer.toHexString(0xff & hash[i]);
-            if(hex.length() == 1) {
+        for (byte b : hash) {
+            String hex = Integer.toHexString(0xff & b);
+            if (hex.length() == 1) {
                 hexString.append('0');
             }
             hexString.append(hex);
         }
         return hexString.toString();
+    }
+
+    /**
+     * This function assigns a unique name to a QR code based on it's hash
+     * @param hash
+     *      The hash of the given QR code
+     * @param names
+     *      The list of names to choose from for the QR code name
+     * @return
+     *      A name generated from the QR code's hash
+     */
+    public static String getQRCodeName(String hash, String[] names) {
+        String name = "";
+        int groupSize = 8;
+        for (int i = 0; i < hash.length(); i += groupSize) {
+            int tempScore = 0;
+            for (int j = 0; j < i + groupSize; j++) {
+                tempScore += hash.charAt(j);
+            }
+            tempScore %= names.length;
+            name = name.concat(names[tempScore]);
+        }
+        return name;
+    }
+
+    /**
+     * This function retrieves data from a file for MainActivity
+     * @param resources
+     *      References the resources in AndroidStudio project
+     * @param length
+     *      Length of the data file/max # of elements that can be read
+     * @return
+     *      A string array of file elements, at most 'length' of them
+     */
+    public static String[] retrieveFileData(Resources resources, int length) {
+        String data;
+        String[] fileData = new String[length];
+        InputStream is = resources.openRawResource(R.raw.qrcode);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+        int count = 0;
+        if (is != null) {
+            try {
+                while ((data = reader.readLine()) != null) {
+                    fileData[count] = data;
+                    count++;
+                }
+                is.close();
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return fileData;
     }
 }
