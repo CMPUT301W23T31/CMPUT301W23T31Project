@@ -7,13 +7,27 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 public class PlayerInfoScreenActivity extends AppCompatActivity {
+
+    Button viewScanBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player_info_screen);
+
+        viewScanBtn = findViewById(R.id.player_info_see_scans_button);
+
+        viewScanBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PlayerInfoScreenActivity.this, MyScansScreenActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
