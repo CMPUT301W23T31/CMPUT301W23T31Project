@@ -44,7 +44,8 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
     FirebaseFirestore QRdb;
 
     CollectionReference collectionReference;
-    String[] QRNames = new String[100];
+    public String[] QRNames = new String[100];
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,22 +69,9 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
 
         //referencing and initializing the Explore Button
         exploreBtn = findViewById(R.id.home_screen_explore_button);
-        
-        String data = "";
-        InputStream is = this.getResources().openRawResource(R.raw.qrcode);
-        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-        int count = 0;
-        if (is != null) {
-            try {
-                while ((data = reader.readLine()) != null) {
-                    QRNames[count] = data;
-                    count++;
-                }
-                is.close();
-            } catch(Exception e) {
-                e.printStackTrace();
-            }
-        }
+
+        QRNames = Utilities.retrieveFileData(this.getResources(), 100);
+
 
         //referencing and initializing the My Scans Button
         myScanBtn = findViewById(R.id.home_screen_my_scans_button);
@@ -208,12 +196,8 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
                 int score = Utilities.getQRScore(hash);
                 String n = ""+hash;
 
-                String name = null;
-                try {
-                    name = getQRCodeName(hash);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                String name = Utilities.getQRCodeName(hash, QRNames);
+
                 HashMap<String, QRCode> QRData = new HashMap<>();
                 QRData.put("Code Info", new QRCode(name, score));
                 collectionReference.document(name).set(QRData);
@@ -230,17 +214,5 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
     public void onOkPressed(){
     }
 
-    public String getQRCodeName(String hash) throws IOException {
-        String name = "";
-        for (int i = 0; i < hash.length(); i += 8) {
-            int tempScore = 0;
-            for (int j = 0; j < i + 8; j++) {
-                tempScore += hash.charAt(j);
-            }
-            tempScore %= QRNames.length;
-            name = name + QRNames[tempScore];
-        }
-        return name;
-    }
 
 }
