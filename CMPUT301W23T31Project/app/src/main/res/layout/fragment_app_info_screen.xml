@@ -1,14 +1,153 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:srcCompat="@drawable/hamburger_menu">
+
+    </ImageButton>
+
+    <TextView
+        android:layout_gravity="center"
+        android:id="@+id/app_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="App Info"
+        android:textSize="40sp"
+        android:textStyle="bold">
+
+    </TextView>
+
+    <TextView
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Made by Team 31 for CMPUT301"
+        android:textSize="18sp">
+
+    </TextView>
+
+    <TextView
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tutorial"
+        android:textSize="35sp"
+        android:textStyle="bold">
+
+    </TextView>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/app_info"
-        android:text="App Info"
-        android:textSize="40sp">
+        android:layout_margin="2dp"
+        android:text="1. Scan QR Codes to earn points. The more points earned, the better!"
+        android:textSize="18sp">
+
+    </TextView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp"
+        android:text="2. Access the map to see nearby codes. You can also view the list to see the nearest codes to you"
+        android:textSize="18sp">
+
+    </TextView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp"
+        android:text="3. You can see your own personal stats and manage your scans under the 'Player Stats' tab"
+        android:textSize="18sp">
+
+    </TextView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp"
+        android:text="4. You can view other players' scores and search for friends in the 'Leaderboard'"
+        android:textSize="18sp">
+
+    </TextView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp"
+        android:text="5. You can change your profile information in your account page"
+        android:textSize="18sp">
+
+    </TextView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp"
+        android:text="6. Have fun!"
+        android:textSize="18sp">
+
+    </TextView>
+
+    <TextView
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="QR Code Color Rankings"
+        android:textSize="35sp"
+        android:textStyle="bold">
+
+    </TextView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="5sp"
+        android:text="Common:       0-1k points"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="20sp">
+
+    </TextView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="5sp"
+        android:text="Uncommon:      1k-10k points"
+        android:textColor="@color/yellow"
+        android:textSize="20sp">
+
+    </TextView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="5sp"
+        android:text="                 Rare:      10k-100k points"
+        android:textColor="@color/purple_700"
+        android:textSize="20sp">
+
+    </TextView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="5sp"
+        android:text="        Special:      100k+   points"
+        android:textColor="@color/purple_200"
+        android:textSize="20sp">
 
     </TextView>
 
