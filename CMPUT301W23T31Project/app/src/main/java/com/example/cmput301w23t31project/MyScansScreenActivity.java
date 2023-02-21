@@ -44,11 +44,6 @@ public class MyScansScreenActivity extends AppCompatActivity {
                 return true;
             }
 
-            case R.id.item7: {
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
-                return true;
-            }
             */
             case R.id.item4: {
                 Intent intent = new Intent(this, ExploreScreenActivity.class);
@@ -57,6 +52,11 @@ public class MyScansScreenActivity extends AppCompatActivity {
             }
             case R.id.item6: {
                 Intent intent = new Intent(this, PlayerInfoScreenActivity.class);
+                startActivity(intent);
+                return true;
+            }
+            case R.id.item7: {
+                Intent intent = new Intent(this, MyAccountScreenActivity.class);
                 startActivity(intent);
                 return true;
             }

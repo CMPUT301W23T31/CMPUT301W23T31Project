@@ -12,7 +12,7 @@ import android.widget.Button;
 
 public class PlayerInfoScreenActivity extends AppCompatActivity {
 
-    Button viewScanBtn;
+    Button viewScanBtn,myAccountBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,10 +21,20 @@ public class PlayerInfoScreenActivity extends AppCompatActivity {
 
         viewScanBtn = findViewById(R.id.player_info_see_scans_button);
 
+        myAccountBtn = findViewById(R.id.player_info_my_account_button);
+
         viewScanBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(PlayerInfoScreenActivity.this, MyScansScreenActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        myAccountBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PlayerInfoScreenActivity.this, MyAccountScreenActivity.class);
                 startActivity(intent);
             }
         });
@@ -58,11 +68,6 @@ public class PlayerInfoScreenActivity extends AppCompatActivity {
                 return true;
             }
 
-            case R.id.item7: {
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
-                return true;
-            }
             */
             case R.id.item4: {
                 Intent intent = new Intent(this, ExploreScreenActivity.class);
@@ -71,6 +76,11 @@ public class PlayerInfoScreenActivity extends AppCompatActivity {
             }
             case R.id.item6: {
                 Intent intent = new Intent(this, PlayerInfoScreenActivity.class);
+                startActivity(intent);
+                return true;
+            }
+            case R.id.item7: {
+                Intent intent = new Intent(this, MyAccountScreenActivity.class);
                 startActivity(intent);
                 return true;
             }

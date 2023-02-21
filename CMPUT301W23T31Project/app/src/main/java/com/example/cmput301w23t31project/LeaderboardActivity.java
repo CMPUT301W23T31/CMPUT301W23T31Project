@@ -74,11 +74,6 @@ public class LeaderboardActivity extends AppCompatActivity {
                 startActivity(intent);
                 return true;
             }
-            case R.id.item5: {
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
-                return true;
-            }
             */
             case R.id.item5: {
                 Intent intent = new Intent(this, LeaderboardActivity.class);
@@ -88,6 +83,11 @@ public class LeaderboardActivity extends AppCompatActivity {
 
             case R.id.item6: {
                 Intent intent = new Intent(this, PlayerInfoScreenActivity.class);
+                startActivity(intent);
+                return true;
+            }
+            case R.id.item7: {
+                Intent intent = new Intent(this, MyAccountScreenActivity.class);
                 startActivity(intent);
                 return true;
             }
