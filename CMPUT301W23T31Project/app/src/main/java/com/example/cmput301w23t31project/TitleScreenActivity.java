@@ -7,6 +7,8 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.cmput301w23t31project.ui.login.LoginActivity;
+
 public class TitleScreenActivity extends AppCompatActivity {
 
     @Override
@@ -15,7 +17,7 @@ public class TitleScreenActivity extends AppCompatActivity {
         setContentView(R.layout.fragment_title_screen);
     }
     public void onTap(View view){
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }
 }
