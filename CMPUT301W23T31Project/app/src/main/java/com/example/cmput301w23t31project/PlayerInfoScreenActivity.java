@@ -9,10 +9,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 public class PlayerInfoScreenActivity extends AppCompatActivity {
 
-    Button viewScanBtn,myAccountBtn;
+    Button viewScanBtn;
+    ImageButton myAccountBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
