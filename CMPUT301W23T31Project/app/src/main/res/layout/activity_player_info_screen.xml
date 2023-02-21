@@ -15,35 +15,22 @@
         >
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            >
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:srcCompat="@drawable/hamburger_menu">
-
-            </ImageButton>
-
-        </LinearLayout>
-
-        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="right">
 
             <ImageButton
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                tools:srcCompat="@tools:sample/avatars">
-            </ImageButton>
+                android:id="@+id/player_info_my_account_button"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                tools:srcCompat="@tools:sample/avatars"></ImageButton>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="My Account  "
-                android:textSize="15sp"
+                android:text="My Account"
+                android:textSize="11sp"
                 android:textStyle="bold">
 
             </TextView>
@@ -64,62 +51,66 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="2dp"
+        android:layout_margin="0dp"
         android:text="Username"
         android:textSize="18sp"
         android:textStyle="bold" />
+
     <TextView
         android:id="@+id/player_info_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="2dp"
+        android:layout_margin="0dp"
         android:hint="Player Username"
-        android:textSize="24sp"/>
+        android:textSize="24sp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="2dp"
+        android:layout_margin="0dp"
         android:text="Total Score"
         android:textSize="18sp"
         android:textStyle="bold" />
+
     <TextView
         android:id="@+id/player_info_total_score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="2dp"
+        android:layout_margin="0dp"
         android:hint="1234567890"
-        android:textSize="24sp"/>
+        android:textSize="24sp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="2dp"
+        android:layout_margin="0dp"
         android:text="Total Scans"
         android:textSize="18sp"
         android:textStyle="bold" />
+
     <TextView
         android:id="@+id/player_info_total_scans"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="2dp"
+        android:layout_margin="0dp"
         android:hint="1234"
-        android:textSize="24sp"/>
+        android:textSize="24sp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="2dp"
+        android:layout_margin="0dp"
         android:text="Rank (by Highest Total Score)"
         android:textSize="18sp"
         android:textStyle="bold" />
+
     <TextView
         android:id="@+id/player_info_rank_by_total_score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="2dp"
+        android:layout_margin="0dp"
         android:hint="11"
-        android:textSize="24sp"/>
+        android:textSize="24sp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -128,18 +119,19 @@
         android:text="Rank (by Highest Unique Score)"
         android:textSize="18sp"
         android:textStyle="bold" />
+
     <TextView
         android:id="@+id/player_info_rank_by_unique_score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="2dp"
+        android:layout_margin="0dp"
         android:hint="22"
-        android:textSize="24sp"/>
+        android:textSize="24sp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="2dp"
+        android:layout_margin="0dp"
         android:text="Highest Scoring QR Code"
         android:textSize="18sp"
         android:textStyle="bold" />
@@ -147,14 +139,14 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="2dp"
+        android:layout_margin="0dp"
         android:text="QR CODE HERE"
-        android:textSize="40sp" />
+        android:textSize="35sp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="2dp"
+        android:layout_margin="0dp"
         android:text="Lowest Scoring QR Code"
         android:textSize="18sp"
         android:textStyle="bold" />
@@ -162,17 +154,17 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="2dp"
+        android:layout_margin="0dp"
         android:text="QR CODE HERE"
-        android:textSize="40sp" />
+        android:textSize="35sp" />
 
     <Button
         android:id="@+id/player_info_see_scans_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="2dp"
+        android:layout_margin="0dp"
         android:text="View All Scans"
-        android:textSize="24sp"/>
+        android:textSize="24sp" />
 
 
 </LinearLayout>
