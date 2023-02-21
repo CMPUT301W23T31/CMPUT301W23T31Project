@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+
+import com.google.zxing.integration.android.IntentIntegrator;
 
 public class ScanResultsFragment extends DialogFragment {
     private OnFragmentInteractionListener listener;
@@ -56,11 +59,28 @@ public class ScanResultsFragment extends DialogFragment {
         return builder
                 .setView(view)
                 .setTitle("SCAN RESULTS")
-                .setNegativeButton("Cancel",null)
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                .setNegativeButton("BACK TO SCANNER", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                        //Intent intent = new Intent(getContext(), MainActivity.class);
+                        //startActivity(intent);
+                    }
+                })
+
+                .setPositiveButton("SEE CODE DETAILS", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         listener.onOkPressed();
+                        dialogInterface.cancel();
+                        String name = resultView.getText().toString();
+                        //score = scoreView.getText().toString();
+                        Intent intent = new Intent(getContext(), QRCodeStatsActivity.class);
+                        intent.putExtra(QRCodeStatsActivity.NAME, name);
+                        intent.putExtra(QRCodeStatsActivity.SCORE, score);
+                        startActivity(intent);
+
+
 
                     }
                 }).create();
