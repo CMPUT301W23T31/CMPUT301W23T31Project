@@ -8,12 +8,12 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-public class ExploreScreenActivity extends AppCompatActivity {
+public class MyAccountScreenActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_explore_screen);
+        setContentView(R.layout.activity_my_account_screen);
     }
 
     @Override
@@ -43,7 +43,6 @@ public class ExploreScreenActivity extends AppCompatActivity {
                 startActivity(intent);
                 return true;
             }
-
 
             */
             case R.id.item4: {
