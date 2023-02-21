@@ -145,12 +145,6 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
                 return true;
             }
 
-            case R.id.item5: {
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
-                return true;
-            }
-
 
              */
             case R.id.item5: {
@@ -165,6 +159,11 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
             }
             case R.id.item6: {
                 Intent intent = new Intent(this, PlayerInfoScreenActivity.class);
+                startActivity(intent);
+                return true;
+            }
+            case R.id.item7: {
+                Intent intent = new Intent(this, MyAccountScreenActivity.class);
                 startActivity(intent);
                 return true;
             }
