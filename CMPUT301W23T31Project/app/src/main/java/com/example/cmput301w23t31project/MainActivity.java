@@ -83,10 +83,20 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
                 // we need to create the object
                 // of IntentIntegrator class
                 // which is the class of QR library
+                /*
                 IntentIntegrator intentIntegrator = new IntentIntegrator(MainActivity.this);
                 intentIntegrator.setPrompt("Scan a barcode or QR Code");
                 intentIntegrator.setOrientationLocked(false);
                 intentIntegrator.initiateScan();
+
+                 */
+                IntentIntegrator integrator = new IntentIntegrator(MainActivity.this);
+                integrator.setPrompt("Scan a barcode");
+                integrator.setCameraId(0); // Use a specific camera of the device
+                integrator.setOrientationLocked(true);
+                integrator.setBeepEnabled(true);
+                integrator.setCaptureActivity(CaptureActivityPortrait.class);
+                integrator.initiateScan();
             }
         });
 
