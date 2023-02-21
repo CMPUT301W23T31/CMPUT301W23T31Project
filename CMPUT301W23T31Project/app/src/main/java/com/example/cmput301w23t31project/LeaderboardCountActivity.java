@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
-public class LeaderboardActivity extends AppCompatActivity {
+public class LeaderboardCountActivity extends AppCompatActivity {
 
     Button highScoreBtn;
     Button countBtn;
@@ -21,7 +21,7 @@ public class LeaderboardActivity extends AppCompatActivity {
     Button regionalBtn;
 
     private ArrayList<Player> dataList;
-    private LeaderboardArrayAdapter leaderboardArrayAdapter;
+    private LeaderboardCountArrayAdapter leaderboardCountArrayAdapter;
 
     ListView LeaderboardList;
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,15 +34,15 @@ public class LeaderboardActivity extends AppCompatActivity {
         totalScoreBtn = findViewById(R.id.leaderboard_by_total_score_button);
         regionalBtn = findViewById(R.id.leaderboard_by_regional_button);
         LeaderboardList = findViewById(R.id.leaderboard_list);
-        leaderboardArrayAdapter = new LeaderboardArrayAdapter(this, dataList);
-        LeaderboardList.setAdapter(leaderboardArrayAdapter);
+        leaderboardCountArrayAdapter = new LeaderboardCountArrayAdapter(this, dataList);
+        LeaderboardList.setAdapter(leaderboardCountArrayAdapter);
         dataList.add(0, new Player("DonKrieg", "Joshu", 20, 2500));
         dataList.add(1, new Player("Average", "Saumya", 25, 2000));
         dataList.add(2, new Player("LongDongLyndom", "Lyndon", 40, 3500));
         dataList.add(3, new Player("LongTanHandsome", "Carson", 15, 1500));
         dataList.add(4, new Player("BigPapi", "RJ", 30, 3000));
         dataList.add(5, new Player("Rus", "Rus", 35, 1200));
-
+        sortList();
     }
 
     @Override
@@ -110,69 +110,16 @@ public class LeaderboardActivity extends AppCompatActivity {
         Intent intent = new Intent(this, LeaderboardCountActivity.class);
         startActivity(intent);
     }
-    public void onClickTotalScore(View view){
-        String name = totalScoreBtn.getText().toString();
-        //clickSort(name);
-        //Intent intent = new Intent(this, LeaderboardActivity.class);
-        //startActivity(intent);
+
+    public void sortList() {
+        for (int i = 0; i < dataList.size() - 1; i++)
+            for (int j = 0; j < dataList.size() - i - 1; j++)
+                if (dataList.get(j).getCount() < dataList.get(j + 1).getCount()) {
+                    Player temp = dataList.get(j);
+                    dataList.set(j, dataList.get(j + 1));
+                    dataList.set(j + 1, temp);
+
+                }
+        leaderboardCountArrayAdapter.notifyDataSetChanged();
     }
-    public void onClickRegional(View view){
-        String name = regionalBtn.getText().toString();
-        //clickSort(name);
-        //Intent intent = new Intent(this, LeaderboardActivity.class);
-        //startActivity(intent);
-    }
-    /*
-    public void clickSort(String name){
-        switch (name){
-            case "High Score": {
-                sortList("High Score");
-                break;
-            }
-            case "Count":{
-                sortList("Count");
-                break;
-            }
-            case "Total Score":{
-                sortList("Total Score");
-                break;
-            }
-            case "Regional":{
-                sortList("Regional");
-                break;
-            }
-        }
-    }
-
-    public void sortList(String name) {
-        switch (name) {
-            case "High Score": {
-                for (int i = 0; i < dataList.size() - 1; i++)
-                    for (int j = 0; j < dataList.size() - i - 1; j++)
-                        if (dataList.get(j).getScore() < dataList.get(j + 1).getScore()) {
-                            Player temp = dataList.get(j);
-                            dataList.set(j, dataList.get(j + 1));
-                            dataList.set(j + 1, temp);
-
-                        }
-                break;
-            }
-            case "Count": {
-                for (int i = 0; i < dataList.size() - 1; i++)
-                    for (int j = 0; j < dataList.size() - i - 1; j++)
-                        if (dataList.get(j).getCount() < dataList.get(j + 1).getCount()) {
-                            Player temp = dataList.get(j);
-                            dataList.set(j, dataList.get(j + 1));
-                            dataList.set(j + 1, temp);
-                        }
-                break;
-            }
-
-
-        }
-        leaderboardArrayAdapter.notifyDataSetChanged();
-    }
-
-     */
 }
-

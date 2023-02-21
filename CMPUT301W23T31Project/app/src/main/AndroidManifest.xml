@@ -74,6 +74,9 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".AppInfoScreenActivity" />
         <activity android:name=".LeaderboardActivity" />
+        <activity android:name=".LeaderboardHighScoreActivity" />
+        <activity android:name=".LeaderboardCountActivity" />
+
     </application>
 
 </manifest>
