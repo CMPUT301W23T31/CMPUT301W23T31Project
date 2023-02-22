@@ -33,6 +33,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
     private ActivityLoginBinding binding;
+    EditText usernameEditText;
+    EditText passwordEditText;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -44,8 +46,8 @@ public class LoginActivity extends AppCompatActivity {
         loginViewModel = new ViewModelProvider(this, new LoginViewModelFactory())
                 .get(LoginViewModel.class);
 
-        final EditText usernameEditText = binding.username;
-        final EditText passwordEditText = binding.password;
+        usernameEditText = binding.username;
+        passwordEditText = binding.password;
         final Button loginButton = binding.login;
         final ProgressBar loadingProgressBar = binding.loading;
 
@@ -84,6 +86,8 @@ public class LoginActivity extends AppCompatActivity {
                 //finish();
 
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                intent.putExtra("username", usernameEditText.getText().toString());
+                intent.putExtra("password", passwordEditText.getText().toString());
                 startActivity(intent);
             }
         });
