@@ -99,8 +99,8 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
                 intentIntegrator.setPrompt("Scan a barcode or QR Code");
                 intentIntegrator.setOrientationLocked(false);
                 intentIntegrator.initiateScan();
+                */
 
-                 */
                 IntentIntegrator integrator = new IntentIntegrator(MainActivity.this);
                 integrator.setPrompt("Scan a barcode");
                 integrator.setCameraId(0); // Use a specific camera of the device
@@ -108,6 +108,8 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
                 integrator.setBeepEnabled(true);
                 integrator.setCaptureActivity(CaptureActivityPortrait.class);
                 integrator.initiateScan();
+
+                  
             }
         });
 
