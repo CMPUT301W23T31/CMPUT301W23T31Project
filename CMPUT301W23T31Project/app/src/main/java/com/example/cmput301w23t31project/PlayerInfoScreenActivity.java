@@ -10,21 +10,29 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 public class PlayerInfoScreenActivity extends AppCompatActivity {
 
     Button viewScanBtn;
     ImageButton myAccountBtn;
+    TextView player_info_username;
+    String username;
+    String password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player_info_screen);
+        Intent intent = getIntent();
+        username = intent.getStringExtra("username");
+        password = intent.getStringExtra("password");
 
         viewScanBtn = findViewById(R.id.player_info_see_scans_button);
-
         myAccountBtn = findViewById(R.id.player_info_my_account_button);
+        player_info_username = findViewById(R.id.player_info_username);
 
+        player_info_username.setText(username);
         viewScanBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

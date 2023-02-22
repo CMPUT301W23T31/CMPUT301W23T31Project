@@ -39,7 +39,7 @@ import java.util.HashMap;
 // https://www.youtube.com/watch?v=UIIpCt2S5Ls
 public class MainActivity extends AppCompatActivity implements ScanResultsFragment.OnFragmentInteractionListener {
     Button scanBtn,playerInfoBtn,exploreBtn,myScanBtn;
-    TextView messageText, messageFormat;
+    TextView home_screen_username;
     String username;
     String password;
     FirebaseFirestore QRdb;
@@ -61,11 +61,12 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
         Intent intent = getIntent();
         username = intent.getStringExtra("username");
         password = intent.getStringExtra("password");
-        HashMap<String, Account> QRData = new HashMap<>();
-        QRData.put("Code Info", new Account(username, password));
-        collectionReference.document(username).set(QRData);
+        HashMap<String, Account> AccountData = new HashMap<>();
+        AccountData.put("Account Info", new Account(username, password));
+        collectionReferenceAccount.document(username).set(AccountData);
 
-
+        //set home screen welcome text
+        home_screen_username = findViewById(R.id.home_screen_welcome_text);
 
         // referencing and initializing
         // the button and textviews
@@ -87,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
         //referencing and initializing the My Scans Button
         myScanBtn = findViewById(R.id.home_screen_my_scans_button);
 
-
+        home_screen_username.setText("Welcome "+username+"!");
         scanBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -117,6 +118,8 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this,PlayerInfoScreenActivity.class);
+                intent.putExtra("username", username);
+                intent.putExtra("password", password);
                 startActivity(intent);
             }
         });
