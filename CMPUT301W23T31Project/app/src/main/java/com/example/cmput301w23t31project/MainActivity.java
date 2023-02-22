@@ -40,10 +40,12 @@ import java.util.HashMap;
 public class MainActivity extends AppCompatActivity implements ScanResultsFragment.OnFragmentInteractionListener {
     Button scanBtn,playerInfoBtn,exploreBtn,myScanBtn;
     TextView messageText, messageFormat;
-
+    String username;
+    String password;
     FirebaseFirestore QRdb;
 
     CollectionReference collectionReference;
+    CollectionReference collectionReferenceAccount;
     public String[] QRNames = new String[100];
 
 
@@ -51,10 +53,19 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_home_screen);
-        Intent intent = getIntent();
-
         QRdb = FirebaseFirestore.getInstance();
         collectionReference = QRdb.collection("QRCodes");
+        collectionReferenceAccount = QRdb.collection("Accounts");
+
+        //get login details
+        Intent intent = getIntent();
+        username = intent.getStringExtra("username");
+        password = intent.getStringExtra("password");
+        HashMap<String, Account> QRData = new HashMap<>();
+        QRData.put("Code Info", new Account(username, password));
+        collectionReference.document(username).set(QRData);
+
+
 
         // referencing and initializing
         // the button and textviews
