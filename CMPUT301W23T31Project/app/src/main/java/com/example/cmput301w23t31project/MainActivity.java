@@ -1,10 +1,11 @@
 package com.example.cmput301w23t31project;
 
 
-import android.content.Context;
+import android.accounts.Account;
+import android.accounts.AccountManager;
 import android.content.Intent;
-import android.net.wifi.ScanResult;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -13,26 +14,14 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 // implements onClickListener for the onclick behaviour of button
@@ -43,14 +32,13 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
     String username;
     String password;
     FirebaseFirestore QRdb;
-
     CollectionReference collectionReference;
     CollectionReference collectionReferenceAccount;
     public String[] QRNameAdjectives = new String[1010];
     public String[] QRNameColors = new String[128];
     public String[] QRNameNouns = new String[2876];
 
-
+    TextView textView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,13 +46,21 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
         QRdb = FirebaseFirestore.getInstance();
         collectionReference = QRdb.collection("QRCodes");
         collectionReferenceAccount = QRdb.collection("Accounts");
-
+        textView = findViewById(R.id.textView);
+        String ID = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
+        textView.setText(ID);
         //get login details
         Intent intent = getIntent();
         username = intent.getStringExtra("username");
-        HashMap<String, Account> AccountData = new HashMap<>();
-        AccountData.put("Account Info", new Account(username));
-        collectionReferenceAccount.document(username).set(AccountData);
+        if (!username.equals("")) {
+            HashMap<String, String> AccountData = new HashMap<>();
+            AccountData.put("username", username);
+            collectionReferenceAccount.document(ID).set(AccountData);
+            //AccountData.put("dog", "corgi");
+            //collectionReferenceAccount.document(ID).set(AccountData);
+        } else {
+            username = intent.getStringExtra("username_present");
+        }
 
         //set home screen welcome text
         home_screen_username = findViewById(R.id.home_screen_welcome_text);
@@ -92,6 +88,7 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
         myScanBtn = findViewById(R.id.home_screen_my_scans_button);
 
         home_screen_username.setText("Welcome "+username+"!");
+
         scanBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
