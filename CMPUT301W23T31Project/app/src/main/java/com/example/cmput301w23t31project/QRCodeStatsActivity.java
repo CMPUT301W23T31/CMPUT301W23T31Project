@@ -15,8 +15,8 @@ public class QRCodeStatsActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String nameText = intent.getStringExtra(NAME);
         String scoreText = intent.getStringExtra(SCORE);
-        TextView nameView = findViewById(R.id.QR_code_score_display);
-        TextView scoreView = findViewById(R.id.QR_code_name_display);
+        TextView nameView = findViewById(R.id.qr_code_stats_code_name);
+        TextView scoreView = findViewById(R.id.qr_code_stats_code_score);
         nameView.setText(scoreText);
         scoreView.setText(nameText);
 
