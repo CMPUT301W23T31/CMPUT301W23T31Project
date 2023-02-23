@@ -8,35 +8,25 @@
     tools:context=".PlayerInfoScreenActivity"
     android:layout_margin="10dp">
 
-    <LinearLayout
+       <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
+        android:orientation="vertical"
+        android:gravity="end">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <ImageButton
+            android:id="@+id/player_info_my_account_button"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            tools:srcCompat="@tools:sample/avatars"/>
+
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="right">
+            android:text="My Account"
+            android:textSize="11sp"
+            android:textStyle="bold"/>
 
-            <ImageButton
-                android:id="@+id/player_info_my_account_button"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                tools:srcCompat="@tools:sample/avatars"></ImageButton>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="My Account"
-                android:textSize="11sp"
-                android:textStyle="bold">
-
-            </TextView>
-
-
-        </LinearLayout>
     </LinearLayout>
 
     <TextView
@@ -141,7 +131,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="0dp"
         android:text="QR CODE HERE"
-        android:textSize="35sp" />
+        android:textSize="35sp"
+        android:textStyle="bold|italic"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -156,7 +147,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="0dp"
         android:text="QR CODE HERE"
-        android:textSize="35sp" />
+        android:textSize="35sp"
+        android:textStyle="bold|italic"/>
 
     <Button
         android:id="@+id/player_info_see_scans_button"
@@ -165,6 +157,5 @@
         android:layout_margin="0dp"
         android:text="View All Scans"
         android:textSize="24sp" />
-
-
+    
 </LinearLayout>
