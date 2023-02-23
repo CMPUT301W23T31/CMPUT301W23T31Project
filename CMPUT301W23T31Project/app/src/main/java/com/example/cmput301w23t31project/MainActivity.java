@@ -62,9 +62,8 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
         //get login details
         Intent intent = getIntent();
         username = intent.getStringExtra("username");
-        password = intent.getStringExtra("password");
         HashMap<String, Account> AccountData = new HashMap<>();
-        AccountData.put("Account Info", new Account(username, password));
+        AccountData.put("Account Info", new Account(username));
         collectionReferenceAccount.document(username).set(AccountData);
 
         //set home screen welcome text

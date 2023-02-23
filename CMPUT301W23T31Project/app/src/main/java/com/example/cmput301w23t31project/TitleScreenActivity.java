@@ -7,7 +7,6 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.cmput301w23t31project.ui.login.LoginActivity;
 
 public class TitleScreenActivity extends AppCompatActivity {
 
