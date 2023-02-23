@@ -157,5 +157,5 @@
         android:layout_margin="0dp"
         android:text="View All Scans"
         android:textSize="24sp" />
-    
+
 </LinearLayout>
