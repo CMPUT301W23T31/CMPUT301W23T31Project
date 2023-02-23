@@ -91,21 +91,30 @@ public class Utilities {
      * This function assigns a unique name to a QR code based on it's hash
      * @param hash
      *      The hash of the given QR code
-     * @param names
-     *      The list of names to choose from for the QR code name
+     * @param adjectives
+     *      The list of adjectives to choose from for the QR code name
+     * @param colors
+     *      The list of colors to choose from for the QR code name
+     * @param nouns
+     *      The list of nouns to choose from for the QR code name
      * @return
      *      A name generated from the QR code's hash
      */
-    public static String getQRCodeName(String hash, String[] names) {
+    public static String getQRCodeName(String hash, String[] adjectives, String[] colors, String[] nouns) {
         String name = "";
-        int groupSize = 8;
-        for (int i = 0; i < hash.length(); i += groupSize) {
-            int tempScore = 0;
-            for (int j = 0; j < i + groupSize; j++) {
-                tempScore += hash.charAt(j);
+        int groupingSize = 16;
+        String[][] words = {adjectives, colors, nouns};
+        int tempScore;
+
+        for (int i = 0; i < 3; i++) {
+            if (i > 0) {name = name.concat(" ");}
+            // adjective
+            tempScore = 0;
+            for (int j = 0; j < groupingSize; j++) {
+                tempScore += hash.charAt(j + i * groupingSize) * 2 ^ j;
             }
-            tempScore %= names.length;
-            name = name.concat(names[tempScore]);
+            tempScore %= words[i].length;
+            name = name.concat(words[i][tempScore]);
         }
         return name;
     }
@@ -119,10 +128,10 @@ public class Utilities {
      * @return
      *      A string array of file elements, at most 'length' of them
      */
-    public static String[] retrieveFileData(Resources resources, int length) {
+    public static String[] retrieveFileData(Resources resources, int length, int file) {
         String data;
         String[] fileData = new String[length];
-        InputStream is = resources.openRawResource(R.raw.qrcode);
+        InputStream is = resources.openRawResource(file);
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
         int count = 0;
         if (is != null) {
