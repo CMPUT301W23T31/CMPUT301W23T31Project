@@ -46,7 +46,9 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
 
     CollectionReference collectionReference;
     CollectionReference collectionReferenceAccount;
-    public String[] QRNames = new String[100];
+    public String[] QRNameAdjectives = new String[1010];
+    public String[] QRNameColors = new String[128];
+    public String[] QRNameNouns = new String[2876];
 
 
     @Override
@@ -82,7 +84,9 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
         //referencing and initializing the Explore Button
         exploreBtn = findViewById(R.id.home_screen_explore_button);
 
-        QRNames = Utilities.retrieveFileData(this.getResources(), 100);
+        QRNameAdjectives = Utilities.retrieveFileData(this.getResources(), 1010, R.raw.adjectives);
+        QRNameColors = Utilities.retrieveFileData(this.getResources(), 128, R.raw.colors);
+        QRNameNouns = Utilities.retrieveFileData(this.getResources(), 2876, R.raw.nouns);
 
 
         //referencing and initializing the My Scans Button
@@ -225,7 +229,7 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
                 int score = Utilities.getQRScore(hash);
                 String n = ""+hash;
 
-                String name = Utilities.getQRCodeName(hash, QRNames);
+                String name = Utilities.getQRCodeName(hash, QRNameAdjectives, QRNameColors, QRNameNouns);
 
                 HashMap<String, QRCode> QRData = new HashMap<>();
                 QRData.put("Code Info", new QRCode(name, score));
