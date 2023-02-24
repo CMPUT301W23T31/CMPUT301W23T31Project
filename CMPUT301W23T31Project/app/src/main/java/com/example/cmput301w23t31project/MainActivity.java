@@ -38,7 +38,6 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
     public String[] QRNameColors = new String[128];
     public String[] QRNameNouns = new String[2876];
 
-    TextView textView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,9 +45,7 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
         QRdb = FirebaseFirestore.getInstance();
         collectionReference = QRdb.collection("QRCodes");
         collectionReferenceAccount = QRdb.collection("Accounts");
-        textView = findViewById(R.id.textView);
         String ID = Utilities.getDeviceId(this);
-        textView.setText(ID);
         //get login details
         Intent intent = getIntent();
         username = intent.getStringExtra("username");

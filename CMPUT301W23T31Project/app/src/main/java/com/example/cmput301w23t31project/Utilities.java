@@ -6,8 +6,10 @@ package com.example.cmput301w23t31project;
 // 1. https://www.geeksforgeeks.org/how-to-read-qr-code-using-zxing-library-in-android/
 // 2. https://www.baeldung.com/sha-256-hashing-java
 // 3. https://www.geeksforgeeks.org/different-ways-reading-text-file-java/
-
-
+// 4. https://stackoverflow.com/questions/17674634/saving-and-reading-bitmaps-images-from-internal-memory-in-android/35827955#35827955
+// 5. https://stackoverflow.com/questions/3879992/how-to-get-bitmap-from-an-uri
+// 6. https://stackoverflow.com/questions/9107900/how-to-upload-image-from-gallery-in-android
+// 4, 5, 6 used for profile pictures
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.res.Resources;

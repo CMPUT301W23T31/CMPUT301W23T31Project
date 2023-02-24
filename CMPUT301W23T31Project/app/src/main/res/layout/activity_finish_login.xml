@@ -36,7 +36,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:text="@string/enter_a_url_for_your_profile_picture_e_g_image_png"
+        android:text="Upload an image"
         app:layout_constraintTop_toBottomOf="@id/finish_login_activity_player_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -46,7 +46,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:selectAllOnFocus="true"
-        android:layout_marginTop="50dp"
         android:text="@string/upload_image"
         app:layout_constraintTop_toBottomOf="@id/finish_login_activity_image_text"
         app:layout_constraintEnd_toEndOf="parent"
