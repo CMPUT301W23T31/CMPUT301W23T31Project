@@ -43,6 +43,18 @@ public class LeaderboardCountActivity extends AppCompatActivity {
         dataList.add(4, new Player("BigPapi", "RJ", 30, 3000));
         dataList.add(5, new Player("Rus", "Rus", 35, 1200));
         sortList();
+
+        Button searchUser;
+
+        searchUser = findViewById(R.id.leaderboard_search_user_button);
+
+        searchUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new SearchUserFragment().show(getSupportFragmentManager(),"Search Username");
+            }
+        });
+
     }
 
     @Override
