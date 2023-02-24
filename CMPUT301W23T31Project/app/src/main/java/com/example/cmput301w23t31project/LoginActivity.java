@@ -19,8 +19,6 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class LoginActivity extends AppCompatActivity {
-    FirebaseFirestore QRdb;
-    CollectionReference collectionReferenceAccount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,17 +26,17 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         EditText username = findViewById(R.id.login_activity_username);
-
+        EditText email = findViewById(R.id.login_activity_email);
+        EditText phone  = findViewById(R.id.login_activity_phone);
         Button login_button = findViewById(R.id.login_activity_button);
-
-        QRdb = FirebaseFirestore.getInstance();
-        collectionReferenceAccount = QRdb.collection("Accounts");
 
         login_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 intent.putExtra("username", username.getText().toString());
+                intent.putExtra("email", email.getText().toString());
+                intent.putExtra("phone", phone.getText().toString());
                 startActivity(intent);
             }
         });
