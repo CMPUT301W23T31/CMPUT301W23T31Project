@@ -17,4 +17,10 @@
     <string name="email">Email</string>
     <string name="enter_your_email_address">Enter your email address</string>
     <string name="create_a_username_for_your_account">Create a username for your account</string>
+    <string name="enter_your_player_name_for_other_users_to_see">Enter your player name for other users to see</string>
+    <string name="enter_a_url_for_your_profile_picture_e_g_image_png">Enter a url for your profile picture (e.g. image.png)</string>
+    <string name="player_name">Player Name</string>
+    <string name="image_url">Image URL</string>
+    <string name="enter_app">Enter App</string>
+    <string name="upload_image">Upload Image</string>
 </resources>

@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <LinearLayout
@@ -11,11 +12,12 @@
         android:orientation="vertical"
         android:gravity="center">
 
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:srcCompat="@tools:sample/avatars">
-        </ImageButton>
+        <ImageView
+            android:id="@+id/imgPicker"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:maxWidth="50dp">
+        </ImageView>
 
 
         <TextView
@@ -36,11 +38,11 @@
             android:textStyle="bold"/>
 
         <TextView
+            android:id="@+id/account_info_player_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="0dp"
-            android:hint="sizhou liu"
             android:textSize="20sp"/>
 
         <TextView
@@ -53,11 +55,11 @@
             android:textStyle="bold"/>
 
         <TextView
+            android:id="@+id/account_info_username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="0dp"
-            android:hint="russel"
             android:textSize="20sp"/>
 
         <TextView
@@ -70,11 +72,11 @@
             android:textStyle="bold"/>
 
         <TextView
+            android:id="@+id/account_info_phone_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="0dp"
-            android:hint="(911)XXX-XXXX"
             android:textSize="20sp"/>
 
         <TextView
@@ -87,11 +89,11 @@
             android:textStyle="bold"/>
 
         <TextView
+            android:id="@+id/account_info_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_margin="0dp"
-            android:hint="sizhou@ualberta.ca"/>
+            android:layout_margin="0dp"/>
 
     </LinearLayout>
 

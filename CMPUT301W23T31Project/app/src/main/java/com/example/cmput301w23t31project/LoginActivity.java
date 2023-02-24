@@ -33,7 +33,8 @@ public class LoginActivity extends AppCompatActivity {
         login_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                Intent intent = new Intent(
+                        LoginActivity.this, FinishLoginActivity.class);
                 intent.putExtra("username", username.getText().toString());
                 intent.putExtra("email", email.getText().toString());
                 intent.putExtra("phone", phone.getText().toString());
