@@ -56,8 +56,10 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
             HashMap<String, String> AccountData = new HashMap<>();
             AccountData.put("username", username);
             collectionReferenceAccount.document(ID).set(AccountData);
-            //AccountData.put("dog", "corgi");
-            //collectionReferenceAccount.document(ID).set(AccountData);
+            AccountData.put("email", intent.getStringExtra("email"));
+            collectionReferenceAccount.document(ID).set(AccountData);
+            AccountData.put("phone", intent.getStringExtra("phone"));
+            collectionReferenceAccount.document(ID).set(AccountData);
         } else {
             username = intent.getStringExtra("username_present");
         }
