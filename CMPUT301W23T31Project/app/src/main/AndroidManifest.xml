@@ -98,6 +98,9 @@
         <activity android:name=".LeaderboardHighScoreActivity" />
         <activity android:name=".LeaderboardCountActivity" />
         <activity android:name=".QRCodeStatsActivity" />
+        <activity android:name=".FinishLoginActivity"
+            android:exported="false">
+        </activity>
         <activity
         android:name=".CaptureActivityPortrait"
         android:screenOrientation="portrait"

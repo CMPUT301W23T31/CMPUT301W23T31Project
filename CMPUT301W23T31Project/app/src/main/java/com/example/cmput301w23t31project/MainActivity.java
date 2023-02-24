@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
         collectionReference = QRdb.collection("QRCodes");
         collectionReferenceAccount = QRdb.collection("Accounts");
         textView = findViewById(R.id.textView);
-        String ID = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
+        String ID = Utilities.getDeviceId(this);
         textView.setText(ID);
         //get login details
         Intent intent = getIntent();
@@ -59,6 +59,10 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
             AccountData.put("email", intent.getStringExtra("email"));
             collectionReferenceAccount.document(ID).set(AccountData);
             AccountData.put("phone", intent.getStringExtra("phone"));
+            collectionReferenceAccount.document(ID).set(AccountData);
+            AccountData.put("playername", intent.getStringExtra("playername"));
+            collectionReferenceAccount.document(ID).set(AccountData);
+            AccountData.put("path", intent.getStringExtra("path"));
             collectionReferenceAccount.document(ID).set(AccountData);
         } else {
             username = intent.getStringExtra("username_present");
