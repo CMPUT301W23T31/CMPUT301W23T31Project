@@ -34,9 +34,6 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
     FirebaseFirestore QRdb;
     CollectionReference collectionReference;
     CollectionReference collectionReferenceAccount;
-    public String[] QRNameAdjectives = new String[1010];
-    public String[] QRNameColors = new String[128];
-    public String[] QRNameNouns = new String[2876];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,10 +78,6 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
 
         //referencing and initializing the Explore Button
         exploreBtn = findViewById(R.id.home_screen_explore_button);
-
-        QRNameAdjectives = Utilities.retrieveFileData(this.getResources(), 1010, R.raw.adjectives);
-        QRNameColors = Utilities.retrieveFileData(this.getResources(), 128, R.raw.colors);
-        QRNameNouns = Utilities.retrieveFileData(this.getResources(), 2876, R.raw.nouns);
 
 
         //referencing and initializing the My Scans Button
@@ -225,20 +218,13 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
                 } catch (NoSuchAlgorithmException e) {
                     e.printStackTrace();
                 }
-                int score = Utilities.getQRScore(hash);
-                String n = ""+hash;
-
-                String name = Utilities.getQRCodeName(hash, QRNameAdjectives, QRNameColors, QRNameNouns);
-
-                HashMap<String, QRCode> QRData = new HashMap<>();
-                QRData.put("Code Info", new QRCode(name, score));
-                collectionReference.document(name).set(QRData);
-                new ScanResultsFragment(name, score).show(getSupportFragmentManager(), "SCAN RESULTS");
+                new ScanResultsFragment(hash, Utilities.getDeviceId(this)).
+                        show(getSupportFragmentManager(), "SCAN RESULTS");
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);
             String n = "";
-            new ScanResultsFragment(n, 0).show(getSupportFragmentManager(), "SCAN RESULTS");
+            new ScanResultsFragment(n, "").show(getSupportFragmentManager(), "SCAN RESULTS");
         }
     }
 
