@@ -63,7 +63,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="${MAPS_API_KEY}" />
+            android:value="AIzaSyDoA6WIqtm2YqtIfdZYYjiVldH-7Vphb_k" />
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
@@ -102,6 +102,9 @@
         <activity android:name=".LeaderboardHighScoreActivity" />
         <activity android:name=".LeaderboardCountActivity" />
         <activity android:name=".QRCodeStatsActivity" />
+        <activity android:name=".FinishLoginActivity"
+            android:exported="false">
+        </activity>
         <activity
         android:name=".CaptureActivityPortrait"
         android:screenOrientation="portrait"

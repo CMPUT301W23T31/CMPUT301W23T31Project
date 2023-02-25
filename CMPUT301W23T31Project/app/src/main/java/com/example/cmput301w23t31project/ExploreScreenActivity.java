@@ -23,6 +23,7 @@ public class ExploreScreenActivity extends AppCompatActivity implements GoogleMa
         GoogleMap.OnMyLocationClickListener,
         OnMapReadyCallback  {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,9 +39,9 @@ public class ExploreScreenActivity extends AppCompatActivity implements GoogleMa
     @Override
     public void onMapReady(GoogleMap googleMap) {
         googleMap.addMarker(new MarkerOptions()
-                .position(new LatLng(0, 0))
-                .title("Marker"));
-        //googleMap.setMyLocationEnabled(true);
+
+                .position(new LatLng(35.252491,-77.569633))
+                .title("University of Alberta"));
         if ( ContextCompat.checkSelfPermission( this, android.Manifest.permission.ACCESS_COARSE_LOCATION ) != PackageManager.PERMISSION_GRANTED ) {
 
             googleMap.getUiSettings().setMyLocationButtonEnabled(true);
@@ -104,7 +105,6 @@ public class ExploreScreenActivity extends AppCompatActivity implements GoogleMa
         }
 
     }
-
     @Override
     public void onMyLocationClick(@NonNull Location location) {
         Toast.makeText(this, "Current location:\n" + location, Toast.LENGTH_LONG)

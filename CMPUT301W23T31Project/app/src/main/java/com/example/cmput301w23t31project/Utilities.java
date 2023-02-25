@@ -6,18 +6,32 @@ package com.example.cmput301w23t31project;
 // 1. https://www.geeksforgeeks.org/how-to-read-qr-code-using-zxing-library-in-android/
 // 2. https://www.baeldung.com/sha-256-hashing-java
 // 3. https://www.geeksforgeeks.org/different-ways-reading-text-file-java/
-
-
+// 4. https://stackoverflow.com/questions/17674634/saving-and-reading-bitmaps-images-from-internal-memory-in-android/35827955#35827955
+// 5. https://stackoverflow.com/questions/3879992/how-to-get-bitmap-from-an-uri
+// 6. https://stackoverflow.com/questions/9107900/how-to-upload-image-from-gallery-in-android
+// 4, 5, 6 used for profile pictures
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.provider.Settings;
+import android.widget.ImageView;
 
+import androidx.appcompat.app.AppCompatActivity;
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+
+import io.grpc.okhttp.internal.Util;
 
 
 public class Utilities {
@@ -147,4 +161,42 @@ public class Utilities {
         }
         return fileData;
     }
+
+    /**
+     * This function returns the ID of the android device
+     * @param app
+     *      References the activity that needs to access the device ID
+     * @return
+     *      The ID of the android device
+     */
+    public static String getDeviceId(AppCompatActivity app) {
+        return Settings.Secure.getString(app.getContentResolver(), Settings.Secure.ANDROID_ID);
+    }
+
+
+    public static String saveToInternalStorage(Bitmap bitmapImage, Context context, String img_path){
+        ContextWrapper cw = new ContextWrapper(context.getApplicationContext());
+        // path to /data/data/yourapp/app_data/imageDir
+        File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
+        // Create imageDir
+        File mypath = new File(directory,img_path);
+
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(mypath);
+            // Use the compress method on the BitMap object to write image to the OutputStream
+            bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fos);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                assert fos != null;
+                fos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return directory.getAbsolutePath();
+    }
+
 }
