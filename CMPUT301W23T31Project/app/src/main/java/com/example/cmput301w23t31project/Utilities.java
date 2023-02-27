@@ -1,6 +1,5 @@
 package com.example.cmput301w23t31project;
-// The Utilities class contains methods needed throughout the entire program that
-// need are used to assist in more important tasks
+
 
 // References
 // 1. https://www.geeksforgeeks.org/how-to-read-qr-code-using-zxing-library-in-android/
@@ -10,19 +9,16 @@ package com.example.cmput301w23t31project;
 // 5. https://stackoverflow.com/questions/3879992/how-to-get-bitmap-from-an-uri
 // 6. https://stackoverflow.com/questions/9107900/how-to-upload-image-from-gallery-in-android
 // 4, 5, 6 used for profile pictures
+
+
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.provider.Settings;
-import android.widget.ImageView;
-
 import androidx.appcompat.app.AppCompatActivity;
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -31,9 +27,11 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-import io.grpc.okhttp.internal.Util;
 
-
+/**
+ * The Utilities class contains methods needed throughout the entire program that need
+ * or are used to assist in more important tasks
+ */
 public class Utilities {
 
     /**
@@ -174,12 +172,25 @@ public class Utilities {
     }
 
 
-    public static String saveToInternalStorage(Bitmap bitmapImage, Context context, String img_path){
+    /**
+     * This method saves the image to internal storage, in other words, saves the image to a path
+     * in the users device that is called upon each time we need that image
+     * @param bitmapImage
+     *      The bitmap of the image selected by the user
+     * @param context
+     *      The context of the application at time of method call
+     * @param img_file_name
+     *      The name of the image file provided (something like image.png)
+     * @return
+     *      The absolute path in the user's device to the image for future usages
+     */
+    public static String saveToInternalStorage(Bitmap bitmapImage, Context context,
+                                               String img_file_name){
         ContextWrapper cw = new ContextWrapper(context.getApplicationContext());
         // path to /data/data/yourapp/app_data/imageDir
         File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
-        // Create imageDir
-        File mypath = new File(directory,img_path);
+        // Create imageDir, which is a directory on the user's device for photos
+        File mypath = new File(directory,img_file_name);
 
         FileOutputStream fos = null;
         try {
