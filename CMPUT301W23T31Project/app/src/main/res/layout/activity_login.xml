@@ -32,14 +32,24 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/login_activity_username_text" />
-
+    <TextView
+        android:id="@+id/login_activity_bad_username"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:textColor="@color/red"
+        android:text="Username already taken. Please enter another username"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/login_activity_username"
+        android:visibility="invisible">
+    </TextView>
     <TextView
         android:id="@+id/login_activity_email_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/enter_your_email_address"
-        android:layout_marginTop="50dp"
-        app:layout_constraintTop_toBottomOf="@+id/login_activity_username"
+        android:layout_marginTop="30dp"
+        app:layout_constraintTop_toBottomOf="@+id/login_activity_bad_username"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 

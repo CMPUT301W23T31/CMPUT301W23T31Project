@@ -67,7 +67,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="0dp"
-        android:hint="1234567890"
+        android:hint="Score"
         android:textSize="24sp" />
 
     <TextView
@@ -83,7 +83,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="0dp"
-        android:hint="1234"
+        android:hint="Scans"
         android:textSize="24sp" />
 
     <TextView
@@ -99,7 +99,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="0dp"
-        android:hint="11"
+        android:hint="Rank 1"
         android:textSize="24sp" />
 
     <TextView
@@ -115,7 +115,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="0dp"
-        android:hint="22"
+        android:hint="Rank 2"
         android:textSize="24sp" />
 
     <TextView
@@ -130,7 +130,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="0dp"
-        android:text="QR CODE HERE"
+        android:text="High"
         android:textSize="35sp"
         android:textStyle="bold|italic"/>
 
@@ -146,7 +146,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="0dp"
-        android:text="QR CODE HERE"
+        android:text="Low"
         android:textSize="35sp"
         android:textStyle="bold|italic"/>
 

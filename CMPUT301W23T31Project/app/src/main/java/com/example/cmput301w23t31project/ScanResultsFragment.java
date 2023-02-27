@@ -36,7 +36,7 @@ import java.util.Objects;
  * just scanned. It also processes QR Code data to be viewed in detail if the user wishes to do so
  */
 public class ScanResultsFragment extends DialogFragment {
-    private final String ID;
+    private final String username;
     private OnFragmentInteractionListener listener;
     private final String hash;
     TextView resultView;
@@ -45,9 +45,9 @@ public class ScanResultsFragment extends DialogFragment {
     public String[] QRNameColors = new String[128];
     public String[] QRNameNouns = new String[2876];
 
-    public ScanResultsFragment(String hash, String ID){
+    public ScanResultsFragment(String hash, String username){
         this.hash = hash;
-        this.ID = ID;
+        this.username = username;
     }
 
     /**
@@ -225,19 +225,19 @@ public class ScanResultsFragment extends DialogFragment {
     private void processPlayerScanInDatabase(Task<QuerySnapshot> task,
                                          CollectionReference playerScans) {
         for (QueryDocumentSnapshot doc : task.getResult()) {
-            if (doc.getId().equals(ID)) {
+            if (doc.getId().equals(username)) {
                 // If database knows user has previously scanned this code,
                 // it increments the # of times user has scanned that code
                 if (doc.getData().containsKey(hash)) {
                     String timesScanned = String.valueOf(Integer.parseInt(Objects.
                             requireNonNull(doc.getString(hash))) + 1);
-                    playerScans.document(ID).update(hash, timesScanned);
+                    playerScans.document(username).update(hash, timesScanned);
                 } else {
                     // Otherwise, adds record to the database that player scanned this QR code
                     // only if player has scanned at least 1 other QR code
                     Map<String, Object> m = doc.getData();
                     m.put(hash, "1");
-                    playerScans.document(ID).set(m);
+                    playerScans.document(username).set(m);
                 }
                 return;
             }
@@ -246,6 +246,6 @@ public class ScanResultsFragment extends DialogFragment {
         // the player has scanned
         Map<String, Object> m = new HashMap<>();
         m.put(hash, "1");
-        playerScans.document(ID).set(m);
+        playerScans.document(username).set(m);
     }
 }

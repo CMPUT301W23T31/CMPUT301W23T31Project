@@ -15,7 +15,6 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 public class TitleScreenActivity extends AppCompatActivity {
     FirebaseFirestore QRdb = FirebaseFirestore.getInstance();
-
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -30,13 +29,13 @@ public class TitleScreenActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                if (document.getId().equals(Utilities.
+                                if (document.getString("DeviceID").equals(Utilities.
                                         getDeviceId(TitleScreenActivity.this))) {
                                     Intent intent = new Intent(TitleScreenActivity.
                                             this, MainActivity.class);
                                     intent.putExtra("username", "");
                                     intent.putExtra("username_present",
-                                            (String)document.getData().get("username"));
+                                            document.getId());
                                     startActivity(intent);
                                     return;
                                 }
