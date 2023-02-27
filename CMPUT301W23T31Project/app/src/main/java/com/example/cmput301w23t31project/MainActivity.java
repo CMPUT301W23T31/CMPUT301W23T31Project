@@ -48,16 +48,16 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
         username = intent.getStringExtra("username");
         if (!username.equals("")) {
             HashMap<String, String> AccountData = new HashMap<>();
-            AccountData.put("username", username);
-            collectionReferenceAccount.document(ID).set(AccountData);
+            AccountData.put("DeviceID", ID);
+            collectionReferenceAccount.document(username).set(AccountData);
             AccountData.put("email", intent.getStringExtra("email"));
-            collectionReferenceAccount.document(ID).set(AccountData);
+            collectionReferenceAccount.document(username).set(AccountData);
             AccountData.put("phone", intent.getStringExtra("phone"));
-            collectionReferenceAccount.document(ID).set(AccountData);
+            collectionReferenceAccount.document(username).set(AccountData);
             AccountData.put("playername", intent.getStringExtra("playername"));
-            collectionReferenceAccount.document(ID).set(AccountData);
+            collectionReferenceAccount.document(username).set(AccountData);
             AccountData.put("path", intent.getStringExtra("path"));
-            collectionReferenceAccount.document(ID).set(AccountData);
+            collectionReferenceAccount.document(username).set(AccountData);
         } else {
             username = intent.getStringExtra("username_present");
         }
@@ -218,7 +218,7 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
                 } catch (NoSuchAlgorithmException e) {
                     e.printStackTrace();
                 }
-                new ScanResultsFragment(hash, Utilities.getDeviceId(this)).
+                new ScanResultsFragment(hash, username).
                         show(getSupportFragmentManager(), "SCAN RESULTS");
             }
         } else {
