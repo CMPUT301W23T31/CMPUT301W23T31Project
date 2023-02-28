@@ -16,7 +16,19 @@ import android.content.ContextWrapper;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.provider.Settings;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -26,6 +38,7 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Set;
 
 
 /**
@@ -208,6 +221,37 @@ public class Utilities {
             }
         }
         return directory.getAbsolutePath();
+    }
+
+    public static void getPlayerScore(CollectionReference playerScans, String username,
+                                      TextView user_score,
+                                      CollectionReference collectionReference) {
+        playerScans.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                Set<String> codes = null;
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot doc : task.getResult()) {
+                        if (doc.getId().equals(username)) {
+                            codes = doc.getData().keySet();
+                            break;
+                        }
+                    }
+                }
+                if (codes != null) {
+                    for (String key : codes) {
+                        collectionReference.document(key).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                            @Override
+                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                int score = Integer.parseInt(user_score.getText().toString());
+                                score += Integer.parseInt(documentSnapshot.getString("Score"));
+                                user_score.setText(String.valueOf(score));
+                            }
+                        });
+                    }
+                }
+            }
+        });
     }
 
 }

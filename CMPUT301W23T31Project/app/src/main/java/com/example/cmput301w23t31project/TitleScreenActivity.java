@@ -3,6 +3,7 @@ package com.example.cmput301w23t31project;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -18,7 +19,6 @@ import java.util.Objects;
  * It is also responsible for checking if the user device is recognized upon entry
  */
 public class TitleScreenActivity extends AppCompatActivity {
-    FirebaseFirestore QRdb = FirebaseFirestore.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -30,7 +30,8 @@ public class TitleScreenActivity extends AppCompatActivity {
      * This method listens for a user tap on the screen and supplies an argument to determine
      * future control flow
      */
-    public void onTap(){
+    public void onTap(View v){
+        FirebaseFirestore QRdb = FirebaseFirestore.getInstance();
         // Access the accounts in the database
         QRdb.collection("Accounts")
                 .get()

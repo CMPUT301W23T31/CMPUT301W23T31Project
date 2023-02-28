@@ -41,13 +41,16 @@ public class ScanResultsFragment extends DialogFragment {
     private final String hash;
     TextView resultView;
     TextView scoreView;
+    TextView myScoreView;
     public String[] QRNameAdjectives = new String[1010];
     public String[] QRNameColors = new String[128];
     public String[] QRNameNouns = new String[2876];
+    private boolean impliesScoreChange = false;
 
-    public ScanResultsFragment(String hash, String username){
+    public ScanResultsFragment(String hash, String username, TextView view){
         this.hash = hash;
         this.username = username;
+        this.myScoreView = view;
     }
 
     /**
@@ -140,6 +143,11 @@ public class ScanResultsFragment extends DialogFragment {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         // Head back to main menu and close the dialog fragment
                         dialogInterface.cancel();
+                        if (impliesScoreChange) {
+                            int myScore = Integer.parseInt(myScoreView.getText().toString());
+                            myScore += score;
+                            myScoreView.setText(String.valueOf(myScore));
+                        }
                     }
                 })
                 .setPositiveButton("SEE CODE DETAILS", new DialogInterface.OnClickListener() {
@@ -212,6 +220,7 @@ public class ScanResultsFragment extends DialogFragment {
         }
         // Add the data to the database
         codes.document(hash).set(stringData);
+        impliesScoreChange = true;
     }
 
     /**
