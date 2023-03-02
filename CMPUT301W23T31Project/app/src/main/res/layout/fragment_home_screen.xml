@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:textSize="36dp"
-            android:text="123456789"
+            android:text="0"
 
             app:layout_constraintTop_toBottomOf="@id/home_screen_current_points_text"
             app:layout_constraintBottom_toTopOf="@id/home_screen_nearest_code_text"

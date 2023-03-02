@@ -26,6 +26,8 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 
 /**
@@ -208,6 +210,23 @@ public class Utilities {
             }
         }
         return directory.getAbsolutePath();
+    }
+
+    /**
+     * This function returns the current date in yyyy-MM-dd format
+     * @return
+     *      The current date in yyyy-MM-dd format
+     */
+    public static String getCurrentDate() {
+        DateTimeFormatter dtf;
+        // Update latest date scanned
+        if (android.os.Build.VERSION.SDK_INT >=
+                android.os.Build.VERSION_CODES.O) {
+            dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDateTime now = LocalDateTime.now();
+            return dtf.format(now);
+        }
+        return "";
     }
 
 }
