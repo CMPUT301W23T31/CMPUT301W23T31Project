@@ -41,10 +41,10 @@ public class MyAccountScreenActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
-                        if (document.getId().equals(Utilities.
+                        if (document.getString("DeviceID").equals(Utilities.
                                 getDeviceId(MyAccountScreenActivity.this))) {
                             player_name.setText(document.getString("playername"));
-                            username.setText(document.getString("username"));
+                            username.setText(document.getId());
                             email.setText(document.getString("email"));
                             phone_number.setText(document.getString("phone"));
                             loadImageFromStorage(document.getString("path"));
