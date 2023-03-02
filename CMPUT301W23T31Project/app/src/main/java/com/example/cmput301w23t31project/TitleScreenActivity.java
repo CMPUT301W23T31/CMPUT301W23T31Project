@@ -32,6 +32,7 @@ public class TitleScreenActivity extends AppCompatActivity {
      * future control flow
      */
     public void onTap(View v){
+
         AccountsCollection accounts = new AccountsCollection();
         accounts.getReference().get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override

@@ -3,6 +3,10 @@ package com.example.cmput301w23t31project;
 
 import android.content.Intent;
 import android.os.Bundle;
+
+import android.provider.Settings;
+import android.util.Log;
+
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -15,13 +19,26 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
+
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import java.security.NoSuchAlgorithmException;
+import java.util.Set;
+
+
+import java.util.HashMap;
+import java.util.Objects;
 import java.util.Set;
 
 
@@ -31,13 +48,16 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
     String username;
     TextView score;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_home_screen);
+
         AccountsCollection collectionReferenceAccount = new AccountsCollection();
         QRCodesCollection QRcodes = new QRCodesCollection();
         QRPlayerScans playerScans = new QRPlayerScans();
+
         String ID = Utilities.getDeviceId(this);
         //get login details
         Intent intent = getIntent();
@@ -48,6 +68,7 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
         } else {
             username = intent.getStringExtra("username_present");
         }
+
         setHomeScore(playerScans, score, QRcodes, username);
 
         // Reference and initialize the Button and TextViews
@@ -200,7 +221,9 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
         } else {
             super.onActivityResult(requestCode, resultCode, data);
             String n = "";
+
             new ScanResultsFragment(n, "", score).show(getSupportFragmentManager(), "SCAN RESULTS");
+
         }
     }
 

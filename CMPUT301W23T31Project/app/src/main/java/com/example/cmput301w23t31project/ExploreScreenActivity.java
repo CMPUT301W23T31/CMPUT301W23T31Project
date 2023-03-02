@@ -21,7 +21,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class ExploreScreenActivity extends AppCompatActivity implements GoogleMap.OnMyLocationButtonClickListener,
         GoogleMap.OnMyLocationClickListener,
-        OnMapReadyCallback {
+        OnMapReadyCallback  {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,7 @@ public class ExploreScreenActivity extends AppCompatActivity implements GoogleMa
     @Override
     public void onMapReady(GoogleMap googleMap) {
         googleMap.addMarker(new MarkerOptions()
+
                 .position(new LatLng(35.252491,-77.569633))
                 .title("University of Alberta"));
         if ( ContextCompat.checkSelfPermission( this, android.Manifest.permission.ACCESS_COARSE_LOCATION ) != PackageManager.PERMISSION_GRANTED ) {

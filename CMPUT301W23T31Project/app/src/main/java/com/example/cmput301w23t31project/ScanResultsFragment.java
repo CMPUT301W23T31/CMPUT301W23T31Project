@@ -42,15 +42,20 @@ public class ScanResultsFragment extends DialogFragment {
     private final String hash;
     TextView resultView;
     TextView scoreView;
+
     TextView homeScore;
+
     public String[] QRNameAdjectives = new String[1010];
     public String[] QRNameColors = new String[128];
     public String[] QRNameNouns = new String[2876];
+    private boolean impliesScoreChange = false;
+
 
     public ScanResultsFragment(String hash, String username, TextView score){
         this.hash = hash;
         this.username = username;
         this.homeScore = score;
+
     }
 
     /**
@@ -125,7 +130,9 @@ public class ScanResultsFragment extends DialogFragment {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         // Head back to main menu and close the dialog fragment
                         dialogInterface.cancel();
+
                         MainActivity.setHomeScore(new QRPlayerScans(), homeScore, new QRCodesCollection(), username);
+
                     }
                 })
                 .setPositiveButton("SEE CODE DETAILS", new DialogInterface.OnClickListener() {
