@@ -6,9 +6,8 @@ import android.os.Bundle;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 
 /**
@@ -22,7 +21,6 @@ public class QRCodeStatsActivity extends AppCompatActivity {
      */
     protected void onCreate(Bundle savedInstanceState) {
         // Get access to the database
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qr_code_stats_screen);
         Intent intent = getIntent();
@@ -34,23 +32,20 @@ public class QRCodeStatsActivity extends AppCompatActivity {
         TextView likesView = findViewById(R.id.qr_code_stats_code_likes_dislikes);
         TextView date = findViewById(R.id.qr_code_stats_code_last_scanned_date);
         TextView scanned = findViewById(R.id.qr_code_stats_code_total_scans);
-        CollectionReference qr_codes = db.collection("QRCodes");
+        QRCodesCollection qr_codes = new QRCodesCollection();
         // Add the required statistics to the text fields
-        qr_codes.document(hash).get().
-                addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot doc) {
-                nameView.setText(doc.getString("Name"));
-                scoreView.setText(doc.getString("Score"));
-                String coordinates = doc.getString("Latitude") + ", " +
-                        doc.getString("Longitude");
-                String likes = doc.getString("Likes") + " / " +
-                        doc.getString("Dislikes");
-                coordinatesView.setText(coordinates);
-                likesView.setText(likes);
-                date.setText(doc.getString("LastScanned"));
-                scanned.setText(doc.getString("TimesScanned"));
-            }
-        });
+        QueryDocumentSnapshot document = qr_codes.getDocument(hash);
+        if (document != null) {
+            nameView.setText(document.getString("Name"));
+            scoreView.setText(document.getString("Score"));
+            String coordinates = document.getString("Latitude") + ", " +
+                    document.getString("Longitude");
+            String likes = document.getString("Likes") + " / " +
+                    document.getString("Dislikes");
+            coordinatesView.setText(coordinates);
+            likesView.setText(likes);
+            date.setText(document.getString("LastScanned"));
+            scanned.setText(document.getString("TimesScanned"));
+        }
     }
 }

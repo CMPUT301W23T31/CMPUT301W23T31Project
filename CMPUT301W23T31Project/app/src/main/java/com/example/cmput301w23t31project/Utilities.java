@@ -38,7 +38,12 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import java.util.Set;
+
 
 
 /**
@@ -223,35 +228,22 @@ public class Utilities {
         return directory.getAbsolutePath();
     }
 
-    public static void getPlayerScore(CollectionReference playerScans, String username,
-                                      TextView user_score,
-                                      CollectionReference collectionReference) {
-        playerScans.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                Set<String> codes = null;
-                if (task.isSuccessful()) {
-                    for (QueryDocumentSnapshot doc : task.getResult()) {
-                        if (doc.getId().equals(username)) {
-                            codes = doc.getData().keySet();
-                            break;
-                        }
-                    }
-                }
-                if (codes != null) {
-                    for (String key : codes) {
-                        collectionReference.document(key).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                            @Override
-                            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                int score = Integer.parseInt(user_score.getText().toString());
-                                score += Integer.parseInt(documentSnapshot.getString("Score"));
-                                user_score.setText(String.valueOf(score));
-                            }
-                        });
-                    }
-                }
-            }
-        });
+
+    /**
+     * This function returns the current date in yyyy-MM-dd format
+     * @return
+     *      The current date in yyyy-MM-dd format
+     */
+    public static String getCurrentDate() {
+        DateTimeFormatter dtf;
+        // Update latest date scanned
+        if (android.os.Build.VERSION.SDK_INT >=
+                android.os.Build.VERSION_CODES.O) {
+            dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDateTime now = LocalDateTime.now();
+            return dtf.format(now);
+        }
+        return "";
     }
 
 }
