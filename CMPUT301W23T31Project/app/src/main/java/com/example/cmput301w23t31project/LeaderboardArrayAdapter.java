@@ -46,4 +46,8 @@ public class LeaderboardArrayAdapter extends ArrayAdapter<Player> {
         return view;
 
     }
+
+    public void search(String username){
+
+    }
 }

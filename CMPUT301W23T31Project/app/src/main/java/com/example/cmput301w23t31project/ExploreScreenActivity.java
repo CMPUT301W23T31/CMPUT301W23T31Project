@@ -61,8 +61,7 @@ public class ExploreScreenActivity extends AppCompatActivity implements GoogleMa
     public boolean onOptionsItemSelected(MenuItem item){
         switch(item.getItemId()){
             case R.id.item2: {
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
+                finish();
                 return true;
             }
             /*
