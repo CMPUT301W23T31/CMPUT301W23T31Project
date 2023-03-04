@@ -118,7 +118,7 @@ public class ScanResultsFragment extends DialogFragment {
         QRCodesCollection codes = new QRCodesCollection();
         QRPlayerScans playerScans = new QRPlayerScans();
 
-        codes.processQRCodeInDatabase(name, String.valueOf(score), hash);
+        codes.processQRCodeInDatabase(name, String.valueOf(score), hash, latitude, longitude);
         playerScans.processPlayerScanInDatabase(username, hash);
 
         // Set the fragment screens to display the name and score of the scanned QR code
