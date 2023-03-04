@@ -14,6 +14,13 @@
         android:paddingBottom="30dp"/>
 
     <TextView
+        android:id="@+id/scan_results_location"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
+
+    <TextView
         android:id="@+id/scan_results_data"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

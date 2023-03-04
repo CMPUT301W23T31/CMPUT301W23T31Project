@@ -2,6 +2,7 @@ package com.example.cmput301w23t31project;
 
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 
 import android.provider.Settings;
@@ -17,6 +18,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 
@@ -47,7 +50,9 @@ import java.util.Set;
 public class MainActivity extends AppCompatActivity implements ScanResultsFragment.OnFragmentInteractionListener {
     String username;
     TextView score;
-
+    private GpsTracker gpsTracker;
+    double latitude;
+    double longitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +85,15 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
         String home_username = "Welcome "+username+"!";
         home_screen_username.setText(home_username);
 
+        try {
+            if (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ) {
+                ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 101);
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+
         scanBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,6 +118,7 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
                   
             }
         });
+
 
         playerInfoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,6 +149,8 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
         });
 
     }
+
+
     public void onClickAppInfo(View view){
         Intent intent = new Intent(this, AppInfoScreenActivity.class);
         startActivity(intent);
@@ -214,14 +231,24 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
                 } catch (NoSuchAlgorithmException e) {
                     e.printStackTrace();
                 }
-                new ScanResultsFragment(hash, username, score).
+                //getting location
+                gpsTracker = new GpsTracker(MainActivity.this);
+                if(gpsTracker.canGetLocation()){
+                    latitude = gpsTracker.getLatitude();
+                    longitude = gpsTracker.getLongitude();
+                    Toast.makeText(this, "l"+latitude+longitude, Toast.LENGTH_SHORT)
+                            .show();
+                }else{
+                    gpsTracker.showSettingsAlert();
+                }
+                new ScanResultsFragment(hash, username, score, latitude, longitude).
                         show(getSupportFragmentManager(), "SCAN RESULTS");
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);
             String n = "";
 
-            new ScanResultsFragment(n, "", score).show(getSupportFragmentManager(), "SCAN RESULTS");
+            new ScanResultsFragment(n, "", score,0,0).show(getSupportFragmentManager(), "SCAN RESULTS");
 
         }
     }
