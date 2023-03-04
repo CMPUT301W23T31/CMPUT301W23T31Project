@@ -27,7 +27,7 @@ public class QRCodesCollection extends QRDatabase {
      * @param hash
      *      The hash of the QR code
      */
-    public void processQRCodeInDatabase(String name, String score, String hash) {
+    public void processQRCodeInDatabase(String name, String score, String hash, double latitude, double longitude) {
         CollectionReference codes = getReference();
         collection.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -42,7 +42,7 @@ public class QRCodesCollection extends QRDatabase {
                             return;
                         }
                     }
-                    addQRCodeToDatabase(name, score, hash);
+                    addQRCodeToDatabase(name, score, hash, latitude, longitude);
                 }
             }
         });
@@ -57,7 +57,7 @@ public class QRCodesCollection extends QRDatabase {
      * @param hash
      *      The hash of the scanned QR code
      */
-    public void addQRCodeToDatabase(String name, String score, String hash) {
+    public void addQRCodeToDatabase(String name, String score, String hash, double latitude, double longitude) {
         // Get QR code name and score
         CollectionReference codes = getReference();
 
@@ -65,8 +65,8 @@ public class QRCodesCollection extends QRDatabase {
         HashMap<String, String> stringData = new HashMap<>();
         stringData.put("Name", name);
         stringData.put("Score", score);
-        stringData.put("Latitude", "0");
-        stringData.put("Longitude", "0");
+        stringData.put("Latitude", String.valueOf(latitude));
+        stringData.put("Longitude", String.valueOf(longitude));
         stringData.put("Likes", "0");
         stringData.put("Dislikes", "0");
         stringData.put("TimesScanned", "1");
