@@ -8,8 +8,11 @@ import android.view.View;
 
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -82,14 +85,22 @@ public class QRCodeStatsActivity extends AppCompatActivity {
                                           }
                                       });
     }
-        ////
+        
 
 
-        // Add the required statistics to the text fields
+
+       
+
+       
+
         //QueryDocumentSnapshot document = qr_codes.getDocument(hash);
 
     public void setStats(DocumentSnapshot document) {
+
+        // Add the required statistics to the text fields
+
         if (document != null) {
+            Toast.makeText(getApplicationContext(),"the thing is not null",Toast.LENGTH_SHORT).show();
             nameView.setText(document.getString("Name"));
             scoreView.setText(document.getString("Score"));
             String coordinates = document.getString("Latitude") + ", " +
@@ -101,5 +112,8 @@ public class QRCodeStatsActivity extends AppCompatActivity {
             date.setText(document.getString("LastScanned"));
             scanned.setText(document.getString("TimesScanned"));
         }
+    }
+    public void DisplayQrCodeFields(){
+
     }
 }
