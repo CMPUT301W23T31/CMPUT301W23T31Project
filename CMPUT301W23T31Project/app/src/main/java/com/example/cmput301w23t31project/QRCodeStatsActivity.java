@@ -3,7 +3,10 @@ package com.example.cmput301w23t31project;
 
 import android.content.Intent;
 import android.os.Bundle;
+
 import android.view.View;
+
+import android.widget.ListView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -13,6 +16,8 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.List;
+
+import java.util.ArrayList;
 
 
 /**
@@ -31,6 +36,9 @@ public class QRCodeStatsActivity extends AppCompatActivity {
      * @param savedInstanceState
      *      A bundle required to create the activity
      */
+    private ArrayList<Player> playerList;
+    private QRCodeStatsAdapter qrCodeStatsAdapter;
+    ListView datalist;
     protected void onCreate(Bundle savedInstanceState) {
         // Get access to the database
         super.onCreate(savedInstanceState);
@@ -38,12 +46,17 @@ public class QRCodeStatsActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String hash = intent.getStringExtra("hash");
         // Accesses all of the text fields
+
         nameView = findViewById(R.id.qr_code_stats_code_name);
         scoreView = findViewById(R.id.qr_code_stats_code_score);
         coordinatesView = findViewById(R.id.qr_code_stats_code_coordinates);
         likesView = findViewById(R.id.qr_code_stats_code_likes_dislikes);
         date = findViewById(R.id.qr_code_stats_code_last_scanned_date);
         scanned = findViewById(R.id.qr_code_stats_code_total_scans);
+        playerList = new ArrayList<>();
+        datalist = findViewById(R.id.qr_code_stats_scanned_by_list);
+        qrCodeStatsAdapter = new QRCodeStatsAdapter(this, playerList);
+        datalist.setAdapter(qrCodeStatsAdapter);
 
         QRCodesCollection qr_codes = new QRCodesCollection();
 
