@@ -3,11 +3,14 @@ package com.example.cmput301w23t31project;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ListView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+
+import java.util.ArrayList;
 
 
 /**
@@ -19,6 +22,9 @@ public class QRCodeStatsActivity extends AppCompatActivity {
      * @param savedInstanceState
      *      A bundle required to create the activity
      */
+    private ArrayList<Player> playerList;
+    private QRCodeStatsAdapter qrCodeStatsAdapter;
+    ListView datalist;
     protected void onCreate(Bundle savedInstanceState) {
         // Get access to the database
         super.onCreate(savedInstanceState);
@@ -26,6 +32,10 @@ public class QRCodeStatsActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String hash = intent.getStringExtra("Hash");
         // Accesses all of the text fields
+        playerList = new ArrayList<>();
+        datalist = findViewById(R.id.qr_code_stats_scanned_by_list);
+        qrCodeStatsAdapter = new QRCodeStatsAdapter(this, playerList);
+        datalist.setAdapter(qrCodeStatsAdapter);
         TextView nameView = findViewById(R.id.qr_code_stats_code_name);
         TextView scoreView = findViewById(R.id.qr_code_stats_code_score);
         TextView coordinatesView = findViewById(R.id.qr_code_stats_code_coordinates);
