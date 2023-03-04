@@ -38,11 +38,13 @@ import java.util.Objects;
  */
 public class ScanResultsFragment extends DialogFragment {
     private final String username;
+    public double latitude;
+    public double longitude;
     private OnFragmentInteractionListener listener;
     private final String hash;
     TextView resultView;
     TextView scoreView;
-
+    TextView locationView;
     TextView homeScore;
 
     public String[] QRNameAdjectives = new String[1010];
@@ -51,11 +53,12 @@ public class ScanResultsFragment extends DialogFragment {
     private boolean impliesScoreChange = false;
 
 
-    public ScanResultsFragment(String hash, String username, TextView score){
+    public ScanResultsFragment(String hash, String username, TextView score, double latitude, double longitude){
         this.hash = hash;
         this.username = username;
         this.homeScore = score;
-
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     /**
@@ -97,7 +100,10 @@ public class ScanResultsFragment extends DialogFragment {
                 inflate(R.layout.fragment_scan_results, null);
         resultView = view.findViewById(R.id.scan_results_data);
         scoreView = view.findViewById(R.id.scan_results_score);
+        locationView = view.findViewById(R.id.scan_results_location);
 
+        //sets location
+        locationView.setText("L"+latitude+" "+longitude);
 
         // Get access to adjectives, colors, and nouns to name scanned QR codes
         QRNameAdjectives = Utilities.retrieveFileData(this.getResources(),
