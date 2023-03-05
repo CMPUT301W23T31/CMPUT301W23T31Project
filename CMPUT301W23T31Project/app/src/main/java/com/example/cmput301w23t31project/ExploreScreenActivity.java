@@ -21,6 +21,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -80,6 +81,18 @@ public class ExploreScreenActivity extends AppCompatActivity implements GoogleMa
                         }
                     }
                 });
+        googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(@NonNull Marker marker) {
+                QRCodesCollection qr_codes = new QRCodesCollection();
+                String codeName = marker.getTitle();
+                Intent intent = new Intent(ExploreScreenActivity.this, QRCodeStatsActivity.class);
+                String hash = qr_codes.getHashFromName(codeName);
+                intent.putExtra("hash", hash);
+                startActivity(intent);
+                return false;
+            }
+        });
 
 
     }
