@@ -27,6 +27,7 @@ public class LeaderboardHighScoreActivity extends AppCompatActivity  implements 
     @Override
     public void searchUser(String username){
         int l = dataList.size();
+        int c = 0;
         for(int i=0;i<l;i++)
         {
             if(username.equals(dataList.get(i).getUserName())){
@@ -34,7 +35,12 @@ public class LeaderboardHighScoreActivity extends AppCompatActivity  implements 
                 LeaderboardList = findViewById(R.id.leaderboard_list);
                 leaderboardHighScoreArrayAdapter = new LeaderboardHighScoreArrayAdapter(this, dataList2);
                 LeaderboardList.setAdapter(leaderboardHighScoreArrayAdapter);
+                c+=1;
             }
+        }
+        if(c==0)
+        {
+            new UsernameNotFoundFragment().show(getSupportFragmentManager(), "Error Message");
         }
     }
 
