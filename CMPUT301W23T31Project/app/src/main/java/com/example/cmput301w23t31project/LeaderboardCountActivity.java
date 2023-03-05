@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
-public class LeaderboardCountActivity extends AppCompatActivity {
+public class LeaderboardCountActivity extends AppCompatActivity implements SearchUserFragment.SearchUserDialogListener{
 
     Button highScoreBtn;
     Button countBtn;
@@ -22,6 +22,21 @@ public class LeaderboardCountActivity extends AppCompatActivity {
 
     private ArrayList<Player> dataList;
     private LeaderboardCountArrayAdapter leaderboardCountArrayAdapter;
+    private ArrayList<Player> dataList2 = new ArrayList<>();
+
+    @Override
+    public void searchUser(String username){
+        int l = dataList.size();
+        for(int i=0;i<l;i++)
+        {
+            if(username.equals(dataList.get(i).getUserName())){
+                dataList2.add(dataList.get(i));
+                LeaderboardList = findViewById(R.id.leaderboard_list);
+                leaderboardCountArrayAdapter = new LeaderboardCountArrayAdapter(this, dataList2);
+                LeaderboardList.setAdapter(leaderboardCountArrayAdapter);
+            }
+        }
+    }
 
     ListView LeaderboardList;
     protected void onCreate(Bundle savedInstanceState) {

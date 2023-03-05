@@ -1,5 +1,7 @@
 package com.example.cmput301w23t31project;
 
+//Reference: https://developers.google.com/maps/documentation/android-sdk/map#view_the_code
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;

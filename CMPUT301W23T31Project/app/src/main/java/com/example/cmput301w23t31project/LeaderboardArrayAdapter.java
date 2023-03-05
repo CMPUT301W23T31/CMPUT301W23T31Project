@@ -1,6 +1,7 @@
 package com.example.cmput301w23t31project;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,10 +45,6 @@ public class LeaderboardArrayAdapter extends ArrayAdapter<Player> {
 
 
         return view;
-
-    }
-
-    public void search(String username){
 
     }
 }
