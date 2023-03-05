@@ -67,7 +67,6 @@ public class QRCodeStatsActivity extends AppCompatActivity {
         datalist = findViewById(R.id.qr_code_stats_scanned_by_list);
         qrCodeStatsAdapter = new QRCodeStatsAdapter(this, playerList);
         datalist.setAdapter(qrCodeStatsAdapter);
-        setList(hash);
         QRCodesCollection qr_codes = new QRCodesCollection();
 
         ///
@@ -92,6 +91,7 @@ public class QRCodeStatsActivity extends AppCompatActivity {
                                               }
                                           }
                                       });
+        setList(hash);
     }
         
 
