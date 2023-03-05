@@ -58,6 +58,7 @@ public class QRCodesCollection extends QRDatabase {
                     for (QueryDocumentSnapshot document: task.getResult()) {
                         if (document.getString("Name").equals(name)) {
                             hash_return =  document.getId();
+
                         }
                     }
                 }

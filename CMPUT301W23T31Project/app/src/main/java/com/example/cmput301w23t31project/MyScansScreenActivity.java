@@ -93,6 +93,7 @@ public class MyScansScreenActivity extends AppCompatActivity implements SearchSc
     public void onDisplayOkPressed(String name){
         QRCodesCollection qr_codes = new QRCodesCollection();
         String hash = qr_codes.getHashFromName(name);
+        Toast.makeText(getApplicationContext(),"hash"+name,Toast.LENGTH_SHORT).show();
         if(hash != "nothing"){
             Intent intent = new Intent(MyScansScreenActivity.this, QRCodeStatsActivity.class);
             intent.putExtra("Hash", hash);

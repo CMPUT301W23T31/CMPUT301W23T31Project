@@ -128,7 +128,7 @@ public class ScanResultsFragment extends DialogFragment {
         resultView.setText(name);
         String s = "QR Code Score: " + score;
         scoreView.setText(s);
-        Toast.makeText(getContext(),"hash"+hash,Toast.LENGTH_SHORT).show();
+
 
         // Build dialog fragment
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());

@@ -65,7 +65,7 @@ public class QRCodeStatsActivity extends AppCompatActivity {
         QRCodesCollection qr_codes = new QRCodesCollection();
 
         ///
-        Toast.makeText(getApplicationContext(),"hash"+hash,Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(),"hashstats: "+hash,Toast.LENGTH_SHORT).show();
         db = FirebaseFirestore.getInstance();
         db.collection("QRCodes").get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
