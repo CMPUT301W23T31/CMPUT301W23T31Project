@@ -78,8 +78,9 @@ public class QRCodeStatsActivity extends AppCompatActivity {
                                                   // our data in a list.
                                                   List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
                                                   for (DocumentSnapshot document : list) {
-                                                      document.getId().equals(hash);
-                                                      setStats(document);
+
+                                                      if(document.getId().equals(hash)){
+                                                            setStats(document);}
                                                   }
                                               }
                                           }
@@ -113,7 +114,9 @@ public class QRCodeStatsActivity extends AppCompatActivity {
             scanned.setText(document.getString("TimesScanned"));
         }
     }
-    public void DisplayQrCodeFields(){
+
+    public void setList(String hash){
+        //const players = query(collection(db, "PlayerScans"));
 
     }
 }
