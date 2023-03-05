@@ -20,12 +20,18 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.List;
 
 public class ExploreScreenActivity extends AppCompatActivity implements GoogleMap.OnMyLocationButtonClickListener,
         GoogleMap.OnMyLocationClickListener,
         OnMapReadyCallback  {
     private GpsTracker gpsTracker;
-
+    private FirebaseFirestore db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +57,29 @@ public class ExploreScreenActivity extends AppCompatActivity implements GoogleMa
         }
         googleMap.setOnMyLocationButtonClickListener(this);
         googleMap.setOnMyLocationClickListener(this);
+
+        db = FirebaseFirestore.getInstance();
+        db.collection("QRCodes").get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        // after getting the data we are calling on success method
+                        // and inside this method we are checking if the received
+                        // query snapshot is empty or not.
+                        if (!queryDocumentSnapshots.isEmpty()) {
+                            // if the snapshot is not empty we are
+                            // hiding our progress bar and adding
+                            // our data in a list.
+                            List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+                            for (DocumentSnapshot document : list) {
+                                LatLng location = new LatLng(Double.valueOf(document.getString("Latitude")),Double.valueOf(document.getString("Longitude")));
+                                googleMap.addMarker(new MarkerOptions().position(location).title(document.getString("Name")));
+                            }
+                        }
+                    }
+                });
+
+
     }
 
     @Override
