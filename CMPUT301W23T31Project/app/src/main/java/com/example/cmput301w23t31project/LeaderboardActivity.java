@@ -11,6 +11,7 @@ import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public class LeaderboardActivity extends AppCompatActivity implements SearchUserFragment.SearchUserDialogListener{
@@ -21,11 +22,21 @@ public class LeaderboardActivity extends AppCompatActivity implements SearchUser
     Button regionalBtn;
 
     private ArrayList<Player> dataList;
+    private ArrayList<Player> dataList2 = new ArrayList<>();
     private LeaderboardArrayAdapter leaderboardArrayAdapter;
 
     @Override
     public void searchUser(String username){
-        leaderboardArrayAdapter.search(username);
+        int l = dataList.size();
+        for(int i=0;i<l;i++)
+        {
+            if(username.equals(dataList.get(i).getUserName())){
+                dataList2.add(dataList.get(i));
+                LeaderboardList = findViewById(R.id.leaderboard_list);
+                leaderboardArrayAdapter = new LeaderboardArrayAdapter(this, dataList2);
+                LeaderboardList.setAdapter(leaderboardArrayAdapter);
+            }
+        }
     }
 
     ListView LeaderboardList;
