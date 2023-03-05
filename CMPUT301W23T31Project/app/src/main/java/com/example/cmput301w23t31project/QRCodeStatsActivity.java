@@ -4,14 +4,19 @@ package com.example.cmput301w23t31project;
 import android.content.Intent;
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.View;
 
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -21,6 +26,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.List;
 
 import java.util.ArrayList;
+
 
 
 /**
@@ -61,7 +67,7 @@ public class QRCodeStatsActivity extends AppCompatActivity {
         datalist = findViewById(R.id.qr_code_stats_scanned_by_list);
         qrCodeStatsAdapter = new QRCodeStatsAdapter(this, playerList);
         datalist.setAdapter(qrCodeStatsAdapter);
-
+        setList(hash);
         QRCodesCollection qr_codes = new QRCodesCollection();
 
         ///
@@ -117,7 +123,27 @@ public class QRCodeStatsActivity extends AppCompatActivity {
     }
 
     public void setList(String hash){
-        //const players = query(collection(db, "PlayerScans"));
+        db = FirebaseFirestore.getInstance();
+        db.collection("PlayerScans").get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        // after getting the data we are calling on success method
+                        // and inside this method we are checking if the received
+                        // query snapshot is empty or not.
+                        if (!queryDocumentSnapshots.isEmpty()) {
+                            // if the snapshot is not empty we are
+                            // hiding our progress bar and adding
+                            // our data in a list.
+                            List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+                            for (DocumentSnapshot document : list) {
+                                if(document.getData().containsKey(hash)){
+                                    playerList.add(new Player(document.getId(),document.getId(),1,Integer.parseInt(scoreView.toString())));
+                                }
+                            }
+                            qrCodeStatsAdapter.notifyDataSetChanged();
+                        }
+                    }});}
 
-    }
+
 }
