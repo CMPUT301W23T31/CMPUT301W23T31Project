@@ -114,7 +114,6 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
                 integrator.setBeepEnabled(true);
                 integrator.setCaptureActivity(CaptureActivityPortrait.class);
                 integrator.initiateScan();
-
                   
             }
         });
@@ -286,6 +285,4 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
             }
         });
     }
-
-
 }

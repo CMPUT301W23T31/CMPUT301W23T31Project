@@ -30,7 +30,14 @@ public class LeaderboardActivity extends AppCompatActivity implements SearchUser
         int l = dataList.size();
         int c = 0;
         for(int i=0;i<l;i++) {
-            if (username.equals(dataList.get(i).getUserName())) {
+            if (username.equalsIgnoreCase(dataList.get(i).getUserName())) {
+                dataList2.add(dataList.get(i));
+                LeaderboardList = findViewById(R.id.leaderboard_list);
+                leaderboardArrayAdapter = new LeaderboardArrayAdapter(this, dataList2);
+                LeaderboardList.setAdapter(leaderboardArrayAdapter);
+                c += 1;
+            }
+            else if(((dataList.get(i).getUserName()).toLowerCase()).startsWith(username.toLowerCase())){
                 dataList2.add(dataList.get(i));
                 LeaderboardList = findViewById(R.id.leaderboard_list);
                 leaderboardArrayAdapter = new LeaderboardArrayAdapter(this, dataList2);
