@@ -17,6 +17,8 @@ import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
@@ -126,6 +128,7 @@ public class ScanResultsFragment extends DialogFragment {
         resultView.setText(name);
         String s = "QR Code Score: " + score;
         scoreView.setText(s);
+        Toast.makeText(getContext(),"hash"+hash,Toast.LENGTH_SHORT).show();
 
         // Build dialog fragment
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());

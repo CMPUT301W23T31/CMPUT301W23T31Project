@@ -34,6 +34,7 @@ public class QRCodeStatsActivity extends AppCompatActivity {
     TextView likesView;
     TextView date;
     TextView scanned;
+    String hash;
     /**
      * This method creates the activity to display QR code stats
      * @param savedInstanceState
@@ -47,7 +48,7 @@ public class QRCodeStatsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qr_code_stats_screen);
         Intent intent = getIntent();
-        String hash = intent.getStringExtra("hash");
+        hash = intent.getStringExtra("Hash");
         // Accesses all of the text fields
 
         nameView = findViewById(R.id.qr_code_stats_code_name);
@@ -64,6 +65,7 @@ public class QRCodeStatsActivity extends AppCompatActivity {
         QRCodesCollection qr_codes = new QRCodesCollection();
 
         ///
+        Toast.makeText(getApplicationContext(),"hash"+hash,Toast.LENGTH_SHORT).show();
         db = FirebaseFirestore.getInstance();
         db.collection("QRCodes").get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -78,7 +80,6 @@ public class QRCodeStatsActivity extends AppCompatActivity {
                                                   // our data in a list.
                                                   List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
                                                   for (DocumentSnapshot document : list) {
-
                                                       if(document.getId().equals(hash)){
                                                             setStats(document);}
                                                   }
@@ -101,7 +102,7 @@ public class QRCodeStatsActivity extends AppCompatActivity {
         // Add the required statistics to the text fields
 
         if (document != null) {
-            Toast.makeText(getApplicationContext(),"the thing is not null",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),"not null",Toast.LENGTH_SHORT).show();
             nameView.setText(document.getString("Name"));
             scoreView.setText(document.getString("Score"));
             String coordinates = document.getString("Latitude") + ", " +

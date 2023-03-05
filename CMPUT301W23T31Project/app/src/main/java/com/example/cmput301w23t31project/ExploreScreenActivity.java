@@ -88,7 +88,7 @@ public class ExploreScreenActivity extends AppCompatActivity implements GoogleMa
                 String codeName = marker.getTitle();
                 Intent intent = new Intent(ExploreScreenActivity.this, QRCodeStatsActivity.class);
                 String hash = qr_codes.getHashFromName(codeName);
-                intent.putExtra("hash", hash);
+                intent.putExtra("Hash", hash);
                 startActivity(intent);
                 return false;
             }

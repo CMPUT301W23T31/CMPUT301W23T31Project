@@ -95,7 +95,7 @@ public class MyScansScreenActivity extends AppCompatActivity implements SearchSc
         String hash = qr_codes.getHashFromName(name);
         if(hash != "nothing"){
             Intent intent = new Intent(MyScansScreenActivity.this, QRCodeStatsActivity.class);
-            intent.putExtra("hash", hash);
+            intent.putExtra("Hash", hash);
             startActivity(intent);
         }else{
             Toast.makeText(this, "Code Not Present", Toast.LENGTH_LONG)
