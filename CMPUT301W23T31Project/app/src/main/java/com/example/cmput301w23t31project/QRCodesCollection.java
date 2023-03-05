@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.Objects;
 
 public class QRCodesCollection extends QRDatabase {
+    String hash_return;
 
     public QRCodesCollection() {
         super("QRCodes");
@@ -46,6 +47,23 @@ public class QRCodesCollection extends QRDatabase {
                 }
             }
         });
+    }
+
+    public String getHashFromName(String name) {
+        CollectionReference codes = getReference();
+        collection.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document: task.getResult()) {
+                        if (document.getString("Name").equals(name)) {
+                            hash_return =  document.getId();
+                        }
+                    }
+                }
+            }
+        });
+        return hash_return;
     }
 
     /**
