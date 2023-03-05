@@ -30,12 +30,19 @@ public class LeaderboardHighScoreActivity extends AppCompatActivity  implements 
         int c = 0;
         for(int i=0;i<l;i++)
         {
-            if(username.equals(dataList.get(i).getUserName())){
+            if(username.equalsIgnoreCase(dataList.get(i).getUserName())){
                 dataList2.add(dataList.get(i));
                 LeaderboardList = findViewById(R.id.leaderboard_list);
                 leaderboardHighScoreArrayAdapter = new LeaderboardHighScoreArrayAdapter(this, dataList2);
                 LeaderboardList.setAdapter(leaderboardHighScoreArrayAdapter);
                 c+=1;
+            }
+            else if(((dataList.get(i).getUserName()).toLowerCase()).startsWith(username.toLowerCase())){
+                dataList2.add(dataList.get(i));
+                LeaderboardList = findViewById(R.id.leaderboard_list);
+                leaderboardHighScoreArrayAdapter = new LeaderboardHighScoreArrayAdapter(this, dataList2);
+                LeaderboardList.setAdapter(leaderboardHighScoreArrayAdapter);
+                c += 1;
             }
         }
         if(c==0)
