@@ -8,10 +8,17 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
+import android.widget.Toast;
 
-public class MyScansScreenActivity extends AppCompatActivity {
+import java.util.ArrayList;
 
+public class MyScansScreenActivity extends AppCompatActivity implements SearchScanFragment.OnFragmentInteractionListener{
+    ListView qrcodeList;
+    ArrayAdapter<QRCode> qrCodeAdapter;
+    ArrayList<QRCode> dataList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,5 +88,18 @@ public class MyScansScreenActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
 
+    }
+    @Override
+    public void onDisplayOkPressed(String name){
+        QRCodesCollection qr_codes = new QRCodesCollection();
+        String hash = qr_codes.getHashFromName(name);
+        if(hash != "nothing"){
+            Intent intent = new Intent(MyScansScreenActivity.this, QRCodeStatsActivity.class);
+            intent.putExtra("hash", hash);
+            startActivity(intent);
+        }else{
+            Toast.makeText(this, "Code Not Present", Toast.LENGTH_LONG)
+                    .show();
+        }
     }
 }
