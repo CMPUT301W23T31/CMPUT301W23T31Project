@@ -12,6 +12,22 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 
 public class SearchScanFragment extends DialogFragment {
+    private OnFragmentInteractionListener listener;
+    public interface OnFragmentInteractionListener{
+        //Implemented by MainActivity, passes the new GasStationVisit object to the MainActivity to be used in ListView
+        void onDisplayOkPressed(String name);
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        //used to check if the user has implemented the required callback listener to the fragment (OnFragmentInteractionListener)
+        super.onAttach(context);
+        if (context instanceof OnFragmentInteractionListener) {
+            listener = (OnFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString() + " must implement OnFragmentInteractionListener");
+        }
+    }
 
     @NonNull
     @Override
@@ -24,7 +40,8 @@ public class SearchScanFragment extends DialogFragment {
                 .setTitle("Search Scan")
                 .setNegativeButton("Cancel",null)
                 .setPositiveButton("Search",((dialog, which) -> {
-                }))
+                    String name = searchScan.getText().toString();
+                    listener.onDisplayOkPressed(name);}))
                 .create();
     }
 }
