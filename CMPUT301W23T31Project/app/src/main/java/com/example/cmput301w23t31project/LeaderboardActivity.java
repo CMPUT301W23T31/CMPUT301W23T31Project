@@ -28,14 +28,19 @@ public class LeaderboardActivity extends AppCompatActivity implements SearchUser
     @Override
     public void searchUser(String username){
         int l = dataList.size();
-        for(int i=0;i<l;i++)
-        {
-            if(username.equals(dataList.get(i).getUserName())){
+        int c = 0;
+        for(int i=0;i<l;i++) {
+            if (username.equals(dataList.get(i).getUserName())) {
                 dataList2.add(dataList.get(i));
                 LeaderboardList = findViewById(R.id.leaderboard_list);
                 leaderboardArrayAdapter = new LeaderboardArrayAdapter(this, dataList2);
                 LeaderboardList.setAdapter(leaderboardArrayAdapter);
+                c += 1;
             }
+        }
+        if(c==0)
+        {
+            new UsernameNotFoundFragment().show(getSupportFragmentManager(), "Error Message");
         }
     }
 
