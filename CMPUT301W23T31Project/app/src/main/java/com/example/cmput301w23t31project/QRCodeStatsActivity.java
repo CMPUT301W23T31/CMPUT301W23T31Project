@@ -70,7 +70,7 @@ public class QRCodeStatsActivity extends AppCompatActivity {
         QRCodesCollection qr_codes = new QRCodesCollection();
 
         ///
-        Toast.makeText(getApplicationContext(),"hash"+hash,Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(),"hashstats: "+hash,Toast.LENGTH_SHORT).show();
         db = FirebaseFirestore.getInstance();
         db.collection("QRCodes").get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -135,10 +135,10 @@ public class QRCodeStatsActivity extends AppCompatActivity {
                             // if the snapshot is not empty we are
                             // hiding our progress bar and adding
                             // our data in a list.
-                            List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
-                            for (DocumentSnapshot document : list) {
+                            //List<DocumentSnapshot> list = ;
+                            for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
                                 if(document.getData().containsKey(hash)){
-                                    playerList.add(new Player(document.getId(),document.getId(),1,Integer.parseInt(scoreView.toString())));
+                                    playerList.add(new Player(document.getId(),document.getId(),1,Integer.parseInt(scoreView.getText().toString())));
                                 }
                             }
                             qrCodeStatsAdapter.notifyDataSetChanged();
