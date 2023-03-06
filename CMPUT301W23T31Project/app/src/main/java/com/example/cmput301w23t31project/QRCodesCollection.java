@@ -1,5 +1,8 @@
 package com.example.cmput301w23t31project;
 
+import android.content.Intent;
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -49,22 +52,26 @@ public class QRCodesCollection extends QRDatabase {
         });
     }
 
-    public String getHashFromName(String name) {
-        CollectionReference codes = getReference();
-        collection.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    for (QueryDocumentSnapshot document: task.getResult()) {
-                        if (document.getString("Name").equals(name)) {
-                            hash_return =  document.getId();
-                        }
-                    }
-                }
-            }
-        });
-        return hash_return;
-    }
+//    public String getHashFromName(String name) {
+//        CollectionReference codes = getReference();
+//        collection.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                if (task.isSuccessful()) {
+//                    for (QueryDocumentSnapshot document: task.getResult()) {
+//                        if (document.getString("Name").equals(name)) {
+//                            hash_return =  document.getId();
+//                            Intent intent = new Intent(Q.this, QRCodeStatsActivity.class);
+//                            intent.putExtra("Hash", hash);
+//                            startActivity(intent);
+//                        }
+//                    }
+//                }
+//            }
+//        });
+//        //Log.d("heheheheheheheheheheheheheh", hash_return);
+//        return hash_return;
+//    }
 
     /**
      * This method adds a QR code to the database
