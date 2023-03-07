@@ -47,12 +47,13 @@ import java.util.Set;
 
 // implements onClickListener for the onclick behaviour of button
 // https://www.youtube.com/watch?v=UIIpCt2S5Ls
-public class MainActivity extends AppCompatActivity implements ScanResultsFragment.OnFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity implements ScanResultsFragment.OnFragmentInteractionListener, AllowLocationFragment.OnFragmentInteractionListener {
     String username;
     TextView score;
     private GpsTracker gpsTracker;
     double latitude;
     double longitude;
+    boolean recordLocation= true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,6 +115,8 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
                 integrator.setBeepEnabled(true);
                 integrator.setCaptureActivity(CaptureActivityPortrait.class);
                 integrator.initiateScan();
+                //permission_asked = false;
+
                   
             }
         });
@@ -226,6 +229,7 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
             } else {
                 // if the intentResult is not null we'll set
                 // the content and format of scan message
+                //new AllowLocationFragment().show(getSupportFragmentManager(), "Ask location permission");
                 String hash = "";
                 try {
                     hash = Utilities.hashQRCode(intentResult.getContents());
@@ -233,17 +237,23 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
                     e.printStackTrace();
                 }
                 //getting location
-                gpsTracker = new GpsTracker(MainActivity.this);
-                if(gpsTracker.canGetLocation()){
-                    latitude = gpsTracker.getLatitude();
-                    longitude = gpsTracker.getLongitude();
-                    Toast.makeText(this, "l"+latitude+longitude, Toast.LENGTH_SHORT)
-                            .show();
+                if(recordLocation){
+                    gpsTracker = new GpsTracker(MainActivity.this);
+                    if(gpsTracker.canGetLocation()){
+                        latitude = gpsTracker.getLatitude();
+                        longitude = gpsTracker.getLongitude();
+                        new ScanResultsFragment(hash, username, score, latitude, longitude).
+                                show(getSupportFragmentManager(), "SCAN RESULTS");
+                        Toast.makeText(this, "l"+latitude+longitude, Toast.LENGTH_SHORT)
+                                .show();
+                    }else{
+                        gpsTracker.showSettingsAlert();
+                    }
                 }else{
-                    gpsTracker.showSettingsAlert();
+                    new ScanResultsFragment(hash, username, score, false).
+                            show(getSupportFragmentManager(), "SCAN RESULTS");
                 }
-                new ScanResultsFragment(hash, username, score, latitude, longitude).
-                        show(getSupportFragmentManager(), "SCAN RESULTS");
+
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);
@@ -286,5 +296,10 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
                 }
             }
         });
+    }
+
+    @Override
+    public void onOkPressed(boolean recordLocation) {
+        this.recordLocation = recordLocation;
     }
 }

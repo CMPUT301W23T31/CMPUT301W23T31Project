@@ -49,6 +49,7 @@ public class ScanResultsFragment extends DialogFragment {
     TextView scoreView;
     TextView locationView;
     TextView homeScore;
+    String location;
 
     public String[] QRNameAdjectives = new String[1010];
     public String[] QRNameColors = new String[128];
@@ -62,6 +63,14 @@ public class ScanResultsFragment extends DialogFragment {
         this.homeScore = score;
         this.latitude = latitude;
         this.longitude = longitude;
+    }
+    public ScanResultsFragment(String hash, String username, TextView score, boolean recordLocation){
+        this.hash = hash;
+        this.username = username;
+        this.homeScore = score;
+        if(!recordLocation){
+        this.location = "No Location";}
+
     }
 
     /**
@@ -105,8 +114,6 @@ public class ScanResultsFragment extends DialogFragment {
         scoreView = view.findViewById(R.id.scan_results_score);
         locationView = view.findViewById(R.id.scan_results_location);
 
-        //sets location
-        locationView.setText("L"+latitude+" "+longitude);
 
         // Get access to adjectives, colors, and nouns to name scanned QR codes
         QRNameAdjectives = Utilities.retrieveFileData(this.getResources(),
@@ -121,9 +128,19 @@ public class ScanResultsFragment extends DialogFragment {
         QRCodesCollection codes = new QRCodesCollection();
         QRPlayerScans playerScans = new QRPlayerScans();
 
-        codes.processQRCodeInDatabase(name, String.valueOf(score), hash, latitude, longitude);
+        if(location== "No Location"){
+            codes.processQRCodeInDatabase(name, String.valueOf(score), hash);
+        }else{
+            codes.processQRCodeInDatabase(name, String.valueOf(score), hash, latitude, longitude);}
         playerScans.processPlayerScanInDatabase(username, hash);
 
+
+        //sets location
+        if(location== "No Location"){
+            locationView.setText("No Location");
+        }else{
+            locationView.setText("L"+latitude+" "+longitude);
+        }
         // Set the fragment screens to display the name and score of the scanned QR code
         resultView.setText(name);
         String s = "QR Code Score: " + score;
