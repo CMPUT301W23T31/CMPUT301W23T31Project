@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -13,13 +14,12 @@
         android:id="@+id/finish_login_activity_player_name_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="250dp"
         android:text="@string/enter_your_player_name_for_other_users_to_see"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/finish_login_activity_player_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/finish_login_activity_player_name">
-    </TextView>
+        app:layout_constraintTop_toTopOf="parent"></TextView>
     <EditText
         android:id="@+id/finish_login_activity_player_name"
         android:layout_width="0dp"
@@ -41,15 +41,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
     </TextView>
+
     <Button
         android:id="@+id/finish_login_activity_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/login_button"
         android:selectAllOnFocus="true"
         android:text="@string/upload_image"
-        app:layout_constraintTop_toBottomOf="@id/finish_login_activity_image_text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/finish_login_activity_image_text" />
 
     <Button
         android:id="@+id/finish_login_activity_button"
@@ -57,8 +60,19 @@
         android:layout_height="wrap_content"
         android:layout_gravity="start"
         android:layout_marginBottom="150dp"
+        android:backgroundTint="@color/login_button"
         android:text="@string/enter_app"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        app:layout_constraintBottom_toTopOf="@+id/finish_login_activity_player_name_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo2" />
 </androidx.constraintlayout.widget.ConstraintLayout>
