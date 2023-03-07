@@ -101,7 +101,7 @@ public class QRCodeStatsCommentsActivity extends AppCompatActivity implements Ad
         CommentsCollection collectionReferenceAccount = new CommentsCollection();
         CommentsCollection comments = new CommentsCollection();
         QRPlayerScans playerScans = new QRPlayerScans();
-        Toast.makeText(getApplicationContext(),"hashstats: "+hash,Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(),"hashstats: "+hash,Toast.LENGTH_SHORT).show();
         db = FirebaseFirestore.getInstance();
         db.collection("QRCodes").get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {

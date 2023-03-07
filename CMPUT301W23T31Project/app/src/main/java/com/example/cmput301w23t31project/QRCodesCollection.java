@@ -52,6 +52,27 @@ public class QRCodesCollection extends QRDatabase {
         });
     }
 
+    public void processQRCodeInDatabase(String name, String score, String hash) {
+        CollectionReference codes = getReference();
+        collection.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document: task.getResult()) {
+                        if (document.getId().equals(hash)) {
+                            String timesScanned = String.valueOf(Integer.
+                                    parseInt(Objects.requireNonNull(document.getString("TimesScanned"))) + 1);
+                            codes.document(hash).update("TimesScanned", timesScanned);
+                            codes.document(hash).update("LastScanned", Utilities.getCurrentDate());
+                            return;
+                        }
+                    }
+                    addQRCodeToDatabase(name, score, hash);
+                }
+            }
+        });
+    }
+
 //    public String getHashFromName(String name) {
 //        CollectionReference codes = getReference();
 //        collection.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -92,6 +113,23 @@ public class QRCodesCollection extends QRDatabase {
         stringData.put("Score", score);
         stringData.put("Latitude", String.valueOf(latitude));
         stringData.put("Longitude", String.valueOf(longitude));
+        stringData.put("Likes", "0");
+        stringData.put("Dislikes", "0");
+        stringData.put("TimesScanned", "1");
+        stringData.put("LastScanned", Utilities.getCurrentDate());
+
+        // Add the data to the database
+        codes.document(hash).set(stringData);
+    }
+
+    public void addQRCodeToDatabase(String name, String score, String hash) {
+        // Get QR code name and score
+        CollectionReference codes = getReference();
+
+        // Add necessary fields of QR code data
+        HashMap<String, String> stringData = new HashMap<>();
+        stringData.put("Name", name);
+        stringData.put("Score", score);
         stringData.put("Likes", "0");
         stringData.put("Dislikes", "0");
         stringData.put("TimesScanned", "1");
