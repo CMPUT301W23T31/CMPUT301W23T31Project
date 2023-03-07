@@ -38,7 +38,7 @@ public class PlayerScansCollection extends PlayerScansDataBase{
                                     String str;
                                     data.entrySet()
                                             .forEach((entry) ->
-                                                    Log.v(TAG,"VAL:"+entry.toString().substring(0, entry.toString().length() - 2)));
+                                                    Log.v(TAG,"VAL:"+entry.toString().split("=")[0]));
                                     }
                         }
                     }
