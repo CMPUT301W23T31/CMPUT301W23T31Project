@@ -96,7 +96,7 @@ public class QRCodeStatsCommentsActivity extends AppCompatActivity implements Ad
         });
 
         ///
-        Toast.makeText(getApplicationContext(),"hashstats: "+hash,Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(),"hashstats: "+hash,Toast.LENGTH_SHORT).show();
         db = FirebaseFirestore.getInstance();
         CommentsCollection collectionReferenceAccount = new CommentsCollection();
         CommentsCollection comments = new CommentsCollection();
@@ -131,7 +131,7 @@ public class QRCodeStatsCommentsActivity extends AppCompatActivity implements Ad
         // Add the required statistics to the text fields
 
         if (document != null) {
-            Toast.makeText(getApplicationContext(),"not null",Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(),"not null",Toast.LENGTH_SHORT).show();
             nameView.setText(document.getString("Name"));
             scoreView.setText(document.getString("Score"));
             String coordinates = document.getString("Latitude") + ", " +

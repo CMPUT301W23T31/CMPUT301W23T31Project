@@ -43,7 +43,7 @@ public class AddCommentFragment extends DialogFragment {
                 .setView(view)
                 .setTitle("Add Comment")
                 .setNegativeButton("Cancel",null)
-                .setPositiveButton("Search",((dialog, which) -> {
+                .setPositiveButton("Add",((dialog, which) -> {
                     String commentText = comment.getText().toString();
                     listener.onDisplayOkPressed(commentText, hash);}))
                 .create();
