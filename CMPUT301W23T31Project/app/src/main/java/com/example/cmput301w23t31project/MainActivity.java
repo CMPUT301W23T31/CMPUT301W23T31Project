@@ -13,6 +13,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -78,10 +80,15 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
 
         // Reference and initialize the Button and TextViews
         TextView home_screen_username = findViewById(R.id.home_screen_welcome_text);
-        Button scanBtn = findViewById(R.id.home_screen_scan_code_button);
-        Button playerInfoBtn = findViewById(R.id.home_screen_player_info_button);
-        Button exploreBtn = findViewById(R.id.home_screen_explore_button);
-        Button myScanBtn = findViewById(R.id.home_screen_my_scans_button);
+
+        ImageView scanBtn = findViewById(R.id.home_screen_scan_code_button);
+
+        ImageView playerInfoBtn = findViewById(R.id.home_screen_player_info_button);
+
+        ImageView exploreBtn = findViewById(R.id.home_screen_explore_button);
+
+        ImageView myScanBtn = findViewById(R.id.home_screen_my_scans_button);
+
         String home_username = "Welcome "+username+"!";
         home_screen_username.setText(home_username);
 
