@@ -39,6 +39,7 @@ public class ExploreScreenActivity extends AppCompatActivity implements GoogleMa
         OnMapReadyCallback  {
     private GpsTracker gpsTracker;
     private FirebaseFirestore db;
+    String username;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +48,8 @@ public class ExploreScreenActivity extends AppCompatActivity implements GoogleMa
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        Intent intent = getIntent();
+        username = intent.getStringExtra("username");
 
     }
 
@@ -101,6 +104,7 @@ public class ExploreScreenActivity extends AppCompatActivity implements GoogleMa
                                     String hash_return =  document.getId();
                                     Intent intent = new Intent(ExploreScreenActivity.this, QRCodeStatsActivity.class);
                                     intent.putExtra("Hash", hash_return);
+                                    intent.putExtra("username", username);
                                     startActivity(intent);
                                 }
                             }

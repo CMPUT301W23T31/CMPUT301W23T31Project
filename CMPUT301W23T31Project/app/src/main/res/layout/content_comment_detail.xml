@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/comment_detail_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="2023-02-02"
+                android:textStyle="italic"
+                android:textSize="24dp"
+                android:layout_margin="2dp"/>
+
+            <TextView
+                android:id="@+id/comment_detail_comment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Comment"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                android:layout_margin="2dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/comment_detail_username_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:hint="username"
+        android:textSize="12dp"
+        android:textColor="@color/white"
+        android:drawableTintMode="src_atop" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
