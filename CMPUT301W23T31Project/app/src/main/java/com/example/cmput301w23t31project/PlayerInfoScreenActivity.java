@@ -1,5 +1,6 @@
 package com.example.cmput301w23t31project;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -12,13 +13,26 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class PlayerInfoScreenActivity extends AppCompatActivity {
 
     Button viewScanBtn;
     ImageButton myAccountBtn;
     TextView player_info_username;
+    TextView player_scans_textview;
+    TextView score;
     String username;
     String password;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +45,18 @@ public class PlayerInfoScreenActivity extends AppCompatActivity {
         viewScanBtn = findViewById(R.id.player_info_see_scans_button);
         myAccountBtn = findViewById(R.id.player_info_my_account_button);
         player_info_username = findViewById(R.id.player_info_username);
+        player_scans_textview = findViewById(R.id.player_info_total_scans);
+        score = findViewById(R.id.player_info_total_score);
+
+        //set total scans
+        PlayerScansCollection scans = new PlayerScansCollection();
+        setTotalScans(scans, player_scans_textview, username);
+
+        //set total score
+        QRPlayerScans playerScans = new QRPlayerScans();
+        QRCodesCollection QRcodes = new QRCodesCollection();
+        setHomeScore(playerScans, score, QRcodes, username);
+
 
         player_info_username.setText(username);
         viewScanBtn.setOnClickListener(new View.OnClickListener() {
@@ -104,5 +130,61 @@ public class PlayerInfoScreenActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
 
+    }
+
+    public static void setHomeScore(QRPlayerScans playerScans, TextView score,
+                                    QRCodesCollection QRcodes, String username) {
+        playerScans.getReference().get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                Set<String> codes = null;
+                for (QueryDocumentSnapshot doc : task.getResult()) {
+                    if (doc.getId().equals(username)) {
+                        codes = doc.getData().keySet();
+                    }
+                }
+                if (codes != null) {
+                    Set<String> finalCodes = codes;
+                    QRcodes.getReference().get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            int total_score = 0;
+                            for (QueryDocumentSnapshot doc : task.getResult()) {
+                                if (finalCodes.contains(doc.getId())) {
+                                    total_score += Integer.parseInt(doc.getString("Score"));
+                                }
+                            }
+                            score.setText(String.valueOf(total_score));
+                        }
+                    });
+                }
+            }
+        });
+    }
+
+
+    public static void setTotalScans(PlayerScansCollection scans, TextView player_scans_textview,  String username) {
+        AtomicInteger total_scans = new AtomicInteger();
+        CollectionReference player_scans = scans.getReference();
+        player_scans.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document: task.getResult()) {
+                        if (document.getId().equals(username)) {
+                            if (document != null) {
+                                Map data = document.getData();
+                                data.entrySet()
+                                        .forEach((entry) ->
+                                                total_scans.addAndGet(Integer.valueOf(entry.toString().split("=")[1])));
+                                player_scans_textview.setText(Integer.toString(total_scans.get()));
+                            }
+                        }
+                    }
+
+                }
+            }
+        });
     }
 }
