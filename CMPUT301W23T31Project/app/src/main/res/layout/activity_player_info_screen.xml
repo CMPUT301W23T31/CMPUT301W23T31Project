@@ -127,12 +127,13 @@
         android:textStyle="bold" />
 
     <TextView
+        android:id="@+id/player_info_high_score"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="37dp"
         android:layout_margin="0dp"
         android:text="High"
         android:textSize="35sp"
-        android:textStyle="bold|italic"/>
+        android:textStyle="bold|italic" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -143,12 +144,13 @@
         android:textStyle="bold" />
 
     <TextView
+        android:id="@+id/player_info_low_score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="0dp"
         android:text="Low"
         android:textSize="35sp"
-        android:textStyle="bold|italic"/>
+        android:textStyle="bold|italic" />
 
     <Button
         android:id="@+id/player_info_see_scans_button"
