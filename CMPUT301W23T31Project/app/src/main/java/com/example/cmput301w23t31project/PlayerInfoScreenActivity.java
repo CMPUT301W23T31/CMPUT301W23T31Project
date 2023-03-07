@@ -29,6 +29,8 @@ public class PlayerInfoScreenActivity extends AppCompatActivity {
     ImageButton myAccountBtn;
     TextView player_info_username;
     TextView player_scans_textview;
+    TextView high_score;
+    TextView low_score;
     TextView score;
     String username;
     String password;
@@ -47,6 +49,8 @@ public class PlayerInfoScreenActivity extends AppCompatActivity {
         player_info_username = findViewById(R.id.player_info_username);
         player_scans_textview = findViewById(R.id.player_info_total_scans);
         score = findViewById(R.id.player_info_total_score);
+        high_score  = findViewById(R.id.player_info_high_score);
+        low_score = findViewById(R.id.player_info_low_score);
 
         //set total scans
         PlayerScansCollection scans = new PlayerScansCollection();
@@ -56,6 +60,10 @@ public class PlayerInfoScreenActivity extends AppCompatActivity {
         QRPlayerScans playerScans = new QRPlayerScans();
         QRCodesCollection QRcodes = new QRCodesCollection();
         setHomeScore(playerScans, score, QRcodes, username);
+
+        //set high score
+        setHighScore(playerScans, high_score, QRcodes, username);
+        setLowScore(playerScans, low_score, QRcodes, username);
 
 
         player_info_username.setText(username);
@@ -183,6 +191,75 @@ public class PlayerInfoScreenActivity extends AppCompatActivity {
                         }
                     }
 
+                }
+            }
+        });
+    }
+
+    public static void setHighScore(QRPlayerScans playerScans, TextView high_score,
+                                    QRCodesCollection QRcodes, String username) {
+        playerScans.getReference().get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                Set<String> codes = null;
+                for (QueryDocumentSnapshot doc : task.getResult()) {
+                    if (doc.getId().equals(username)) {
+                        codes = doc.getData().keySet();
+                    }
+                }
+                if (codes != null) {
+                    Set<String> finalCodes = codes;
+                    QRcodes.getReference().get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            int max_score = 0;
+                            for (QueryDocumentSnapshot doc : task.getResult()) {
+                                if (finalCodes.contains(doc.getId())) {
+                                    if(Integer.parseInt(doc.getString("Score"))>max_score){
+                                        max_score = Integer.parseInt(doc.getString("Score"));
+                                    }
+                                }
+                            }
+                            high_score.setText(String.valueOf(max_score));
+                        }
+                    });
+                }
+            }
+        });
+    }
+
+    public static void setLowScore(QRPlayerScans playerScans, TextView low_score,
+                                    QRCodesCollection QRcodes, String username) {
+        playerScans.getReference().get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                Set<String> codes = null;
+                for (QueryDocumentSnapshot doc : task.getResult()) {
+                    if (doc.getId().equals(username)) {
+                        codes = doc.getData().keySet();
+                    }
+                }
+                if (codes != null) {
+                    Set<String> finalCodes = codes;
+                    QRcodes.getReference().get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            int min_score = 1;
+                            int count = 0;
+                            for (QueryDocumentSnapshot doc : task.getResult()) {
+                                if (finalCodes.contains(doc.getId())) {
+                                    if(count == 0){
+                                        min_score = Integer.parseInt(doc.getString("Score"));
+                                    }
+                                    if(Integer.parseInt(doc.getString("Score"))<min_score){
+                                        min_score = Integer.parseInt(doc.getString("Score"));
+                                    }
+                                    count++;
+                                }
+                            }
+                            low_score.setText(String.valueOf(min_score));
+                        }
+                    });
                 }
             }
         });
