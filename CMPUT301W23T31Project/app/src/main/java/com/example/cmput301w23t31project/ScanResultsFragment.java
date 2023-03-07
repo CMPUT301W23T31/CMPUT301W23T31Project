@@ -153,6 +153,7 @@ public class ScanResultsFragment extends DialogFragment {
                         // Send Hash and Device ID to a new fragment that shows QR Code statistics
                         Intent intent = new Intent(getContext(), QRCodeStatsActivity.class);
                         intent.putExtra("Hash", hash);
+                        intent.putExtra("username", username);
                         startActivity(intent);
                     }
                 }).create();

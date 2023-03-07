@@ -134,6 +134,7 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this,
                         ExploreScreenActivity.class);
+                intent.putExtra("username", username);
                 startActivity(intent);
             }
         });
@@ -143,6 +144,7 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this,
                         MyScansScreenActivity.class);
+                intent.putExtra("username", username);
                 startActivity(intent);
             }
         });

@@ -26,13 +26,15 @@ public class MyScansScreenActivity extends AppCompatActivity implements SearchSc
     ListView qrcodeList;
     ArrayAdapter<QRCode> qrCodeAdapter;
     ArrayList<QRCode> dataList;
+    String username;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_scans_screen);
 
         Button searchScan;
-
+        Intent intent = getIntent();
+        username = intent.getStringExtra("username");
         searchScan = findViewById(R.id.my_scans_search_scan_button);
 
         searchScan.setOnClickListener(new View.OnClickListener() {
@@ -109,6 +111,7 @@ public class MyScansScreenActivity extends AppCompatActivity implements SearchSc
                             String hash_return =  document.getId();
                             Intent intent = new Intent(MyScansScreenActivity.this, QRCodeStatsActivity.class);
                             intent.putExtra("Hash", hash_return);
+                            intent.putExtra("username", username);
                             startActivity(intent);
                         }
                     }
