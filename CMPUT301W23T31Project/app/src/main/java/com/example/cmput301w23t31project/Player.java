@@ -6,11 +6,30 @@ public class Player {
     private int count;
     private int Score;
 
+    private String date;
+
+    private int highestScoringQR;
+    private int lowestScoringQR;
+
+
     public Player(String userName, String playerName, int count, int score) {
         this.userName = userName;
         this.playerName = playerName;
         this.count = count;
         this.Score = score;
+    }
+
+    public Player(String userName, int count, int score, int highestScoringQR, int lowestScoringQR) {
+        this.userName = userName;
+        this.count = count;
+        this.Score = score;
+        this.highestScoringQR = highestScoringQR;
+        this.lowestScoringQR = lowestScoringQR;
+    }
+
+    public Player(String userName, String date) {
+        this.userName = userName;
+        this.date = date;
     }
 
     public String getUserName() {

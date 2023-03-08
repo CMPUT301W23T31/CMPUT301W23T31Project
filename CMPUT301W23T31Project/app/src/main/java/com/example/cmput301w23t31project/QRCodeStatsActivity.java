@@ -108,7 +108,7 @@ public class QRCodeStatsActivity extends AppCompatActivity {
         // Add the required statistics to the text fields
 
         if (document != null) {
-            Toast.makeText(getApplicationContext(),"not null",Toast.LENGTH_SHORT).show();
+
             nameView.setText(document.getString("Name"));
             scoreView.setText(document.getString("Score"));
             String coordinates = document.getString("Latitude") + ", " +
@@ -138,12 +138,12 @@ public class QRCodeStatsActivity extends AppCompatActivity {
                             List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
                             for (DocumentSnapshot document : list) {
                                 if(document.getData().containsKey(hash)){
-                                    playerList.add(new Player(document.getId(),document.getId(),1,Integer.parseInt(scoreView.toString())));
+                                    playerList.add(new Player(document.getId(),document.getId(),1,1));
                                 }
                             }
                             qrCodeStatsAdapter.notifyDataSetChanged();
                         }
                     }});}
-
+//Integer.parseInt(scoreView.toString())
 
 }

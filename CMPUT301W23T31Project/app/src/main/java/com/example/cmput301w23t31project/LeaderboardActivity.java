@@ -64,6 +64,8 @@ public class LeaderboardActivity extends AppCompatActivity implements SearchUser
         LeaderboardList = findViewById(R.id.leaderboard_list);
         leaderboardArrayAdapter = new LeaderboardArrayAdapter(this, dataList);
         LeaderboardList.setAdapter(leaderboardArrayAdapter);
+        PlayerScansCollection playerScansCollection = new PlayerScansCollection();
+        playerScansCollection.getPlayerScans();
         dataList.add(0, new Player("DonKrieg", "Joshu", 20, 2500));
         dataList.add(1, new Player("Average", "Saumya", 25, 2000));
         dataList.add(2, new Player("LongDongLyndom", "Lyndon", 40, 3500));
