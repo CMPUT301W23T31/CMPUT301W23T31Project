@@ -23,18 +23,23 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.List;
-
+//https://www.geeksforgeeks.org/how-to-add-dynamic-markers-in-google-maps-with-firebase-firstore/?ref=lbp
 public class ExploreScreenActivity extends AppCompatActivity implements GoogleMap.OnMyLocationButtonClickListener,
         GoogleMap.OnMyLocationClickListener,
         OnMapReadyCallback  {
     private GpsTracker gpsTracker;
     private FirebaseFirestore db;
+    String username;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +48,8 @@ public class ExploreScreenActivity extends AppCompatActivity implements GoogleMa
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        Intent intent = getIntent();
+        username = intent.getStringExtra("username");
 
     }
 
@@ -86,10 +93,24 @@ public class ExploreScreenActivity extends AppCompatActivity implements GoogleMa
             public boolean onMarkerClick(@NonNull Marker marker) {
                 QRCodesCollection qr_codes = new QRCodesCollection();
                 String codeName = marker.getTitle();
-                Intent intent = new Intent(ExploreScreenActivity.this, QRCodeStatsActivity.class);
-                String hash = qr_codes.getHashFromName(codeName);
-                intent.putExtra("Hash", hash);
-                startActivity(intent);
+                QRCodesCollection QR_codes = new QRCodesCollection();
+                CollectionReference codes = QR_codes.getReference();
+                codes.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document: task.getResult()) {
+                                if (document.getString("Name").equals(codeName)) {
+                                    String hash_return =  document.getId();
+                                    Intent intent = new Intent(ExploreScreenActivity.this, QRCodeStatsActivity.class);
+                                    intent.putExtra("Hash", hash_return);
+                                    intent.putExtra("username", username);
+                                    startActivity(intent);
+                                }
+                            }
+                        }
+                    }
+                });
                 return false;
             }
         });

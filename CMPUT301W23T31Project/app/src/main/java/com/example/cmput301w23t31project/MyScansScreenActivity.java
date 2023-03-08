@@ -1,5 +1,6 @@
 package com.example.cmput301w23t31project;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -13,19 +14,27 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
 import java.util.ArrayList;
 
 public class MyScansScreenActivity extends AppCompatActivity implements SearchScanFragment.OnFragmentInteractionListener{
     ListView qrcodeList;
     ArrayAdapter<QRCode> qrCodeAdapter;
     ArrayList<QRCode> dataList;
+    String username;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_scans_screen);
 
         Button searchScan;
-
+        Intent intent = getIntent();
+        username = intent.getStringExtra("username");
         searchScan = findViewById(R.id.my_scans_search_scan_button);
 
         searchScan.setOnClickListener(new View.OnClickListener() {
@@ -91,15 +100,23 @@ public class MyScansScreenActivity extends AppCompatActivity implements SearchSc
     }
     @Override
     public void onDisplayOkPressed(String name){
-        QRCodesCollection qr_codes = new QRCodesCollection();
-        String hash = qr_codes.getHashFromName(name);
-        if(hash != "nothing"){
-            Intent intent = new Intent(MyScansScreenActivity.this, QRCodeStatsActivity.class);
-            intent.putExtra("Hash", hash);
-            startActivity(intent);
-        }else{
-            Toast.makeText(this, "Code Not Present", Toast.LENGTH_LONG)
-                    .show();
-        }
+        QRCodesCollection QR_codes = new QRCodesCollection();
+        CollectionReference codes = QR_codes.getReference();
+        codes.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document: task.getResult()) {
+                        if (document.getString("Name").equals(name)) {
+                            String hash_return =  document.getId();
+                            Intent intent = new Intent(MyScansScreenActivity.this, QRCodeStatsActivity.class);
+                            intent.putExtra("Hash", hash_return);
+                            intent.putExtra("username", username);
+                            startActivity(intent);
+                        }
+                    }
+                }
+            }
+        });
     }
 }

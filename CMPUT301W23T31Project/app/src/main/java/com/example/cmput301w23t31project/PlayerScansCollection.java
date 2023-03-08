@@ -1,11 +1,11 @@
 package com.example.cmput301w23t31project;
 
+
 import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
-
+import static android.content.ContentValues.TAG;
 import androidx.annotation.NonNull;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -18,7 +18,9 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
 import java.util.List;
+
 import java.util.Map;
 import java.util.Objects;
 
@@ -34,6 +36,7 @@ public class PlayerScansCollection extends QRDatabase{
         super("PlayerInfo");
     }
 
+
     public void addPlayerInfoToCollection(String username, Intent intent, int max, int min ,int count,int SumScore) {
         HashMap<String, String> PlayerInfo = new HashMap<>();
         PlayerInfo.put("Username", username);
@@ -47,16 +50,25 @@ public class PlayerScansCollection extends QRDatabase{
         PlayerInfo.put("path", intent.getStringExtra("path"));
         collection.document(username).set(PlayerInfo);
     }
-    public void processPlayerScansInDatabase(String hash) {
+    
+
+
+    public void processPlayerScansInDatabase(String username) {
+
         CollectionReference codes = getReference();
         collection.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document: task.getResult()) {
-                        if (document.getId().equals(hash)) {
-
-                            return;
+                        if (document.getId().equals(username)) {
+                                if (document != null) {
+                                    Map data = document.getData();
+                                    String str;
+                                    data.entrySet()
+                                            .forEach((entry) ->
+                                                    Log.v(TAG,"VAL:"+entry.toString().split("=")[0]));
+                                    }
                         }
                     }
 
