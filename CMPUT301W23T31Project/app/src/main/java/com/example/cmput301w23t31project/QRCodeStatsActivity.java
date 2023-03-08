@@ -116,7 +116,6 @@ public class QRCodeStatsActivity extends AppCompatActivity {
         // Add the required statistics to the text fields
 
         if (document != null) {
-            //Toast.makeText(getApplicationContext(),"not null",Toast.LENGTH_SHORT).show();
             nameView.setText(document.getString("Name"));
             scoreView.setText(document.getString("Score"));
             String coordinates = document.getString("Latitude") + ", " +
@@ -156,6 +155,6 @@ public class QRCodeStatsActivity extends AppCompatActivity {
                             qrCodeStatsAdapter.notifyDataSetChanged();
                         }
                     }});}
-
+//Integer.parseInt(scoreView.toString())
 
 }
