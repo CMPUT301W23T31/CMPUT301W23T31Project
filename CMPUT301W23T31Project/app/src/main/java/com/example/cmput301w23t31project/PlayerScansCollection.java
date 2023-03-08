@@ -37,18 +37,17 @@ public class PlayerScansCollection extends QRDatabase{
     }
 
 
-    public void addPlayerInfoToCollection(String username, Intent intent, int max, int min ,int count,int SumScore) {
+    public void addPlayerInfoToCollection(String username, String max, String min ,String count,String SumScore) {
+        CollectionReference codes = getReference();
+        // Add necessary fields of QR code data
         HashMap<String, String> PlayerInfo = new HashMap<>();
-        PlayerInfo.put("Username", username);
-        collection.document(username).set(PlayerInfo);
-                PlayerInfo.put("email", intent.getStringExtra("email"));
-        collection.document(username).set(PlayerInfo);
-        PlayerInfo.put("phone", intent.getStringExtra("phone"));
-        collection.document(username).set(PlayerInfo);
-        PlayerInfo.put("playername", intent.getStringExtra("playername"));
-        collection.document(username).set(PlayerInfo);
-        PlayerInfo.put("path", intent.getStringExtra("path"));
-        collection.document(username).set(PlayerInfo);
+        PlayerInfo.put("Total Score", SumScore);
+        PlayerInfo.put("Total Scans", count);
+        PlayerInfo.put("Lowest Scoring QR Code", min);
+        PlayerInfo.put("Highest Scoring QR Code", max);
+
+        // Add the data to the database
+        codes.document(username).set(PlayerInfo);
     }
     
 
@@ -61,14 +60,17 @@ public class PlayerScansCollection extends QRDatabase{
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document: task.getResult()) {
+                        Log.i("VAL",document.getId());
                         if (document.getId().equals(username)) {
-                                if (document != null) {
+
                                     Map data = document.getData();
                                     String str;
                                     data.entrySet()
                                             .forEach((entry) ->
                                                     Log.v(TAG,"VAL:"+entry.toString().split("=")[0]));
-                                    }
+
+                                    qrHash.add(String.valueOf(data));
+
                         }
                     }
 
@@ -95,17 +97,16 @@ public class PlayerScansCollection extends QRDatabase{
                             //for(int i = 0; i< list.size();i++){
                                 //username = list.get(i).getId();
                                 for (DocumentSnapshot document : list) {
-
-                                    //username = document.getId();
-                                    for(int i = 0 ;i < document.getData().size();i++){
-                                        String hashish = document.getData().toString();
-                                    //Log.i("TAG", hashish);
-                                        qrHash.add(hashish);
-                                        Log.i("TAG","this is the hashish");
-                                        Log.i("TAG",hashish);}
-                                //Log.i("TAG", username);
+                                    Map data = document.getData();
+                                    data.entrySet()
+                                            .forEach((entry) ->
+                                                    qrHash.add(entry.toString().split("=")[0]));
+                                                    //Log.v(TAG,"VAL:"+entry.toString().split("=")[0]));
+                                    qrHash.add(String.valueOf(data));
                                     username = document.getId();
-                                    //getTotalPlayerScore(username,qrHash);
+
+                                    //processPlayerScansInDatabase(username);
+                                    getTotalPlayerScore(username,qrHash);
                                     qrHash = new ArrayList<>();
                                     }
 
@@ -124,11 +125,17 @@ public class PlayerScansCollection extends QRDatabase{
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        Log.i("TAG",userName);
                         int SumScore = 0;
                         String score = "";
-                        int max;
-                        int min;
+                        int max = 0;
+                        int min = 0;
                         int numberScore;
+                        int count = 0;
+                        String max2 = "";
+                        String min2 = "";
+                        String count2 = "";
+                        String TotalScore = "";
                         // after getting the data we are calling on success method
                         // and inside this method we are checking if the received
                         // query snapshot is empty or not.
@@ -138,23 +145,16 @@ public class PlayerScansCollection extends QRDatabase{
                             // our data in a list.
                             List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
                                 for (DocumentSnapshot document : list) {
-                                    int i = 0;
-                                    max = 0;
-                                    min = 0;
-                                    String XD = qrHash.get(i);
-                                    Log.i("TAG", userName);
-                                    Log.i("TAG", "This is the player hash list");
-                                    Log.i("TAG", XD);
-                                    Log.i("TAG", "This is the doc hash");
-                                    Log.i("TAG", document.getId());
-                                    if(i < list.size())
-                                        i++;
+
                                     if(qrHash.contains(document.getId())){
+
                                         //score = String.valueOf(i);
                                         //Log.i("TAG", score);
                                         Log.i("TAG", "This is the doc hash");
                                         Log.i("TAG", document.getId());
                                         numberScore = Integer.parseInt(document.getString("Score"));
+                                        if(min == 0){
+                                            min = numberScore;}
                                         SumScore = SumScore + numberScore;
                                         if(max < numberScore){
                                             max = numberScore;
@@ -162,11 +162,21 @@ public class PlayerScansCollection extends QRDatabase{
                                         if(min > numberScore){
                                             min = numberScore;
                                         }
-                                        score = String.valueOf(SumScore);}
+                                        max2 = String.valueOf(max);
+                                        Log.i("MAX", max2);
+                                        min2 = String.valueOf(min);
+                                        Log.i("min", min2);
+                                        count++;
+                                        count2 = String.valueOf(count);
+                                        Log.i("count", count2);
+                                        TotalScore = String.valueOf(SumScore);
+                                    }
 
 
                         }
-                                Log.i("TAG", score);
+
+
+                            addPlayerInfoToCollection(userName,max2,min2,count2,TotalScore);
 
                     }}
     });
