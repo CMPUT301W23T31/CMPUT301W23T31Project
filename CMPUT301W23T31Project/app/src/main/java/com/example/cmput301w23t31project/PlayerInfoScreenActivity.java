@@ -76,9 +76,10 @@ public class PlayerInfoScreenActivity extends AppCompatActivity {
         viewScanBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PlayerScansCollection scans = new PlayerScansCollection();
-                scans.processPlayerScansInDatabase(username);
+                //PlayerScansCollection scans = new PlayerScansCollection();
+                //scans.processPlayerScansInDatabase(username);
                 Intent intent = new Intent(PlayerInfoScreenActivity.this, MyScansScreenActivity.class);
+                intent.putExtra("username", username);
                 startActivity(intent);
             }
         });
