@@ -28,16 +28,17 @@ public class LeaderboardCountActivity extends AppCompatActivity implements Searc
     public void searchUser(String username){
         int l = dataList.size();
         int c = 0;
+        dataList2 = new ArrayList<>();
         for(int i=0;i<l;i++)
         {
-            if(username.equalsIgnoreCase(dataList.get(i).getUserName())){
+            if(username.trim().equalsIgnoreCase(dataList.get(i).getUserName())){
                 dataList2.add(dataList.get(i));
                 LeaderboardList = findViewById(R.id.leaderboard_list);
                 leaderboardCountArrayAdapter = new LeaderboardCountArrayAdapter(this, dataList2);
                 LeaderboardList.setAdapter(leaderboardCountArrayAdapter);
                 c+=1;
             }
-            else if(((dataList.get(i).getUserName()).toLowerCase()).startsWith(username.toLowerCase())){
+            else if(((dataList.get(i).getUserName()).toLowerCase()).startsWith(username.toLowerCase().trim())){
                 dataList2.add(dataList.get(i));
                 LeaderboardList = findViewById(R.id.leaderboard_list);
                 leaderboardCountArrayAdapter = new LeaderboardCountArrayAdapter(this, dataList2);
