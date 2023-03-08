@@ -9,8 +9,10 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -19,6 +21,7 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -52,6 +55,7 @@ public class PlayerInfoScreenActivity extends AppCompatActivity {
         high_score  = findViewById(R.id.player_info_high_score);
         low_score = findViewById(R.id.player_info_low_score);
 
+
         //set total scans
         PlayerScansCollection scans = new PlayerScansCollection();
         setTotalScans(scans, player_scans_textview, username);
@@ -64,6 +68,8 @@ public class PlayerInfoScreenActivity extends AppCompatActivity {
         //set high score
         setHighScore(playerScans, high_score, QRcodes, username);
         setLowScore(playerScans, low_score, QRcodes, username);
+
+
 
 
         player_info_username.setText(username);
