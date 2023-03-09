@@ -53,6 +53,13 @@ public class LeaderboardHighScoreActivity extends AppCompatActivity  implements 
                 LeaderboardList.setAdapter(leaderboardHighScoreArrayAdapter);
                 c += 1;
             }
+            else if(((dataList.get(i).getUserName()).toLowerCase()).contains(username.toLowerCase().trim())){
+                dataList2.add(dataList.get(i));
+                LeaderboardList = findViewById(R.id.leaderboard_list);
+                leaderboardHighScoreArrayAdapter = new LeaderboardHighScoreArrayAdapter(this, dataList2);
+                LeaderboardList.setAdapter(leaderboardHighScoreArrayAdapter);
+                c += 1;
+            }
         }
         if(c==0)
         {

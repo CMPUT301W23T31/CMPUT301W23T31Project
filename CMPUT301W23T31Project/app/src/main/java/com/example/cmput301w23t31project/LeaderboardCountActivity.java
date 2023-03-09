@@ -53,6 +53,13 @@ public class LeaderboardCountActivity extends AppCompatActivity implements Searc
                 LeaderboardList.setAdapter(leaderboardCountArrayAdapter);
                 c += 1;
             }
+            else if(((dataList.get(i).getUserName()).toLowerCase()).contains(username.toLowerCase().trim())){
+                dataList2.add(dataList.get(i));
+                LeaderboardList = findViewById(R.id.leaderboard_list);
+                leaderboardCountArrayAdapter = new LeaderboardCountArrayAdapter(this, dataList2);
+                LeaderboardList.setAdapter(leaderboardCountArrayAdapter);
+                c += 1;
+            }
         }
         if(c==0)
         {
