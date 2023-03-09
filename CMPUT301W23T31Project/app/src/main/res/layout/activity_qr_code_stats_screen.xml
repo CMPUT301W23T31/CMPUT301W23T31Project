@@ -7,12 +7,14 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:id="@+id/qr_code_stats_header_stats"
+        android:id="@+id/qr_code_stats_comment_header_stats"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        android:padding="10dp"
+        android:background="@color/stats_accent_green">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -24,13 +26,13 @@
                 android:id="@+id/qr_code_stats_code_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="QR Name"/>
+                android:hint="------- QR Name (Long) -------"/>
 
             <TextView
                 android:id="@+id/qr_code_stats_code_coordinates"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="Coordinates"/>
+                android:hint="Coordinates of Code"/>
 
         </LinearLayout>
 
@@ -43,12 +45,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Quick Overview"/>
+                android:text="Quick Overview"
+                android:textStyle="bold"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingStart="50dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -65,7 +69,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingStart="50dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -82,24 +87,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Likes/Dislikes: "/>
-
-                <TextView
-                    android:id="@+id/qr_code_stats_code_likes_dislikes"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="L/D"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingStart="50dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -115,6 +104,50 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            android:layout_gravity="center_horizontal"
+
+            android:layout_margin="5dp"
+            android:paddingVertical="3dp"
+            android:paddingHorizontal="30dp"
+            android:background="@color/stats_accent_green">
+
+            <Button
+                android:id="@+id/qr_code_stats_comment_like_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Like"/>
+
+            <Space
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/qr_code_stats_code_likes_dislikes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:hint="L | D"/>
+
+            <Space
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"/>
+
+            <Button
+                android:id="@+id/qr_code_stats_comment_dislike_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dislike"/>
+
+        </LinearLayout>
+
     </LinearLayout>
 
     <LinearLayout
@@ -122,7 +155,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@id/qr_code_stats_header_stats"
+
+        android:layout_margin="10dp"
+        app:layout_constraintTop_toBottomOf="@id/qr_code_stats_comment_header_stats"
         app:layout_constraintStart_toStartOf="parent"
         android:gravity="center_horizontal">
 
@@ -139,7 +174,7 @@
             android:layout_height="wrap_content"
             android:text="Scanned By"
             android:layout_marginHorizontal="20dp"
-           />
+            />
 
     </LinearLayout>
 
@@ -149,10 +184,21 @@
         android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@id/qr_code_stats_option_buttons"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:divider="@color/black"
         android:dividerHeight="1dp"
         tools:listitem="@layout/content_player_detail" />
 
 
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/qr_code_stats_comments_view_surroundings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_margin="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="View Surroundings"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
