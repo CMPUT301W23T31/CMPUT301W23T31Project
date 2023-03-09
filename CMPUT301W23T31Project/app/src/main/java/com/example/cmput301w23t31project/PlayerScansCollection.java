@@ -81,8 +81,6 @@ public class PlayerScansCollection extends QRDatabase{
     }
     public void getPlayerScans(){
         db = FirebaseFirestore.getInstance();
-
-
         db.collection("PlayerScans").get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
@@ -115,7 +113,7 @@ public class PlayerScansCollection extends QRDatabase{
 
 
                             }}
-                });
+                    });
     }
 
 

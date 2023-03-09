@@ -2,6 +2,7 @@ package com.example.cmput301w23t31project;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -80,7 +81,13 @@ public class LeaderboardCountActivity extends AppCompatActivity implements Searc
         LeaderboardList = findViewById(R.id.leaderboard_list);
         leaderboardCountArrayAdapter = new LeaderboardCountArrayAdapter(this, dataList);
         LeaderboardList.setAdapter(leaderboardCountArrayAdapter);
-        CreateLeaderBoard();
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                CreateLeaderBoard();
+            }
+        },3000);
 
         Button searchUser;
 
