@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -94,56 +95,26 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/home_screen_nearest_code" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <ImageView
-        android:id="@+id/home_screen_explore_button"
-        android:layout_width="180dp"
-        android:layout_height="140dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintEnd_toStartOf="@+id/imageView4"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/home_screen_upper_text"
-        app:srcCompat="@drawable/explore" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageView
         android:id="@+id/imageView4"
         android:layout_width="180dp"
         android:layout_height="140dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginEnd="25dp"
+        android:onClick="onClickLeaderboard"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/home_screen_upper_text"
-        app:srcCompat="@drawable/leaderboard"
-        android:onClick="onClickLeaderboard"/>
-
-    <ImageView
-        android:id="@+id/home_screen_scan_code_button"
-        android:layout_width="180dp"
-        android:layout_height="140dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/home_screen_explore_button"
-        app:srcCompat="@drawable/scan" />
-
-    <ImageView
-        android:id="@+id/home_screen_my_scans_button"
-        android:layout_width="180dp"
-        android:layout_height="140dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/home_screen_scan_code_button"
-        app:srcCompat="@drawable/scans" />
+        app:srcCompat="@drawable/leaderboard" />
 
     <ImageView
         android:id="@+id/home_screen_player_info_button"
         android:layout_width="180dp"
         android:layout_height="140dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginEnd="25dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView4"
         app:srcCompat="@drawable/player" />
@@ -153,10 +124,43 @@
         android:layout_width="180dp"
         android:layout_height="140dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginEnd="25dp"
+        android:onClick="onClickAppInfo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/home_screen_player_info_button"
-        app:srcCompat="@drawable/app"
-        android:onClick="onClickAppInfo"/>
+        app:srcCompat="@drawable/app" />
+
+    <ImageView
+        android:id="@+id/home_screen_explore_button"
+        android:layout_width="180dp"
+        android:layout_height="140dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toStartOf="@+id/imageView4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/home_screen_upper_text"
+        app:srcCompat="@drawable/explore_new" />
+
+    <ImageView
+        android:id="@+id/home_screen_my_scans_button"
+        android:layout_width="180dp"
+        android:layout_height="140dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toStartOf="@+id/imageView8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/home_screen_scan_code_button"
+        app:srcCompat="@drawable/scans" />
+
+    <ImageView
+        android:id="@+id/home_screen_scan_code_button"
+        android:layout_width="180dp"
+        android:layout_height="140dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toStartOf="@+id/home_screen_player_info_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/home_screen_explore_button"
+        app:srcCompat="@drawable/scan" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
