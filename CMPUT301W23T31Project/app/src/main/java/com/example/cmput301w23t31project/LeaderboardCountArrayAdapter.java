@@ -1,6 +1,7 @@
 package com.example.cmput301w23t31project;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,6 +42,14 @@ public class LeaderboardCountArrayAdapter extends ArrayAdapter<Player> {
         score.setText(String.valueOf(player.getCount()));
         usernameText.setText(player.getUserName());
         profileBtn.setText("View Profile");
+
+        profileBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, PlayerProfileActivity.class);
+                context.startActivity(intent);
+            }
+        });
 
 
 
