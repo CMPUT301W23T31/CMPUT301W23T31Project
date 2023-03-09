@@ -1,13 +1,17 @@
 package com.example.cmput301w23t31project;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 
+import android.view.LayoutInflater;
 import android.view.View;
 
+import android.view.ViewOverlay;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -71,10 +75,9 @@ public class QRCodeStatsActivity extends AppCompatActivity {
         QRCodesCollection qr_codes = new QRCodesCollection();
 
         View representationView = findViewById(R.id.qr_code_stats_visual_representation_view);
-        visualRepresentation = new DrawRepresentation(this, hash, 20);
-        //visualRepresentation.setBackgroundColor(Color.WHITE);
-        // representationView.setVisual(visualRepresentation);
-        // TODO: NEEDS HELP
+        visualRepresentation = new DrawRepresentation(hash, 80);
+        representationView.setForeground(visualRepresentation);
+
 
 
         gotoComments.setOnClickListener(new View.OnClickListener() {

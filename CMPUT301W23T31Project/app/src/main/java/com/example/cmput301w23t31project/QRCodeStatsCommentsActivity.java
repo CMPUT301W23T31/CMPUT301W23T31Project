@@ -52,6 +52,7 @@ public class QRCodeStatsCommentsActivity extends AppCompatActivity implements Ad
     ListView datalist;
     String username;
     String date_text;
+    DrawRepresentation visualRepresentation;
     protected void onCreate(Bundle savedInstanceState) {
         // Get access to the database
         super.onCreate(savedInstanceState);
@@ -74,6 +75,11 @@ public class QRCodeStatsCommentsActivity extends AppCompatActivity implements Ad
         qrCodeStatsCommentsAdapter = new QRCodeStatsCommentsAdapter(this, commentList);
         datalist.setAdapter(qrCodeStatsCommentsAdapter);
         QRCodesCollection qr_codes = new QRCodesCollection();
+
+        View representationView = findViewById(R.id.qr_code_stats_visual_representation_view);
+        visualRepresentation = new DrawRepresentation(hash, 80);
+        representationView.setForeground(visualRepresentation);
+
 
         //set date
         Date c = Calendar.getInstance().getTime();
