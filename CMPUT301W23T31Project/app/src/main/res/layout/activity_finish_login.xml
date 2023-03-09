@@ -5,66 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin">
-
-    <TextView
-        android:id="@+id/finish_login_activity_player_name_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="250dp"
-        android:text="@string/enter_your_player_name_for_other_users_to_see"
-        app:layout_constraintBottom_toTopOf="@id/finish_login_activity_player_name"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></TextView>
-    <EditText
-        android:id="@+id/finish_login_activity_player_name"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="@string/player_name"
-        android:inputType="text"
-        android:selectAllOnFocus="true"
-        android:height="50dp"
-        app:layout_constraintTop_toBottomOf="@id/finish_login_activity_player_name_text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-    <TextView
-        android:id="@+id/finish_login_activity_image_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="Upload an image"
-        app:layout_constraintTop_toBottomOf="@id/finish_login_activity_player_name"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-    </TextView>
-
-    <Button
-        android:id="@+id/finish_login_activity_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:backgroundTint="@color/login_button"
-        android:selectAllOnFocus="true"
-        android:text="@string/upload_image"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/finish_login_activity_image_text" />
-
-    <Button
-        android:id="@+id/finish_login_activity_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:layout_marginBottom="150dp"
-        android:backgroundTint="@color/login_button"
-        android:text="@string/enter_app"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+    android:padding="@dimen/activity_horizontal_margin">
 
     <ImageView
         android:id="@+id/imageView"
@@ -75,4 +16,61 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logo2" />
+
+    <TextView
+        android:id="@+id/finish_login_activity_player_name_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/enter_your_player_name_for_other_users_to_see"
+        app:layout_constraintBottom_toTopOf="@id/finish_login_activity_player_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageView"/>
+
+    <EditText
+        android:id="@+id/finish_login_activity_player_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minEms="15"
+        android:hint="@string/player_name"
+        android:inputType="text"
+        android:selectAllOnFocus="true"
+        app:layout_constraintTop_toBottomOf="@id/finish_login_activity_player_name_text"
+        app:layout_constraintBottom_toTopOf="@id/finish_login_activity_image_text"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/finish_login_activity_image_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Upload an image"
+        app:layout_constraintTop_toBottomOf="@id/finish_login_activity_player_name"
+        app:layout_constraintBottom_toTopOf="@+id/finish_login_activity_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+    </TextView>
+
+    <Button
+        android:id="@+id/finish_login_activity_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/login_button"
+        android:selectAllOnFocus="true"
+        android:text="@string/upload_image"
+        app:layout_constraintBottom_toTopOf="@id/finish_login_activity_button"
+        app:layout_constraintTop_toBottomOf="@id/finish_login_activity_image_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <Button
+        android:id="@+id/finish_login_activity_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/login_button"
+        android:text="@string/enter_app"
+        app:layout_constraintTop_toBottomOf="@+id/finish_login_activity_image"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

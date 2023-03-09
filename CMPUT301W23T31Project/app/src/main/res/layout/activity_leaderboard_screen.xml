@@ -38,7 +38,7 @@
                 android:onClick="onClickHighScore"
                 android:text="High Score"
 
-                android:textSize="8dp"
+                android:textSize="@dimen/leaderboard_button_text_size"
                 android:layout_margin="3dp"/>
 
             <Button
@@ -48,7 +48,7 @@
                 android:onClick="onClickCount"
                 android:text="Count"
 
-                android:textSize="10dp"
+                android:textSize="@dimen/leaderboard_button_text_size"
                 android:layout_margin="3dp"/>
 
             <Button
@@ -58,7 +58,7 @@
                 android:onClick="onClickTotalScore"
                 android:text="Total Score"
 
-                android:textSize="10dp"
+                android:textSize="@dimen/leaderboard_button_text_size"
                 android:layout_margin="3dp"/>
 
             <Button
@@ -68,7 +68,7 @@
                 android:onClick="onClickRegional"
                 android:text="Regional"
 
-                android:textSize="10dp"
+                android:textSize="@dimen/leaderboard_button_text_size"
                 android:layout_margin="3dp"/>
         </LinearLayout>
 
