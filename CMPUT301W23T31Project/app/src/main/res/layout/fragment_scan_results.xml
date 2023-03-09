@@ -8,22 +8,24 @@
     <TextView
         android:id="@+id/scan_results_score"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Results Score"
         android:textSize="20sp"
-        android:textStyle="bold"
-        android:paddingBottom="30dp"/>
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/scan_results_location"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Results Location"
         android:textSize="20sp"
         android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/scan_results_data"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Results Data"
         android:textSize="20sp"
         android:textStyle="bold"/>
 
