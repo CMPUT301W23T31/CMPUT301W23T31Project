@@ -2,6 +2,7 @@ package com.example.cmput301w23t31project;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -67,6 +68,7 @@ public class LeaderboardActivity extends AppCompatActivity implements SearchUser
 
     ListView LeaderboardList;
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_leaderboard_screen);
         Intent intent = getIntent();
@@ -80,11 +82,18 @@ public class LeaderboardActivity extends AppCompatActivity implements SearchUser
         LeaderboardList.setAdapter(leaderboardArrayAdapter);
         PlayerScansCollection playerScansCollection = new PlayerScansCollection();
         playerScansCollection.getPlayerScans();
-        CreateLeaderBoard();
-        //Log.i("data",dataList.get(0).getUserName());
-        //Log.i("Size", Integer.toString(dataList.get(0).getTotalScore()));
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    CreateLeaderBoard();
+                                }
+                            },250);
 
-        Button searchUser;
+                //Log.i("data",dataList.get(0).getUserName());
+                //Log.i("Size", Integer.toString(dataList.get(0).getTotalScore()));
+
+                Button searchUser;
         searchUser = findViewById(R.id.leaderboard_search_user_button);
         searchUser.setOnClickListener(new View.OnClickListener() {
             @Override
