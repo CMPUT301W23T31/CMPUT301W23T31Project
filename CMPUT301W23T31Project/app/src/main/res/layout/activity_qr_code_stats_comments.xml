@@ -12,7 +12,9 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        android:padding="10dp"
+        android:background="@color/stats_accent_green">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -24,94 +26,138 @@
                 android:id="@+id/qr_code_stats_comment_code_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="QR Name"/>
+                android:hint="------- QR Name (Long) -------"/>
 
             <TextView
                 android:id="@+id/qr_code_stats_comment_code_coordinates"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="Coordinates"/>
+                android:hint="Coordinates of Code"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="start">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Quick Overview"
+                    android:textStyle="bold"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingStart="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Score Points: "/>
+
+                    <TextView
+                        android:id="@+id/qr_code_stats_comment_code_score"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="Score"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingStart="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Last Scanned: "/>
+
+                    <TextView
+                        android:id="@+id/qr_code_stats_comment_code_last_scanned_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="Date"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingStart="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Times Scanned: "/>
+
+                    <TextView
+                        android:id="@+id/qr_code_stats_comment_code_total_scans"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="0"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/qr_code_stats_visual_representation_view"
+                android:layout_marginStart="50dp"
+                android:layout_width="200dp"
+                android:layout_height="80dp"/>
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="start">
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            android:layout_gravity="center_horizontal"
 
-            <TextView
+            android:layout_margin="5dp"
+            android:paddingVertical="3dp"
+            android:paddingHorizontal="30dp"
+            android:background="@color/stats_accent_green">
+
+            <Button
+                android:id="@+id/qr_code_stats_comment_like_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Quick Overview"/>
+                android:text="Like"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <Space
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/qr_code_stats_comment_code_likes_dislikes"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Score Points: "/>
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:hint="L | D"/>
 
-                <TextView
-                    android:id="@+id/qr_code_stats_comment_code_score"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="Score"/>
-            </LinearLayout>
+            <Space
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <Button
+                android:id="@+id/qr_code_stats_comment_dislike_button"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Last Scanned: "/>
-
-                <TextView
-                    android:id="@+id/qr_code_stats_comment_code_last_scanned_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="Date"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Likes/Dislikes: "/>
-
-                <TextView
-                    android:id="@+id/qr_code_stats_comment_code_likes_dislikes"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="L/D"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Times Scanned: "/>
-
-                <TextView
-                    android:id="@+id/qr_code_stats_comment_code_total_scans"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="0"/>
-            </LinearLayout>
+                android:text="Dislike"/>
 
         </LinearLayout>
 
@@ -122,6 +168,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+
+        android:layout_margin="10dp"
         app:layout_constraintTop_toBottomOf="@id/qr_code_stats_comment_header_stats"
         app:layout_constraintStart_toStartOf="parent"
         android:gravity="center_horizontal">
@@ -149,6 +197,8 @@
         android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@id/qr_code_stats_option_buttons"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:divider="@color/black"
         android:dividerHeight="1dp"
         tools:listitem="@layout/content_comment_detail" />
@@ -162,5 +212,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:text="Add Comment"/>
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/qr_code_stats_comments_view_surroundings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_margin="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="View Surroundings"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

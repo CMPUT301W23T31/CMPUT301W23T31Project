@@ -2,23 +2,18 @@ package com.example.cmput301w23t31project;
 
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
-import android.util.Log;
 import android.view.View;
 
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -52,6 +47,7 @@ public class QRCodeStatsActivity extends AppCompatActivity {
     private QRCodeStatsAdapter qrCodeStatsAdapter;
     String username;
     ListView datalist;
+    DrawRepresentation visualRepresentation;
     protected void onCreate(Bundle savedInstanceState) {
         // Get access to the database
         super.onCreate(savedInstanceState);
@@ -73,6 +69,13 @@ public class QRCodeStatsActivity extends AppCompatActivity {
         qrCodeStatsAdapter = new QRCodeStatsAdapter(this, playerList);
         datalist.setAdapter(qrCodeStatsAdapter);
         QRCodesCollection qr_codes = new QRCodesCollection();
+
+        View representationView = findViewById(R.id.qr_code_stats_visual_representation_view);
+        visualRepresentation = new DrawRepresentation(this, hash, 20);
+        //visualRepresentation.setBackgroundColor(Color.WHITE);
+        // representationView.setVisual(visualRepresentation);
+        // TODO: NEEDS HELP
+
 
         gotoComments.setOnClickListener(new View.OnClickListener() {
             @Override

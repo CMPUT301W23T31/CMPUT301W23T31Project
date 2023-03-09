@@ -32,8 +32,8 @@ public class MyAccountScreenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_account_screen);
-        TextView player_name = findViewById(R.id.account_info_player_name);
-        TextView username = findViewById(R.id.account_info_username);
+        TextView player_name = findViewById(R.id.account_info_name);
+        TextView username = findViewById(R.id.account_info_total_username);
         TextView email = findViewById(R.id.account_info_email);
         TextView phone_number = findViewById(R.id.account_info_phone_number);
         db.collection("Accounts").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
