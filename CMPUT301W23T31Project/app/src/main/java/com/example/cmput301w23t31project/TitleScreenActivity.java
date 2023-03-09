@@ -38,6 +38,7 @@ public class TitleScreenActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 Intent intent;
+                // Find if the user already has an account. If so, move to home screen
                 for (QueryDocumentSnapshot account : task.getResult()) {
                     if (Objects.equals(account.getString("DeviceID"), Utilities.getDeviceId(TitleScreenActivity.this))) {
                         intent = new Intent(TitleScreenActivity.

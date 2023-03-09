@@ -1,44 +1,32 @@
 package com.example.cmput301w23t31project;
 
-import android.util.Log;
 
-import androidx.annotation.NonNull;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
+
+/**
+ * This class creates an instance of the database we need for the program
+ */
 public class QRDatabase {
     FirebaseFirestore QRdb;
     CollectionReference collection;
-    QueryDocumentSnapshot returnDocument = null;
-    QuerySnapshot[] collectionDocuments = new QuerySnapshot[1];
 
+    /**
+     * Constructor to create a database instance
+     * @param collection
+     *      The name of the collection we want to access
+     */
     public QRDatabase(String collection) {
         QRdb = FirebaseFirestore.getInstance();
         this.collection = QRdb.collection(collection);
     }
 
-    public QueryDocumentSnapshot getDocument(String docId) {
-        collection.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    for (QueryDocumentSnapshot document: task.getResult()) {
-                        if (document.getId().equals(docId)) {
-                            returnDocument = document;
-                            return;
-                        }
-                    }
-                }
-            }
-        });
-        return returnDocument;
-    }
-
+    /**
+     * Obtains the CollectionReference object of a database collection
+     * @return
+     *      CollectionReference object for database collection
+     */
     public CollectionReference getReference() {
         return collection;
     }

@@ -1,18 +1,20 @@
 package com.example.cmput301w23t31project;
 
-import androidx.annotation.NonNull;
 
+import androidx.annotation.NonNull;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
 
+
+/**
+ * This class performs operations related to the collection of player scans
+ */
 public class QRPlayerScans extends QRDatabase {
 
     public QRPlayerScans() {
@@ -46,6 +48,7 @@ public class QRPlayerScans extends QRDatabase {
                         }
                     }
                 }
+                // Otherwise, create a new document with a QR code the user scanned
                 Map<String, Object> m;
                 if (document != null) {
                     m = document.getData();
