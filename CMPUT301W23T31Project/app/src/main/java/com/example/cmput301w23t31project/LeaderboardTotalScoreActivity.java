@@ -88,7 +88,7 @@ public class LeaderboardTotalScoreActivity extends AppCompatActivity implements 
             public void run() {
                 CreateLeaderBoard();
             }
-        },3000);
+        },250);
 
 
         Button searchUser;
