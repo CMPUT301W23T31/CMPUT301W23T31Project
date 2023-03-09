@@ -117,7 +117,8 @@ public class LeaderboardHighScoreActivity extends AppCompatActivity  implements 
                         int totalScans = Integer.parseInt(document.getString("Total Scans"));
                         int highestScoringQR = Integer.parseInt(document.getString("Highest Scoring QR Code"));
                         int lowestScoringQR = Integer.parseInt(document.getString("Lowest Scoring QR Code"));
-                        dataList.add(i,new Player(userName,totalScans,totalScore,highestScoringQR,lowestScoringQR));
+                        int rank = Integer.parseInt(document.getString("Rank"));
+                        dataList.add(i,new Player(userName,totalScans,totalScore,highestScoringQR,lowestScoringQR,rank));
                         Log.i("Size", Integer.toString(dataList.size()));
 
                         //Log.i("Size", Integer.toString(dataList.get(0).getTotalScore()));
@@ -125,6 +126,7 @@ public class LeaderboardHighScoreActivity extends AppCompatActivity  implements 
                     }
                     leaderboardHighScoreArrayAdapter.notifyDataSetChanged();
                     sortList();
+                    giveRank();
                 }}});
 
     }
@@ -173,6 +175,13 @@ public class LeaderboardHighScoreActivity extends AppCompatActivity  implements 
                 return super.onOptionsItemSelected(item);
         }
 
+    }
+    public void giveRank(){
+        for(int i = 0;i < dataList.size();i++){
+            int rank;
+            rank = 1+i;
+            dataList.get(i).setRank(rank);
+        }
     }
     public void onClickHighScore(View view){
         String name = highScoreBtn.getText().toString();

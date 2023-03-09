@@ -5,7 +5,7 @@ public class Player {
     private String playerName;
     private int count;
     private int totalScore;
-
+    private int rank;
     private String date;
 
     private int highestScoringQR;
@@ -19,17 +19,26 @@ public class Player {
         this.totalScore = score;
     }
 
-    public Player(String userName, int count, int score, int highestScoringQR, int lowestScoringQR) {
+    public Player(String userName, int count, int score, int highestScoringQR, int lowestScoringQR,int rank) {
         this.userName = userName;
         this.count = count;
         this.totalScore = score;
         this.highestScoringQR = highestScoringQR;
         this.lowestScoringQR = lowestScoringQR;
+        this.rank = rank;
     }
 
     public Player(String userName, String date) {
         this.userName = userName;
         this.date = date;
+    }
+
+    public int getRank() {
+        return rank;
+    }
+
+    public void setRank(int rank) {
+        this.rank = rank;
     }
 
     public String getDate() {

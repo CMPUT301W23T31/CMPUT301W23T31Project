@@ -33,7 +33,8 @@ public class SortLeaderBoard {
                         int totalScans = Integer.parseInt(document.getString("Total Scans"));
                         int highestScoringQR = Integer.parseInt(document.getString("Highest Scoring QR Code"));
                         int lowestScoringQR = Integer.parseInt(document.getString("Lowest Scoring QR Code"));
-                        dataList.add(new Player(userName,totalScans,totalScore,highestScoringQR,lowestScoringQR));
+                        int rank = Integer.parseInt(document.getString("Rank"));
+                        dataList.add(new Player(userName,totalScans,totalScore,highestScoringQR,lowestScoringQR,rank));
 
                     }
 
