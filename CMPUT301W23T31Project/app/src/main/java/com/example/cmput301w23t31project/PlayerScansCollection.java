@@ -125,7 +125,7 @@ public class PlayerScansCollection extends QRDatabase{
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        Log.i("TAG",userName);
+                        //Log.i("TAG",userName);
                         int SumScore = 0;
                         String score = "";
                         int max = 0;
@@ -150,8 +150,8 @@ public class PlayerScansCollection extends QRDatabase{
 
                                         //score = String.valueOf(i);
                                         //Log.i("TAG", score);
-                                        Log.i("TAG", "This is the doc hash");
-                                        Log.i("TAG", document.getId());
+                                        //Log.i("TAG", "This is the doc hash");
+                                        //Log.i("TAG", document.getId());
                                         numberScore = Integer.parseInt(document.getString("Score"));
                                         if(min == 0){
                                             min = numberScore;}
@@ -163,12 +163,12 @@ public class PlayerScansCollection extends QRDatabase{
                                             min = numberScore;
                                         }
                                         max2 = String.valueOf(max);
-                                        Log.i("MAX", max2);
+                                        //Log.i("MAX", max2);
                                         min2 = String.valueOf(min);
-                                        Log.i("min", min2);
+                                        //Log.i("min", min2);
                                         count++;
                                         count2 = String.valueOf(count);
-                                        Log.i("count", count2);
+                                        //Log.i("count", count2);
                                         TotalScore = String.valueOf(SumScore);
                                     }
 

@@ -2,6 +2,7 @@ package com.example.cmput301w23t31project;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -11,9 +12,16 @@ import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class LeaderboardHighScoreActivity extends AppCompatActivity  implements SearchUserFragment.SearchUserDialogListener{
+    private FirebaseFirestore db;
 
     Button highScoreBtn;
     Button countBtn;
@@ -65,13 +73,8 @@ public class LeaderboardHighScoreActivity extends AppCompatActivity  implements 
         LeaderboardList = findViewById(R.id.leaderboard_list);
         leaderboardHighScoreArrayAdapter = new LeaderboardHighScoreArrayAdapter(this, dataList);
         LeaderboardList.setAdapter(leaderboardHighScoreArrayAdapter);
-        dataList.add(0, new Player("DonKrieg", "Joshu", 20, 2500));
-        dataList.add(1, new Player("Average", "Saumya", 25, 2000));
-        dataList.add(2, new Player("LongDongLyndom", "Lyndon", 40, 3500));
-        dataList.add(3, new Player("LongTanHandsome", "Carson", 15, 1500));
-        dataList.add(4, new Player("BigPapi", "RJ", 30, 3000));
-        dataList.add(5, new Player("Rus", "Rus", 35, 1200));
-        sortList();
+        CreateLeaderBoard();
+
 
         Button searchUser;
 
@@ -92,7 +95,39 @@ public class LeaderboardHighScoreActivity extends AppCompatActivity  implements 
         inflater.inflate(R.menu.hamburger_menu,menu);
         return true;
     }
+    public void CreateLeaderBoard(){
+        db = FirebaseFirestore.getInstance();
+        db.collection("PlayerInfo").get() .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                // after getting the data we are calling on success method
+                // and inside this method we are checking if the received
+                // query snapshot is empty or not.
+                if (!queryDocumentSnapshots.isEmpty()) {
+                    // if the snapshot is not empty we are
+                    // hiding our progress bar and adding
+                    // our data in a list.
+                    List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+                    for (DocumentSnapshot document : list) {
+                        int i = 0;
+                        String userName = document.getId();
+                        Log.i("TAG", userName);
+                        //Log.i("TAG", document.getId());
+                        int totalScore = Integer.parseInt(document.getString("Total Score"));
+                        int totalScans = Integer.parseInt(document.getString("Total Scans"));
+                        int highestScoringQR = Integer.parseInt(document.getString("Highest Scoring QR Code"));
+                        int lowestScoringQR = Integer.parseInt(document.getString("Lowest Scoring QR Code"));
+                        dataList.add(i,new Player(userName,totalScans,totalScore,highestScoringQR,lowestScoringQR));
+                        Log.i("Size", Integer.toString(dataList.size()));
 
+                        //Log.i("Size", Integer.toString(dataList.get(0).getTotalScore()));
+                        i++;
+                    }
+                    leaderboardHighScoreArrayAdapter.notifyDataSetChanged();
+                    sortList();
+                }}});
+
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         switch(item.getItemId()){
@@ -151,11 +186,17 @@ public class LeaderboardHighScoreActivity extends AppCompatActivity  implements 
         Intent intent = new Intent(this, LeaderboardCountActivity.class);
         startActivity(intent);
     }
+    public void onClickTotalScore(View view){
+        String name = totalScoreBtn.getText().toString();
+        //clickSort(name);
+        Intent intent = new Intent(this, LeaderboardTotalScoreActivity.class);
+        startActivity(intent);
+    }
 
     public void sortList() {
                 for (int i = 0; i < dataList.size() - 1; i++)
                     for (int j = 0; j < dataList.size() - i - 1; j++)
-                        if (dataList.get(j).getScore() < dataList.get(j + 1).getScore()) {
+                        if (dataList.get(j).getHighestScoringQR() < dataList.get(j + 1).getHighestScoringQR()) {
                             Player temp = dataList.get(j);
                             dataList.set(j, dataList.get(j + 1));
                             dataList.set(j + 1, temp);

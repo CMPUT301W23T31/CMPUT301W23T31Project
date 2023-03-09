@@ -4,7 +4,7 @@ public class Player {
     private String userName;
     private String playerName;
     private int count;
-    private int Score;
+    private int totalScore;
 
     private String date;
 
@@ -16,13 +16,13 @@ public class Player {
         this.userName = userName;
         this.playerName = playerName;
         this.count = count;
-        this.Score = score;
+        this.totalScore = score;
     }
 
     public Player(String userName, int count, int score, int highestScoringQR, int lowestScoringQR) {
         this.userName = userName;
         this.count = count;
-        this.Score = score;
+        this.totalScore = score;
         this.highestScoringQR = highestScoringQR;
         this.lowestScoringQR = lowestScoringQR;
     }
@@ -30,6 +30,18 @@ public class Player {
     public Player(String userName, String date) {
         this.userName = userName;
         this.date = date;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public int getHighestScoringQR() {
+        return highestScoringQR;
+    }
+
+    public int getLowestScoringQR() {
+        return lowestScoringQR;
     }
 
     public String getUserName() {
@@ -56,12 +68,12 @@ public class Player {
         this.count = count;
     }
 
-    public int getScore() {
-        return Score;
+    public int getTotalScore() {
+        return totalScore;
     }
 
-    public void setScore(int score) {
-        Score = score;
+    public void setTotalScore(int totalScore) {
+        this.totalScore = totalScore;
     }
 }
 

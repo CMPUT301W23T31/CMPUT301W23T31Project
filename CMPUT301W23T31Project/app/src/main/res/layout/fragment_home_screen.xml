@@ -158,6 +158,7 @@
         android:layout_marginEnd="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/home_screen_player_info_button"
-        app:srcCompat="@drawable/app" />
+        app:srcCompat="@drawable/app"
+        android:onClick="onClickAppInfo"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

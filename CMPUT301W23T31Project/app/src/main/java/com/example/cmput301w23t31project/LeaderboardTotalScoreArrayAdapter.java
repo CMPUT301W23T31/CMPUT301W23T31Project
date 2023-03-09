@@ -13,9 +13,9 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
-public class LeaderboardHighScoreArrayAdapter extends ArrayAdapter<Player> {
+public class LeaderboardTotalScoreArrayAdapter extends ArrayAdapter<Player> {
     private Context context;
-    public LeaderboardHighScoreArrayAdapter (Context context, ArrayList<Player> players){
+    public LeaderboardTotalScoreArrayAdapter (Context context, ArrayList<Player> players){
         super(context,0,players);
         this.context = context;
     }
@@ -24,7 +24,7 @@ public class LeaderboardHighScoreArrayAdapter extends ArrayAdapter<Player> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View view;
         if (convertView == null) {
-            view = LayoutInflater.from(context).inflate(R.layout.content_leaderboard_high_score_list, parent, false);
+            view = LayoutInflater.from(context).inflate(R.layout.content_leaderboard_total_score_list, parent, false);
         } else {
             view = convertView;
         }
@@ -36,7 +36,7 @@ public class LeaderboardHighScoreArrayAdapter extends ArrayAdapter<Player> {
         TextView usernameText = view.findViewById(R.id.leaderboard_content_user_name);
         Button profileBtn = view.findViewById(R.id.leaderboard_content_profile_button);
         playerName.setText(player.getPlayerName());
-        score.setText(String.valueOf(player.getHighestScoringQR()));
+        score.setText(String.valueOf(player.getTotalScore()));
         usernameText.setText(player.getUserName());
         profileBtn.setText("View Profile");
 
@@ -46,4 +46,3 @@ public class LeaderboardHighScoreArrayAdapter extends ArrayAdapter<Player> {
 
     }
 }
-
