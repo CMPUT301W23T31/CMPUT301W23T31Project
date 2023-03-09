@@ -87,7 +87,7 @@ public class LeaderboardCountActivity extends AppCompatActivity implements Searc
             public void run() {
                 CreateLeaderBoard();
             }
-        },3000);
+        },250);
 
         Button searchUser;
 
