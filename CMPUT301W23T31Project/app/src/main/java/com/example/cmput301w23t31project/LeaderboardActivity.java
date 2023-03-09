@@ -123,7 +123,8 @@ public class LeaderboardActivity extends AppCompatActivity implements SearchUser
                         int totalScans = Integer.parseInt(document.getString("Total Scans"));
                         int highestScoringQR = Integer.parseInt(document.getString("Highest Scoring QR Code"));
                         int lowestScoringQR = Integer.parseInt(document.getString("Lowest Scoring QR Code"));
-                        dataList.add(i,new Player(userName,totalScans,totalScore,highestScoringQR,lowestScoringQR));
+                        int rank = Integer.parseInt(document.getString("Rank"));
+                        dataList.add(i,new Player(userName,totalScans,totalScore,highestScoringQR,lowestScoringQR,rank));
                         Log.i("Size", Integer.toString(dataList.size()));
 
                         //Log.i("Size", Integer.toString(dataList.get(0).getTotalScore()));
