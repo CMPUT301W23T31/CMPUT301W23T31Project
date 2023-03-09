@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -20,23 +21,23 @@
         android:id="@+id/login_activity_username_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
         android:text="@string/create_a_username_for_your_account"
-        app:layout_constraintBottom_toTopOf="@id/login_activity_username"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imageView2"/>
+        app:layout_constraintTop_toBottomOf="@id/imageView2" />
 
     <EditText
         android:id="@+id/login_activity_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:minEms="15"
+        android:layout_marginStart="4dp"
         android:hint="@string/username"
         android:inputType="text"
+        android:minEms="15"
         android:selectAllOnFocus="true"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/login_activity_username_text"
-        app:layout_constraintBottom_toTopOf="@id/login_activity_email_text"/>
+        app:layout_constraintTop_toBottomOf="@+id/login_activity_username_text" />
 
     <TextView
         android:id="@+id/login_activity_bad_username"
@@ -54,45 +55,44 @@
         android:id="@+id/login_activity_email_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:text="@string/enter_your_email_address"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_activity_bad_username"
-        app:layout_constraintBottom_toTopOf="@id/login_activity_email"/>
+        app:layout_constraintTop_toBottomOf="@+id/login_activity_bad_username" />
 
     <EditText
         android:id="@+id/login_activity_email"
-        android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:minEms="15"
+        android:layout_height="wrap_content"
         android:hint="@string/email"
         android:inputType="textEmailAddress"
+        android:minEms="15"
         android:selectAllOnFocus="true"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/login_activity_email_text"
-        app:layout_constraintBottom_toTopOf="@id/login_activity_phone_text"/>
+        app:layout_constraintTop_toBottomOf="@id/login_activity_email_text" />
 
     <TextView
         android:id="@+id/login_activity_phone_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
         android:text="@string/enter_your_phone_number"
+        app:layout_constraintBottom_toTopOf="@id/login_activity_phone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_activity_email"
-        app:layout_constraintBottom_toTopOf="@id/login_activity_phone"/>
+        app:layout_constraintTop_toBottomOf="@+id/login_activity_email" />
 
     <EditText
         android:id="@+id/login_activity_phone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:minEms="15"
         android:hint="@string/phone_number"
         android:inputType="phone"
+        android:minEms="15"
         android:selectAllOnFocus="true"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/login_activity_phone_text"
-        app:layout_constraintBottom_toTopOf="@id/login_activity_button"/>
+        app:layout_constraintTop_toBottomOf="@id/login_activity_phone_text" />
 
     <Button
         android:id="@+id/login_activity_button"

@@ -21,34 +21,33 @@
         android:id="@+id/finish_login_activity_player_name_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
         android:text="@string/enter_your_player_name_for_other_users_to_see"
         app:layout_constraintBottom_toTopOf="@id/finish_login_activity_player_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imageView"/>
+        app:layout_constraintTop_toBottomOf="@id/imageView" />
 
     <EditText
         android:id="@+id/finish_login_activity_player_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:minEms="15"
         android:hint="@string/player_name"
         android:inputType="text"
+        android:minEms="15"
         android:selectAllOnFocus="true"
-        app:layout_constraintTop_toBottomOf="@id/finish_login_activity_player_name_text"
-        app:layout_constraintBottom_toTopOf="@id/finish_login_activity_image_text"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/finish_login_activity_player_name_text" />
 
     <TextView
         android:id="@+id/finish_login_activity_image_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
         android:text="Upload an image"
-        app:layout_constraintTop_toBottomOf="@id/finish_login_activity_player_name"
-        app:layout_constraintBottom_toTopOf="@+id/finish_login_activity_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-    </TextView>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/finish_login_activity_player_name"></TextView>
 
     <Button
         android:id="@+id/finish_login_activity_image"
@@ -57,10 +56,8 @@
         android:backgroundTint="@color/login_button_brown"
         android:selectAllOnFocus="true"
         android:text="@string/upload_image"
-        app:layout_constraintBottom_toTopOf="@id/finish_login_activity_button"
-        app:layout_constraintTop_toBottomOf="@id/finish_login_activity_image_text"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/finish_login_activity_image_text" />
 
     <Button
         android:id="@+id/finish_login_activity_button"
