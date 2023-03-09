@@ -1,5 +1,6 @@
 package com.example.cmput301w23t31project;
 
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,7 +21,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LeaderboardCountActivity extends AppCompatActivity implements SearchUserFragment.SearchUserDialogListener{
+public class LeaderboardTotalScoreActivity extends AppCompatActivity implements SearchUserFragment.SearchUserDialogListener{
     private FirebaseFirestore db;
 
     Button highScoreBtn;
@@ -28,29 +29,34 @@ public class LeaderboardCountActivity extends AppCompatActivity implements Searc
     Button totalScoreBtn;
     Button regionalBtn;
 
-    private ArrayList<Player> dataList;
-    private LeaderboardCountArrayAdapter leaderboardCountArrayAdapter;
+    private ArrayList<Player> dataList = new ArrayList<>();
     private ArrayList<Player> dataList2 = new ArrayList<>();
+    private LeaderboardTotalScoreArrayAdapter leaderboardTotalScoreArrayAdapter;
+
+    public ArrayList<Player> getDataList() {
+        return dataList;
+    }
+
+
 
     @Override
     public void searchUser(String username){
         int l = dataList.size();
         int c = 0;
         dataList2 = new ArrayList<>();
-        for(int i=0;i<l;i++)
-        {
-            if(username.trim().equalsIgnoreCase(dataList.get(i).getUserName())){
+        for(int i=0;i<l;i++) {
+            if (username.trim().equalsIgnoreCase(dataList.get(i).getUserName())) {
                 dataList2.add(dataList.get(i));
                 LeaderboardList = findViewById(R.id.leaderboard_list);
-                leaderboardCountArrayAdapter = new LeaderboardCountArrayAdapter(this, dataList2);
-                LeaderboardList.setAdapter(leaderboardCountArrayAdapter);
-                c+=1;
+                leaderboardTotalScoreArrayAdapter = new LeaderboardTotalScoreArrayAdapter(this, dataList2);
+                LeaderboardList.setAdapter(leaderboardTotalScoreArrayAdapter);
+                c += 1;
             }
             else if(((dataList.get(i).getUserName()).toLowerCase()).startsWith(username.toLowerCase().trim())){
                 dataList2.add(dataList.get(i));
                 LeaderboardList = findViewById(R.id.leaderboard_list);
-                leaderboardCountArrayAdapter = new LeaderboardCountArrayAdapter(this, dataList2);
-                LeaderboardList.setAdapter(leaderboardCountArrayAdapter);
+                leaderboardTotalScoreArrayAdapter = new LeaderboardTotalScoreArrayAdapter(this, dataList2);
+                LeaderboardList.setAdapter(leaderboardTotalScoreArrayAdapter);
                 c += 1;
             }
         }
@@ -63,22 +69,23 @@ public class LeaderboardCountActivity extends AppCompatActivity implements Searc
     ListView LeaderboardList;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_leaderboard_screen);
+        setContentView(R.layout.activity_leaderboard_total_score);
         Intent intent = getIntent();
-        dataList = new ArrayList<>();
+        //dataList = new ArrayList<>();
         highScoreBtn = findViewById(R.id.leaderboard_by_high_score_button);
         countBtn = findViewById(R.id.leaderboard_by_count_button);
         totalScoreBtn = findViewById(R.id.leaderboard_by_total_score_button);
         regionalBtn = findViewById(R.id.leaderboard_by_regional_button);
         LeaderboardList = findViewById(R.id.leaderboard_list);
-        leaderboardCountArrayAdapter = new LeaderboardCountArrayAdapter(this, dataList);
-        LeaderboardList.setAdapter(leaderboardCountArrayAdapter);
+        leaderboardTotalScoreArrayAdapter = new LeaderboardTotalScoreArrayAdapter(this, dataList);
+        LeaderboardList.setAdapter(leaderboardTotalScoreArrayAdapter);
+        PlayerScansCollection playerScansCollection = new PlayerScansCollection();
+        playerScansCollection.getPlayerScans();
         CreateLeaderBoard();
 
+
         Button searchUser;
-
         searchUser = findViewById(R.id.leaderboard_search_user_button);
-
         searchUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,6 +93,13 @@ public class LeaderboardCountActivity extends AppCompatActivity implements Searc
             }
         });
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.hamburger_menu,menu);
+        return true;
     }
     public void CreateLeaderBoard(){
         db = FirebaseFirestore.getInstance();
@@ -115,25 +129,18 @@ public class LeaderboardCountActivity extends AppCompatActivity implements Searc
                         //Log.i("Size", Integer.toString(dataList.get(0).getTotalScore()));
                         i++;
                     }
-                    leaderboardCountArrayAdapter.notifyDataSetChanged();
+                    leaderboardTotalScoreArrayAdapter.notifyDataSetChanged();
                     sortList();
+
                 }}});
 
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.hamburger_menu,menu);
-        return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         switch(item.getItemId()){
             case R.id.item2: {
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
+                finish();
                 return true;
             }
             /*
@@ -147,11 +154,6 @@ public class LeaderboardCountActivity extends AppCompatActivity implements Searc
                 startActivity(intent);
                 return true;
             }
-            case R.id.item5: {
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
-                return true;
-            }
             */
             case R.id.item5: {
                 Intent intent = new Intent(this, LeaderboardActivity.class);
@@ -161,6 +163,11 @@ public class LeaderboardCountActivity extends AppCompatActivity implements Searc
 
             case R.id.item6: {
                 Intent intent = new Intent(this, PlayerInfoScreenActivity.class);
+                startActivity(intent);
+                return true;
+            }
+            case R.id.item7: {
+                Intent intent = new Intent(this, MyAccountScreenActivity.class);
                 startActivity(intent);
                 return true;
             }
@@ -192,16 +199,23 @@ public class LeaderboardCountActivity extends AppCompatActivity implements Searc
         Intent intent = new Intent(this, LeaderboardTotalScoreActivity.class);
         startActivity(intent);
     }
-
+    public void onClickRegional(View view){
+        String name = regionalBtn.getText().toString();
+        //clickSort(name);
+        //Intent intent = new Intent(this, LeaderboardActivity.class);
+        //startActivity(intent);
+    }
     public void sortList() {
         for (int i = 0; i < dataList.size() - 1; i++)
             for (int j = 0; j < dataList.size() - i - 1; j++)
-                if (dataList.get(j).getCount() < dataList.get(j + 1).getCount()) {
+                if (dataList.get(j).getTotalScore() < dataList.get(j + 1).getTotalScore()) {
                     Player temp = dataList.get(j);
                     dataList.set(j, dataList.get(j + 1));
                     dataList.set(j + 1, temp);
 
                 }
-        leaderboardCountArrayAdapter.notifyDataSetChanged();
+        leaderboardTotalScoreArrayAdapter.notifyDataSetChanged();
     }
 }
+
+
