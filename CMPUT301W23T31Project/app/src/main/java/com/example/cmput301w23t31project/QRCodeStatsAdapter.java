@@ -34,7 +34,7 @@ public class QRCodeStatsAdapter  extends ArrayAdapter<Player> {
             TextView date = view.findViewById(R.id.player_detail_date);
             Button profileBtn = view.findViewById(R.id.player_detail_view_profile_button);
             playerName.setText(player.getPlayerName());
-            date.setText(String.valueOf(player.getScore()));
+            date.setText(String.valueOf(player.getTotalScore()));
             profileBtn.setText("View Profile");
 
 

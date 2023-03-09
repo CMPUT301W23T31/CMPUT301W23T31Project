@@ -37,7 +37,7 @@ public class PlayerScansCollection extends QRDatabase{
     }
 
 
-    public void addPlayerInfoToCollection(String username, String max, String min ,String count,String SumScore) {
+    public void addPlayerInfoToCollection(String username, String max, String min ,String count,String SumScore,String rank) {
         CollectionReference codes = getReference();
         // Add necessary fields of QR code data
         HashMap<String, String> PlayerInfo = new HashMap<>();
@@ -45,6 +45,7 @@ public class PlayerScansCollection extends QRDatabase{
         PlayerInfo.put("Total Scans", count);
         PlayerInfo.put("Lowest Scoring QR Code", min);
         PlayerInfo.put("Highest Scoring QR Code", max);
+        PlayerInfo.put("Rank",rank);
 
         // Add the data to the database
         codes.document(username).set(PlayerInfo);
@@ -125,9 +126,11 @@ public class PlayerScansCollection extends QRDatabase{
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        Log.i("TAG",userName);
+                        //Log.i("TAG",userName);
                         int SumScore = 0;
                         String score = "";
+                        int rank = 0;
+                        String rank2 = String.valueOf(rank);
                         int max = 0;
                         int min = 0;
                         int numberScore;
@@ -150,8 +153,8 @@ public class PlayerScansCollection extends QRDatabase{
 
                                         //score = String.valueOf(i);
                                         //Log.i("TAG", score);
-                                        Log.i("TAG", "This is the doc hash");
-                                        Log.i("TAG", document.getId());
+                                        //Log.i("TAG", "This is the doc hash");
+                                        //Log.i("TAG", document.getId());
                                         numberScore = Integer.parseInt(document.getString("Score"));
                                         if(min == 0){
                                             min = numberScore;}
@@ -163,12 +166,12 @@ public class PlayerScansCollection extends QRDatabase{
                                             min = numberScore;
                                         }
                                         max2 = String.valueOf(max);
-                                        Log.i("MAX", max2);
+                                        //Log.i("MAX", max2);
                                         min2 = String.valueOf(min);
-                                        Log.i("min", min2);
+                                        //Log.i("min", min2);
                                         count++;
                                         count2 = String.valueOf(count);
-                                        Log.i("count", count2);
+                                        //Log.i("count", count2);
                                         TotalScore = String.valueOf(SumScore);
                                     }
 
@@ -176,7 +179,7 @@ public class PlayerScansCollection extends QRDatabase{
                         }
 
 
-                            addPlayerInfoToCollection(userName,max2,min2,count2,TotalScore);
+                            addPlayerInfoToCollection(userName,max2,min2,count2,TotalScore,rank2);
 
                     }}
     });

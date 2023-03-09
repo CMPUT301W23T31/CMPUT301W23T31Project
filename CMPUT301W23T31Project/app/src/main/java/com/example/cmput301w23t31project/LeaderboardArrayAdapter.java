@@ -1,7 +1,6 @@
 package com.example.cmput301w23t31project;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +37,7 @@ public class LeaderboardArrayAdapter extends ArrayAdapter<Player> {
         Button profileBtn = view.findViewById(R.id.leaderboard_content_profile_button);
         playerName.setText(player.getPlayerName());
 
-        score.setText(String.valueOf(player.getScore()));
+        score.setText(String.valueOf(player.getTotalScore()));
         usernameText.setText(player.getUserName());
         profileBtn.setText("View Profile");
 

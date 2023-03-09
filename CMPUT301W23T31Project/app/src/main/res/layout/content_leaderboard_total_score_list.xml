@@ -49,19 +49,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-        <TextView
-            android:id="@+id/leaderboard_content_relevant_stat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:hint="High Score:"
-            android:textSize="18sp" />
+            <TextView
+                android:id="@+id/leaderboard_content_relevant_stat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:hint="Total Score:"
+                android:textSize="18sp" />
             <TextView
                 android:id="@+id/leaderboard_content_High_score"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
-                android:hint="High Score"
+                android:hint="Total Score"
                 android:textSize="18sp" />
         </LinearLayout>
     </LinearLayout>

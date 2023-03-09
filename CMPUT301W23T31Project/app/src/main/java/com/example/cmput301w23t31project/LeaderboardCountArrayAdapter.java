@@ -35,8 +35,10 @@ public class LeaderboardCountArrayAdapter extends ArrayAdapter<Player> {
         TextView score = view.findViewById(R.id.leaderboard_content_count);
         TextView usernameText = view.findViewById(R.id.leaderboard_content_user_name);
         Button profileBtn = view.findViewById(R.id.leaderboard_content_profile_button);
+        TextView rank = view.findViewById(R.id.leaderboard_content_rank);
+        rank.setText(String.valueOf(player.getRank()));
         playerName.setText(player.getPlayerName());
-        score.setText(String.valueOf(player.getScore()));
+        score.setText(String.valueOf(player.getCount()));
         usernameText.setText(player.getUserName());
         profileBtn.setText("View Profile");
 

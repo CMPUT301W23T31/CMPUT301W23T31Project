@@ -4,8 +4,8 @@ public class Player {
     private String userName;
     private String playerName;
     private int count;
-    private int Score;
-
+    private int totalScore;
+    private int rank;
     private String date;
 
     private int highestScoringQR;
@@ -16,20 +16,41 @@ public class Player {
         this.userName = userName;
         this.playerName = playerName;
         this.count = count;
-        this.Score = score;
+        this.totalScore = score;
     }
 
-    public Player(String userName, int count, int score, int highestScoringQR, int lowestScoringQR) {
+    public Player(String userName, int count, int score, int highestScoringQR, int lowestScoringQR,int rank) {
         this.userName = userName;
         this.count = count;
-        this.Score = score;
+        this.totalScore = score;
         this.highestScoringQR = highestScoringQR;
         this.lowestScoringQR = lowestScoringQR;
+        this.rank = rank;
     }
 
     public Player(String userName, String date) {
         this.userName = userName;
         this.date = date;
+    }
+
+    public int getRank() {
+        return rank;
+    }
+
+    public void setRank(int rank) {
+        this.rank = rank;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public int getHighestScoringQR() {
+        return highestScoringQR;
+    }
+
+    public int getLowestScoringQR() {
+        return lowestScoringQR;
     }
 
     public String getUserName() {
@@ -56,12 +77,12 @@ public class Player {
         this.count = count;
     }
 
-    public int getScore() {
-        return Score;
+    public int getTotalScore() {
+        return totalScore;
     }
 
-    public void setScore(int score) {
-        Score = score;
+    public void setTotalScore(int totalScore) {
+        this.totalScore = totalScore;
     }
 }
 
