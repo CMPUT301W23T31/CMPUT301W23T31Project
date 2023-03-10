@@ -36,7 +36,7 @@ public class AddCommentFragment extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(@NonNull Bundle savedInstanceState){
-        View view = LayoutInflater.from(getContext()).inflate(R.layout.fragment_add_comment, null);
+        View view = getLayoutInflater().inflate(R.layout.fragment_add_comment, null);
         EditText comment = view.findViewById(R.id.add_comment);
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         return builder

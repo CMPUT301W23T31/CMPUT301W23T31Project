@@ -33,13 +33,22 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.List;
+
+
 //https://www.geeksforgeeks.org/how-to-add-dynamic-markers-in-google-maps-with-firebase-firstore/?ref=lbp
-public class ExploreScreenActivity extends AppCompatActivity implements GoogleMap.OnMyLocationButtonClickListener,
+
+/**
+ * Handles the Explore Screen (with map view, allowing players to view local QR codes nearby)
+ */
+public class ExploreScreenActivity extends AppCompatActivity
+        implements GoogleMap.OnMyLocationButtonClickListener,
         GoogleMap.OnMyLocationClickListener,
         OnMapReadyCallback  {
+
     private GpsTracker gpsTracker;
     private FirebaseFirestore db;
     String username;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,11 +59,11 @@ public class ExploreScreenActivity extends AppCompatActivity implements GoogleMa
         mapFragment.getMapAsync(this);
         Intent intent = getIntent();
         username = intent.getStringExtra("username");
-
     }
 
-
-    // Get a handle to the GoogleMap object and display marker.
+    /**
+     * Gets a handle to the GoogleMap object and display marker.
+     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
         googleMap.addMarker(new MarkerOptions()
@@ -172,12 +181,22 @@ public class ExploreScreenActivity extends AppCompatActivity implements GoogleMa
         }
 
     }
+
+
+    /**
+     * Toasts current location when clicked
+     * @param location current location to toast
+     */
     @Override
     public void onMyLocationClick(@NonNull Location location) {
         Toast.makeText(this, "Current location:\n" + location, Toast.LENGTH_LONG)
                 .show();
     }
 
+    /**
+     * Toasts to respond to MyLocation button being pressed
+     * @return true/false to indicate choice (see below)
+     */
     @Override
     public boolean onMyLocationButtonClick() {
         Toast.makeText(this, "MyLocation button clicked", Toast.LENGTH_SHORT)

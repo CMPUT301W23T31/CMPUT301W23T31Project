@@ -1,8 +1,14 @@
 package com.example.cmput301w23t31project;
 
+/**
+ * Represents a single account of someone using the app (anyone who plays the game)
+ * Also stores relevant quick-access stats to improve database efficiency
+ *
+ */
 public class Player {
-    private String userName;
+    private String username;
     private String playerName;
+
     private int count;
     private int totalScore;
     private int rank;
@@ -11,16 +17,31 @@ public class Player {
     private int highestScoringQR;
     private int lowestScoringQR;
 
-
-    public Player(String userName, String playerName, int count, int score) {
-        this.userName = userName;
+    /**
+     * Instantiates new instance of Player (standard)
+     * @param username username of player (uniquely identifiable)
+     * @param playerName public name of player associated with account
+     * @param count number of lifetime QR codes scanned by player
+     * @param score total score of player (sum of all scanned QR codes' scores)
+     */
+    public Player(String username, String playerName, int count, int score) {
+        this.username = username;
         this.playerName = playerName;
         this.count = count;
         this.totalScore = score;
     }
 
-    public Player(String userName, int count, int score, int highestScoringQR, int lowestScoringQR,int rank) {
-        this.userName = userName;
+    /**
+     * Instantiates new instance of Player (full)
+     * @param username username of player (uniquely identifiable)
+     * @param count number of lifetime QR codes scanned by player
+     * @param score total score of player (sum of all scanned QR codes' scores)
+     * @param highestScoringQR score of highest-scoring QR code scanned by player
+     * @param lowestScoringQR score of lowest-scoring QR code scanned by player
+     * @param rank rank position by total score (position in global leaderboard)
+     */
+    public Player(String username, int count, int score, int highestScoringQR, int lowestScoringQR,int rank) {
+        this.username = username;
         this.count = count;
         this.totalScore = score;
         this.highestScoringQR = highestScoringQR;
@@ -28,8 +49,13 @@ public class Player {
         this.rank = rank;
     }
 
-    public Player(String userName, String date) {
-        this.userName = userName;
+    /**
+     * Instantiates new instance of Player (basic)
+     * @param username username of player (uniquely identifiable)
+     * @param date date account was created
+     */
+    public Player(String username, String date) {
+        this.username = username;
         this.date = date;
     }
 
@@ -53,20 +79,16 @@ public class Player {
         return lowestScoringQR;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPlayerName() {
         return playerName;
-    }
-
-    public void setPlayerName(String playerName) {
-        this.playerName = playerName;
     }
 
     public int getCount() {
@@ -85,5 +107,3 @@ public class Player {
         this.totalScore = totalScore;
     }
 }
-
-

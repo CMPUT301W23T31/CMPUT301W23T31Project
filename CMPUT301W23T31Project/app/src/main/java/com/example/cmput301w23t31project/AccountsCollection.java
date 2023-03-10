@@ -21,6 +21,12 @@ public class AccountsCollection extends QRDatabase {
         super("Accounts");
     }
 
+    /**
+     * Adds account to database collection
+     * @param username username of player being added
+     * @param intent intent being passed with user info (email/phone/playername/path)
+     * @param ID device ID associated with account being added to collection
+     */
     public void addAccountToCollection(String username, Intent intent, String ID) {
         HashMap<String, String> AccountData = new HashMap<>();
         AccountData.put("DeviceID", ID);

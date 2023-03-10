@@ -8,6 +8,10 @@ import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+/**
+ * This class is for the "App Info" Screen and Menu
+ * Screen is fairly static, so functions are limited
+ */
 public class AppInfoScreenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

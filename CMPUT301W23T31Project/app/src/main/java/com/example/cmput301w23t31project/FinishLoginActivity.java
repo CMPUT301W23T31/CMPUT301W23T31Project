@@ -70,12 +70,9 @@ public class FinishLoginActivity extends AppCompatActivity {
 
     /**
      * This method handles a request to upload a particular image from the user's photo gallery
-     * @param requestCode
-     *      The code indicating the type of request made
-     * @param resultCode
-     *      The code indicating what response to provide after the request is handled
-     * @param data
-     *      The data provided along with the request code (in this case the image data)
+     * @param requestCode the code indicating the type of request made
+     * @param resultCode the code indicating what response to provide after the request is handled
+     * @param data the data provided along with the request code (in this case the image data)
      */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

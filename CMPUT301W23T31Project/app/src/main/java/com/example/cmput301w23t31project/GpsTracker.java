@@ -16,37 +16,43 @@ import android.provider.Settings;
 import android.util.Log;
 
 import androidx.core.app.ActivityCompat;
-//https://www.howtodoandroid.com/get-current-location-android/
+
+/**
+ * Handles the Location Services of app (locating location of player/device)
+ * Started here: https://www.howtodoandroid.com/get-current-location-android/
+ */
 class GpsTracker extends Service implements LocationListener {
     private final Context mContext;
-
-    // flag for GPS status
-    boolean isGPSEnabled = false;
-
-    // flag for network status
-    boolean isNetworkEnabled = false;
-
-    // flag for GPS status
-    boolean canGetLocation = false;
+    boolean isGPSEnabled = false;     // flag for GPS status
+    boolean isNetworkEnabled = false; // flag for network status
+    boolean canGetLocation = false;   // flag for GPS status
 
     Location location; // location
-    double latitude; // latitude
-    double longitude; // longitude
+    double latitude;   // latitude
+    double longitude;  // longitude
 
     // The minimum distance to change Updates in meters
     private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10; // 10 meters
 
     // The minimum time between updates in milliseconds
-    private static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1; // 1 minute
+    private static final long MIN_TIME_BW_UPDATES = 1000 * 60; // 1 minute
 
     // Declaring a Location Manager
     protected LocationManager locationManager;
 
+    /**
+     * Instantiates new GPS Tracker to be used by other parts
+     * @param context context to use
+     */
     public GpsTracker(Context context) {
         this.mContext = context;
         getLocation();
     }
 
+    /**
+     * Attempts to find the user/device's current location
+     * @return current location, as determined by GPS
+     */
     public Location getLocation() {
         try {
             locationManager = (LocationManager) mContext.getSystemService(LOCATION_SERVICE);
@@ -55,8 +61,7 @@ class GpsTracker extends Service implements LocationListener {
             isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
 
             // getting network status
-            isNetworkEnabled = locationManager
-                    .isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+            isNetworkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 
             if (!isGPSEnabled && !isNetworkEnabled) {
                 // no network provider is enabled
@@ -75,9 +80,7 @@ class GpsTracker extends Service implements LocationListener {
 
                     Log.d("Network", "Network");
                     if (locationManager != null) {
-                        location = locationManager
-                                .getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-
+                        location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
                         if (location != null) {
                             latitude = location.getLatitude();
                             longitude = location.getLongitude();
@@ -121,8 +124,7 @@ class GpsTracker extends Service implements LocationListener {
     /**
      * Stop using GPS listener
      * Calling this function will stop using GPS in your app
-     * */
-
+     */
     public void stopUsingGPS(){
         if(locationManager != null){
             locationManager.removeUpdates(GpsTracker.this);
@@ -130,45 +132,41 @@ class GpsTracker extends Service implements LocationListener {
     }
 
     /**
-     * Function to get latitude
-     * */
-
+     * Gets the current latitude
+     * @return current latitude if player/device
+     */
     public double getLatitude(){
         if(location != null){
             latitude = location.getLatitude();
         }
 
-        // return latitude
         return latitude;
     }
 
     /**
-     * Function to get longitude
-     * */
-
+     * Gets the current longitude
+     * @return current longitude if player/device
+     */
     public double getLongitude(){
         if(location != null){
             longitude = location.getLongitude();
         }
 
-        // return longitude
         return longitude;
     }
 
     /**
      * Function to check GPS/wifi enabled
-     * @return boolean
-     * */
-
+     * @return boolean of whether GpsTracker can currently get location
+     */
     public boolean canGetLocation() {
         return this.canGetLocation;
     }
 
     /**
-     * Function to show settings alert dialog
-     * On pressing Settings button will lauch Settings Options
-     * */
-
+     * Shows settings alert dialog
+     * On pressing Settings button will launch Settings Options
+     */
     public void showSettingsAlert(){
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(mContext);
 
@@ -196,20 +194,16 @@ class GpsTracker extends Service implements LocationListener {
     }
 
     @Override
-    public void onLocationChanged(Location location) {
-    }
+    public void onLocationChanged(Location location) {}
 
     @Override
-    public void onProviderDisabled(String provider) {
-    }
+    public void onProviderDisabled(String provider) {}
 
     @Override
-    public void onProviderEnabled(String provider) {
-    }
+    public void onProviderEnabled(String provider) {}
 
     @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) {
-    }
+    public void onStatusChanged(String provider, int status, Bundle extras) {}
 
     @Override
     public IBinder onBind(Intent arg0) {

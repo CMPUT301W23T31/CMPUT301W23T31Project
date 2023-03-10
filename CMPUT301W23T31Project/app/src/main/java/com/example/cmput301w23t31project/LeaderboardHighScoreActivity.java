@@ -39,21 +39,21 @@ public class LeaderboardHighScoreActivity extends AppCompatActivity  implements 
         dataList2 = new ArrayList<>();
         for(int i=0;i<l;i++)
         {
-            if(username.trim().equalsIgnoreCase(dataList.get(i).getUserName())){
+            if(username.trim().equalsIgnoreCase(dataList.get(i).getUsername())){
                 dataList2.add(dataList.get(i));
                 LeaderboardList = findViewById(R.id.leaderboard_list);
                 leaderboardHighScoreArrayAdapter = new LeaderboardHighScoreArrayAdapter(this, dataList2);
                 LeaderboardList.setAdapter(leaderboardHighScoreArrayAdapter);
                 c+=1;
             }
-            else if(((dataList.get(i).getUserName()).toLowerCase()).startsWith(username.toLowerCase().trim())){
+            else if(((dataList.get(i).getUsername()).toLowerCase()).startsWith(username.toLowerCase().trim())){
                 dataList2.add(dataList.get(i));
                 LeaderboardList = findViewById(R.id.leaderboard_list);
                 leaderboardHighScoreArrayAdapter = new LeaderboardHighScoreArrayAdapter(this, dataList2);
                 LeaderboardList.setAdapter(leaderboardHighScoreArrayAdapter);
                 c += 1;
             }
-            else if(((dataList.get(i).getUserName()).toLowerCase()).contains(username.toLowerCase().trim())){
+            else if(((dataList.get(i).getUsername()).toLowerCase()).contains(username.toLowerCase().trim())){
                 dataList2.add(dataList.get(i));
                 LeaderboardList = findViewById(R.id.leaderboard_list);
                 leaderboardHighScoreArrayAdapter = new LeaderboardHighScoreArrayAdapter(this, dataList2);
