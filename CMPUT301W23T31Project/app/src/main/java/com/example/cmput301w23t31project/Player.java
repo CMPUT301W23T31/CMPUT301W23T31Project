@@ -1,6 +1,8 @@
 package com.example.cmput301w23t31project;
 
-public class Player {
+import java.io.Serializable;
+
+public class Player implements Serializable {
     private String userName;
     private String playerName;
     private int count;

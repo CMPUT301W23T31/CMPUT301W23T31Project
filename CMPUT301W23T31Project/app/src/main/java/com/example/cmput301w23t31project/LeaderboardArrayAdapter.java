@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public class LeaderboardArrayAdapter extends ArrayAdapter<Player> {
@@ -47,6 +48,7 @@ public class LeaderboardArrayAdapter extends ArrayAdapter<Player> {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, PlayerProfileActivity.class);
+                intent.putExtra("Player_Data", player);
                 context.startActivity(intent);
             }
         });
