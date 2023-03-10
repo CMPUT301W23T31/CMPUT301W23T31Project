@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -64,8 +63,7 @@ public class AllowLocationFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         //creates the Dialog and handles responses to interactions between user and layout
-        View view = LayoutInflater.from(getActivity()).
-                inflate(R.layout.fragment_allow_location, null);
+        View view = getLayoutInflater().inflate(R.layout.fragment_allow_location, null);
 
         // Build dialog fragment
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
