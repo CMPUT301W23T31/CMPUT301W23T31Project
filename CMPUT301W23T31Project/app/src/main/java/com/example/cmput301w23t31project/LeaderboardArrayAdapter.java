@@ -40,7 +40,7 @@ public class LeaderboardArrayAdapter extends ArrayAdapter<Player> {
         playerName.setText(player.getPlayerName());
 
         score.setText(String.valueOf(player.getTotalScore()));
-        usernameText.setText(player.getUserName());
+        usernameText.setText(player.getUsername());
         profileBtn.setText("View Profile");
 
         profileBtn.setOnClickListener(new View.OnClickListener() {

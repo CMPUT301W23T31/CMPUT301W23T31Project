@@ -39,7 +39,7 @@ public class LeaderboardTotalScoreArrayAdapter extends ArrayAdapter<Player> {
         rank.setText(String.valueOf(player.getRank()));
         playerName.setText(player.getPlayerName());
         score.setText(String.valueOf(player.getTotalScore()));
-        usernameText.setText(player.getUserName());
+        usernameText.setText(player.getUsername());
         profileBtn.setText("View Profile");
 
 

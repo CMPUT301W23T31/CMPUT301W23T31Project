@@ -40,7 +40,7 @@ public class LeaderboardHighScoreArrayAdapter extends ArrayAdapter<Player> {
         rank.setText(String.valueOf(player.getRank()));
         playerName.setText(player.getPlayerName());
         score.setText(String.valueOf(player.getHighestScoringQR()));
-        usernameText.setText(player.getUserName());
+        usernameText.setText(player.getUsername());
         profileBtn.setText("View Profile");
 
         profileBtn.setOnClickListener(new View.OnClickListener() {
