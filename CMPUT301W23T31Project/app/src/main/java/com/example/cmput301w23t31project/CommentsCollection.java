@@ -13,12 +13,22 @@ import com.google.firebase.firestore.AggregateSource;
 
 import java.util.HashMap;
 
+/**
+ * Handles the collection (heap of) comments added to QR codes
+ */
 public class CommentsCollection extends QRDatabase{
     public int docId;
     public CommentsCollection() {
         super("Comments");
     }
 
+    /**
+     * Adds given comment contents to collection of all comments (for database storage)
+     * @param username (unique) username of player who created/added comment
+     * @param comment body of comment
+     * @param date date that comment was created/added
+     * @param hash hash of QR code being commented on (for correct association)
+     */
     public void addCommentToCollection(String username, String comment, String date, String hash) {
 
         AggregateQuery countQuery = collection.count();
