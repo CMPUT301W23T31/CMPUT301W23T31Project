@@ -16,18 +16,8 @@ import android.content.ContextWrapper;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.provider.Settings;
-import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -42,8 +32,6 @@ import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import java.util.Set;
-
 
 
 /**
@@ -54,10 +42,8 @@ public class Utilities {
 
     /**
      * This function obtains a score for a scanned QR Code
-     * @param hash
-     *      The hash value of a scanned QR code
-     * @return
-     *      The score assigned to a particular QR Code
+     * @param hash the hash value of a scanned QR code
+     * @return the score assigned to a particular QR Code
      */
     public static int getQRScore(String hash) {
         int stringLength = hash.length();
@@ -82,11 +68,9 @@ public class Utilities {
     }
 
     /**
-     * This function obtains a SHA-256 hash for provided QR Code contents
-     * @param contents
-     *      The contents of the QR Code as a String of characters
-     * @return
-     *      The SHA-256 hash for a QR Code
+     * Obtains a SHA-256 hash for provided QR Code contents
+     * @param contents ohe contents of the QR Code as a String of characters
+     * @return the SHA-256 hash for a QR Code
      * @throws NoSuchAlgorithmException
      *      Throws such an exception when a "SHA-256" algorithm is
      *      not found in getInstance
@@ -99,11 +83,9 @@ public class Utilities {
     }
 
     /**
-     * This function converts bytes to their corresponding hex value
-     * @param hash
-     *      The hash for a particular QR Code
-     * @return
-     *      A string of hexadecimal values representing a QR Code
+     * Converts bytes to their corresponding hex value
+     * @param hash the hash for a particular QR Code
+     * @return String of hexadecimal values representing a QR Code
      */
     private static String bytesToHex(byte[] hash) {
         StringBuilder hexString = new StringBuilder(2 * hash.length);
@@ -118,17 +100,12 @@ public class Utilities {
     }
 
     /**
-     * This function assigns a unique name to a QR code based on it's hash
-     * @param hash
-     *      The hash of the given QR code
-     * @param adjectives
-     *      The list of adjectives to choose from for the QR code name
-     * @param colors
-     *      The list of colors to choose from for the QR code name
-     * @param nouns
-     *      The list of nouns to choose from for the QR code name
-     * @return
-     *      A name generated from the QR code's hash
+     * Assigns a unique name to a QR code based on it's hash
+     * @param hash the hash of the given QR code
+     * @param adjectives the list of adjectives to choose from for the QR code name
+     * @param colors the list of colors to choose from for the QR code name
+     * @param nouns the list of nouns to choose from for the QR code name
+     * @return the name generated from the QR code's hash
      */
     public static String getQRCodeName(String hash, String[] adjectives, String[] colors, String[] nouns) {
         String name = "";
@@ -150,13 +127,10 @@ public class Utilities {
     }
 
     /**
-     * This function retrieves data from a file for MainActivity
-     * @param resources
-     *      References the resources in AndroidStudio project
-     * @param length
-     *      Length of the data file/max # of elements that can be read
-     * @return
-     *      A string array of file elements, at most 'length' of them
+     * Retrieves data from a file for MainActivity
+     * @param resources references the resources in AndroidStudio project
+     * @param length length of the data file/max # of elements that can be read
+     * @return a string array of file elements, at most 'length' of them
      */
     public static String[] retrieveFileData(Resources resources, int length, int file) {
         String data;
@@ -180,10 +154,8 @@ public class Utilities {
 
     /**
      * This function returns the ID of the android device
-     * @param app
-     *      References the activity that needs to access the device ID
-     * @return
-     *      The ID of the android device
+     * @param app references the activity that needs to access the device ID
+     * @return the ID of the android device
      */
     public static String getDeviceId(AppCompatActivity app) {
         return Settings.Secure.getString(app.getContentResolver(), Settings.Secure.ANDROID_ID);
@@ -191,19 +163,14 @@ public class Utilities {
 
 
     /**
-     * This method saves the image to internal storage, in other words, saves the image to a path
+     * Saves the image to internal storage, in other words, saves the image to a path
      * in the users device that is called upon each time we need that image
-     * @param bitmapImage
-     *      The bitmap of the image selected by the user
-     * @param context
-     *      The context of the application at time of method call
-     * @param img_file_name
-     *      The name of the image file provided (something like image.png)
-     * @return
-     *      The absolute path in the user's device to the image for future usages
+     * @param bitmapImage the bitmap of the image selected by the user
+     * @param context the context of the application at time of method call
+     * @param img_file_name the name of the image file provided (something like image.png)
+     * @return the absolute path in the user's device to the image for future usages
      */
-    public static String saveToInternalStorage(Bitmap bitmapImage, Context context,
-                                               String img_file_name){
+    public static String saveToInternalStorage(Bitmap bitmapImage, Context context, String img_file_name){
         ContextWrapper cw = new ContextWrapper(context.getApplicationContext());
         // path to /data/data/yourapp/app_data/imageDir
         File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
@@ -228,11 +195,9 @@ public class Utilities {
         return directory.getAbsolutePath();
     }
 
-
     /**
      * This function returns the current date in yyyy-MM-dd format
-     * @return
-     *      The current date in yyyy-MM-dd format
+     * @return the current date in yyyy-MM-dd format
      */
     public static String getCurrentDate() {
         DateTimeFormatter dtf;

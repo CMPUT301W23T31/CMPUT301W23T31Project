@@ -1,6 +1,5 @@
 package com.example.cmput301w23t31project;
 
-
 import androidx.annotation.NonNull;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -10,7 +9,6 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-
 
 /**
  * This class performs operations related to the collection of player scans
@@ -24,10 +22,8 @@ public class QRPlayerScans extends QRDatabase {
     /**
      * This method either adds a record in the database indicating the user has scanned the
      * particular QR code, or updates that record
-     * @param username
-     *      The username of the user using the app on the device
-     * @param hash
-     *      The hash value of the scanned QR code
+     * @param username the username of the user using the app on the device
+     * @param hash the hash value of the scanned QR code
      */
     public void processPlayerScanInDatabase(String username, String hash) {
         CollectionReference scans = getReference();

@@ -29,6 +29,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText phone;
     TextView badUsername;
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         super.onCreate(savedInstanceState);
@@ -58,8 +59,7 @@ public class LoginActivity extends AppCompatActivity {
     /**
      * This method verifies that the username the user provided is not previously taken, and
      * subsequently logs in the user
-     * @param task
-     *      The operation that holds a snapshot of the query
+     * @param task the operation that holds a snapshot of the query
      */
     public void loginUser(Task<QuerySnapshot> task) {
         int found = 0;
