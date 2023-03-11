@@ -74,7 +74,13 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
         AccountsCollection collectionReferenceAccount = new AccountsCollection();
         QRCodesCollection QRCodes = new QRCodesCollection();
         QRPlayerScans playerScans = new QRPlayerScans();
+        PlayerScansCollection playerScansCollection = new PlayerScansCollection();
+        playerScansCollection.getPlayerScans();
+        playerScansCollection.CreateLeaderBoard();
 
+        //playerScansCollection.sortByCountList();
+        //playerScansCollection.sortByHighScoreList();
+        //playerScansCollection.sortByTotalScoreList();
         String ID = Utilities.getDeviceId(this);
 
         //get login details

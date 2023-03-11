@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:id="@+id/screen"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:onClick="onTap">
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -13,7 +18,8 @@
         android:text="QR Hunter"
         android:gravity="center_horizontal"
         android:layout_gravity="center"
-        android:textSize="48dp">
+        android:textSize="48dp"
+        android:onClick="onTap">
 
     </TextView>
 
@@ -24,7 +30,8 @@
         android:padding="50dp"
         android:scaleX="1.5"
         android:scaleY="1.5"
-        app:srcCompat="@drawable/test2_title_screen" />
+        app:srcCompat="@drawable/test2_title_screen"
+        android:onClick="onTap"/>
 
     <TextView
         android:id="@+id/tap_to_enter"
@@ -35,9 +42,10 @@
         android:gravity="center_horizontal"
 
         android:onClick="onTap"
-        android:text="Tap here to enter"
+        android:text="Tap to enter"
         android:textSize="40dp">
 
     </TextView>
 
 </LinearLayout>
+</FrameLayout>

@@ -20,6 +20,9 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
+/**
+ * A class that displays a leaderboard of all players in the playerbase
+ */
 
 public class LeaderboardActivity extends AppCompatActivity implements SearchUserFragment.SearchUserDialogListener{
     private FirebaseFirestore db;
@@ -32,6 +35,7 @@ public class LeaderboardActivity extends AppCompatActivity implements SearchUser
     private ArrayList<Player> dataList = new ArrayList<>();
     private ArrayList<Player> dataList2 = new ArrayList<>();
     private LeaderboardArrayAdapter leaderboardArrayAdapter;
+
 
     public ArrayList<Player> getDataList() {
         return dataList;
@@ -79,7 +83,6 @@ public class LeaderboardActivity extends AppCompatActivity implements SearchUser
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_leaderboard_screen);
         Intent intent = getIntent();
-        //dataList = new ArrayList<>();
         highScoreBtn = findViewById(R.id.leaderboard_by_high_score_button);
         countBtn = findViewById(R.id.leaderboard_by_count_button);
         totalScoreBtn = findViewById(R.id.leaderboard_by_total_score_button);
@@ -87,8 +90,8 @@ public class LeaderboardActivity extends AppCompatActivity implements SearchUser
         LeaderboardList = findViewById(R.id.leaderboard_list);
         leaderboardArrayAdapter = new LeaderboardArrayAdapter(this, dataList);
         LeaderboardList.setAdapter(leaderboardArrayAdapter);
-        PlayerScansCollection playerScansCollection = new PlayerScansCollection();
-        playerScansCollection.getPlayerScans();
+        //PlayerScansCollection playerScansCollection = new PlayerScansCollection();
+        //playerScansCollection.getPlayerScans();
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
                                 @Override
@@ -96,10 +99,8 @@ public class LeaderboardActivity extends AppCompatActivity implements SearchUser
 
                                     CreateLeaderBoard();
                                 }
-                            },250);
+                            },5250);
 
-                //Log.i("data",dataList.get(0).getUserName());
-                //Log.i("Size", Integer.toString(dataList.get(0).getTotalScore()));
 
                 Button searchUser;
         searchUser = findViewById(R.id.leaderboard_search_user_button);
@@ -118,6 +119,9 @@ public class LeaderboardActivity extends AppCompatActivity implements SearchUser
         inflater.inflate(R.menu.hamburger_menu,menu);
         return true;
     }
+    /**
+     from the playerinfo collection in the database access the username and fields and display the users in a listview
+     */
     public void CreateLeaderBoard(){
         db = FirebaseFirestore.getInstance();
         db.collection("PlayerInfo").get() .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -134,8 +138,6 @@ public class LeaderboardActivity extends AppCompatActivity implements SearchUser
                     for (DocumentSnapshot document : list) {
                         int i = 0;
                         String userName = document.getId();
-                        Log.i("TAG", userName);
-                        //Log.i("TAG", document.getId());
                         int totalScore = Integer.parseInt(document.getString("Total Score"));
                         int totalScans = Integer.parseInt(document.getString("Total Scans"));
                         int highestScoringQR = Integer.parseInt(document.getString("Highest Scoring QR Code"));
@@ -143,8 +145,6 @@ public class LeaderboardActivity extends AppCompatActivity implements SearchUser
                         int rank = Integer.parseInt(document.getString("Rank"));
                         dataList.add(i,new Player(userName,totalScans,totalScore,highestScoringQR,lowestScoringQR,rank));
                         Log.i("Size", Integer.toString(dataList.size()));
-
-                        //Log.i("Size", Integer.toString(dataList.get(0).getTotalScore()));
                         i++;
                     }
                     leaderboardArrayAdapter.notifyDataSetChanged();
@@ -222,57 +222,6 @@ public class LeaderboardActivity extends AppCompatActivity implements SearchUser
         //Intent intent = new Intent(this, LeaderboardActivity.class);
         //startActivity(intent);
     }
-    /*
-    public void clickSort(String name){
-        switch (name){
-            case "High Score": {
-                sortList("High Score");
-                break;
-            }
-            case "Count":{
-                sortList("Count");
-                break;
-            }
-            case "Total Score":{
-                sortList("Total Score");
-                break;
-            }
-            case "Regional":{
-                sortList("Regional");
-                break;
-            }
-        }
-    }
 
-    public void sortList(String name) {
-        switch (name) {
-            case "High Score": {
-                for (int i = 0; i < dataList.size() - 1; i++)
-                    for (int j = 0; j < dataList.size() - i - 1; j++)
-                        if (dataList.get(j).getScore() < dataList.get(j + 1).getScore()) {
-                            Player temp = dataList.get(j);
-                            dataList.set(j, dataList.get(j + 1));
-                            dataList.set(j + 1, temp);
-
-                        }
-                break;
-            }
-            case "Count": {
-                for (int i = 0; i < dataList.size() - 1; i++)
-                    for (int j = 0; j < dataList.size() - i - 1; j++)
-                        if (dataList.get(j).getCount() < dataList.get(j + 1).getCount()) {
-                            Player temp = dataList.get(j);
-                            dataList.set(j, dataList.get(j + 1));
-                            dataList.set(j + 1, temp);
-                        }
-                break;
-            }
-
-
-        }
-        leaderboardArrayAdapter.notifyDataSetChanged();
-    }
-
-     */
 }
 

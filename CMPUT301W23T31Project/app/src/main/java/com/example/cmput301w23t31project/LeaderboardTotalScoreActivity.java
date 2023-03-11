@@ -22,6 +22,9 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A class that displays a leaderboard of all players in the playerbase
+ */
 public class LeaderboardTotalScoreActivity extends AppCompatActivity implements SearchUserFragment.SearchUserDialogListener{
     private FirebaseFirestore db;
 
@@ -79,7 +82,6 @@ public class LeaderboardTotalScoreActivity extends AppCompatActivity implements 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_leaderboard_total_score);
         Intent intent = getIntent();
-        //dataList = new ArrayList<>();
         highScoreBtn = findViewById(R.id.leaderboard_by_high_score_button);
         countBtn = findViewById(R.id.leaderboard_by_count_button);
         totalScoreBtn = findViewById(R.id.leaderboard_by_total_score_button);
@@ -115,6 +117,10 @@ public class LeaderboardTotalScoreActivity extends AppCompatActivity implements 
         inflater.inflate(R.menu.hamburger_menu,menu);
         return true;
     }
+    /**
+     from the playerinfo collection in the database access the username and fields and display the users in a listview
+     then sort the list and give each player a rank
+     */
     public void CreateLeaderBoard(){
         db = FirebaseFirestore.getInstance();
         db.collection("PlayerInfo").get() .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -131,17 +137,12 @@ public class LeaderboardTotalScoreActivity extends AppCompatActivity implements 
                     for (DocumentSnapshot document : list) {
                         int i = 0;
                         String userName = document.getId();
-                        Log.i("TAG", userName);
-                        //Log.i("TAG", document.getId());
                         int totalScore = Integer.parseInt(document.getString("Total Score"));
                         int totalScans = Integer.parseInt(document.getString("Total Scans"));
                         int highestScoringQR = Integer.parseInt(document.getString("Highest Scoring QR Code"));
                         int lowestScoringQR = Integer.parseInt(document.getString("Lowest Scoring QR Code"));
                         int rank = Integer.parseInt(document.getString("Rank"));
                         dataList.add(i,new Player(userName,totalScans,totalScore,highestScoringQR,lowestScoringQR,rank));
-                        Log.i("Size", Integer.toString(dataList.size()));
-
-                        //Log.i("Size", Integer.toString(dataList.get(0).getTotalScore()));
                         i++;
                     }
                     leaderboardTotalScoreArrayAdapter.notifyDataSetChanged();
@@ -156,6 +157,10 @@ public class LeaderboardTotalScoreActivity extends AppCompatActivity implements 
             int rank;
             rank = 1+i;
             dataList.get(i).setRank(rank);
+            String username = dataList.get(i).getUsername();
+            String TotalRank = String.valueOf(rank);
+            //PlayerScansCollection playerScansCollection = new PlayerScansCollection();
+            //playerScansCollection.addTotalScoreRank(username,TotalRank);
         }
     }
 

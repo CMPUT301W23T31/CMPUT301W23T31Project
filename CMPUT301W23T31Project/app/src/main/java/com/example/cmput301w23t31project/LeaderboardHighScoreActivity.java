@@ -102,6 +102,10 @@ public class LeaderboardHighScoreActivity extends AppCompatActivity  implements 
         inflater.inflate(R.menu.hamburger_menu,menu);
         return true;
     }
+    /**
+     from the playerinfo collection in the database access the username and fields and display the users in a listview
+     then sort the list and give each player a rank
+     */
     public void CreateLeaderBoard(){
         db = FirebaseFirestore.getInstance();
         db.collection("PlayerInfo").get() .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -119,16 +123,12 @@ public class LeaderboardHighScoreActivity extends AppCompatActivity  implements 
                         int i = 0;
                         String userName = document.getId();
                         Log.i("TAG", userName);
-                        //Log.i("TAG", document.getId());
                         int totalScore = Integer.parseInt(document.getString("Total Score"));
                         int totalScans = Integer.parseInt(document.getString("Total Scans"));
                         int highestScoringQR = Integer.parseInt(document.getString("Highest Scoring QR Code"));
                         int lowestScoringQR = Integer.parseInt(document.getString("Lowest Scoring QR Code"));
                         int rank = Integer.parseInt(document.getString("Rank"));
                         dataList.add(i,new Player(userName,totalScans,totalScore,highestScoringQR,lowestScoringQR,rank));
-                        Log.i("Size", Integer.toString(dataList.size()));
-
-                        //Log.i("Size", Integer.toString(dataList.get(0).getTotalScore()));
                         i++;
                     }
                     leaderboardHighScoreArrayAdapter.notifyDataSetChanged();
@@ -188,6 +188,11 @@ public class LeaderboardHighScoreActivity extends AppCompatActivity  implements 
             int rank;
             rank = 1+i;
             dataList.get(i).setRank(rank);
+            String username = dataList.get(i).getUsername();
+            String HighScoreRank = String.valueOf(rank);
+            Log.i("TAG","test");
+            //PlayerScansCollection playerScansCollection = new PlayerScansCollection();
+            //playerScansCollection.addHighScoreRank(username,HighScoreRank);
         }
     }
     public void onClickHighScore(View view){
