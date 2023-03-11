@@ -201,6 +201,7 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
      */
     public void onClickLeaderboard(View view){
         Intent intent = new Intent(this, LeaderboardActivity.class);
+        intent.putExtra("username", username);
         startActivity(intent);
     }
 

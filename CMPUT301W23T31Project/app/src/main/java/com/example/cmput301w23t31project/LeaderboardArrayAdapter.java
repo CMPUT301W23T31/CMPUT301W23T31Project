@@ -17,10 +17,14 @@ import java.util.ArrayList;
 
 public class LeaderboardArrayAdapter extends ArrayAdapter<Player> {
     private Context context;
-    public LeaderboardArrayAdapter (Context context, ArrayList<Player> players){
+    private String Username;
+    public LeaderboardArrayAdapter (Context context, ArrayList<Player> players,String Username){
         super(context,0,players);
         this.context = context;
+        this.Username = Username;
     }
+
+
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -48,6 +52,7 @@ public class LeaderboardArrayAdapter extends ArrayAdapter<Player> {
             public void onClick(View v) {
                 Intent intent = new Intent(context, PlayerProfileActivity.class);
                 intent.putExtra("Player_Data", player);
+                intent.putExtra("currentPlayer",getUsername());
                 context.startActivity(intent);
             }
         });
@@ -55,5 +60,9 @@ public class LeaderboardArrayAdapter extends ArrayAdapter<Player> {
 
         return view;
 
+    }
+
+    public String getUsername() {
+        return Username;
     }
 }

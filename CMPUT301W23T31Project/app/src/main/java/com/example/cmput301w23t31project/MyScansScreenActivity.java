@@ -41,6 +41,7 @@ public class MyScansScreenActivity extends AppCompatActivity implements SearchSc
     ArrayAdapter<QRCode> qrCodeAdapter;
     ArrayList<QRCode> datalist;
     String username;
+    String currentUser;
 
     /**
      * On Create method
@@ -54,14 +55,14 @@ public class MyScansScreenActivity extends AppCompatActivity implements SearchSc
 
         Button searchScan;
         Intent intent = getIntent();
-
         username = intent.getStringExtra("username");
+        currentUser = intent.getStringExtra("currentPlayer");
         searchScan = findViewById(R.id.my_scans_search_scan_button);
         qrcodeList = findViewById(R.id.leaderboard_list);
 
         // setting up listview of scans
         datalist = new ArrayList<>();
-        qrCodeAdapter = new QRCodeArrayAdapter(this, datalist, username);
+        qrCodeAdapter = new QRCodeArrayAdapter(this, datalist, username,currentUser);
         qrcodeList.setAdapter(qrCodeAdapter);
 
         QRPlayerScans playerScans = new QRPlayerScans();
@@ -214,5 +215,9 @@ public class MyScansScreenActivity extends AppCompatActivity implements SearchSc
 
             }
         });
+    }
+    public void setVisibility(String username){
+        //db.collection("PlayerScans").getId()
+
     }
 }

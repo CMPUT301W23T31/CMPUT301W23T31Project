@@ -16,9 +16,11 @@ import java.util.ArrayList;
 
 public class LeaderboardCountArrayAdapter extends ArrayAdapter<Player> {
     private Context context;
-    public LeaderboardCountArrayAdapter (Context context, ArrayList<Player> players){
+    private String currentUser;
+    public LeaderboardCountArrayAdapter (Context context, ArrayList<Player> players,String currentUser){
         super(context,0,players);
         this.context = context;
+        this.currentUser = currentUser;
     }
     @NonNull
     @Override
@@ -48,6 +50,7 @@ public class LeaderboardCountArrayAdapter extends ArrayAdapter<Player> {
             public void onClick(View v) {
                 Intent intent = new Intent(context, PlayerProfileActivity.class);
                 intent.putExtra("Player_Data", player);
+                intent.putExtra("currentPlayer",getUsername());
                 context.startActivity(intent);
             }
         });
@@ -56,5 +59,8 @@ public class LeaderboardCountArrayAdapter extends ArrayAdapter<Player> {
 
         return view;
 
+    }
+    public String getUsername() {
+        return currentUser;
     }
 }

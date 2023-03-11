@@ -27,6 +27,7 @@ public class LeaderboardHighScoreActivity extends AppCompatActivity  implements 
     Button countBtn;
     Button totalScoreBtn;
     Button regionalBtn;
+    private String username;
 
     private ArrayList<Player> dataList;
     private LeaderboardHighScoreArrayAdapter leaderboardHighScoreArrayAdapter;
@@ -42,21 +43,21 @@ public class LeaderboardHighScoreActivity extends AppCompatActivity  implements 
             if(username.trim().equalsIgnoreCase(dataList.get(i).getUsername())){
                 dataList2.add(dataList.get(i));
                 LeaderboardList = findViewById(R.id.leaderboard_list);
-                leaderboardHighScoreArrayAdapter = new LeaderboardHighScoreArrayAdapter(this, dataList2);
+                leaderboardHighScoreArrayAdapter = new LeaderboardHighScoreArrayAdapter(this, dataList2,username);
                 LeaderboardList.setAdapter(leaderboardHighScoreArrayAdapter);
                 c+=1;
             }
             else if(((dataList.get(i).getUsername()).toLowerCase()).startsWith(username.toLowerCase().trim())){
                 dataList2.add(dataList.get(i));
                 LeaderboardList = findViewById(R.id.leaderboard_list);
-                leaderboardHighScoreArrayAdapter = new LeaderboardHighScoreArrayAdapter(this, dataList2);
+                leaderboardHighScoreArrayAdapter = new LeaderboardHighScoreArrayAdapter(this, dataList2,username);
                 LeaderboardList.setAdapter(leaderboardHighScoreArrayAdapter);
                 c += 1;
             }
             else if(((dataList.get(i).getUsername()).toLowerCase()).contains(username.toLowerCase().trim())){
                 dataList2.add(dataList.get(i));
                 LeaderboardList = findViewById(R.id.leaderboard_list);
-                leaderboardHighScoreArrayAdapter = new LeaderboardHighScoreArrayAdapter(this, dataList2);
+                leaderboardHighScoreArrayAdapter = new LeaderboardHighScoreArrayAdapter(this, dataList2,username);
                 LeaderboardList.setAdapter(leaderboardHighScoreArrayAdapter);
                 c += 1;
             }
@@ -72,13 +73,14 @@ public class LeaderboardHighScoreActivity extends AppCompatActivity  implements 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_leaderboard_screen);
         Intent intent = getIntent();
+        username = intent.getStringExtra("username");
         dataList = new ArrayList<>();
         highScoreBtn = findViewById(R.id.leaderboard_by_high_score_button);
         countBtn = findViewById(R.id.leaderboard_by_count_button);
         totalScoreBtn = findViewById(R.id.leaderboard_by_total_score_button);
         regionalBtn = findViewById(R.id.leaderboard_by_regional_button);
         LeaderboardList = findViewById(R.id.leaderboard_list);
-        leaderboardHighScoreArrayAdapter = new LeaderboardHighScoreArrayAdapter(this, dataList);
+        leaderboardHighScoreArrayAdapter = new LeaderboardHighScoreArrayAdapter(this, dataList,username);
         LeaderboardList.setAdapter(leaderboardHighScoreArrayAdapter);
         CreateLeaderBoard();
 
@@ -197,20 +199,20 @@ public class LeaderboardHighScoreActivity extends AppCompatActivity  implements 
     }
     public void onClickHighScore(View view){
         String name = highScoreBtn.getText().toString();
-        //clickSort(name);
         Intent intent = new Intent(this, LeaderboardHighScoreActivity.class);
+        intent.putExtra("username", username);
         startActivity(intent);
     }
     public void onClickCount(View view){
         String name = countBtn.getText().toString();
-        //clickSort(name);
         Intent intent = new Intent(this, LeaderboardCountActivity.class);
+        intent.putExtra("username", username);
         startActivity(intent);
     }
     public void onClickTotalScore(View view){
         String name = totalScoreBtn.getText().toString();
-        //clickSort(name);
         Intent intent = new Intent(this, LeaderboardTotalScoreActivity.class);
+        intent.putExtra("username", username);
         startActivity(intent);
     }
 

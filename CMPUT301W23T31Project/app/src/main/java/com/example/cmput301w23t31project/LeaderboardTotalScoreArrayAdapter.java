@@ -16,9 +16,11 @@ import java.util.ArrayList;
 
 public class LeaderboardTotalScoreArrayAdapter extends ArrayAdapter<Player> {
     private Context context;
-    public LeaderboardTotalScoreArrayAdapter (Context context, ArrayList<Player> players){
+    private String Username;
+    public LeaderboardTotalScoreArrayAdapter (Context context, ArrayList<Player> players,String Username){
         super(context,0,players);
         this.context = context;
+        this.Username = Username;
     }
     @NonNull
     @Override
@@ -48,6 +50,7 @@ public class LeaderboardTotalScoreArrayAdapter extends ArrayAdapter<Player> {
             public void onClick(View v) {
                 Intent intent = new Intent(context, PlayerProfileActivity.class);
                 intent.putExtra("Player_Data", player);
+                intent.putExtra("currentPlayer",getUsername());
                 context.startActivity(intent);
             }
         });
@@ -55,5 +58,8 @@ public class LeaderboardTotalScoreArrayAdapter extends ArrayAdapter<Player> {
 
         return view;
 
+    }
+    public String getUsername() {
+        return Username;
     }
 }
