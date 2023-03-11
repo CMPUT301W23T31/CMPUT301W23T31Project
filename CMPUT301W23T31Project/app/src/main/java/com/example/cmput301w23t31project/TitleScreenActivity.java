@@ -34,16 +34,10 @@ public class TitleScreenActivity extends AppCompatActivity {
                 Intent intent;
                 // Find if the user already has an account. If so, move to home screen
                 for (QueryDocumentSnapshot account : task.getResult()) {
-<<<<<<< HEAD
                     if (Objects.equals(account.getString("DeviceID"),
                             Utilities.getDeviceId(TitleScreenActivity.this))) {
                         intent = new Intent(TitleScreenActivity.
                                 this, MainActivity.class);
-=======
-                    if (Objects.equals(account.getString("DeviceID"), Utilities.getDeviceId(TitleScreenActivity.this))) {
-                        intent = new Intent(TitleScreenActivity.this, MainActivity.class);
-
->>>>>>> b7d276904b7d953f5270d72f38c1b1db70ce465e
                         intent.putExtra("username", "");
                         intent.putExtra("username_present", account.getId());
 
