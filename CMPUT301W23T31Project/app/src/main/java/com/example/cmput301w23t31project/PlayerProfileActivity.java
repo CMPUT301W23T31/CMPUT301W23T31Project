@@ -8,14 +8,26 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+/**
+ * Creates Player Profile Activity
+ */
 public class PlayerProfileActivity extends AppCompatActivity {
 
+    /**
+     * Instantiates layout of screen
+     * @param savedInstanceState previously saves instance state
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player_profile);
     }
 
+    /**
+     * For creating the options menu
+     * @param menu menu to create
+     * @return boolean of whether to display or not
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -23,6 +35,11 @@ public class PlayerProfileActivity extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * Delegates functionality when item is chosen from menu
+     * @param item item chosen from menu
+     * @return boolean on whether to proceed or not
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         switch(item.getItemId()){
