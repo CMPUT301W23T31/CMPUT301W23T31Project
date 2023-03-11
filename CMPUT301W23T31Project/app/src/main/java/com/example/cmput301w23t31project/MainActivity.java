@@ -289,7 +289,7 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
                         gpsTracker.showSettingsAlert();
                     }
                 }else{
-                    new ScanResultsFragment(hash, username, score, false).
+                    new ScanResultsFragment(hash, username, score).
                             show(getSupportFragmentManager(), "SCAN RESULTS");
                 }
 
