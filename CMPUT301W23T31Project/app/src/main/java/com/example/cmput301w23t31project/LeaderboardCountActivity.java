@@ -31,7 +31,7 @@ public class LeaderboardCountActivity extends AppCompatActivity implements Searc
     Button countBtn;
     Button totalScoreBtn;
     Button regionalBtn;
-
+    private String username;
     private ArrayList<Player> dataList;
     private LeaderboardCountArrayAdapter leaderboardCountArrayAdapter;
     private ArrayList<Player> dataList2 = new ArrayList<>();
@@ -46,21 +46,21 @@ public class LeaderboardCountActivity extends AppCompatActivity implements Searc
             if(username.trim().equalsIgnoreCase(dataList.get(i).getUsername())){
                 dataList2.add(dataList.get(i));
                 LeaderboardList = findViewById(R.id.leaderboard_list);
-                leaderboardCountArrayAdapter = new LeaderboardCountArrayAdapter(this, dataList2);
+                leaderboardCountArrayAdapter = new LeaderboardCountArrayAdapter(this, dataList2,username);
                 LeaderboardList.setAdapter(leaderboardCountArrayAdapter);
                 c+=1;
             }
             else if(((dataList.get(i).getUsername()).toLowerCase()).startsWith(username.toLowerCase().trim())){
                 dataList2.add(dataList.get(i));
                 LeaderboardList = findViewById(R.id.leaderboard_list);
-                leaderboardCountArrayAdapter = new LeaderboardCountArrayAdapter(this, dataList2);
+                leaderboardCountArrayAdapter = new LeaderboardCountArrayAdapter(this, dataList2,username);
                 LeaderboardList.setAdapter(leaderboardCountArrayAdapter);
                 c += 1;
             }
             else if(((dataList.get(i).getUsername()).toLowerCase()).contains(username.toLowerCase().trim())){
                 dataList2.add(dataList.get(i));
                 LeaderboardList = findViewById(R.id.leaderboard_list);
-                leaderboardCountArrayAdapter = new LeaderboardCountArrayAdapter(this, dataList2);
+                leaderboardCountArrayAdapter = new LeaderboardCountArrayAdapter(this, dataList2,username);
                 LeaderboardList.setAdapter(leaderboardCountArrayAdapter);
                 c += 1;
             }
@@ -76,13 +76,14 @@ public class LeaderboardCountActivity extends AppCompatActivity implements Searc
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_leaderboard_screen);
         Intent intent = getIntent();
+        username = intent.getStringExtra("username");
         dataList = new ArrayList<>();
         highScoreBtn = findViewById(R.id.leaderboard_by_high_score_button);
         countBtn = findViewById(R.id.leaderboard_by_count_button);
         totalScoreBtn = findViewById(R.id.leaderboard_by_total_score_button);
         regionalBtn = findViewById(R.id.leaderboard_by_regional_button);
         LeaderboardList = findViewById(R.id.leaderboard_list);
-        leaderboardCountArrayAdapter = new LeaderboardCountArrayAdapter(this, dataList);
+        leaderboardCountArrayAdapter = new LeaderboardCountArrayAdapter(this, dataList,username);
         LeaderboardList.setAdapter(leaderboardCountArrayAdapter);
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -207,18 +208,21 @@ public class LeaderboardCountActivity extends AppCompatActivity implements Searc
         String name = highScoreBtn.getText().toString();
         //clickSort(name);
         Intent intent = new Intent(this, LeaderboardHighScoreActivity.class);
+        intent.putExtra("username", username);
         startActivity(intent);
     }
     public void onClickCount(View view){
         String name = countBtn.getText().toString();
         //clickSort(name);
         Intent intent = new Intent(this, LeaderboardCountActivity.class);
+        intent.putExtra("username", username);
         startActivity(intent);
     }
     public void onClickTotalScore(View view){
         String name = totalScoreBtn.getText().toString();
         //clickSort(name);
         Intent intent = new Intent(this, LeaderboardTotalScoreActivity.class);
+        intent.putExtra("username", username);
         startActivity(intent);
     }
 

@@ -32,6 +32,7 @@ public class QRCodeArrayAdapter extends ArrayAdapter<QRCode> {
     private ArrayList<QRCode> QRCodes;
     private Context context;
     private String username;
+    private String currentUser;
     FirebaseFirestore QRdb;
     CollectionReference collection;
 
@@ -40,11 +41,12 @@ public class QRCodeArrayAdapter extends ArrayAdapter<QRCode> {
      * @param context relevant context
      * @param codes QR codes
      */
-    public QRCodeArrayAdapter(Context context, ArrayList<QRCode> codes, String username){
+    public QRCodeArrayAdapter(Context context, ArrayList<QRCode> codes, String username,String currentUser){
         super(context,0, codes);
         this.QRCodes = codes;
         this.context = context;
         this.username = username;
+        this.currentUser = currentUser;
     }
 
     /**
@@ -70,6 +72,9 @@ public class QRCodeArrayAdapter extends ArrayAdapter<QRCode> {
         TextView QRCodeName = view.findViewById(R.id.code_detail_name);
         TextView QRCodePoints = view.findViewById(R.id.code_detail_points);
         ImageView delete = view.findViewById(R.id.delete);
+        if(!isVisibility()){
+            delete.setVisibility(View.GONE);
+        }
         PlayerScansCollection scans = new PlayerScansCollection();
         QRdb = FirebaseFirestore.getInstance();
         String hash = QRCode.getHash();
@@ -99,5 +104,13 @@ public class QRCodeArrayAdapter extends ArrayAdapter<QRCode> {
         });
 
         return view;
+    }
+    public boolean isVisibility(){
+        if(currentUser==username){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 }

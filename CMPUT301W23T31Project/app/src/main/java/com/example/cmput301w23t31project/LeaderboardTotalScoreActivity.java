@@ -32,6 +32,7 @@ public class LeaderboardTotalScoreActivity extends AppCompatActivity implements 
     Button countBtn;
     Button totalScoreBtn;
     Button regionalBtn;
+    private String username;
 
     private ArrayList<Player> dataList = new ArrayList<>();
     private ArrayList<Player> dataList2 = new ArrayList<>();
@@ -52,21 +53,21 @@ public class LeaderboardTotalScoreActivity extends AppCompatActivity implements 
             if (username.trim().equalsIgnoreCase(dataList.get(i).getUsername())) {
                 dataList2.add(dataList.get(i));
                 LeaderboardList = findViewById(R.id.leaderboard_list);
-                leaderboardTotalScoreArrayAdapter = new LeaderboardTotalScoreArrayAdapter(this, dataList2);
+                leaderboardTotalScoreArrayAdapter = new LeaderboardTotalScoreArrayAdapter(this, dataList2,username);
                 LeaderboardList.setAdapter(leaderboardTotalScoreArrayAdapter);
                 c += 1;
             }
             else if(((dataList.get(i).getUsername()).toLowerCase()).startsWith(username.toLowerCase().trim())){
                 dataList2.add(dataList.get(i));
                 LeaderboardList = findViewById(R.id.leaderboard_list);
-                leaderboardTotalScoreArrayAdapter = new LeaderboardTotalScoreArrayAdapter(this, dataList2);
+                leaderboardTotalScoreArrayAdapter = new LeaderboardTotalScoreArrayAdapter(this, dataList2,username);
                 LeaderboardList.setAdapter(leaderboardTotalScoreArrayAdapter);
                 c += 1;
             }
             else if(((dataList.get(i).getUsername()).toLowerCase()).contains(username.toLowerCase().trim())){
                 dataList2.add(dataList.get(i));
                 LeaderboardList = findViewById(R.id.leaderboard_list);
-                leaderboardTotalScoreArrayAdapter = new LeaderboardTotalScoreArrayAdapter(this, dataList2);
+                leaderboardTotalScoreArrayAdapter = new LeaderboardTotalScoreArrayAdapter(this, dataList2,username);
                 LeaderboardList.setAdapter(leaderboardTotalScoreArrayAdapter);
                 c += 1;
             }
@@ -82,12 +83,13 @@ public class LeaderboardTotalScoreActivity extends AppCompatActivity implements 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_leaderboard_total_score);
         Intent intent = getIntent();
+        username = intent.getStringExtra("username");
         highScoreBtn = findViewById(R.id.leaderboard_by_high_score_button);
         countBtn = findViewById(R.id.leaderboard_by_count_button);
         totalScoreBtn = findViewById(R.id.leaderboard_by_total_score_button);
         regionalBtn = findViewById(R.id.leaderboard_by_regional_button);
         LeaderboardList = findViewById(R.id.leaderboard_list);
-        leaderboardTotalScoreArrayAdapter = new LeaderboardTotalScoreArrayAdapter(this, dataList);
+        leaderboardTotalScoreArrayAdapter = new LeaderboardTotalScoreArrayAdapter(this, dataList,username);
         LeaderboardList.setAdapter(leaderboardTotalScoreArrayAdapter);
         PlayerScansCollection playerScansCollection = new PlayerScansCollection();
         playerScansCollection.getPlayerScans();
@@ -213,24 +215,28 @@ public class LeaderboardTotalScoreActivity extends AppCompatActivity implements 
         String name = highScoreBtn.getText().toString();
         //clickSort(name);
         Intent intent = new Intent(this, LeaderboardHighScoreActivity.class);
+        intent.putExtra("username", username);
         startActivity(intent);
     }
     public void onClickCount(View view){
         String name = countBtn.getText().toString();
         //clickSort(name);
         Intent intent = new Intent(this, LeaderboardCountActivity.class);
+        intent.putExtra("username", username);
         startActivity(intent);
     }
     public void onClickTotalScore(View view){
         String name = totalScoreBtn.getText().toString();
         //clickSort(name);
         Intent intent = new Intent(this, LeaderboardTotalScoreActivity.class);
+        intent.putExtra("username", username);
         startActivity(intent);
     }
     public void onClickRegional(View view){
         String name = regionalBtn.getText().toString();
         //clickSort(name);
         //Intent intent = new Intent(this, LeaderboardActivity.class);
+        //intent.putExtra("username", username);
         //startActivity(intent);
     }
     public void sortList() {

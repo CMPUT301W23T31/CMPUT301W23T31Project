@@ -19,8 +19,7 @@ public class SearchScanFragment extends DialogFragment {
 
     /**
      * Implemented by MainActivity
-     * Passes the new GasStationVisit object to the MainActivity to be used in ListView
-     */ //TODO: WHAT...^^^^^^^^^^^
+     */
     public interface OnFragmentInteractionListener{
         void onDisplayOkPressed(String name);
     }
