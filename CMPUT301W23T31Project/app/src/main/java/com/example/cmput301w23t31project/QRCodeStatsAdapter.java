@@ -42,6 +42,7 @@ public class QRCodeStatsAdapter  extends ArrayAdapter<Player> {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(context, PlayerProfileActivity.class);
+                    intent.putExtra("Player_Data", player);
                     context.startActivity(intent);
                 }
             });
