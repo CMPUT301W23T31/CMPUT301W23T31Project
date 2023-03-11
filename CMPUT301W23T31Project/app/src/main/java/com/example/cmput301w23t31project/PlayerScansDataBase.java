@@ -9,6 +9,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+// TODO: Determine if this class is even needed
 public class PlayerScansDataBase {
     FirebaseFirestore playerDB;
     CollectionReference collection;

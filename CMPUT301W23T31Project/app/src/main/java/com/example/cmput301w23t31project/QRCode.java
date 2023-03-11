@@ -1,12 +1,19 @@
 package com.example.cmput301w23t31project;
 
+/**
+ * Represents a single QR Code object
+ */
 public class QRCode {
     private String name;
     private int score;
     private String hash;
 
-    // private QRCodeImage;
-
+    /**
+     * Creates a new instance of a QR code
+     * @param name human-readable name of QR code
+     * @param score QR code's score
+     * @param hash SHA-256 hash of QR code
+     */
     QRCode(String name, int score, String hash) {
         this.name = name;
         this.score = score;
