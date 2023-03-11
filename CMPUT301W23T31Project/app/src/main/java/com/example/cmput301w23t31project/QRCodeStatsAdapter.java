@@ -23,7 +23,7 @@ public class QRCodeStatsAdapter extends ArrayAdapter<Player> {
     /**
      * Instantiates a new adapter
      * @param context relevant context
-     * @param players player profiles to include in comments
+     * @param players player profiles who have scanned QR code
      */
     public QRCodeStatsAdapter (Context context, ArrayList<Player> players){
         super(context,0,players);
@@ -31,11 +31,11 @@ public class QRCodeStatsAdapter extends ArrayAdapter<Player> {
     }
 
     /**
-     * Creates view for Array Adapter to display comments
+     * Creates view for Array Adapter to display player scans
      * @param position position in list to create view for
      * @param convertView view to use
      * @param parent parent ViewGroup to work within
-     * @return view for given comment (in given position)
+     * @return view for given scan (in given position)
      */
     @NonNull
     @Override
