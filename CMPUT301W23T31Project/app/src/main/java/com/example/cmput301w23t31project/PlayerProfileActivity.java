@@ -18,15 +18,17 @@ public class PlayerProfileActivity extends AppCompatActivity {
 
         Player player =  (Player) getIntent().getSerializableExtra("Player_Data");
 
-        TextView PlayerName, PlayerUsername, PlayerScore;
+        TextView PlayerUsername, PlayerScore, PlayerHighestScoringQr, PlayerLowestScoringQr;
 
-        PlayerName = findViewById(R.id.player_name);
-        PlayerUsername = findViewById(R.id.player_username);
-        PlayerScore = findViewById(R.id.player_total_score);
+        PlayerUsername = findViewById(R.id.player_profile_username);
+        PlayerScore = findViewById(R.id.player_profile_total_score);
+        PlayerHighestScoringQr = findViewById(R.id.player_profile_high_score);
+        PlayerLowestScoringQr = findViewById(R.id.player_profile_low_score);
 
-        PlayerName.setText(player.getPlayerName());
         PlayerUsername.setText(player.getUsername());
         PlayerScore.setText(String.valueOf(player.getTotalScore()));
+        PlayerHighestScoringQr.setText(String.valueOf(player.getHighestScoringQR()));
+        PlayerLowestScoringQr.setText(String.valueOf(player.getLowestScoringQR()));
 
     }
 
