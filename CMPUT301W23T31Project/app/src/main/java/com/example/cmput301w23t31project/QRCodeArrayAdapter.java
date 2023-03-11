@@ -15,38 +15,50 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
+/**
+ * Array adapter for QR code visualization in listviews
+ */
 public class QRCodeArrayAdapter extends ArrayAdapter<QRCode> {
-    private ArrayList<QRCode> QRCodes;
-    private Context context;
+    private final ArrayList<QRCode> QRCodes;
+    private final Context context;
 
+    /**
+     * Sets up listview for use
+     * @param context relevant context
+     * @param codes QR codes
+     */
     public QRCodeArrayAdapter(Context context, ArrayList<QRCode> codes){
         super(context,0, codes);
         this.QRCodes = codes;
         this.context = context;
     }
 
+    /**
+     * Gets view (w/ relevant/proper details) for given QR code
+     * @param position position of QR code in list
+     * @param convertView view to use
+     * @param parent parent to fill view with
+     */
     @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup
-            parent) {
+    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         //return super.getView(position, convertView, parent);
 
-        View view = convertView;
-
-        if (view == null) {
+        View view;
+        if (convertView == null) {
             view = LayoutInflater.from(context).inflate(R.layout.content_code_detail, parent, false);
         }
         else {
             view = convertView;
         }
 
-        QRCode qrCode = getItem(position);
+        QRCode QRCode = getItem(position);
         TextView QRCodeName = view.findViewById(R.id.code_detail_name);
         TextView QRCodePoints = view.findViewById(R.id.code_detail_points);
 
-        Log.d(TAG,"ADAPT:"+ qrCode.getName());
-        QRCodeName.setText(qrCode.getName());
-        QRCodePoints.setText("Points: "+Integer. toString(qrCode.getScore()));
+        Log.d(TAG,"ADAPT: " + QRCode.getName());
+        QRCodeName.setText(QRCode.getName());
+        QRCodePoints.setText("Points: " + QRCode.getScore());
 
         return view;
     }
