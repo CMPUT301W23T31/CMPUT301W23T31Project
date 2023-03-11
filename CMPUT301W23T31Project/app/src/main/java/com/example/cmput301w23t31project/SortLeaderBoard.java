@@ -8,8 +8,14 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
+//TODO: DETERMINE IF WE NEED THIS CLASS (CLAIMED TO BE UNUSED)
 public class SortLeaderBoard {
     private FirebaseFirestore db;
+
+    /**
+     * Creates a leaderboard of player profiles that can be sorted on any attribute
+     * @param dataList list to add data-filled players to (to use for leaderboard)
+     */
     public void CreateLeaderBoard(ArrayList<Player> dataList){
         db = FirebaseFirestore.getInstance();
         db.collection("PlayerInfo").get() .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -35,8 +41,10 @@ public class SortLeaderBoard {
                         dataList.add(new Player(userName,totalScans,totalScore,highestScoringQR,lowestScoringQR,rank));
 
                     }
+                }
 
-    }}});
-        }
+            }
+        });
 
+    }
 }
