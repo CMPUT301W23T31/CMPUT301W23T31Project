@@ -19,6 +19,7 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -62,11 +63,10 @@ public class PlayerInfoScreenActivity extends AppCompatActivity {
         low_score = findViewById(R.id.player_info_low_score);
 
         //set total scans
-        PlayerScansCollection scans = new PlayerScansCollection();
-        setTotalScans(scans, player_scans_textview, username);
+        QRPlayerScans playerScans = new QRPlayerScans();
+        setTotalScans(playerScans, player_scans_textview, username);
 
         //set total score
-        QRPlayerScans playerScans = new QRPlayerScans();
         QRCodesCollection QRCodes = new QRCodesCollection();
         setHomeScore(playerScans, score, QRCodes, username);
 
@@ -207,26 +207,17 @@ public class PlayerInfoScreenActivity extends AppCompatActivity {
      * @param player_scans_textview textview to update value of (w/ total number of scans)
      * @param username username of player whose score is being updated
      */
-    public static void setTotalScans(PlayerScansCollection scans, TextView player_scans_textview,  String username) {
-        AtomicInteger total_scans = new AtomicInteger();
-        CollectionReference player_scans = scans.getReference();
-        player_scans.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+    public static void setTotalScans(QRPlayerScans scans, TextView player_scans_textview,  String username) {
+        scans.getReference().get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
-
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document: task.getResult()) {
                         if (document.getId().equals(username)) {
-                            if (document != null) {
-                                Map data = document.getData();
-                                data.entrySet()
-                                        .forEach((entry) ->
-                                                total_scans.addAndGet(Integer.parseInt(entry.toString().split("=")[1])));
-                                player_scans_textview.setText(Integer.toString(total_scans.get()));
-                            }
+                            player_scans_textview.setText(String.format("%d", document.getData().keySet().size()));
+                            return;
                         }
                     }
-
                 }
             }
         });

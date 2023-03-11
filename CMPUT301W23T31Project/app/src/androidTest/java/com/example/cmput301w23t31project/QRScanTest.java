@@ -80,6 +80,7 @@ public class QRScanTest {
         solo.clickOnView(solo.getView(R.id.home_screen_scan_code_button));
 
         // Allow time to scan QR code
+
         solo.waitForActivity("ScanResultsFragment");
         solo.waitForText("SCAN RESULTS", 1, 2000);
         solo.waitForText("ajar tangerine stink", 1, 2000);
@@ -101,5 +102,8 @@ public class QRScanTest {
                 assert found == 1;
             }
         });
+
+
+
     }
 }
