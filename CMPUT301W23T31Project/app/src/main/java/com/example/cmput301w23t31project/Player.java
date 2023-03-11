@@ -1,11 +1,13 @@
 package com.example.cmput301w23t31project;
 
+import java.io.Serializable;
+
 /**
  * Represents a single account of someone using the app (anyone who plays the game)
  * Also stores relevant quick-access stats to improve database efficiency
  *
  */
-public class Player {
+public class Player implements Serializable {
     private String username;
     private String playerName;
 

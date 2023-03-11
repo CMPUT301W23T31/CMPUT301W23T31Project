@@ -60,6 +60,13 @@ public class LeaderboardTotalScoreActivity extends AppCompatActivity implements 
                 LeaderboardList.setAdapter(leaderboardTotalScoreArrayAdapter);
                 c += 1;
             }
+            else if(((dataList.get(i).getUsername()).toLowerCase()).contains(username.toLowerCase().trim())){
+                dataList2.add(dataList.get(i));
+                LeaderboardList = findViewById(R.id.leaderboard_list);
+                leaderboardTotalScoreArrayAdapter = new LeaderboardTotalScoreArrayAdapter(this, dataList2);
+                LeaderboardList.setAdapter(leaderboardTotalScoreArrayAdapter);
+                c += 1;
+            }
         }
         if(c==0)
         {

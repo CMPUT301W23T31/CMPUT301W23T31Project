@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 public class PlayerProfileActivity extends AppCompatActivity {
 
@@ -14,6 +15,19 @@ public class PlayerProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player_profile);
+
+        Player player =  (Player) getIntent().getSerializableExtra("Player_Data");
+
+        TextView PlayerName, PlayerUsername, PlayerScore;
+
+        PlayerName = findViewById(R.id.player_name);
+        PlayerUsername = findViewById(R.id.player_username);
+        PlayerScore = findViewById(R.id.player_total_score);
+
+        PlayerName.setText(player.getPlayerName());
+        PlayerUsername.setText(player.getUsername());
+        PlayerScore.setText(String.valueOf(player.getTotalScore()));
+
     }
 
     @Override
