@@ -3,7 +3,6 @@ package com.example.cmput301w23t31project;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -28,17 +27,23 @@ public class TitleScreenActivity extends AppCompatActivity {
      * Listens for a user tap on the screen and supplies an argument to determine future control flow
      */
     public void onTap(View v){
-
         AccountsCollection accounts = new AccountsCollection();
-        accounts.getReference().get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        accounts.getReference().get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>(){
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 Intent intent;
                 // Find if the user already has an account. If so, move to home screen
                 for (QueryDocumentSnapshot account : task.getResult()) {
+<<<<<<< HEAD
+                    if (Objects.equals(account.getString("DeviceID"),
+                            Utilities.getDeviceId(TitleScreenActivity.this))) {
+                        intent = new Intent(TitleScreenActivity.
+                                this, MainActivity.class);
+=======
                     if (Objects.equals(account.getString("DeviceID"), Utilities.getDeviceId(TitleScreenActivity.this))) {
                         intent = new Intent(TitleScreenActivity.this, MainActivity.class);
 
+>>>>>>> b7d276904b7d953f5270d72f38c1b1db70ce465e
                         intent.putExtra("username", "");
                         intent.putExtra("username_present", account.getId());
 
@@ -55,4 +60,6 @@ public class TitleScreenActivity extends AppCompatActivity {
 
         });
     }
+
+
 }
