@@ -24,6 +24,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldValue;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -63,6 +64,7 @@ public class QRCodeArrayAdapter extends ArrayAdapter<QRCode> {
 
         Log.d(TAG,"ADAPT:"+ qrCode.getName());
         QRCodeName.setText(qrCode.getName());
+        String hash = qrCode.getHash();
         QRCodePoints.setText("Points: "+Integer. toString(qrCode.getScore()));
 
         delete.setOnClickListener(new View.OnClickListener() {
@@ -74,11 +76,11 @@ public class QRCodeArrayAdapter extends ArrayAdapter<QRCode> {
                     //Toast.makeText(MainActivity.this, "deleted", Toast.LENGTH_LONG).show();
                     DocumentReference scan = scans.getReference().document(username);
                     Map<String, Object> updates = new HashMap<>();
-                    updates.put(qrCode.getHash(), FieldValue.delete());
+                    updates.put(hash, FieldValue.delete());
                     scan.update(updates).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
-
+                            Log.i(TAG, "DELETEDDDD"+username);
                         }
                     });
                 }
