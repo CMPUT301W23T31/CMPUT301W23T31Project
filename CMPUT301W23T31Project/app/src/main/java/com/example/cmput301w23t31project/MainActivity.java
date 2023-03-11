@@ -49,6 +49,10 @@ import java.util.Set;
 
 // implements onClickListener for the onclick behaviour of button
 // https://www.youtube.com/watch?v=UIIpCt2S5Ls
+
+/**
+ * Main Activity Class for home screen of app (main menu)
+ */
 public class MainActivity extends AppCompatActivity implements ScanResultsFragment.OnFragmentInteractionListener, AllowLocationFragment.OnFragmentInteractionListener {
     String username;
     TextView score;
@@ -57,16 +61,22 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
     double longitude;
     boolean recordLocation= true;
 
+    /**
+     * On create method
+     * Handles the setup of home screen button and other functionalities
+     * @param savedInstanceState saved instance state from past
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_home_screen);
 
         AccountsCollection collectionReferenceAccount = new AccountsCollection();
-        QRCodesCollection QRcodes = new QRCodesCollection();
+        QRCodesCollection QRCodes = new QRCodesCollection();
         QRPlayerScans playerScans = new QRPlayerScans();
 
         String ID = Utilities.getDeviceId(this);
+
         //get login details
         Intent intent = getIntent();
         score = findViewById(R.id.home_screen_current_points);
@@ -77,22 +87,19 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
             username = intent.getStringExtra("username_present");
         }
 
-        setHomeScore(playerScans, score, QRcodes, username);
+        setHomeScore(playerScans, score, QRCodes, username);
 
         // Reference and initialize the Button and TextViews
         TextView home_screen_username = findViewById(R.id.home_screen_welcome_text);
-
         ImageView scanBtn = findViewById(R.id.home_screen_scan_code_button);
-
         ImageView playerInfoBtn = findViewById(R.id.home_screen_player_info_button);
-
         ImageView exploreBtn = findViewById(R.id.home_screen_explore_button);
-
         ImageView myScanBtn = findViewById(R.id.home_screen_my_scans_button);
 
-        String home_username = "Welcome "+username+"!";
+        String home_username = "Welcome " + username + "!";
         home_screen_username.setText(home_username);
 
+        // fine location access request
         try {
             if (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ) {
                 ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 101);
@@ -101,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
             e.printStackTrace();
         }
 
-
+        // new scan button functionality
         scanBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -123,12 +130,10 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
                 integrator.setCaptureActivity(CaptureActivityPortrait.class);
                 integrator.initiateScan();
                 //permission_asked = false;
-
-                  
             }
         });
 
-
+        // player info button functionality
         playerInfoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -139,6 +144,7 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
             }
         });
 
+        // explore (map) button functionality
         exploreBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -149,6 +155,7 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
             }
         });
 
+        // "my scans" button functionality
         myScanBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -161,22 +168,41 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
 
     }
 
-
+    /**
+     * Handles functionality for App Info button
+     * @param view relevant view
+     */
     public void onClickAppInfo(View view){
         Intent intent = new Intent(this, AppInfoScreenActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * Hamburger menu clicking functionality
+     * @param menu menu to open
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.hamburger_menu,menu);
         return true;
     }
+
+    /**
+     * Functionality for Leaderboard Button click
+     * @param view relevant view
+     */
     public void onClickLeaderboard(View view){
         Intent intent = new Intent(this, LeaderboardActivity.class);
         startActivity(intent);
     }
+
+    /**
+     * Functionality for option menu interaction
+     * @param item item being selected within menu
+     * @return boolean based on whether item is valid or not
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         switch(item.getItemId()){
@@ -223,7 +249,13 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
         }
 
     }
-    
+
+    /**
+     * Used to initiate player when logged in
+     * @param requestCode request code
+     * @param resultCode result code
+     * @param data data
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -271,12 +303,22 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
         }
     }
 
+    /**
+     * When OK is pressed
+     */
     @Override
     public void onOkPressed(){
     }
 
+    /**
+     * Handles the live updates to the home screen score and other details
+     * @param playerScans relevant QRPlayerScans object
+     * @param score textview to put player's score in
+     * @param QRCodes relevant QRCodesCollection
+     * @param username player's username
+     */
     public static void setHomeScore(QRPlayerScans playerScans, TextView score,
-                                    QRCodesCollection QRcodes, String username) {
+                                    QRCodesCollection QRCodes, String username) {
         playerScans.getReference().get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -288,7 +330,7 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
                 }
                 if (codes != null) {
                     Set<String> finalCodes = codes;
-                    QRcodes.getReference().get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    QRCodes.getReference().get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                 int total_score = 0;
@@ -305,6 +347,10 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
         });
     }
 
+    /**
+     * On OK pressed
+     * @param recordLocation boolean of whether location recording is allowed
+     */
     @Override
     public void onOkPressed(boolean recordLocation) {
         this.recordLocation = recordLocation;
