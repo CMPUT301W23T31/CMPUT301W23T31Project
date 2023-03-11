@@ -21,8 +21,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldValue;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -33,6 +35,8 @@ public class QRCodeArrayAdapter extends ArrayAdapter<QRCode> {
     private ArrayList<QRCode> qrCodes;
     private Context context;
     private String username;
+    FirebaseFirestore QRdb;
+    CollectionReference collection;
 
     public QRCodeArrayAdapter(Context context, ArrayList<QRCode> codes, String username){
         super(context,0, codes);
@@ -61,6 +65,7 @@ public class QRCodeArrayAdapter extends ArrayAdapter<QRCode> {
         TextView QRCodePoints = view.findViewById(R.id.code_detail_points);
         ImageView delete = view.findViewById(R.id.delete);
         PlayerScansCollection scans = new PlayerScansCollection();
+        QRdb = FirebaseFirestore.getInstance();
 
         Log.d(TAG,"ADAPT:"+ qrCode.getName());
         QRCodeName.setText(qrCode.getName());
@@ -74,7 +79,7 @@ public class QRCodeArrayAdapter extends ArrayAdapter<QRCode> {
                     qrCodes.remove(position);
                     QRCodeArrayAdapter.this.notifyDataSetChanged();
                     //Toast.makeText(MainActivity.this, "deleted", Toast.LENGTH_LONG).show();
-                    DocumentReference scan = scans.getReference().document(username);
+                    DocumentReference scan = QRdb.collection("PlayerScans").document(username);
                     Map<String, Object> updates = new HashMap<>();
                     updates.put(hash, FieldValue.delete());
                     scan.update(updates).addOnCompleteListener(new OnCompleteListener<Void>() {
