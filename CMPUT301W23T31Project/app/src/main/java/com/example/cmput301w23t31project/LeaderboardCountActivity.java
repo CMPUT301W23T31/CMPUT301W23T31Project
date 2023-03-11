@@ -20,6 +20,9 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
+/**
+ * A class that displays a leaderboard of all players in the playerbase
+ */
 
 public class LeaderboardCountActivity extends AppCompatActivity implements SearchUserFragment.SearchUserDialogListener{
     private FirebaseFirestore db;
@@ -87,13 +90,10 @@ public class LeaderboardCountActivity extends AppCompatActivity implements Searc
             public void run() {
                 CreateLeaderBoard();
             }
-        },250);
+        },3250);
 
         Button searchUser;
-
-
         searchUser = findViewById(R.id.leaderboard_search_user_button);
-
         searchUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,6 +102,10 @@ public class LeaderboardCountActivity extends AppCompatActivity implements Searc
         });
 
     }
+    /**
+     from the playerinfo collection in the database access the username and fields and display the users in a listview
+     then sort the list and give each player a rank
+     */
     public void CreateLeaderBoard(){
         db = FirebaseFirestore.getInstance();
         db.collection("PlayerInfo").get() .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -119,7 +123,6 @@ public class LeaderboardCountActivity extends AppCompatActivity implements Searc
                         int i = 0;
                         String userName = document.getId();
                         Log.i("TAG", userName);
-                        //Log.i("TAG", document.getId());
                         int totalScore = Integer.parseInt(document.getString("Total Score"));
                         int totalScans = Integer.parseInt(document.getString("Total Scans"));
                         int highestScoringQR = Integer.parseInt(document.getString("Highest Scoring QR Code"));
@@ -127,8 +130,6 @@ public class LeaderboardCountActivity extends AppCompatActivity implements Searc
                         int rank = Integer.parseInt(document.getString("Rank"));
                         dataList.add(i,new Player(userName,totalScans,totalScore,highestScoringQR,lowestScoringQR,rank));
                         Log.i("Size", Integer.toString(dataList.size()));
-
-                        //Log.i("Size", Integer.toString(dataList.get(0).getTotalScore()));
                         i++;
                     }
                     leaderboardCountArrayAdapter.notifyDataSetChanged();
@@ -142,6 +143,10 @@ public class LeaderboardCountActivity extends AppCompatActivity implements Searc
                         int rank;
                         rank = 1+i;
                         dataList.get(i).setRank(rank);
+                        String username = dataList.get(i).getUsername();
+                        String CountRank = String.valueOf(rank);
+                        //PlayerScansCollection playerScansCollection = new PlayerScansCollection();
+                        //playerScansCollection.addCountScoreRank(username,CountRank);
                         }
     }
 
