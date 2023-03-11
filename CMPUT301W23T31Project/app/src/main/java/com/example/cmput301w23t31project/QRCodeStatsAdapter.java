@@ -14,41 +14,59 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
-public class QRCodeStatsAdapter  extends ArrayAdapter<Player> {
+/**
+ * Adapter for QR code stats page
+ */
+public class QRCodeStatsAdapter extends ArrayAdapter<Player> {
         private Context context;
-        public QRCodeStatsAdapter (Context context, ArrayList<Player> players){
-            super(context,0,players);
-            this.context = context;
-        }
-        @NonNull
-        @Override
-        public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-            View view;
-            if (convertView == null) {
-                view = LayoutInflater.from(context).inflate(R.layout.content_player_detail, parent, false);
-            } else {
-                view = convertView;
-            }
 
-            Player player = getItem(position);
-            TextView playerName = view.findViewById(R.id.player_detail_username);
-            TextView date = view.findViewById(R.id.player_detail_date);
-            Button profileBtn = view.findViewById(R.id.player_detail_view_profile_button);
-            playerName.setText(player.getPlayerName());
-            date.setText(String.valueOf(player.getTotalScore()));
-            profileBtn.setText("View Profile");
-
-            profileBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(context, PlayerProfileActivity.class);
-                    context.startActivity(intent);
-                }
-            });
-
-
-
-            return view;
-
-        }
+    /**
+     * Instantiates a new adapter
+     * @param context relevant context
+     * @param players player profiles to include in comments
+     */
+    public QRCodeStatsAdapter (Context context, ArrayList<Player> players){
+        super(context,0,players);
+        this.context = context;
     }
+
+    /**
+     * Creates view for Array Adapter to display comments
+     * @param position position in list to create view for
+     * @param convertView view to use
+     * @param parent parent ViewGroup to work within
+     * @return view for given comment (in given position)
+     */
+    @NonNull
+    @Override
+    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+        View view;
+        if (convertView == null) {
+            view = LayoutInflater.from(context).inflate(R.layout.content_player_detail, parent, false);
+        } else {
+            view = convertView;
+        }
+
+        // getting all attributes to update
+        Player player = getItem(position);
+        TextView playerName = view.findViewById(R.id.player_detail_username);
+        TextView date = view.findViewById(R.id.player_detail_date);
+        Button profileBtn = view.findViewById(R.id.player_detail_view_profile_button);
+
+        playerName.setText(player.getPlayerName());
+        date.setText(String.valueOf(player.getTotalScore()));
+        profileBtn.setText("View Profile");
+
+        // functionality for 'view player profile' button
+        profileBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, PlayerProfileActivity.class);
+                context.startActivity(intent);
+            }
+        });
+
+        return view;
+
+    }
+}
