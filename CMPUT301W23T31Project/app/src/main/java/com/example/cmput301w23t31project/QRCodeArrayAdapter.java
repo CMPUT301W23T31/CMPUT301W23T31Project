@@ -3,13 +3,11 @@ package com.example.cmput301w23t31project;
 import static android.content.ContentValues.TAG;
 
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,12 +16,12 @@ import androidx.annotation.Nullable;
 import java.util.ArrayList;
 
 public class QRCodeArrayAdapter extends ArrayAdapter<QRCode> {
-    private ArrayList<QRCode> qrCodes;
+    private ArrayList<QRCode> QRCodes;
     private Context context;
 
     public QRCodeArrayAdapter(Context context, ArrayList<QRCode> codes){
         super(context,0, codes);
-        this.qrCodes = codes;
+        this.QRCodes = codes;
         this.context = context;
     }
 

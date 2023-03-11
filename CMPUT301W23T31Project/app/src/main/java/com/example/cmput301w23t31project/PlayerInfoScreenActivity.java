@@ -9,10 +9,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -21,11 +19,13 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.util.ArrayList;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ * Activity for "Player Info" Screen
+ */
 public class PlayerInfoScreenActivity extends AppCompatActivity {
 
     Button viewScanBtn;
@@ -38,15 +38,21 @@ public class PlayerInfoScreenActivity extends AppCompatActivity {
     String username;
     String password;
 
-
+    /**
+     * On Create method
+     * Sets up button functionality and player stats to display
+     * @param savedInstanceState previously saved instance state
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player_info_screen);
+
         Intent intent = getIntent();
         username = intent.getStringExtra("username");
         password = intent.getStringExtra("password");
 
+        // getting needed attributes
         viewScanBtn = findViewById(R.id.player_info_see_scans_button);
         myAccountBtn = findViewById(R.id.player_info_my_account_button);
         player_info_username = findViewById(R.id.player_info_username);
@@ -55,24 +61,23 @@ public class PlayerInfoScreenActivity extends AppCompatActivity {
         high_score  = findViewById(R.id.player_info_high_score);
         low_score = findViewById(R.id.player_info_low_score);
 
-
         //set total scans
         PlayerScansCollection scans = new PlayerScansCollection();
         setTotalScans(scans, player_scans_textview, username);
 
         //set total score
         QRPlayerScans playerScans = new QRPlayerScans();
-        QRCodesCollection QRcodes = new QRCodesCollection();
-        setHomeScore(playerScans, score, QRcodes, username);
+        QRCodesCollection QRCodes = new QRCodesCollection();
+        setHomeScore(playerScans, score, QRCodes, username);
 
         //set high score
-        setHighScore(playerScans, high_score, QRcodes, username);
-        setLowScore(playerScans, low_score, QRcodes, username);
+        setHighScore(playerScans, high_score, QRCodes, username);
+        setLowScore(playerScans, low_score, QRCodes, username);
 
-
-
-
+        // set player username
         player_info_username.setText(username);
+
+        // 'my scans' button functionality
         viewScanBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,6 +89,7 @@ public class PlayerInfoScreenActivity extends AppCompatActivity {
             }
         });
 
+        // 'my account' button functionality
         myAccountBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,6 +99,12 @@ public class PlayerInfoScreenActivity extends AppCompatActivity {
         });
     }
 
+
+    /**
+     * For creating the options menu
+     * @param menu menu to create
+     * @return boolean of whether to display or not
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -100,6 +112,11 @@ public class PlayerInfoScreenActivity extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * Delegates functionality when item is chosen from menu
+     * @param item item chosen from menu
+     * @return boolean on whether to proceed or not
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         switch(item.getItemId()){
@@ -147,8 +164,15 @@ public class PlayerInfoScreenActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Handles the setting of the player's score (displayed on the home screen)
+     * @param playerScans QRPlayerScans object of player's scans
+     * @param score textview to update value of (w/ user's score)
+     * @param QRCodes QRCodesCollection object of possible QR codes
+     * @param username username of player whose score is being updated
+     */
     public static void setHomeScore(QRPlayerScans playerScans, TextView score,
-                                    QRCodesCollection QRcodes, String username) {
+                                    QRCodesCollection QRCodes, String username) {
         playerScans.getReference().get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -160,7 +184,7 @@ public class PlayerInfoScreenActivity extends AppCompatActivity {
                 }
                 if (codes != null) {
                     Set<String> finalCodes = codes;
-                    QRcodes.getReference().get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    QRCodes.getReference().get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                             int total_score = 0;
@@ -177,7 +201,12 @@ public class PlayerInfoScreenActivity extends AppCompatActivity {
         });
     }
 
-
+    /**
+     * Handles the setting of the player's total number of scans (displayed on the home screen)
+     * @param scans PlayerScansCollection object of the player's scans
+     * @param player_scans_textview textview to update value of (w/ total number of scans)
+     * @param username username of player whose score is being updated
+     */
     public static void setTotalScans(PlayerScansCollection scans, TextView player_scans_textview,  String username) {
         AtomicInteger total_scans = new AtomicInteger();
         CollectionReference player_scans = scans.getReference();
@@ -192,7 +221,7 @@ public class PlayerInfoScreenActivity extends AppCompatActivity {
                                 Map data = document.getData();
                                 data.entrySet()
                                         .forEach((entry) ->
-                                                total_scans.addAndGet(Integer.valueOf(entry.toString().split("=")[1])));
+                                                total_scans.addAndGet(Integer.parseInt(entry.toString().split("=")[1])));
                                 player_scans_textview.setText(Integer.toString(total_scans.get()));
                             }
                         }
@@ -203,8 +232,15 @@ public class PlayerInfoScreenActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Handles the setting of the player's highest score (displayed in profile details)
+     * @param playerScans QRPlayerScans object of player's scans
+     * @param high_score textview to update value of (w/ user's highest score)
+     * @param QRCodes QRCodesCollection object of possible QR codes
+     * @param username username of player whose score is being updated
+     */
     public static void setHighScore(QRPlayerScans playerScans, TextView high_score,
-                                    QRCodesCollection QRcodes, String username) {
+                                    QRCodesCollection QRCodes, String username) {
         playerScans.getReference().get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -216,7 +252,7 @@ public class PlayerInfoScreenActivity extends AppCompatActivity {
                 }
                 if (codes != null) {
                     Set<String> finalCodes = codes;
-                    QRcodes.getReference().get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    QRCodes.getReference().get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                             int max_score = 0;
@@ -235,8 +271,15 @@ public class PlayerInfoScreenActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Handles the setting of the player's lowest score (displayed in profile details)
+     * @param playerScans QRPlayerScans object of player's scans
+     * @param low_score textview to update value of (w/ user's lowest score)
+     * @param QRCodes QRCodesCollection object of possible QR codes
+     * @param username username of player whose score is being updated
+     */
     public static void setLowScore(QRPlayerScans playerScans, TextView low_score,
-                                    QRCodesCollection QRcodes, String username) {
+                                    QRCodesCollection QRCodes, String username) {
         playerScans.getReference().get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -248,7 +291,7 @@ public class PlayerInfoScreenActivity extends AppCompatActivity {
                 }
                 if (codes != null) {
                     Set<String> finalCodes = codes;
-                    QRcodes.getReference().get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    QRCodes.getReference().get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                             int min_score = 1;
