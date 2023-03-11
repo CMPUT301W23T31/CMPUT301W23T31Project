@@ -4,12 +4,10 @@ package com.example.cmput301w23t31project;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import java.util.Objects;
@@ -32,15 +30,15 @@ public class TitleScreenActivity extends AppCompatActivity {
      * future control flow
      */
     public void onTap(View v){
-
         AccountsCollection accounts = new AccountsCollection();
-        accounts.getReference().get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        accounts.getReference().get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>(){
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 Intent intent;
                 // Find if the user already has an account. If so, move to home screen
                 for (QueryDocumentSnapshot account : task.getResult()) {
-                    if (Objects.equals(account.getString("DeviceID"), Utilities.getDeviceId(TitleScreenActivity.this))) {
+                    if (Objects.equals(account.getString("DeviceID"),
+                            Utilities.getDeviceId(TitleScreenActivity.this))) {
                         intent = new Intent(TitleScreenActivity.
                                 this, MainActivity.class);
                         intent.putExtra("username", "");
@@ -58,4 +56,6 @@ public class TitleScreenActivity extends AppCompatActivity {
             }
         });
     }
+
+
 }

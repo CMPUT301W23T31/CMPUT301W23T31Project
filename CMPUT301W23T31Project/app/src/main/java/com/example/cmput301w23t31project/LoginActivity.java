@@ -10,11 +10,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.Objects;
 
 
 /**
@@ -60,6 +63,10 @@ public class LoginActivity extends AppCompatActivity {
      */
     public void loginUser(Task<QuerySnapshot> task) {
         int found = 0;
+        if (username.getText().toString().equals("")) {
+            found = 1;
+            badUsername.setVisibility(View.VISIBLE);
+        }
         // Check if the query contains a document with a matching username
         for (QueryDocumentSnapshot doc : task.getResult()) {
             if (doc.getId().equals(username.getText().toString())) {
@@ -78,5 +85,9 @@ public class LoginActivity extends AppCompatActivity {
             intent.putExtra("phone", phone.getText().toString());
             startActivity(intent);
         }
+    }
+
+    public String getDeviceID() {
+        return Utilities.getDeviceId(this);
     }
 }

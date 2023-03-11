@@ -309,4 +309,5 @@ public class MainActivity extends AppCompatActivity implements ScanResultsFragme
     public void onOkPressed(boolean recordLocation) {
         this.recordLocation = recordLocation;
     }
+
 }

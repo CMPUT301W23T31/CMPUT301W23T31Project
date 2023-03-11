@@ -5,8 +5,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-
 import androidx.appcompat.app.AppCompatActivity;
+
 
 /**
  * This class is for the "App Info" Screen and Menu
@@ -16,7 +16,6 @@ public class AppInfoScreenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_app_info_screen);
-        Intent intent = getIntent();
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
