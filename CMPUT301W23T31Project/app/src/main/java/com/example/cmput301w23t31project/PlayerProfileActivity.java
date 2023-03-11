@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 /**
  * Creates Player Profile Activity
@@ -21,6 +23,33 @@ public class PlayerProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player_profile);
+
+        Player player =  (Player) getIntent().getSerializableExtra("Player_Data");
+
+        TextView PlayerUsername, PlayerScore, PlayerHighestScoringQr, PlayerLowestScoringQr, view_scans;
+
+        PlayerUsername = findViewById(R.id.player_profile_username);
+        PlayerScore = findViewById(R.id.player_profile_total_score);
+        PlayerHighestScoringQr = findViewById(R.id.player_profile_high_score);
+        PlayerLowestScoringQr = findViewById(R.id.player_profile_low_score);
+        view_scans = findViewById(R.id.player_profile_see_scans_button);
+
+        PlayerUsername.setText(player.getUsername());
+        PlayerScore.setText(String.valueOf(player.getTotalScore()));
+        PlayerHighestScoringQr.setText(String.valueOf(player.getHighestScoringQR()));
+        PlayerLowestScoringQr.setText(String.valueOf(player.getLowestScoringQR()));
+
+        view_scans.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //PlayerScansCollection scans = new PlayerScansCollection();
+                //scans.processPlayerScansInDatabase(username);
+                Intent intent = new Intent(PlayerProfileActivity.this, MyScansScreenActivity.class);
+                intent.putExtra("username", player.getUsername());
+                startActivity(intent);
+            }
+        });
+
     }
 
     /**

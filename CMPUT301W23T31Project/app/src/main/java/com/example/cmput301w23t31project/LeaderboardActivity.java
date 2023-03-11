@@ -93,6 +93,7 @@ public class LeaderboardActivity extends AppCompatActivity implements SearchUser
         handler.postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
+
                                     CreateLeaderBoard();
                                 }
                             },250);

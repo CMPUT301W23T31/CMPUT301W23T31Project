@@ -15,11 +15,13 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
@@ -59,7 +61,7 @@ public class MyScansScreenActivity extends AppCompatActivity implements SearchSc
 
         // setting up listview of scans
         datalist = new ArrayList<>();
-        qrCodeAdapter = new QRCodeArrayAdapter(this, datalist);
+        qrCodeAdapter = new QRCodeArrayAdapter(this, datalist, username);
         qrcodeList.setAdapter(qrCodeAdapter);
 
         QRPlayerScans playerScans = new QRPlayerScans();
@@ -85,6 +87,7 @@ public class MyScansScreenActivity extends AppCompatActivity implements SearchSc
                 startActivity(intent);
             }
         });
+
     }
 
     /**

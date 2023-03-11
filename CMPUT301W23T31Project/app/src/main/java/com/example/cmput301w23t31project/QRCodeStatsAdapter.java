@@ -18,7 +18,7 @@ import java.util.ArrayList;
  * Adapter for QR code stats page
  */
 public class QRCodeStatsAdapter extends ArrayAdapter<Player> {
-        private Context context;
+    private Context context;
 
     /**
      * Instantiates a new adapter
