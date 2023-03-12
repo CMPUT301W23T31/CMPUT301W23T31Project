@@ -25,7 +25,7 @@ import java.util.List;
 /**
  * A class that displays a leaderboard of all players in the playerbase
  */
-public class LeaderboardTotalScoreActivity extends AppCompatActivity implements SearchUserFragment.SearchUserDialogListener{
+public class LeaderboardTotalScoreActivity extends HamburgerMenu implements SearchUserFragment.SearchUserDialogListener{
     private FirebaseFirestore db;
 
     Button highScoreBtn;
@@ -168,47 +168,7 @@ public class LeaderboardTotalScoreActivity extends AppCompatActivity implements 
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
-        switch(item.getItemId()){
-            case R.id.item2: {
-                finish();
-                return true;
-            }
-            /*
-            case R.id.item3: {
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
-                return true;
-            }
-            case R.id.item4: {
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
-                return true;
-            }
-            */
-            case R.id.item5: {
-                Intent intent = new Intent(this, LeaderboardActivity.class);
-                startActivity(intent);
-                return true;
-            }
-
-            case R.id.item6: {
-                Intent intent = new Intent(this, PlayerInfoScreenActivity.class);
-                startActivity(intent);
-                return true;
-            }
-            case R.id.item7: {
-                Intent intent = new Intent(this, MyAccountScreenActivity.class);
-                startActivity(intent);
-                return true;
-            }
-            case R.id.item8: {
-                Intent intent = new Intent(this, AppInfoScreenActivity.class);
-                startActivity(intent);
-                return true;
-            }
-            default:
-                return super.onOptionsItemSelected(item);
-        }
+        return useHamburgerMenu(item, username);
 
     }
     public void onClickHighScore(View view){

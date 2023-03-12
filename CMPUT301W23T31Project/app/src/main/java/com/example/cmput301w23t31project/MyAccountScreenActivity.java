@@ -18,6 +18,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.zxing.integration.android.IntentIntegrator;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -26,9 +27,9 @@ import java.io.FileNotFoundException;
 /**
  * Main class for "My Account" screen
  */
-public class MyAccountScreenActivity extends AppCompatActivity {
+public class MyAccountScreenActivity extends HamburgerMenu {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-
+    private String username;
     /**
      * On Create method
      * Sets up button (and other) functionality
@@ -39,14 +40,14 @@ public class MyAccountScreenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_account_screen);
-
+        Intent intent = getIntent();
+        username = intent.getStringExtra("username");
         TextView player_name = findViewById(R.id.account_info_name);
         TextView username = findViewById(R.id.account_info_total_username);
         TextView email = findViewById(R.id.account_info_email);
         TextView phone_number = findViewById(R.id.account_info_phone_number);
 
         db.collection("Accounts").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
@@ -86,48 +87,7 @@ public class MyAccountScreenActivity extends AppCompatActivity {
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
-        switch(item.getItemId()){
-            case R.id.item2: {
-                finish();
-                return true;
-            }
-            /*
-            case R.id.item3: {
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
-                return true;
-            }
-
-            case R.id.item5: {
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
-                return true;
-            }
-
-            */
-            case R.id.item4: {
-                Intent intent = new Intent(this, ExploreScreenActivity.class);
-                startActivity(intent);
-                return true;
-            }
-            case R.id.item6: {
-                Intent intent = new Intent(this, PlayerInfoScreenActivity.class);
-                startActivity(intent);
-                return true;
-            }
-            case R.id.item7: {
-                Intent intent = new Intent(this, MyAccountScreenActivity.class);
-                startActivity(intent);
-                return true;
-            }
-            case R.id.item8: {
-                Intent intent = new Intent(this, AppInfoScreenActivity.class);
-                startActivity(intent);
-                return true;
-            }
-            default:
-                return super.onOptionsItemSelected(item);
-        }
+        return useHamburgerMenu(item, username);
 
     }
 
