@@ -39,6 +39,10 @@ public class QRCodesCollection extends QRDatabase {
                         if (document.getId().equals(hash)) {
                             String timesScanned = String.valueOf(Integer.
                                     parseInt(Objects.requireNonNull(document.getString("TimesScanned"))) + 1);
+                            if(!(Double.valueOf(document.getString("Latitude"))==200)){
+                                codes.document(hash).update("Latitude", latitude);
+                                codes.document(hash).update("Longitude", longitude);
+                            }
                             codes.document(hash).update("TimesScanned", timesScanned);
                             codes.document(hash).update("LastScanned", Utilities.getCurrentDate());
                             return;

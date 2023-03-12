@@ -1,14 +1,19 @@
 package com.example.cmput301w23t31project;
 
+import static android.content.ContentValues.TAG;
+
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -36,21 +41,26 @@ public class ScanResultsFragment extends DialogFragment {
     TextView locationView;
     TextView homeScore;
     String location;
+    Boolean recordlocation;
 
     public String[] QRNameAdjectives = new String[1010];
     public String[] QRNameColors = new String[128];
     public String[] QRNameNouns = new String[2876];
     private boolean impliesScoreChange = false;
 
+    public ToggleButton toggleButton;
+    public TextView stateOnOff;
+
     /**
      * Creates a new 'Scan Results' Fragment from Scan
-     * @param hash scanned QR code hash
-     * @param username username of player who scanned
-     * @param score score of QR code scanned
-     * @param latitude longitude of QR code
+     *
+     * @param hash      scanned QR code hash
+     * @param username  username of player who scanned
+     * @param score     score of QR code scanned
+     * @param latitude  longitude of QR code
      * @param longitude latitude of QR code
      */
-    public ScanResultsFragment(String hash, String username, TextView score, double latitude, double longitude){
+    public ScanResultsFragment(String hash, String username, TextView score, double latitude, double longitude) {
         this.hash = hash;
         this.username = username;
         this.homeScore = score;
@@ -60,11 +70,12 @@ public class ScanResultsFragment extends DialogFragment {
 
     /**
      * Creates a new 'Scan Results' Fragment from Scan (w/ no location given)
-     * @param hash scanned QR code hash
+     *
+     * @param hash     scanned QR code hash
      * @param username username of player who scanned
-     * @param score score of QR code scanned
+     * @param score    score of QR code scanned
      */
-    public ScanResultsFragment(String hash, String username, TextView score){
+    public ScanResultsFragment(String hash, String username, TextView score) {
         this.hash = hash;
         this.username = username;
         this.homeScore = score;
@@ -82,6 +93,7 @@ public class ScanResultsFragment extends DialogFragment {
 
     /**
      * This method checks if user has implemented the required callback listener to the fragment
+     *
      * @param context context information for an OnFragmentInteractionListener class
      */
     @Override
@@ -97,6 +109,7 @@ public class ScanResultsFragment extends DialogFragment {
 
     /**
      * This method displays a pop up dialog fragment and shows the user a QR code name and score
+     *
      * @param savedInstanceState bundle object needed to create a Dialog fragment
      * @return d Dialog fragment displaying a QR code name and score
      */
@@ -123,13 +136,7 @@ public class ScanResultsFragment extends DialogFragment {
         QRCodesCollection codes = new QRCodesCollection();
         QRPlayerScans playerScans = new QRPlayerScans();
 
-        if(Objects.equals(location, "No Location")){
-            codes.processQRCodeInDatabase(name, String.valueOf(score), hash);
-            locationView.setText("No Location");
-        } else {
-            codes.processQRCodeInDatabase(name, String.valueOf(score), hash, latitude, longitude);
-            locationView.setText("L" + latitude + " " + longitude);
-        }
+
         playerScans.processPlayerScanInDatabase(username, hash);
 
 
@@ -138,13 +145,31 @@ public class ScanResultsFragment extends DialogFragment {
         String s = "QR Code Score: " + score;
         scoreView.setText(s);
 
+        toggleButton = (ToggleButton) view.findViewById(R.id.location_button);
+        //stateOnOff=(TextView) view.findViewById(R.id.tvstate);
+        //stateOnOff.setText("OFF");
+        recordlocation = false;
+        toggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    Log.v(TAG, "TOGGLE CHECK TRUE");
+                    recordlocation = true;
+                } else {
+                    Log.v(TAG, "TOGGLE CHECK FALSE");
+                    recordlocation = false;
+                }
+            }
+        });
+
+
 
         // Build dialog fragment
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         return builder
             .setView(view)
             .setTitle("SCAN RESULTS")
-            .setNegativeButton("BACK TO SCANNER", new DialogInterface.OnClickListener() {
+            .setNegativeButton("BACK TO HOME", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     // Head back to main menu and close the dialog fragment
@@ -158,6 +183,17 @@ public class ScanResultsFragment extends DialogFragment {
                 public void onClick(DialogInterface dialogInterface, int i) {
                     listener.onOkPressed();
                     dialogInterface.cancel();
+
+                    if(recordlocation){
+                        codes.processQRCodeInDatabase(name, String.valueOf(score), hash, latitude, longitude);
+                    }else{
+                        latitude = 200;
+                        longitude = 200;
+                        Log.v(TAG, "no location");
+                        codes.processQRCodeInDatabase(name, String.valueOf(score), hash, latitude, longitude);
+                    }
+
+
                     // Send Hash and Device ID to a new fragment that shows QR Code statistics
                     Intent intent = new Intent(getContext(), QRCodeStatsActivity.class);
                     intent.putExtra("Hash", hash);

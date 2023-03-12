@@ -242,23 +242,19 @@ public class MainActivity extends HamburgerMenu implements ScanResultsFragment.O
                 } catch (NoSuchAlgorithmException e) {
                     e.printStackTrace();
                 }
-                //getting location
-                if(recordLocation){
-                    gpsTracker = new GpsTracker(MainActivity.this);
-                    if(gpsTracker.canGetLocation()){
-                        latitude = gpsTracker.getLatitude();
-                        longitude = gpsTracker.getLongitude();
-                        new ScanResultsFragment(hash, username, score, latitude, longitude).
-                                show(getSupportFragmentManager(), "SCAN RESULTS");
-                        Toast.makeText(this, "l"+latitude+longitude, Toast.LENGTH_SHORT)
-                                .show();
-                    }else{
-                        gpsTracker.showSettingsAlert();
-                    }
-                }else{
-                    new ScanResultsFragment(hash, username, score).
+
+                gpsTracker = new GpsTracker(MainActivity.this);
+                if(gpsTracker.canGetLocation()){
+                    latitude = gpsTracker.getLatitude();
+                    longitude = gpsTracker.getLongitude();
+                    new ScanResultsFragment(hash, username, score, latitude, longitude).
                             show(getSupportFragmentManager(), "SCAN RESULTS");
+                    Toast.makeText(this, "l"+latitude+longitude, Toast.LENGTH_SHORT)
+                            .show();
+                }else{
+                    gpsTracker.showSettingsAlert();
                 }
+
 
             }
         } else {
