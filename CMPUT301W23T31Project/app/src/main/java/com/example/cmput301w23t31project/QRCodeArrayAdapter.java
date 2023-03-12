@@ -3,6 +3,7 @@ package com.example.cmput301w23t31project;
 import static android.content.ContentValues.TAG;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -91,25 +92,30 @@ public class QRCodeArrayAdapter extends ArrayAdapter<QRCode> {
         QRCodeName.setText(QRCode.getName());
         QRCodePoints.setText("Points: " + QRCode.getScore());
 
-        delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (QRCodes.size() > 0 && position >= 0) {
-                    QRCodes.remove(position);
-                    QRCodeArrayAdapter.this.notifyDataSetChanged();
-                    //Toast.makeText(MainActivity.this, "deleted", Toast.LENGTH_LONG).show();
-                    DocumentReference scan = QRdb.collection("PlayerScans").document(username);
-                    Map<String, Object> updates = new HashMap<>();
-                    updates.put(hash, FieldValue.delete());
-                    scan.update(updates).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            Log.i(TAG, "DELETEDDDD"+username);
-                        }
-                    });
+        if (!currentUser.equals(username)){
+            delete.setVisibility(View.GONE);
+            Log.i("TAG", currentUser+":crnt   display:"+username);
+        }else {
+            delete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (QRCodes.size() > 0 && position >= 0) {
+                        QRCodes.remove(position);
+                        QRCodeArrayAdapter.this.notifyDataSetChanged();
+                        //Toast.makeText(MainActivity.this, "deleted", Toast.LENGTH_LONG).show();
+                        DocumentReference scan = QRdb.collection("PlayerScans").document(username);
+                        Map<String, Object> updates = new HashMap<>();
+                        updates.put(hash, FieldValue.delete());
+                        scan.update(updates).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                Log.i(TAG, "DELETEDDDD" + username);
+                            }
+                        });
+                    }
                 }
-            }
-        });
+            });
+        }
 
         return view;
     }

@@ -100,6 +100,7 @@ public class PlayerInfoScreenActivity extends HamburgerMenu {
                 //scans.processPlayerScansInDatabase(username);
                 Intent intent = new Intent(PlayerInfoScreenActivity.this, MyScansScreenActivity.class);
                 intent.putExtra("username", username);
+                intent.putExtra("crnt_username", username);
                 startActivity(intent);
             }
         });
