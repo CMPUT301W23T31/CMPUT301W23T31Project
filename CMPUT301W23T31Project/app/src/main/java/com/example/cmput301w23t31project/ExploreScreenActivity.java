@@ -93,7 +93,7 @@ public class ExploreScreenActivity extends HamburgerMenu
                             // our data in a list.
                             List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
                             for (DocumentSnapshot document : list) {
-                                Log.d("TAG",document.getString("Latitude"));
+                                Log.d("TAG",(document.getString("Latitude")).getClass().toString());
                                 if((Double.valueOf(document.getString("Latitude"))==200)){
                                     String coordinates = "No Location";
                                 }else{
