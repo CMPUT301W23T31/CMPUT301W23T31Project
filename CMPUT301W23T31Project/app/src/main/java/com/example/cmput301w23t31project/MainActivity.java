@@ -168,6 +168,7 @@ public class MainActivity extends HamburgerMenu implements ScanResultsFragment.O
                 Intent intent = new Intent(MainActivity.this,
                         MyScansScreenActivity.class);
                 intent.putExtra("username", username);
+                intent.putExtra("crnt_username", username);
                 startActivity(intent);
             }
         });

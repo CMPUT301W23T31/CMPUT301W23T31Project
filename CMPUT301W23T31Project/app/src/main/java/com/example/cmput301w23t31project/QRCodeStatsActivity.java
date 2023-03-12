@@ -69,7 +69,7 @@ public class QRCodeStatsActivity extends AppCompatActivity {
 
         // Setting up listview
         playerList = new ArrayList<>();
-        qrCodeStatsAdapter = new QRCodeStatsAdapter(this, playerList);
+        qrCodeStatsAdapter = new QRCodeStatsAdapter(this, playerList, username);
         datalist.setAdapter(qrCodeStatsAdapter);
         QRCodesCollection qr_codes = new QRCodesCollection();
 

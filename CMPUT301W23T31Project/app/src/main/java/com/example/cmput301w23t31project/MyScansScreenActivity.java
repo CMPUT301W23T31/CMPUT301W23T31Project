@@ -58,8 +58,9 @@ public class MyScansScreenActivity extends HamburgerMenu implements SearchScanFr
 
         Button searchScan;
         Intent intent = getIntent();
-        username = intent.getStringExtra("player");
-        currentUser = intent.getStringExtra("username");
+
+        username = intent.getStringExtra("username");
+        currentUser = intent.getStringExtra("crnt_username");
         searchScan = findViewById(R.id.my_scans_search_scan_button);
         qrcodeList = findViewById(R.id.leaderboard_list);
 

@@ -49,9 +49,8 @@ public class LeaderboardTotalScoreArrayAdapter extends ArrayAdapter<Player> {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, PlayerProfileActivity.class);
-                intent.putExtra("Player_Data", player);
-                intent.putExtra("currentPlayer",getUsername());
-                intent.putExtra("username", Username);
+                intent.putExtra("crnt_username", Username);
+                intent.putExtra("username",player.getUsername());
                 context.startActivity(intent);
             }
         });

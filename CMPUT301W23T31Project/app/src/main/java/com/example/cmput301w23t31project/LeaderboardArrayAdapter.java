@@ -17,11 +17,11 @@ import java.util.ArrayList;
 
 public class LeaderboardArrayAdapter extends ArrayAdapter<Player> {
     private Context context;
-    private String Username;
+    private String username;
     public LeaderboardArrayAdapter (Context context, ArrayList<Player> players,String Username){
         super(context,0,players);
         this.context = context;
-        this.Username = Username;
+        this.username = Username;
     }
 
 
@@ -51,9 +51,9 @@ public class LeaderboardArrayAdapter extends ArrayAdapter<Player> {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, PlayerProfileActivity.class);
-                intent.putExtra("Player_Data", player);
-                intent.putExtra("currentPlayer",getUsername());
-                intent.putExtra("username", Username);
+                intent.putExtra("crnt_username", username);
+                intent.putExtra("username",player.getUsername());
+
                 context.startActivity(intent);
             }
         });
@@ -61,9 +61,5 @@ public class LeaderboardArrayAdapter extends ArrayAdapter<Player> {
 
         return view;
 
-    }
-
-    public String getUsername() {
-        return Username;
     }
 }
