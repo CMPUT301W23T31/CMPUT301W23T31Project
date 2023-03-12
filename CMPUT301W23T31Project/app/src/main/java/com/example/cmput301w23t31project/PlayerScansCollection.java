@@ -233,10 +233,10 @@ public class PlayerScansCollection extends QRDatabase{
                         int min = 0;
                         int numberScore;
                         int count = 0;
-                        String max2 = "";
-                        String min2 = "";
-                        String count2 = "";
-                        String TotalScore = "";
+                        String max2 = "0";
+                        String min2 = "0";
+                        String count2 = "0";
+                        String TotalScore = "0";
                         // after getting the data we are calling on success method
                         // and inside this method we are checking if the received
                         // query snapshot is empty or not.

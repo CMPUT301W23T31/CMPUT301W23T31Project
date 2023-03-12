@@ -20,6 +20,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.robotium.solo.Solo;
 
+import java.util.HashMap;
 import java.util.Objects;
 
 
@@ -81,11 +82,8 @@ public class QRScanTest {
 
         // Allow time to scan QR code
 
-        solo.waitForActivity("ScanResultsFragment");
-        solo.waitForText("SCAN RESULTS", 1, 2000);
-        solo.waitForText("ajar tangerine stink", 1, 2000);
-        solo.waitForText("QR Code Score: 10", 1, 2000);
-        solo.clickLongOnTextAndPress("BACK TO SCANNER", 0);
+        solo.waitForActivity("ScanResultsFragment", 5);
+        solo.clickLongOnTextAndPress("BACK TO HOME", 0);
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
 
         qrCodes = new QRCodesCollection();
@@ -96,14 +94,13 @@ public class QRScanTest {
                 for (QueryDocumentSnapshot code : task.getResult()) {
                     if (Objects.equals(code.getId(),
                             "b138867051e7f22a7e1d4befdb1875beb17e28c6464afbdab7532dc7292f7489")) {
+                        code.getReference().update("Latitude", "0");
+                        code.getReference().update("Longitude", "0");
                         found = 1;
                     }
                 }
                 assert found == 1;
             }
         });
-
-
-
     }
 }

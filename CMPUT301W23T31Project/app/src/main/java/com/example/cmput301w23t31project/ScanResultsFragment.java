@@ -174,6 +174,7 @@ public class ScanResultsFragment extends DialogFragment {
                 public void onClick(DialogInterface dialogInterface, int i) {
                     // Head back to main menu and close the dialog fragment
                     dialogInterface.cancel();
+                    codes.processQRCodeInDatabase(name, String.valueOf(score), hash, latitude, longitude);
                     MainActivity.setHomeScore(new QRPlayerScans(), homeScore, new QRCodesCollection(), username);
 
                 }
