@@ -1,6 +1,8 @@
 package com.example.cmput301w23t31project;
 
 
+import static android.content.ContentValues.TAG;
+
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -11,18 +13,23 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.SetOptions;
 
+import java.util.HashMap;
 import java.util.List;
 
 import java.util.ArrayList;
-
+import java.util.Map;
 
 
 /**
@@ -36,6 +43,7 @@ public class QRCodeStatsActivity extends AppCompatActivity {
     TextView likesView;
     TextView date;
     TextView scanned;
+    TextView dislikesView;
     Button gotoComments;
     String hash;
 
@@ -145,7 +153,8 @@ public class QRCodeStatsActivity extends AppCompatActivity {
                                     String coordinates = document.getString("Latitude") + ", " + document.getString("Longitude");
                                     String likes = document.getString("Likes") + " / " + document.getString("Dislikes");
                                     coordinatesView.setText(coordinates);
-                                    likesView.setText(likes);}}
+                                    likesView.setText(likes);
+                                    }}
 
             date.setText(document.getString("LastScanned"));
             scanned.setText(document.getString("TimesScanned"));
@@ -191,6 +200,69 @@ public class QRCodeStatsActivity extends AppCompatActivity {
                     }
                 });
     }
+    public void onLike(View view){
+        db = FirebaseFirestore.getInstance();
+        db.collection("QRCodes").get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        // after getting the data we are calling on success method
+                        // and inside this method we are checking if the received
+                        // query snapshot is empty or not.
+                        if (!queryDocumentSnapshots.isEmpty()) {
+                            // if the snapshot is not empty we are
+                            // hiding our progress bar and adding
+                            // our data in a list.
+                            for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                                if(document.getId().equals(hash)){
+                                    //String likes = (document.get("likes").toString());
+                                    String numberOfLikes = document.getString("Likes");
+                                    String numberOfDislikes = document.getString("Dislikes");
+                                    int likes1 = Integer.parseInt(numberOfLikes);
+                                    int likes2 = likes1 +1;
+                                    //int dislikes = Integer.parseInt(numberOfDislikes) - 1;
+                                    TextView LikesText = findViewById(R.id.qr_code_stats_code_likes_dislikes);
+                                    String likesStr = (likes2 + " / " + numberOfDislikes);
+                                    LikesText.setText(likesStr);
+                                    //document.getData().put("Likes",likes2);TextView LikesText = findViewById(R.id.qr_code_stats_code_likes_dislikes);
+                                }
+
+                            }
+                        }}});
+
+    }
+    public void onDislike(View view) {
+        TextView LikesText = findViewById(R.id.qr_code_stats_code_likes_dislikes);
+        TextView DisLikesText = findViewById(R.id.qr_code_stats_code_likes_dislikes);
+        String numberOfLikes = LikesText.toString();
+        String[] numberOfLikes2 = numberOfLikes.split("/");
+        String numberOfDislikes = DisLikesText.toString();
+        int likes1 = Integer.parseInt(numberOfLikes2[0]);
+        int likes2 = likes1 + 1;
+        //int dislikes = Integer.parseInt(numberOfDislikes) - 1;
+        String likesStr = (likes2 + " / " + numberOfDislikes);
+        LikesText.setText(likesStr);
+        //DocumentReference scan = QRdb.collection("PlayerInfo").document(username);
+        Map<String, Object> m = new HashMap<>();
+        db = FirebaseFirestore.getInstance();
+        m.put("Likes", likes2);
+        Log.i("TAG", String.valueOf(likes2));
+        db.collection("QRcodes").document(hash)
+                .set(m, SetOptions.merge())
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot successfully written!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error writing document", e);
+                    }
+                });
+    }
+
 
 
 }
