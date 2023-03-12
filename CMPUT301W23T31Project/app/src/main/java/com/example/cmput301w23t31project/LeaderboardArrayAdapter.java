@@ -53,6 +53,7 @@ public class LeaderboardArrayAdapter extends ArrayAdapter<Player> {
                 Intent intent = new Intent(context, PlayerProfileActivity.class);
                 intent.putExtra("crnt_username", username);
                 intent.putExtra("username",player.getUsername());
+
                 context.startActivity(intent);
             }
         });

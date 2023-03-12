@@ -100,8 +100,7 @@ public class PlayerProfileActivity extends HamburgerMenu {
                 Intent intent = new Intent(PlayerProfileActivity.this, MyScansScreenActivity.class);
                 intent.putExtra("username", username);
                 intent.putExtra("crnt_username", crnt_username);
-                //intent.putExtra("username",)
-                //intent.putExtra("currentUsername",username);
+
                 startActivity(intent);
             }
         });

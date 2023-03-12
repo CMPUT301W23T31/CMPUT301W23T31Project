@@ -29,6 +29,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import org.checkerframework.checker.units.qual.A;
+
 import java.util.ArrayList;
 import java.util.Set;
 
@@ -41,6 +43,7 @@ public class MyScansScreenActivity extends HamburgerMenu implements SearchScanFr
     ArrayAdapter<QRCode> qrCodeAdapter;
     ArrayList<QRCode> datalist;
     String username;
+    String player;
     String currentUser;
 
     /**
@@ -55,6 +58,7 @@ public class MyScansScreenActivity extends HamburgerMenu implements SearchScanFr
 
         Button searchScan;
         Intent intent = getIntent();
+
         username = intent.getStringExtra("username");
         currentUser = intent.getStringExtra("crnt_username");
         searchScan = findViewById(R.id.my_scans_search_scan_button);
@@ -110,7 +114,7 @@ public class MyScansScreenActivity extends HamburgerMenu implements SearchScanFr
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        return useHamburgerMenu(item, username);
+        return useHamburgerMenu(item, currentUser);
 
     }
 

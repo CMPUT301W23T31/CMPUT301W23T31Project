@@ -70,7 +70,8 @@ public class MainActivity extends HamburgerMenu implements ScanResultsFragment.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_home_screen);
-
+        Intent intent = getIntent();
+        username = intent.getStringExtra("username");
         AccountsCollection collectionReferenceAccount = new AccountsCollection();
         QRCodesCollection QRCodes = new QRCodesCollection();
         QRPlayerScans playerScans = new QRPlayerScans();
@@ -84,13 +85,12 @@ public class MainActivity extends HamburgerMenu implements ScanResultsFragment.O
         String ID = Utilities.getDeviceId(this);
 
         //get login details
-        Intent intent = getIntent();
+
         score = findViewById(R.id.home_screen_current_points);
-        username = intent.getStringExtra("username");
-        if (!username.equals("")) {
+        if (intent.hasExtra("path")) {
             collectionReferenceAccount.addAccountToCollection(username, intent, ID);
         } else {
-            username = intent.getStringExtra("username_present");
+            username = intent.getStringExtra("username");
         }
 
         setHomeScore(playerScans, score, QRCodes, username);
@@ -181,6 +181,7 @@ public class MainActivity extends HamburgerMenu implements ScanResultsFragment.O
      */
     public void onClickAppInfo(View view){
         Intent intent = new Intent(this, AppInfoScreenActivity.class);
+        intent.putExtra("username", username);
         startActivity(intent);
     }
 
