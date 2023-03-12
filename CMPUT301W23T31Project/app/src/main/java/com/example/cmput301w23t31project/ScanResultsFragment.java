@@ -174,6 +174,7 @@ public class ScanResultsFragment extends DialogFragment {
                 public void onClick(DialogInterface dialogInterface, int i) {
                     // Head back to main menu and close the dialog fragment
 
+
                     if(recordlocation){
                         codes.processQRCodeInDatabase(name, String.valueOf(score), hash, latitude, longitude);
                     }else{
@@ -182,6 +183,7 @@ public class ScanResultsFragment extends DialogFragment {
                         Log.v(TAG, "no location");
                         codes.processQRCodeInDatabase(name, String.valueOf(score), hash, latitude, longitude);
                     }
+
                     MainActivity.setHomeScore(new QRPlayerScans(), homeScore, new QRCodesCollection(), username);
                     dialogInterface.cancel();
 
