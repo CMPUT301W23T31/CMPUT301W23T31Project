@@ -103,13 +103,13 @@ public class QRCodeStatsActivity extends AppCompatActivity {
         dislikebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                HitLikeDislike(0);
+                HitLikeDislike(1);
             }
         });
         likebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                HitLikeDislike(1);
+                HitLikeDislike(0);
             }
         });
 
@@ -233,24 +233,22 @@ public class QRCodeStatsActivity extends AppCompatActivity {
 
 
         switch (number){
-            case 0:{
-                int dislikes1 = Integer.valueOf(DisLikesFinished);
-                int dislikes2 = dislikes1 + 1;
-                String likesStr = (LikesFinished + " / " + DisLikesFinished);
-                LikesDislikesText.setText(likesStr);
-                String dislikes = String.valueOf(dislikes2);
-                m.put("Dislikes", dislikes);
-                setStats(hash);
-                break;
-            }
-            case 1: {
+            case 0: {
                 int likes1 = Integer.valueOf(LikesFinished);
                 int likes2 = likes1 + 1;
                 String likesStr = (LikesFinished + " / " + DisLikesFinished);
                 LikesDislikesText.setText(likesStr);
                 String likes = String.valueOf(likes2);
                 m.put("Likes", likes);
-                setStats(hash);
+                break;
+            }
+            case 1:{
+                int dislikes1 = Integer.valueOf(DisLikesFinished);
+                int dislikes2 = dislikes1 + 1;
+                String likesStr = (LikesFinished + " / " + DisLikesFinished);
+                LikesDislikesText.setText(likesStr);
+                String dislikes = String.valueOf(dislikes2);
+                m.put("Dislikes", dislikes);
                 break;
             }
 
@@ -260,7 +258,7 @@ public class QRCodeStatsActivity extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        //  setStats(hash);
+                        setStats(hash);
                         Log.d(TAG, "DocumentSnapshot successfully written!");
                     }
                 })
