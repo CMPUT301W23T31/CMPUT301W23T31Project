@@ -168,8 +168,8 @@ public class LeaderboardTotalScoreActivity extends HamburgerMenu implements Sear
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
-        return useHamburgerMenu(item, username);
 
+        return useHamburgerMenu(item, username);
     }
     public void onClickHighScore(View view){
         String name = highScoreBtn.getText().toString();

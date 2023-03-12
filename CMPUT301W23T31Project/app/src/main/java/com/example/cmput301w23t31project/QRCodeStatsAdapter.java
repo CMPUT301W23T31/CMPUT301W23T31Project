@@ -54,7 +54,7 @@ public class QRCodeStatsAdapter extends ArrayAdapter<Player> implements Serializ
         TextView date = view.findViewById(R.id.player_detail_date);
         Button profileBtn = view.findViewById(R.id.player_detail_view_profile_button);
 
-        playerName.setText(player.getPlayerName());
+        playerName.setText(player.getUsername());
         date.setText(String.valueOf(player.getTotalScore()));
         profileBtn.setText("View Profile");
 

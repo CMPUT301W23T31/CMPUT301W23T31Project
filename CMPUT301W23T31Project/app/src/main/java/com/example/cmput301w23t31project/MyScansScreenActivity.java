@@ -175,8 +175,5 @@ public class MyScansScreenActivity extends HamburgerMenu implements SearchScanFr
             }
         });
     }
-    public void setVisibility(String username){
-        //db.collection("PlayerScans").getId()
 
-    }
 }
