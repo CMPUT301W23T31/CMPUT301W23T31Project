@@ -13,16 +13,21 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -72,9 +77,12 @@ public class QRCodeArrayAdapter extends ArrayAdapter<QRCode> {
         TextView QRCodeName = view.findViewById(R.id.code_detail_name);
         TextView QRCodePoints = view.findViewById(R.id.code_detail_points);
         ImageView delete = view.findViewById(R.id.delete);
-        if(!isVisibility()){
-            delete.setVisibility(View.GONE);
-        }
+        //if(!isVisibility()){
+        //    delete.setVisibility(View.GONE);
+        //}
+        //else{
+        //    delete.setVisibility(View.VISIBLE);
+        //}
         PlayerScansCollection scans = new PlayerScansCollection();
         QRdb = FirebaseFirestore.getInstance();
         String hash = QRCode.getHash();
@@ -105,12 +113,27 @@ public class QRCodeArrayAdapter extends ArrayAdapter<QRCode> {
 
         return view;
     }
-    public boolean isVisibility(){
-        if(currentUser==username){
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
+//    public boolean isVisibility(){
+//        Utilities utilities = new Utilities();
+//
+//        QRdb = FirebaseFirestore.getInstance();
+//        QRdb.collection("Accounts").get() .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+//            @Override
+//            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+//                // after getting the data we are calling on success method
+//                // and inside this method we are checking if the received
+//                // query snapshot is empty or not.
+//                if (!queryDocumentSnapshots.isEmpty()) {
+//                    // if the snapshot is not empty we are
+//                    // hiding our progress bar and adding
+//                    // our data in a list.
+//                    List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+//                    for (DocumentSnapshot document : list) {
+//                        if(document.getId().equals(username));
+//                    }
+//
+//        }
+//    }});
+//
+//    }
 }

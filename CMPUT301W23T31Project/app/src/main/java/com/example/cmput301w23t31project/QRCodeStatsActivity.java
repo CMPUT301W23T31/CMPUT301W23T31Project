@@ -4,6 +4,7 @@ package com.example.cmput301w23t31project;
 import android.content.Intent;
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.View;
 
 import android.widget.Button;
@@ -92,7 +93,7 @@ public class QRCodeStatsActivity extends AppCompatActivity {
         ///
         //Toast.makeText(getApplicationContext(),"hashstats: "+hash,Toast.LENGTH_SHORT).show();
         db = FirebaseFirestore.getInstance();
-        db.collection("QRCodes").get()
+        db.collection("PlayerScans").get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                       @Override
                       public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -105,35 +106,51 @@ public class QRCodeStatsActivity extends AppCompatActivity {
                               // our data in a list.
                               List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
                               for (DocumentSnapshot document : list) {
-                                  if(document.getId().equals(hash)){
-                                        setStats(document);}
+                                  if(document.getData().containsKey(hash)){
+                                      setList(document.getId());
+                                      setStats(hash);}
+
                               }
                           }
                       }
                 });
-        setList(username);
+        //setList(username);
     }
 
     /**
      * Updates all text fields about all QR code stats
-     * @param document DocumentSnapshot object containing all needed information
+     * @param hash DocumentSnapshot object containing all needed information
      */
-    public void setStats(DocumentSnapshot document) {
+    public void setStats(String hash) {
+        db = FirebaseFirestore.getInstance();
+        db.collection("QRCodes").get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        // after getting the data we are calling on success method
+                        // and inside this method we are checking if the received
+                        // query snapshot is empty or not.
+                        if (!queryDocumentSnapshots.isEmpty()) {
+                            // if the snapshot is not empty we are
+                            // hiding our progress bar and adding
+                            // our data in a list.
+                            List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+                            for (DocumentSnapshot document : list) {
+                                // Adding the required statistics to the text fields
+                                if (document != null) {
+                                    if(document.getId().equals(hash)){
+                                    nameView.setText(document.getString("Name"));
+                                    scoreView.setText(document.getString("Score"));
 
-        // Adding the required statistics to the text fields
-        if (document != null) {
-            nameView.setText(document.getString("Name"));
-            scoreView.setText(document.getString("Score"));
-
-            String coordinates = document.getString("Latitude") + ", " + document.getString("Longitude");
-            String likes = document.getString("Likes") + " / " + document.getString("Dislikes");
-            coordinatesView.setText(coordinates);
-            likesView.setText(likes);
+                                    String coordinates = document.getString("Latitude") + ", " + document.getString("Longitude");
+                                    String likes = document.getString("Likes") + " / " + document.getString("Dislikes");
+                                    coordinatesView.setText(coordinates);
+                                    likesView.setText(likes);}}
 
             date.setText(document.getString("LastScanned"));
             scanned.setText(document.getString("TimesScanned"));
         }
-    }
+    }}});}
 
     /**
      * sets and updates relevant listview for given QR code
@@ -155,6 +172,7 @@ public class QRCodeStatsActivity extends AppCompatActivity {
                             //List<DocumentSnapshot> list = ;
                             for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
                                 if(document.getId().equals(username)){
+                                    Log.i("TAG","TESTING SCAN");
                                     int score = 0;
                                     if(!scoreView.getText().toString().equals("")){
                                         score = Integer.parseInt(scoreView.getText().toString());
