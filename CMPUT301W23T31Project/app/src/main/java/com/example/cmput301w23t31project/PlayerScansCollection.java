@@ -61,6 +61,7 @@ public class PlayerScansCollection extends QRDatabase{
         PlayerInfo.put("Total Score", SumScore);
         PlayerInfo.put("Total Scans", count);
         PlayerInfo.put("Lowest Scoring QR Code", min);
+        Log.i("FAG",min);
         PlayerInfo.put("Highest Scoring QR Code", max);
         PlayerInfo.put("Rank",rank);
         //PlayerInfo.put("field test",temp);
@@ -249,6 +250,7 @@ public class PlayerScansCollection extends QRDatabase{
 
                                     if(QRHash.contains(document.getId())){
                                         numberScore = Integer.parseInt(document.getString("Score"));
+                                        Log.i("Score",document.getString("Score"));
                                         sumScore = sumScore + numberScore;
                                         if(min == 0){
                                             min = numberScore;
