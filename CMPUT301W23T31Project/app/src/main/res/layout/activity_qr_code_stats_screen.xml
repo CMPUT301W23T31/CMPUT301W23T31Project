@@ -165,7 +165,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Dislike"
-                android:onClick="onDislike"/>
+                android:clickable="true"/>
 
         </LinearLayout>
 
