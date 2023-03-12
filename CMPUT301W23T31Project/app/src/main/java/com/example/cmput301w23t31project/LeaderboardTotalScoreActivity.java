@@ -170,6 +170,7 @@ public class LeaderboardTotalScoreActivity extends AppCompatActivity implements 
     public boolean onOptionsItemSelected(MenuItem item){
         switch(item.getItemId()){
             case R.id.item2: {
+
                 finish();
                 return true;
             }

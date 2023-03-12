@@ -216,8 +216,5 @@ public class MyScansScreenActivity extends AppCompatActivity implements SearchSc
             }
         });
     }
-    public void setVisibility(String username){
-        //db.collection("PlayerScans").getId()
 
-    }
 }

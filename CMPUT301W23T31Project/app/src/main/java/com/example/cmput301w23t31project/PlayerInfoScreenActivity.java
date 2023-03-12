@@ -14,11 +14,15 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
@@ -29,10 +33,14 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class PlayerInfoScreenActivity extends AppCompatActivity {
 
+    private FirebaseFirestore db;
+
     Button viewScanBtn;
     ImageButton myAccountBtn;
     TextView player_info_username;
     TextView player_scans_textview;
+    TextView playerTotalScoreRank;
+    TextView playerHighScoreRank;
     TextView high_score;
     TextView low_score;
     TextView score;
@@ -73,6 +81,9 @@ public class PlayerInfoScreenActivity extends AppCompatActivity {
         //set high score
         setHighScore(playerScans, high_score, QRCodes, username);
         setLowScore(playerScans, low_score, QRCodes, username);
+
+        //set ranks
+        setRank();
 
         // set player username
         player_info_username.setText(username);
@@ -305,4 +316,28 @@ public class PlayerInfoScreenActivity extends AppCompatActivity {
             }
         });
     }
+    public void setRank(){
+        playerHighScoreRank = findViewById(R.id.player_info_rank_by_unique_score);
+        playerTotalScoreRank = findViewById(R.id.player_info_rank_by_total_score);
+        db = FirebaseFirestore.getInstance();
+        db.collection("PlayerInfo").get() .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                // after getting the data we are calling on success method
+                // and inside this method we are checking if the received
+                // query snapshot is empty or not.
+                if (!queryDocumentSnapshots.isEmpty()) {
+                    // if the snapshot is not empty we are
+                    // hiding our progress bar and adding
+                    // our data in a list.
+                    List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+                    for (DocumentSnapshot document : list) {
+                        if(document.getId().equals(username)){
+                            playerHighScoreRank.setText(document.get("High Score Rank").toString());
+                            playerTotalScoreRank.setText(document.get("Total Score Rank").toString());
+                        }
+
+                    }
+                }
+            }});}
 }
