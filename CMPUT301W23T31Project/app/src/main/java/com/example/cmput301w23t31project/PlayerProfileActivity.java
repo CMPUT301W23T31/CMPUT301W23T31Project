@@ -31,7 +31,7 @@ public class PlayerProfileActivity extends HamburgerMenu {
     TextView playerTotalScoreRank;
     TextView playerHighScoreRank;
     TextView PlayerHighestScoringQr;
-    String username;
+
 
     /**
      * Instantiates layout of screen
