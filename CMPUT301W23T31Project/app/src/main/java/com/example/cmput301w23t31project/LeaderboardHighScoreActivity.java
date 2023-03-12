@@ -20,7 +20,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LeaderboardHighScoreActivity extends AppCompatActivity  implements SearchUserFragment.SearchUserDialogListener{
+public class LeaderboardHighScoreActivity extends HamburgerMenu implements SearchUserFragment.SearchUserDialogListener{
     private FirebaseFirestore db;
 
     Button highScoreBtn;
@@ -141,48 +141,7 @@ public class LeaderboardHighScoreActivity extends AppCompatActivity  implements 
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
-        switch(item.getItemId()){
-            case R.id.item2: {
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
-                return true;
-            }
-            /*
-            case R.id.item3: {
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
-                return true;
-            }
-            case R.id.item4: {
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
-                return true;
-            }
-            case R.id.item5: {
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
-                return true;
-            }
-            */
-            case R.id.item5: {
-                Intent intent = new Intent(this, LeaderboardActivity.class);
-                startActivity(intent);
-                return true;
-            }
-
-            case R.id.item6: {
-                Intent intent = new Intent(this, PlayerInfoScreenActivity.class);
-                startActivity(intent);
-                return true;
-            }
-            case R.id.item8: {
-                Intent intent = new Intent(this, AppInfoScreenActivity.class);
-                startActivity(intent);
-                return true;
-            }
-            default:
-                return super.onOptionsItemSelected(item);
-        }
+        return useHamburgerMenu(item, username);
 
     }
     public void giveRank(){

@@ -7,15 +7,20 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.zxing.integration.android.IntentIntegrator;
+
 
 /**
  * This class is for the "App Info" Screen and Menu
  * Screen is fairly static, so functions are limited
  */
-public class AppInfoScreenActivity extends AppCompatActivity {
+public class AppInfoScreenActivity extends HamburgerMenu {
+    private String username;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_app_info_screen);
+        Intent intent = getIntent();
+        username = intent.getStringExtra("username");
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -26,56 +31,7 @@ public class AppInfoScreenActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
-        switch(item.getItemId()){
-            case R.id.item2: {
-                finish();
-                return true;
-            }
-            /*
-            case R.id.item3: {
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
-                return true;
-            }
-
-            case R.id.item5: {
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
-                return true;
-            }
-
-
-             */
-            case R.id.item5: {
-                Intent intent = new Intent(this, LeaderboardActivity.class);
-                startActivity(intent);
-                return true;
-            }
-
-            case R.id.item4: {
-                Intent intent = new Intent(this, ExploreScreenActivity.class);
-                startActivity(intent);
-                return true;
-            }
-            case R.id.item6: {
-                Intent intent = new Intent(this, PlayerInfoScreenActivity.class);
-                startActivity(intent);
-                return true;
-            }
-            case R.id.item7: {
-                Intent intent = new Intent(this, MyAccountScreenActivity.class);
-                startActivity(intent);
-                return true;
-            }
-
-            case R.id.item8: {
-                Intent intent = new Intent(this, AppInfoScreenActivity.class);
-                startActivity(intent);
-                return true;
-            }
-            default:
-                return super.onOptionsItemSelected(item);
-        }
+        return useHamburgerMenu(item, username);
 
     }
 }
