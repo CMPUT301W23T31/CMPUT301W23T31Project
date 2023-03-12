@@ -6,6 +6,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
@@ -14,6 +15,8 @@ import androidx.fragment.app.DialogFragment;
 public class AddCommentFragment extends DialogFragment {
     private OnFragmentInteractionListener listener;
     public String hash;
+    Button add;
+    Button cancel;
     public interface OnFragmentInteractionListener{
         //Implemented by MainActivity, passes the new GasStationVisit object to the MainActivity to be used in ListView
         void onDisplayOkPressed(String commentText, String hash);
@@ -38,14 +41,32 @@ public class AddCommentFragment extends DialogFragment {
     public Dialog onCreateDialog(@NonNull Bundle savedInstanceState){
         View view = getLayoutInflater().inflate(R.layout.fragment_add_comment, null);
         EditText comment = view.findViewById(R.id.add_comment);
+        add = view.findViewById(R.id._add_button);
+        cancel = view.findViewById(R.id.comments_cancel_button);
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        return builder
+        Dialog built = builder
                 .setView(view)
                 .setTitle("Add Comment")
-                .setNegativeButton("Cancel",null)
-                .setPositiveButton("Add",((dialog, which) -> {
-                    String commentText = comment.getText().toString();
-                    listener.onDisplayOkPressed(commentText, hash);}))
                 .create();
+        cancel.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                built.dismiss();
+            }
+
+    });
+
+        add.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                String commentText = comment.getText().toString();
+                listener.onDisplayOkPressed(commentText, hash);
+                built.dismiss();
+            }
+
+        });
+        return built;
     }
 }
