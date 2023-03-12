@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -92,8 +93,14 @@ public class ExploreScreenActivity extends HamburgerMenu
                             // our data in a list.
                             List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
                             for (DocumentSnapshot document : list) {
-                                LatLng location = new LatLng(Double.valueOf(document.getString("Latitude")),Double.valueOf(document.getString("Longitude")));
-                                googleMap.addMarker(new MarkerOptions().position(location).title(document.getString("Name")));
+                                Log.d("TAG",document.getString("Latitude"));
+                                if((Double.valueOf(document.getString("Latitude"))==200)){
+                                    String coordinates = "No Location";
+                                }else{
+
+                                    LatLng location = new LatLng(Double.valueOf(document.getString("Latitude")),Double.valueOf(document.getString("Longitude")));
+                                    googleMap.addMarker(new MarkerOptions().position(location).title(document.getString("Name")));
+                                }
                             }
                         }
                     }

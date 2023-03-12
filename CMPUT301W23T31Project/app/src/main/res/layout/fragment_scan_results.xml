@@ -12,14 +12,29 @@
         android:hint="Results Score"
         android:textSize="20sp"
         android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/scan_results_location"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Results Location"
-        android:textSize="20sp"
-        android:textStyle="bold"/>
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/scan_results_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Record Location?"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <ToggleButton
+            android:id="@+id/location_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Record Location?"></ToggleButton>
+    </LinearLayout>
+
+
+
 
     <TextView
         android:id="@+id/scan_results_data"

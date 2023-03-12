@@ -38,7 +38,7 @@ public class QRCodeStatsActivity extends AppCompatActivity {
     TextView scanned;
     Button gotoComments;
     String hash;
-
+    String coordinates;
     private ArrayList<Player> playerList;
     private QRCodeStatsAdapter qrCodeStatsAdapter;
     String username;
@@ -141,8 +141,11 @@ public class QRCodeStatsActivity extends AppCompatActivity {
                                     if(document.getId().equals(hash)){
                                     nameView.setText(document.getString("Name"));
                                     scoreView.setText(document.getString("Score"));
-
-                                    String coordinates = document.getString("Latitude") + ", " + document.getString("Longitude");
+                                    if((Double.valueOf(document.getString("Latitude"))==200)){
+                                        coordinates = "No Location";
+                                    }else{
+                                        coordinates = document.getString("Latitude") + ", " + document.getString("Longitude");
+                                    }
                                     String likes = document.getString("Likes") + " / " + document.getString("Dislikes");
                                     coordinatesView.setText(coordinates);
                                     likesView.setText(likes);}}
