@@ -91,7 +91,7 @@ public class LeaderboardCountActivity extends HamburgerMenu implements SearchUse
             public void run() {
                 CreateLeaderBoard();
             }
-        },3250);
+        },250);
 
         Button searchUser;
         searchUser = findViewById(R.id.leaderboard_search_user_button);
