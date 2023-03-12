@@ -51,6 +51,7 @@ public class LeaderboardHighScoreArrayAdapter extends ArrayAdapter<Player> {
                 Intent intent = new Intent(context, PlayerProfileActivity.class);
                 intent.putExtra("Player_Data", player);
                 intent.putExtra("currentPlayer",getUsername());
+                intent.putExtra("username", Username);
                 context.startActivity(intent);
             }
         });
