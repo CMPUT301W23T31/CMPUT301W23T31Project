@@ -109,6 +109,8 @@ public class PlayerInfoScreenActivity extends HamburgerMenu {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(PlayerInfoScreenActivity.this, MyAccountScreenActivity.class);
+                intent.putExtra("player", username);
+                intent.putExtra("username", username);
                 startActivity(intent);
             }
         });

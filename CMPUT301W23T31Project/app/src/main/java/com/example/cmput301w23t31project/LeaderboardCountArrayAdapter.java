@@ -51,6 +51,7 @@ public class LeaderboardCountArrayAdapter extends ArrayAdapter<Player> {
                 Intent intent = new Intent(context, PlayerProfileActivity.class);
                 intent.putExtra("Player_Data", player);
                 intent.putExtra("currentPlayer",getUsername());
+                intent.putExtra("username", currentUser);
                 context.startActivity(intent);
             }
         });

@@ -38,8 +38,7 @@ public class TitleScreenActivity extends AppCompatActivity {
                             Utilities.getDeviceId(TitleScreenActivity.this))) {
                         intent = new Intent(TitleScreenActivity.
                                 this, MainActivity.class);
-                        intent.putExtra("username", "");
-                        intent.putExtra("username_present", account.getId());
+                        intent.putExtra("username", account.getId());
 
                         startActivity(intent);
                         return;
