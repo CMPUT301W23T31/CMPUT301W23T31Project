@@ -111,7 +111,7 @@ public class QRCodeStatsActivity extends AppCompatActivity {
                           }
                       }
                 });
-        setList(hash);
+        setList(username);
     }
 
     /**
@@ -137,11 +137,11 @@ public class QRCodeStatsActivity extends AppCompatActivity {
 
     /**
      * sets and updates relevant listview for given QR code
-     * @param hash relevant QR code's identifying hash
+     * @param username relevant QR code's identifying username
      */
-    public void setList(String hash){
+    public void setList(String username){
         db = FirebaseFirestore.getInstance();
-        db.collection("PlayerScans").get()
+        db.collection("PlayerInfo").get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -154,12 +154,18 @@ public class QRCodeStatsActivity extends AppCompatActivity {
                             // our data in a list.
                             //List<DocumentSnapshot> list = ;
                             for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
-                                if(document.getData().containsKey(hash)){
-                                    int score =0;
+                                if(document.getId().equals(username)){
+                                    int score = 0;
                                     if(!scoreView.getText().toString().equals("")){
                                         score = Integer.parseInt(scoreView.getText().toString());
                                     }
-                                    playerList.add(new Player(document.getId(),document.getId(),1,score));
+                                    int totalScore = Integer.parseInt(document.getString("Total Score"));
+                                    int totalScans = Integer.parseInt(document.getString("Total Scans"));
+                                    int highestScoringQR = Integer.parseInt(document.getString("Highest Scoring QR Code"));
+                                    int lowestScoringQR = Integer.parseInt(document.getString("Lowest Scoring QR Code"));
+                                    int rank = Integer.parseInt(document.getString("Rank"));
+                                    playerList.add(new Player(document.getId(), totalScans,
+                                            totalScore, highestScoringQR, lowestScoringQR, rank));
                                 }
                             }
                             qrCodeStatsAdapter.notifyDataSetChanged();

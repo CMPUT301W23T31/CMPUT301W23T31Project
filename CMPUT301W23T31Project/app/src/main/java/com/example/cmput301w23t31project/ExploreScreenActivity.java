@@ -205,4 +205,8 @@ public class ExploreScreenActivity extends AppCompatActivity
         // (the camera animates to the user's current position).
         return false;
     }
+
+    public int[] getScreenDimensions() {
+        return new int[]{getResources().getDisplayMetrics().heightPixels, getResources().getDisplayMetrics().widthPixels};
+    }
 }

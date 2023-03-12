@@ -12,12 +12,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.io.Serializable;
 import java.util.ArrayList;
-
+// https://stackoverflow.com/questions/2736389/how-to-pass-an-object-from-one-activity-to-another-on-android
 /**
  * Adapter for QR code stats page
  */
-public class QRCodeStatsAdapter extends ArrayAdapter<Player> {
+public class QRCodeStatsAdapter extends ArrayAdapter<Player> implements Serializable {
     private Context context;
 
     /**
@@ -62,6 +63,7 @@ public class QRCodeStatsAdapter extends ArrayAdapter<Player> {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, PlayerProfileActivity.class);
+                intent.putExtra("Player_Data", player);
                 context.startActivity(intent);
             }
         });
