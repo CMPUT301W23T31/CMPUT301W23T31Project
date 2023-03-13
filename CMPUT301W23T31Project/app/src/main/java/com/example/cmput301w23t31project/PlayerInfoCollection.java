@@ -10,7 +10,6 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -23,12 +22,11 @@ import java.util.HashMap;
 import java.util.List;
 
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * Class that stores a collection of a Player's Scans
  */
-public class PlayerScansCollection extends QRDatabase{
+public class PlayerInfoCollection extends QRDatabase{
     private FirebaseFirestore db;
 
     private ArrayList<Player> HighScoreDataList = new ArrayList<>();
@@ -39,7 +37,7 @@ public class PlayerScansCollection extends QRDatabase{
     //HashMap<String, String> PlayerInfo = new HashMap<>();
 
 
-    public PlayerScansCollection() {
+    public PlayerInfoCollection() {
         super("PlayerInfo");
     }
 

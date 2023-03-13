@@ -117,6 +117,7 @@ public class ExploreScreenActivity extends HamburgerMenu
                                 if (document.getString("Name").equals(codeName)) {
                                     String hash_return =  document.getId();
                                     Intent intent = new Intent(ExploreScreenActivity.this, QRCodeStatsActivity.class);
+                                    Log.i("TAG", hash_return+"  "+username);
                                     intent.putExtra("Hash", hash_return);
                                     intent.putExtra("username", username);
                                     startActivity(intent);

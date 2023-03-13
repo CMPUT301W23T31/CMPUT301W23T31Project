@@ -135,10 +135,7 @@ public class ScanResultsFragment extends DialogFragment {
         // Get access to the database
         QRCodesCollection codes = new QRCodesCollection();
         QRPlayerScans playerScans = new QRPlayerScans();
-
-
         playerScans.processPlayerScanInDatabase(username, hash);
-
 
         // Set the fragment screens to display the name and score of the scanned QR code
         resultView.setText(name);
