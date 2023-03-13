@@ -1,6 +1,7 @@
 package com.example.cmput301w23t31project;
 
-
+// https://stackoverflow.com/questions/2736389/how-to-pass-an-object-from-one-activity-to-another-on-android
+// https://stackoverflow.com/questions/4743116/get-screen-width-and-height-in-android
 // References
 // 1. https://www.geeksforgeeks.org/how-to-read-qr-code-using-zxing-library-in-android/
 // 2. https://www.baeldung.com/sha-256-hashing-java
@@ -16,9 +17,7 @@ import android.content.ContextWrapper;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.provider.Settings;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -28,10 +27,8 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
 
 
 /**
@@ -210,5 +207,4 @@ public class Utilities {
         }
         return "";
     }
-
 }
