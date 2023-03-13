@@ -1,30 +1,26 @@
 package com.example.cmput301w23t31project;
 
 import android.app.Activity;
-import android.util.Log;
-import android.widget.EditText;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.emulators.EmulatedServiceSettings;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.robotium.solo.Solo;
 
-import java.util.HashMap;
 import java.util.Objects;
 
 
-public class QRScanTest {
+public class AaQRScanTest {
     private Solo solo;
 
 

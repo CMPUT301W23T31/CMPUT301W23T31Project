@@ -2,14 +2,12 @@ package com.example.cmput301w23t31project;
 
 
 import android.app.Activity;
-import android.util.Log;
 import android.widget.EditText;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
 
