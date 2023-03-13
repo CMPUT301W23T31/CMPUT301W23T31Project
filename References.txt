@@ -1,0 +1,123 @@
+LIST OF REFERENCES
+
+Here is a list of references assisting in the completion of our project.
+
+Link: https://stackoverflow.com/questions/2736389/how-to-pass-an-object-from-one-activity-to-another-on-android
+Author: Samuh, edited by GeneCode
+Date: Apr 29, 2010; edited Apr 3, 2022
+License: https://creativecommons.org/licenses/by-sa/4.0/
+Purpose: To help us pass an object in between activities (used in QRCodeStatsArrayAdapter)
+
+
+Link: https://stackoverflow.com/questions/4743116/get-screen-width-and-height-in-android
+Author: RelativeGames
+Date: Jun 2, 2021
+License: https://creativecommons.org/licenses/by-sa/4.0/
+Purpose: To learn how to access the size of the window of the phone to assist in testing the map markers
+
+
+Link: https://firebase.google.com/docs/firestore/manage-data/add-data
+Author: Unknown
+Date: Last updated Mar 10, 2023
+License: https://creativecommons.org/licenses/by/4.0/
+Purpose: To learn how to add data to the database in a variety of ways in our code. Appears all over the program
+
+
+Link: https://www.geeksforgeeks.org/how-to-read-qr-code-using-zxing-library-in-android/
+Author: ankur035
+Date: Last updated Jan 15, 2021
+License: https://creativecommons.org/licenses/by-sa/4.0/
+Purpose: To help us set up the scanner in our program to scan QR codes. Also assists in getting the scan results
+as a String. Used in MainActivity
+
+
+Link: https://www.baeldung.com/sha-256-hashing-java
+Author: baeldung
+Date: Last modified Feb 28, 2022
+License: https://opensource.org/license/mit/
+Purpose: Provides a SHA-256 hashing algorithm for us to provide unique QR code identifiers. We took bytesToHex function and
+the guide for MessageDigest use
+
+
+Link: https://www.youtube.com/watch?v=UIIpCt2S5Ls
+Author: DevNami
+Date: Nov 4, 2016
+License: Not Stated
+Purpose: Learned how to read a textfile into Java from this link. Appears in Utilities
+
+
+Link: https://www.geeksforgeeks.org/different-ways-reading-text-file-java/
+Author: GeeksForGeeks
+Date: Dec 20, 2021
+License: https://creativecommons.org/licenses/by-sa/4.0/
+Purpose: Provided ideas to read in text files
+
+
+Link: https://stackoverflow.com/questions/17674634/saving-and-reading-bitmaps-images-from-internal-memory-in-android/35827955#35827955
+Author: Brijesh Thakur
+Date: Jul 16, 2013
+License: https://creativecommons.org/licenses/by-sa/3.0/
+Purpose: To learn how to load and save images in/out of the phones internal memory
+
+
+Link: https://stackoverflow.com/questions/3879992/how-to-get-bitmap-from-an-uri
+Author: Ahmed Sayed
+Date: Aug 2, 2018
+License: https://creativecommons.org/licenses/by-sa/4.0/
+Purpose: To learn how to access a image from a uri and put it in a Bitmap object
+
+
+Link: https://stackoverflow.com/questions/9107900/how-to-upload-image-from-gallery-in-android
+Author: Dhruv Gairola
+Date: Feb 2, 2012
+License: https://creativecommons.org/licenses/by-sa/3.0/
+Purpose: To help with accessing the phones photo gallery to provide a profile photo
+MainActivity, FinishLoginActivity, ScanResultsFragment
+
+Link: https://stackoverflow.com/questions/2785485/is-there-a-unique-android-device-id
+Author: Anthony Forloney
+Date: May 7, 2010
+License: https://creativecommons.org/licenses/by-sa/2.5/
+Purpose: To learn how to access the device ID
+
+
+Link: https://firebase.google.com/docs/firestore/query-data/queries
+Author: Unknown
+Date: Last updated Mar 10, 2023
+License: https://creativecommons.org/licenses/by/4.0/
+Purpose: To learn how to query the database. We used many of these functions
+
+
+Link: https://stackoverflow.com/questions/40268446/junit-5-how-to-assert-an-exception-is-thrown
+Author: Eight users of StackOverflow
+Date: Last edited Dec 9, 2022
+License: https://creativecommons.org/licenses/by-sa/3.0/
+Purpose: To learn how to use assertThrows so we can test exceptions
+
+
+Link: https://www.youtube.com/watch?v=oh4YOj9VkVE
+Author: Coding In Flow
+Date: Oct 12, 2017
+License: Not Stated
+Purpose: To set up the hamburger menu. We followed this tutorial
+
+
+Link: https://www.geeksforgeeks.org/how-to-add-dynamic-markers-in-google-maps-with-firebase-firstore/?ref=lbp
+Author: chaitanyamunje
+Date: Last modified Dec 22, 2022
+License: https://creativecommons.org/licenses/by-sa/4.0/
+Purpose: To learn how to integrate markers on the maps and how to add them using Firestore
+
+
+Link: https://developers.google.com/maps/documentation/android-sdk/map#view_the_code
+Author: Unknown
+Date: Unknown
+License: Unknown
+Purpose: To learn how to add a map view to the project
+
+
+Link: https://www.javatpoint.com/java-get-current-date
+Author: Unknown
+Date: Unknown
+License: Unknown
+Purpose: To learn how to retrieve the current date in yyyy-MM-dd format
