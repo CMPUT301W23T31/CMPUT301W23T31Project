@@ -1,21 +1,13 @@
 package com.example.cmput301w23t31project;
 
+
 import android.content.Intent;
-import android.util.Log;
-
-import androidx.annotation.NonNull;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-
 import java.util.HashMap;
-import java.util.Objects;
 
+
+/**
+ * This class handles accounts in the database in the program
+ */
 public class AccountsCollection extends QRDatabase {
 
     public AccountsCollection() {

@@ -1,5 +1,6 @@
 package com.example.cmput301w23t31project;
 
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +11,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import java.util.Objects;
+
 
 /**
  * Responsible for displaying the title screen to the user

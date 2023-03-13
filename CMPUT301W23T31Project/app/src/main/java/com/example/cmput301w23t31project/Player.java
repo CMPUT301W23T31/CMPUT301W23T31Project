@@ -1,6 +1,8 @@
 package com.example.cmput301w23t31project;
 
+
 import java.io.Serializable;
+
 
 /**
  * Represents a single account of someone using the app (anyone who plays the game)

@@ -1,4 +1,8 @@
 package com.example.cmput301w23t31project;
+// NOTICE:
+// For the LeaderBoard...Activity classes that inherit this,
+// the method functionality is very similar
+
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,10 +25,11 @@ import com.google.zxing.integration.android.IntentIntegrator;
 
 import java.util.ArrayList;
 import java.util.List;
-/**
- * A class that displays a leaderboard of all players in the playerbase
- */
 
+
+/**
+ * A class that displays a leaderboard of all players in the player database
+ */
 public class LeaderboardActivity extends HamburgerMenu implements SearchUserFragment.SearchUserDialogListener{
     private FirebaseFirestore db;
 
@@ -44,7 +49,11 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
     }
 
 
-
+    /**
+     * This method gets the search results and displays the results, if there are any
+     * @param username
+     *      The searched username
+     */
     @Override
     public void searchUser(String username){
         int l = dataList.size();
@@ -122,8 +131,10 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
         inflater.inflate(R.menu.hamburger_menu,menu);
         return true;
     }
+
     /**
-     from the playerinfo collection in the database access the username and fields and display the users in a listview
+     * from the playerinfo collection in the database access the username and
+     * fields and display the users in a listview
      */
     public void CreateLeaderBoard(){
         db = FirebaseFirestore.getInstance();
@@ -161,24 +172,44 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
         return useHamburgerMenu(item, username);
 
     }
+
+    /**
+     * This method allows user to shift to LeaderboardHighScoreActivity
+     * @param view
+     *      A view needed to change intents
+     */
     public void onClickHighScore(View view){
         String name = highScoreBtn.getText().toString();
         Intent intent = new Intent(this, LeaderboardHighScoreActivity.class);
         intent.putExtra("username", username);
         startActivity(intent);
     }
+
+    /**
+     * This method allows user to shift to LeaderboardCountActivity
+     * @param view
+     *      A view needed to change intents
+     */
     public void onClickCount(View view){
         String name = countBtn.getText().toString();
         Intent intent = new Intent(this, LeaderboardCountActivity.class);
         intent.putExtra("username", username);
         startActivity(intent);
     }
+
+    /**
+     * This method allows user to shift to LeaderboardTotalScoreActivity
+     * @param view
+     *      A view needed to change intents
+     */
     public void onClickTotalScore(View view){
         String name = totalScoreBtn.getText().toString();
         Intent intent = new Intent(this, LeaderboardTotalScoreActivity.class);
         intent.putExtra("username", username);
         startActivity(intent);
     }
+
+
     public void onClickRegional(View view){
         String name = regionalBtn.getText().toString();
         //intent.putExtra("username", username);
