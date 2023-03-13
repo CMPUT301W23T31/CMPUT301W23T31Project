@@ -65,6 +65,7 @@ public class wipeAccountsTest {
         playerScans.getReference().document("NewTestName").delete();
         info.getReference().document("NewTestName").delete();
 
+
     }
 
     /**
