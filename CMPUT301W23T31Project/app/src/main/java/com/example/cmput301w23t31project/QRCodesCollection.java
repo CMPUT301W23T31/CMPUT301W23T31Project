@@ -2,6 +2,7 @@ package com.example.cmput301w23t31project;
 
 import android.util.Log;
 
+
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -12,6 +13,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.HashMap;
 import java.util.Objects;
+
 
 /**
  * Organizes a collection of QR codes

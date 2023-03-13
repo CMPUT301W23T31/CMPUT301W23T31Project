@@ -36,6 +36,11 @@ public class LeaderboardCountActivity extends HamburgerMenu implements SearchUse
     private LeaderboardCountArrayAdapter leaderboardCountArrayAdapter;
     private ArrayList<Player> dataList2 = new ArrayList<>();
 
+    /**
+     * This method gets the search results and displays the results, if there are any
+     * @param username
+     *      The searched username
+     */
     @Override
     public void searchUser(String username){
         int l = dataList.size();
@@ -163,6 +168,12 @@ public class LeaderboardCountActivity extends HamburgerMenu implements SearchUse
         return useHamburgerMenu(item, username);
 
     }
+
+    /**
+     * This method allows user to shift to LeaderboardHighScoreActivity
+     * @param view
+     *      A view needed to change intents
+     */
     public void onClickHighScore(View view){
         String name = highScoreBtn.getText().toString();
         //clickSort(name);
@@ -170,6 +181,12 @@ public class LeaderboardCountActivity extends HamburgerMenu implements SearchUse
         intent.putExtra("username", username);
         startActivity(intent);
     }
+
+    /**
+     * This method allows user to shift to LeaderboardCountActivity
+     * @param view
+     *      A view needed to change intents
+     */
     public void onClickCount(View view){
         String name = countBtn.getText().toString();
         //clickSort(name);
@@ -177,6 +194,12 @@ public class LeaderboardCountActivity extends HamburgerMenu implements SearchUse
         intent.putExtra("username", username);
         startActivity(intent);
     }
+
+    /**
+     * This method allows user to shift to LeaderboardTotalActivity
+     * @param view
+     *      A view needed to change intents
+     */
     public void onClickTotalScore(View view){
         String name = totalScoreBtn.getText().toString();
         //clickSort(name);

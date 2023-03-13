@@ -49,7 +49,7 @@ public class QRCodeStatsActivity extends AppCompatActivity {
     Button dislikebtn;
     Button likebtn;
     String coordinates;
-    private ArrayList<Player> playerList;
+    ArrayList<Player> playerList;
     private QRCodeStatsAdapter qrCodeStatsAdapter;
     String username;
     ListView datalist;
@@ -233,14 +233,14 @@ public class QRCodeStatsActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         TextView LikesDislikesText = findViewById(R.id.qr_code_stats_code_likes_dislikes);
         String numberOfLikes = LikesDislikesText.getText().toString();
-        String likesStr = "";
+        String likesStr = "0";
         String LikesFinished = processString(numberOfLikes,number);
         String DisLikesFinished = processString(numberOfLikes,number);
 
 
         switch (number){
             case 0: {
-                int likes1 = Integer.valueOf(LikesFinished);
+                int likes1 = Integer.parseInt(LikesFinished);
                 int likes2 = likes1 + 1;
                 likesStr = (LikesFinished + " / " + DisLikesFinished);
                 String likes = String.valueOf(likes2);
@@ -248,7 +248,7 @@ public class QRCodeStatsActivity extends AppCompatActivity {
                 break;
             }
             case 1:{
-                int dislikes1 = Integer.valueOf(DisLikesFinished);
+                int dislikes1 = Integer.parseInt(DisLikesFinished);
                 int dislikes2 = dislikes1 + 1;
                 likesStr = (LikesFinished + " / " + DisLikesFinished);
                 String dislikes = String.valueOf(dislikes2);
@@ -275,8 +275,8 @@ public class QRCodeStatsActivity extends AppCompatActivity {
                 });
     }
     public String processString(String string,int number) {
-        String LikesFinished = "";
-        String DisLikesFinished ="";
+        String LikesFinished = "0";
+        String DisLikesFinished ="0";
         switch (number) {
             case 0:{
                 String[] numberOflikesArr = string.split("/");

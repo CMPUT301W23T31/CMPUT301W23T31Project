@@ -23,6 +23,7 @@ import java.util.List;
 
 import java.util.Map;
 
+
 /**
  * Class that stores a collection of a Player's Scans
  */
@@ -59,7 +60,7 @@ public class PlayerInfoCollection extends QRDatabase{
         PlayerInfo.put("Total Score", SumScore);
         PlayerInfo.put("Total Scans", count);
         PlayerInfo.put("Lowest Scoring QR Code", min);
-        Log.i("FAG",min);
+        Log.i("TAG",min);
         PlayerInfo.put("Highest Scoring QR Code", max);
         PlayerInfo.put("Rank",rank);
         //PlayerInfo.put("field test",temp);

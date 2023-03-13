@@ -1,5 +1,6 @@
 package com.example.cmput301w23t31project;
 
+
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
@@ -9,6 +10,7 @@ import android.graphics.drawable.Drawable;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 
 /**
  * Represents and creates unique visualization for QR code (based off of QR code hash)
@@ -62,7 +64,8 @@ public class DrawRepresentation extends Drawable {
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 2; j++) {
                 this.paint.setColor(Color.parseColor(this.colors[j*5 + i]));
-                canvas.drawRect(this.height*i, this.height*j, this.height*(i+1), this.height*(j+1), paint);
+                canvas.drawRect(this.height*i, this.height*j,
+                        this.height*(i+1), this.height*(j+1), paint);
             }
         }
 
@@ -72,7 +75,8 @@ public class DrawRepresentation extends Drawable {
         this.paint.setColor(Color.parseColor("#ffffff"));
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 2; j++) {
-                canvas.drawRect(this.height*i, this.height*j, this.height*(i+1), this.height*(j+1), paint);
+                canvas.drawRect(this.height*i, this.height*j,
+                        this.height*(i+1), this.height*(j+1), paint);
             }
         }
 

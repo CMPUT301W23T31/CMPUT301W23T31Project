@@ -22,10 +22,6 @@ import java.util.List;
 /**
  * Creates Player Profile Activity
  */
-
-    
-
-
 public class PlayerProfileActivity extends HamburgerMenu {
     private FirebaseFirestore db;
     Player player;
@@ -126,7 +122,7 @@ public class PlayerProfileActivity extends HamburgerMenu {
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
-        return useHamburgerMenu(item, username);
+        return useHamburgerMenu(item, crnt_username);
 
     }
     public void setRank(){

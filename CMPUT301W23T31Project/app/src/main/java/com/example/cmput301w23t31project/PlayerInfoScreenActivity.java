@@ -32,10 +32,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * Activity for "Player Info" Screen
  */
-
-
-    
-
 public class PlayerInfoScreenActivity extends HamburgerMenu {
 
     private FirebaseFirestore db;

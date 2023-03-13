@@ -87,6 +87,11 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * This method returns the Device ID (used here for testing)
+     * @return
+     *      Device ID as a String
+     */
     public String getDeviceID() {
         return Utilities.getDeviceId(this);
     }

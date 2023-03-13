@@ -59,5 +59,6 @@ dependencies {
     implementation 'com.google.firebase:firebase-firestore:24.4.2'
     androidTestImplementation "androidx.test:runner:1.5.2"
     androidTestImplementation "androidx.test:rules:1.5.0"
+    //implementation files('/Users/lyndonhallett/Library/Android/sdk/platforms/android-33/android.jar')
     androidTestImplementation "com.jayway.android.robotium:robotium-solo:5.2.1"
 }

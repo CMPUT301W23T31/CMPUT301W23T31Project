@@ -1,5 +1,6 @@
 package com.example.cmput301w23t31project;
 
+
 import androidx.annotation.NonNull;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -9,6 +10,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+
 
 /**
  * This class performs operations related to the collection of player scans

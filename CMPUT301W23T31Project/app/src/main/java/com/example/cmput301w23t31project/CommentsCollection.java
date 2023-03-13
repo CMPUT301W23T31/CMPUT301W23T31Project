@@ -1,7 +1,5 @@
 package com.example.cmput301w23t31project;
 
-import android.content.Intent;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -12,6 +10,7 @@ import com.google.firebase.firestore.AggregateQuerySnapshot;
 import com.google.firebase.firestore.AggregateSource;
 
 import java.util.HashMap;
+
 
 /**
  * Handles the collection (heap of) comments added to QR codes

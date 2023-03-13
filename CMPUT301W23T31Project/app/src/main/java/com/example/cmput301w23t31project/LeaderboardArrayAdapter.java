@@ -15,9 +15,15 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
+
+/**
+ * A class that represents a leaderboard user object
+ */
 public class LeaderboardArrayAdapter extends ArrayAdapter<Player> {
     private Context context;
     private String username;
+
+
     public LeaderboardArrayAdapter (Context context, ArrayList<Player> players,String Username){
         super(context,0,players);
         this.context = context;

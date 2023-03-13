@@ -21,7 +21,7 @@ import com.robotium.solo.Solo;
 import java.util.Objects;
 
 
-public class LoginActivityTest {
+public class ALoginActivityTest {
     private Solo solo;
 
 

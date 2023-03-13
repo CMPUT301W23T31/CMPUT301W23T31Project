@@ -8,9 +8,17 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
+import androidx.annotation.NonNull;
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.AggregateQuery;
+import com.google.firebase.firestore.AggregateQuerySnapshot;
+import com.google.firebase.firestore.AggregateSource;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.robotium.solo.Solo;
 
 import static junit.framework.TestCase.assertTrue;
@@ -18,6 +26,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.fail;
+
+import java.util.HashMap;
+import java.util.Objects;
 
 public class addCommentsTest {
     private Solo solo;
@@ -85,6 +96,17 @@ public class addCommentsTest {
         solo.enterText((EditText) solo.getView(R.id.add_comment), "Test Comment");
         solo.clickOnView(solo.getView(R.id._add_button));
         assertTrue(solo.waitForText("Test Comment", 1, 2000));
+        CommentsCollection collection = new CommentsCollection();
+        collection.getReference().get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                for (QueryDocumentSnapshot doc: task.getResult()) {
+                    if (Objects.equals(doc.getString("comment"), "Test Comment")) {
+                        doc.getReference().delete();
+                    }
+                }
+            }
+        });
         //assertEquals(1, 1);
     }
 

@@ -1,5 +1,6 @@
 package com.example.cmput301w23t31project;
 
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Service;
@@ -16,6 +17,7 @@ import android.provider.Settings;
 import android.util.Log;
 
 import androidx.core.app.ActivityCompat;
+
 
 /**
  * Handles the Location Services of app (locating location of player/device)
