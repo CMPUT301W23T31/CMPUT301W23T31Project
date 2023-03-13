@@ -20,7 +20,7 @@ import com.robotium.solo.Solo;
 import java.util.Objects;
 
 
-public class AaQRScanTest {
+public class AQRScanTest {
     private Solo solo;
 
 

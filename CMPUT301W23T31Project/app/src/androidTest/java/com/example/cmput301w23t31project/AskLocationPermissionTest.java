@@ -3,6 +3,7 @@ package com.example.cmput301w23t31project;
 import static junit.framework.TestCase.assertTrue;
 
 import android.app.Activity;
+import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.test.platform.app.InstrumentationRegistry;
@@ -85,7 +86,13 @@ public class AskLocationPermissionTest {
         solo.waitForActivity("ScanResultsFragment", 5);
         solo.clickOnView(solo.getView(R.id.location_button));
         solo.clickOnView(solo.getView(R.id.location_button));
-        solo.clickLongOnTextAndPress("SEE CODE DETAILS", 0);
+        solo.clickLongOnText("BACK TO HOME");
+        solo.clickOnView(solo.getView(R.id.home_screen_my_scans_button));
+        solo.assertCurrentActivity("Wrong Activity", MyScansScreenActivity.class);
+        assertTrue(solo.waitForView(R.id.leaderboard_list));
+        MyScansScreenActivity activity = (MyScansScreenActivity) solo.getCurrentActivity();
+        final ListView qrcodes = activity.qrcodeList; // Get the listview
+        solo.clickInList((int)qrcodes.getItemIdAtPosition(1));
         solo.assertCurrentActivity("Wrong Activity", QRCodeStatsActivity.class);
         assertTrue(solo.waitForText("No Location", 1, 3000));
     }

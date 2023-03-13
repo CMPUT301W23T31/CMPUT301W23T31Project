@@ -1,7 +1,6 @@
 package com.example.cmput301w23t31project;
 
 import android.app.Activity;
-import android.widget.ListView;
 
 import org.junit.After;
 import org.junit.Before;
@@ -28,7 +27,7 @@ import static org.junit.Assert.fail;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class DeleteCodeTest {
+public class removeCodeTest {
     private Solo solo;
 
 
