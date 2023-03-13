@@ -18,7 +18,7 @@ package com.example.cmput301w23t31project;
 // https://stackoverflow.com/questions/2785485/is-there-a-unique-android-device-id
 // https://firebase.google.com/docs/firestore/query-data/queries
 // https://stackoverflow.com/questions/40268446/junit-5-how-to-assert-an-exception-is-thrown
-
+// https://www.youtube.com/watch?v=oh4YOj9VkVE
 
 
 import android.content.Context;
