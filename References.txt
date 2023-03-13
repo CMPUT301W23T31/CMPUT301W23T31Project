@@ -72,7 +72,6 @@ Author: Dhruv Gairola
 Date: Feb 2, 2012
 License: https://creativecommons.org/licenses/by-sa/3.0/
 Purpose: To help with accessing the phones photo gallery to provide a profile photo
-MainActivity, FinishLoginActivity, ScanResultsFragment
 
 Link: https://stackoverflow.com/questions/2785485/is-there-a-unique-android-device-id
 Author: Anthony Forloney
