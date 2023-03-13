@@ -35,7 +35,7 @@ import java.util.Set;
 /**
  * Main Activity Class for home screen of app (main menu)
  */
-public class MainActivity extends HamburgerMenu implements ScanResultsFragment.OnFragmentInteractionListener, AllowLocationFragment.OnFragmentInteractionListener {
+public class MainActivity extends HamburgerMenu implements ScanResultsFragment.OnFragmentInteractionListener {
     String username;
     TextView score;
     private GpsTracker gpsTracker;
@@ -292,13 +292,6 @@ public class MainActivity extends HamburgerMenu implements ScanResultsFragment.O
         });
     }
 
-    /**
-     * On OK pressed
-     * @param recordLocation boolean of whether location recording is allowed
-     */
-    @Override
-    public void onOkPressed(boolean recordLocation) {
-        this.recordLocation = recordLocation;
-    }
+
 
 }

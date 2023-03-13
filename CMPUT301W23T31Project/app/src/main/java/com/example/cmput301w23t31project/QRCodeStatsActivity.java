@@ -163,8 +163,8 @@ public class QRCodeStatsActivity extends AppCompatActivity {
                             for (DocumentSnapshot document : list) {
                                 // Adding the required statistics to the text fields
                                 if (document != null) {
-                                    Log.d("TAG", "Reached inside setting stats");
                                     if(document.getId().equals(hash)){
+                                        Log.d("TAG", "Reached inside setting statsijgsoigjaslkg");
                                     nameView.setText(document.getString("Name"));
                                     scoreView.setText(document.getString("Score"));
                                     if((Double.valueOf(document.getString("Latitude"))==200)){
@@ -176,14 +176,14 @@ public class QRCodeStatsActivity extends AppCompatActivity {
                                     String likes = document.getString("Likes") + " / " + document.getString("Dislikes");
                                     coordinatesView.setText(coordinates);
                                     likesView.setText(likes);
-                                    }}else{
-                                    Log.d("TAG", "Reached inside setting stats doc null");
-                                }
+                                    date.setText(document.getString("LastScanned"));
+                                    scanned.setText(document.getString("TimesScanned"));
+                                    }
 
-            date.setText(document.getString("LastScanned"));
-            scanned.setText(document.getString("TimesScanned"));
+
         }
-    }}});}
+    }}}});
+    }
 
     /**
      * sets and updates relevant listview for given QR code
