@@ -114,6 +114,7 @@
 
             <View
                 android:id="@+id/qr_code_stats_visual_representation_view"
+
                 android:layout_width="169dp"
                 android:layout_height="75dp"
                 android:layout_gravity="right"
@@ -121,6 +122,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
 
         </FrameLayout>
 
