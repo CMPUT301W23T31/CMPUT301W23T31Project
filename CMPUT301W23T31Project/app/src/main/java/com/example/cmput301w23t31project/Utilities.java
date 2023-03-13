@@ -1,15 +1,24 @@
 package com.example.cmput301w23t31project;
 
+
+// I decided to put some references for the program here because Utilities class is general
+// and I didn't want them scattered
+// References (for many functions / methods / code in many classes)
 // https://stackoverflow.com/questions/2736389/how-to-pass-an-object-from-one-activity-to-another-on-android
 // https://stackoverflow.com/questions/4743116/get-screen-width-and-height-in-android
-// References
-// 1. https://www.geeksforgeeks.org/how-to-read-qr-code-using-zxing-library-in-android/
-// 2. https://www.baeldung.com/sha-256-hashing-java
-// 3. https://www.geeksforgeeks.org/different-ways-reading-text-file-java/
-// 4. https://stackoverflow.com/questions/17674634/saving-and-reading-bitmaps-images-from-internal-memory-in-android/35827955#35827955
-// 5. https://stackoverflow.com/questions/3879992/how-to-get-bitmap-from-an-uri
-// 6. https://stackoverflow.com/questions/9107900/how-to-upload-image-from-gallery-in-android
-// 4, 5, 6 used for profile pictures
+// https://www.javatpoint.com/java-get-current-date
+// https://firebase.google.com/docs/firestore/manage-data/add-data
+// https://www.geeksforgeeks.org/how-to-read-qr-code-using-zxing-library-in-android/
+// https://www.baeldung.com/sha-256-hashing-java
+// https://www.youtube.com/watch?v=UIIpCt2S5Ls
+// https://www.geeksforgeeks.org/different-ways-reading-text-file-java/
+// https://stackoverflow.com/questions/17674634/saving-and-reading-bitmaps-images-from-internal-memory-in-android/35827955#35827955
+// https://stackoverflow.com/questions/3879992/how-to-get-bitmap-from-an-uri
+// https://stackoverflow.com/questions/9107900/how-to-upload-image-from-gallery-in-android
+// https://stackoverflow.com/questions/2785485/is-there-a-unique-android-device-id
+// https://firebase.google.com/docs/firestore/query-data/queries
+// https://stackoverflow.com/questions/40268446/junit-5-how-to-assert-an-exception-is-thrown
+
 
 
 import android.content.Context;
