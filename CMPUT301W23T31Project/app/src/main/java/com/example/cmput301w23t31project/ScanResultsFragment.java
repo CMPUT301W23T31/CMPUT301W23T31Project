@@ -2,6 +2,7 @@ package com.example.cmput301w23t31project;
 
 import static android.content.ContentValues.TAG;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -11,6 +12,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.ToggleButton;
@@ -42,6 +44,7 @@ public class ScanResultsFragment extends DialogFragment {
     TextView homeScore;
     String location;
     Boolean recordlocation;
+    TextView set_on_off;
 
     public String[] QRNameAdjectives = new String[1010];
     public String[] QRNameColors = new String[128];
@@ -143,30 +146,39 @@ public class ScanResultsFragment extends DialogFragment {
         scoreView.setText(s);
 
         toggleButton = (ToggleButton) view.findViewById(R.id.location_button);
+        set_on_off = view.findViewById(R.id.set_on_off);
         //stateOnOff=(TextView) view.findViewById(R.id.tvstate);
         //stateOnOff.setText("OFF");
         recordlocation = false;
+        Log.v(TAG, "no location");
+        codes.processQRCodeInDatabase(name, String.valueOf(score), hash, 200, 200);
         toggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    Log.v(TAG, "TOGGLE CHECK TRUE");
-                    recordlocation = true;
+                    codes.processQRCodeInDatabase(name, String.valueOf(score), hash, latitude, longitude);
+                    Log.d("TAG", "ALLOWED LOCATION RECORD");
                 } else {
                     Log.v(TAG, "TOGGLE CHECK FALSE");
-                    recordlocation = false;
+                    latitude = 200;
+                    longitude = 200;
+                    codes.processQRCodeInDatabase(name, String.valueOf(score), hash, latitude, longitude);
                 }
             }
         });
-
-        if(recordlocation){
-            codes.processQRCodeInDatabase(name, String.valueOf(score), hash, latitude, longitude);
-        }else{
-            latitude = 200;
-            longitude = 200;
-            Log.v(TAG, "no location");
-            codes.processQRCodeInDatabase(name, String.valueOf(score), hash, latitude, longitude);
-        }
+//        set_on_off = view.findViewById(R.id.set_on_off);
+//        String on_off = set_on_off.getText().toString();
+//        Log.d("TAG", "on_off text: "+on_off);
+//        if(on_off.equals("on")){
+//            Log.d("TAG", "ALLOWED LOCATION RECORD  "+latitude+"  "+longitude);
+//            codes.processQRCodeInDatabase(name, String.valueOf(score), hash, latitude, longitude);
+//        }else{
+//            latitude = 200;
+//            longitude = 200;
+//            Log.v(TAG, "no location");
+//            codes.processQRCodeInDatabase(name, String.valueOf(score), hash, latitude, longitude);
+//        }
 
 
         // Build dialog fragment

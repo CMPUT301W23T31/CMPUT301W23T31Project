@@ -31,6 +31,14 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="Record Location?"></ToggleButton>
+
+        <TextView
+            android:id="@+id/set_on_off"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="location"
+            android:textSize="20sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
 

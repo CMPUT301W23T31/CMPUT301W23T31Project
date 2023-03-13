@@ -1,5 +1,7 @@
 package com.example.cmput301w23t31project;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -40,6 +42,7 @@ public class QRCodesCollection extends QRDatabase {
                             String timesScanned = String.valueOf(Integer.
                                     parseInt(Objects.requireNonNull(document.getString("TimesScanned"))) + 1);
                             if(!(latitude == 200)){
+                                Log.d("Updates: ", ""+latitude);
                                 codes.document(hash).update("Latitude", String.valueOf(latitude));
                                 codes.document(hash).update("Longitude", String.valueOf(longitude));
                             }
