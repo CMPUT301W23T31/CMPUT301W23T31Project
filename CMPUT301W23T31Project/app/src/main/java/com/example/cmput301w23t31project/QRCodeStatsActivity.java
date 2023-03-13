@@ -227,7 +227,7 @@ public class QRCodeStatsActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         TextView LikesDislikesText = findViewById(R.id.qr_code_stats_code_likes_dislikes);
         String numberOfLikes = LikesDislikesText.getText().toString();
-
+        String likesStr = "";
         String LikesFinished = processString(numberOfLikes,number);
         String DisLikesFinished = processString(numberOfLikes,number);
 
@@ -236,8 +236,7 @@ public class QRCodeStatsActivity extends AppCompatActivity {
             case 0: {
                 int likes1 = Integer.valueOf(LikesFinished);
                 int likes2 = likes1 + 1;
-                String likesStr = (LikesFinished + " / " + DisLikesFinished);
-                LikesDislikesText.setText(likesStr);
+                likesStr = (LikesFinished + " / " + DisLikesFinished);
                 String likes = String.valueOf(likes2);
                 m.put("Likes", likes);
                 break;
@@ -245,14 +244,14 @@ public class QRCodeStatsActivity extends AppCompatActivity {
             case 1:{
                 int dislikes1 = Integer.valueOf(DisLikesFinished);
                 int dislikes2 = dislikes1 + 1;
-                String likesStr = (LikesFinished + " / " + DisLikesFinished);
-                LikesDislikesText.setText(likesStr);
+                likesStr = (LikesFinished + " / " + DisLikesFinished);
                 String dislikes = String.valueOf(dislikes2);
                 m.put("Dislikes", dislikes);
                 break;
             }
 
         }
+        String finalLikesStr = likesStr;
         db.collection("QRCodes").document(hash)
                 .set(m, SetOptions.merge())
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
