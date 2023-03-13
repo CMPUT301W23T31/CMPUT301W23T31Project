@@ -35,6 +35,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.zxing.integration.android.IntentIntegrator;
 
 import java.util.List;
+import java.util.Objects;
 
 
 //https://www.geeksforgeeks.org/how-to-add-dynamic-markers-in-google-maps-with-firebase-firstore/?ref=lbp
@@ -76,31 +77,25 @@ public class ExploreScreenActivity extends HamburgerMenu
         googleMap.setOnMyLocationButtonClickListener(this);
         googleMap.setOnMyLocationClickListener(this);
 
-        db = FirebaseFirestore.getInstance();
-        db.collection("QRCodes").get()
+        QRCodesCollection qrCodes = new QRCodesCollection();
+        qrCodes.getReference().get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                         // after getting the data we are calling on success method
                         // and inside this method we are checking if the received
                         // query snapshot is empty or not.
-                        if (!queryDocumentSnapshots.isEmpty()) {
-                            // if the snapshot is not empty we are
-                            // hiding our progress bar and adding
-                            // our data in a list.
-                            List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
-                            for (DocumentSnapshot document : list) {
+                        for (QueryDocumentSnapshot document: queryDocumentSnapshots) {
                                 Log.d("TAG",(document.getString("Latitude")).getClass().toString());
-                                if((Double.valueOf(document.getString("Latitude"))==200)){
+                                if((Double.parseDouble(Objects.requireNonNull(document.getString("Latitude")))==200)){
                                     String coordinates = "No Location";
                                 }else{
 
-                                    LatLng location = new LatLng(Double.valueOf(document.getString("Latitude")),Double.valueOf(document.getString("Longitude")));
+                                    LatLng location = new LatLng(Double.parseDouble(document.getString("Latitude")),Double.parseDouble(document.getString("Longitude")));
                                     googleMap.addMarker(new MarkerOptions().position(location).title(document.getString("Name")));
                                 }
                             }
                         }
-                    }
                 });
         googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
