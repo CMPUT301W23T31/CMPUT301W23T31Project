@@ -4,15 +4,12 @@ package com.example.cmput301w23t31project;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -91,7 +88,7 @@ public class LeaderboardTotalScoreActivity extends HamburgerMenu implements Sear
         LeaderboardList = findViewById(R.id.leaderboard_list);
         leaderboardTotalScoreArrayAdapter = new LeaderboardTotalScoreArrayAdapter(this, dataList,username);
         LeaderboardList.setAdapter(leaderboardTotalScoreArrayAdapter);
-        PlayerScansCollection playerScansCollection = new PlayerScansCollection();
+        PlayerInfoCollection playerScansCollection = new PlayerInfoCollection();
         playerScansCollection.getPlayerScans();
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {

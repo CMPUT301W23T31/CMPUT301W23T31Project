@@ -66,6 +66,7 @@ public class QRCodeStatsActivity extends AppCompatActivity {
         Intent intent = getIntent();
         hash = intent.getStringExtra("Hash");
         username = intent.getStringExtra("username");
+        Log.d("TAG", hash+" stats  "+ username);
 
         // Accesses all of the text fields
         nameView = findViewById(R.id.qr_code_stats_code_name);
@@ -113,7 +114,7 @@ public class QRCodeStatsActivity extends AppCompatActivity {
             }
         });
 
-        ///
+        setStats(hash);
         //Toast.makeText(getApplicationContext(),"hashstats: "+hash,Toast.LENGTH_SHORT).show();
         db = FirebaseFirestore.getInstance();
         db.collection("PlayerScans").get()
@@ -129,9 +130,10 @@ public class QRCodeStatsActivity extends AppCompatActivity {
                               // our data in a list.
                               List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
                               for (DocumentSnapshot document : list) {
+                                  Log.d("TAG",  document.getData().keySet()+"   "+hash);
                                   if(document.getData().containsKey(hash)){
-                                      setList(document.getId());
-                                      setStats(hash);}
+                                      Log.d("TAG", "Reached inside setting stats found doc");
+                                      setList(document.getId());}
 
                               }
                           }
@@ -161,18 +163,22 @@ public class QRCodeStatsActivity extends AppCompatActivity {
                             for (DocumentSnapshot document : list) {
                                 // Adding the required statistics to the text fields
                                 if (document != null) {
+                                    Log.d("TAG", "Reached inside setting stats");
                                     if(document.getId().equals(hash)){
                                     nameView.setText(document.getString("Name"));
                                     scoreView.setText(document.getString("Score"));
                                     if((Double.valueOf(document.getString("Latitude"))==200)){
                                         coordinates = "No Location";
+
                                     }else{
                                         coordinates = document.getString("Latitude") + ", " + document.getString("Longitude");
                                     }
                                     String likes = document.getString("Likes") + " / " + document.getString("Dislikes");
                                     coordinatesView.setText(coordinates);
                                     likesView.setText(likes);
-                                    }}
+                                    }}else{
+                                    Log.d("TAG", "Reached inside setting stats doc null");
+                                }
 
             date.setText(document.getString("LastScanned"));
             scanned.setText(document.getString("TimesScanned"));

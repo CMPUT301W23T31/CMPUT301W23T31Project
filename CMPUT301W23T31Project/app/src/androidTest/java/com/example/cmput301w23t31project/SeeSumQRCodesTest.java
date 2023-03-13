@@ -18,7 +18,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.fail;
 
-public class MyUserCodes {
+public class SeeSumQRCodesTest {
     private Solo solo;
 
 
@@ -49,32 +49,26 @@ public class MyUserCodes {
     }
 
     @Test
-    public void QRCodeTest() {
+    public void SeeSumFromPlayerInfo() {
         solo.assertCurrentActivity("Wrong Activity", TitleScreenActivity.class);
 
         solo.clickOnView(solo.getView(R.id.tap_to_enter));
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
 
-        solo.clickOnView(solo.getView(R.id.home_screen_my_scans_button));
-
-        solo.assertCurrentActivity("Wrong Activity", MyScansScreenActivity.class);
-        assertTrue(solo.waitForView(R.id.leaderboard_list));
-        //assertEquals(1, 1);
-    }
-
-    @Test
-    public void QRCodeTestThroughProfile() {
-        solo.assertCurrentActivity("Wrong Activity", TitleScreenActivity.class);
-
-        solo.clickOnView(solo.getView(R.id.tap_to_enter));
-        solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
         solo.clickOnView(solo.getView(R.id.home_screen_player_info_button));
 
         solo.assertCurrentActivity("Wrong Activity", PlayerInfoScreenActivity.class);
-        solo.clickOnView(solo.getView(R.id.player_info_see_scans_button));
+        assertTrue(solo.waitForView(R.id.player_info_total_score));
+        //assertEquals(1, 1);
+    }
+    @Test
+    public void SeeSumFromHomeScreen() {
+        solo.assertCurrentActivity("Wrong Activity", TitleScreenActivity.class);
 
-        solo.assertCurrentActivity("Wrong Activity", MyScansScreenActivity.class);
-        assertTrue(solo.waitForView(R.id.leaderboard_list));
+        solo.clickOnView(solo.getView(R.id.tap_to_enter));
+        solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
+        assertTrue(solo.waitForView(R.id.home_screen_current_points));
+
         //assertEquals(1, 1);
     }
 
@@ -87,3 +81,4 @@ public class MyUserCodes {
         solo.finishOpenedActivities();
     }
 }
+

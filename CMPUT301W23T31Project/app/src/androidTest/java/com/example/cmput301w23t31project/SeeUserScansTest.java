@@ -18,7 +18,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.fail;
 
-public class SeeSumQRCodes {
+public class SeeUserScansTest{
     private Solo solo;
 
 
@@ -49,26 +49,32 @@ public class SeeSumQRCodes {
     }
 
     @Test
-    public void SeeSumFromPlayerInfo() {
+    public void QRCodeTest() {
         solo.assertCurrentActivity("Wrong Activity", TitleScreenActivity.class);
 
         solo.clickOnView(solo.getView(R.id.tap_to_enter));
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
 
+        solo.clickOnView(solo.getView(R.id.home_screen_my_scans_button));
+
+        solo.assertCurrentActivity("Wrong Activity", MyScansScreenActivity.class);
+        assertTrue(solo.waitForView(R.id.leaderboard_list));
+        //assertEquals(1, 1);
+    }
+
+    @Test
+    public void QRCodeTestThroughProfile() {
+        solo.assertCurrentActivity("Wrong Activity", TitleScreenActivity.class);
+
+        solo.clickOnView(solo.getView(R.id.tap_to_enter));
+        solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
         solo.clickOnView(solo.getView(R.id.home_screen_player_info_button));
 
         solo.assertCurrentActivity("Wrong Activity", PlayerInfoScreenActivity.class);
-        assertTrue(solo.waitForView(R.id.player_info_total_score));
-        //assertEquals(1, 1);
-    }
-    @Test
-    public void SeeSumFromHomeScreen() {
-        solo.assertCurrentActivity("Wrong Activity", TitleScreenActivity.class);
+        solo.clickOnView(solo.getView(R.id.player_info_see_scans_button));
 
-        solo.clickOnView(solo.getView(R.id.tap_to_enter));
-        solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
-        assertTrue(solo.waitForView(R.id.home_screen_current_points));
-
+        solo.assertCurrentActivity("Wrong Activity", MyScansScreenActivity.class);
+        assertTrue(solo.waitForView(R.id.leaderboard_list));
         //assertEquals(1, 1);
     }
 
@@ -81,4 +87,3 @@ public class SeeSumQRCodes {
         solo.finishOpenedActivities();
     }
 }
-
