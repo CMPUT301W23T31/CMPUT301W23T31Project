@@ -136,4 +136,5 @@
         app:layout_constraintTop_toBottomOf="@+id/home_screen_explore_button"
         app:srcCompat="@drawable/scan" />
 
+
 </androidx.constraintlayout.widget.ConstraintLayout>
