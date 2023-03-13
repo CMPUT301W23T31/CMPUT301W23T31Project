@@ -159,6 +159,14 @@ public class ScanResultsFragment extends DialogFragment {
             }
         });
 
+        if(recordlocation){
+            codes.processQRCodeInDatabase(name, String.valueOf(score), hash, latitude, longitude);
+        }else{
+            latitude = 200;
+            longitude = 200;
+            Log.v(TAG, "no location");
+            codes.processQRCodeInDatabase(name, String.valueOf(score), hash, latitude, longitude);
+        }
 
 
         // Build dialog fragment
@@ -172,15 +180,6 @@ public class ScanResultsFragment extends DialogFragment {
                     // Head back to main menu and close the dialog fragment
 
 
-                    if(recordlocation){
-                        codes.processQRCodeInDatabase(name, String.valueOf(score), hash, latitude, longitude);
-                    }else{
-                        latitude = 200;
-                        longitude = 200;
-                        Log.v(TAG, "no location");
-                        codes.processQRCodeInDatabase(name, String.valueOf(score), hash, latitude, longitude);
-                    }
-
                     MainActivity.setHomeScore(new QRPlayerScans(), homeScore, new QRCodesCollection(), username);
                     dialogInterface.cancel();
 
@@ -191,16 +190,6 @@ public class ScanResultsFragment extends DialogFragment {
                 public void onClick(DialogInterface dialogInterface, int i) {
                     listener.onOkPressed();
                     dialogInterface.cancel();
-
-                    if(recordlocation){
-                        codes.processQRCodeInDatabase(name, String.valueOf(score), hash, latitude, longitude);
-                    }else{
-                        latitude = 200;
-                        longitude = 200;
-                        Log.v(TAG, "no location");
-                        codes.processQRCodeInDatabase(name, String.valueOf(score), hash, latitude, longitude);
-                    }
-
 
                     // Send Hash and Device ID to a new fragment that shows QR Code statistics
                     Intent intent = new Intent(getContext(), QRCodeStatsActivity.class);
