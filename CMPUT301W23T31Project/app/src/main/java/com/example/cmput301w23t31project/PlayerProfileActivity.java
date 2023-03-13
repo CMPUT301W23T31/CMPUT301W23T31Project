@@ -122,7 +122,7 @@ public class PlayerProfileActivity extends HamburgerMenu {
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
-        return useHamburgerMenu(item, username);
+        return useHamburgerMenu(item, crnt_username);
 
     }
     public void setRank(){
