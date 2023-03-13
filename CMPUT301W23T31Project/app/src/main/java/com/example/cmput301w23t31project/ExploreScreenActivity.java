@@ -68,10 +68,7 @@ public class ExploreScreenActivity extends HamburgerMenu
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        googleMap.addMarker(new MarkerOptions()
-
-                .position(new LatLng(35.252491,-77.569633))
-                .title("University of Alberta"));
+        
         if ( ContextCompat.checkSelfPermission( this, android.Manifest.permission.ACCESS_COARSE_LOCATION ) != PackageManager.PERMISSION_GRANTED ) {
 
             googleMap.getUiSettings().setMyLocationButtonEnabled(true);

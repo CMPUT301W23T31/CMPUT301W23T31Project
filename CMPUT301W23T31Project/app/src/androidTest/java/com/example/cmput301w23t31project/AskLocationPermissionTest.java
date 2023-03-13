@@ -1,30 +1,30 @@
 package com.example.cmput301w23t31project;
 
+import static junit.framework.TestCase.assertTrue;
+
 import android.app.Activity;
-import android.util.Log;
-import android.widget.EditText;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.emulators.EmulatedServiceSettings;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.robotium.solo.Solo;
 
-import java.util.HashMap;
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+
 import java.util.Objects;
 
 
-public class QRScanTest {
+
+public class AskLocationPermissionTest {
+
     private Solo solo;
 
 
@@ -83,24 +83,10 @@ public class QRScanTest {
         // Allow time to scan QR code
 
         solo.waitForActivity("ScanResultsFragment", 5);
-        solo.clickLongOnTextAndPress("BACK TO HOME", 0);
-        solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
-
-        qrCodes = new QRCodesCollection();
-        qrCodes.getReference().get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                int found = 0;
-                for (QueryDocumentSnapshot code : task.getResult()) {
-                    if (Objects.equals(code.getId(),
-                            "b138867051e7f22a7e1d4befdb1875beb17e28c6464afbdab7532dc7292f7489")) {
-                        code.getReference().update("Latitude", "0");
-                        code.getReference().update("Longitude", "0");
-                        found = 1;
-                    }
-                }
-                assert found == 1;
-            }
-        });
+        solo.clickOnView(solo.getView(R.id.location_button));
+        solo.clickOnView(solo.getView(R.id.location_button));
+        solo.clickLongOnTextAndPress("SEE CODE DETAILS", 0);
+        solo.assertCurrentActivity("Wrong Activity", QRCodeStatsActivity.class);
+        assertTrue(solo.waitForText("No Location", 1, 3000));
     }
 }
