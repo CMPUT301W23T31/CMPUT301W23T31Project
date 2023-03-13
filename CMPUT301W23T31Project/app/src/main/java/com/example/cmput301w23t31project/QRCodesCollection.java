@@ -45,6 +45,9 @@ public class QRCodesCollection extends QRDatabase {
                                 Log.d("Updates: ", ""+latitude);
                                 codes.document(hash).update("Latitude", String.valueOf(latitude));
                                 codes.document(hash).update("Longitude", String.valueOf(longitude));
+                            } else {
+                                codes.document(hash).update("Latitude", String.valueOf(200));
+                                codes.document(hash).update("Longitude", String.valueOf(200));
                             }
                             codes.document(hash).update("TimesScanned", timesScanned);
                             codes.document(hash).update("LastScanned", Utilities.getCurrentDate());
