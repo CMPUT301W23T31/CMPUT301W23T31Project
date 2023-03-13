@@ -1,5 +1,6 @@
 package com.example.cmput301w23t31project;
 
+
 import static android.content.ContentValues.TAG;
 
 import androidx.annotation.NonNull;
@@ -33,6 +34,7 @@ import org.checkerframework.checker.units.qual.A;
 
 import java.util.ArrayList;
 import java.util.Set;
+
 
 /**
  * Activity class for "My Scans" Screen

@@ -33,6 +33,12 @@ public class LeaderboardHighScoreActivity extends HamburgerMenu implements Searc
     private LeaderboardHighScoreArrayAdapter leaderboardHighScoreArrayAdapter;
     private ArrayList<Player> dataList2 = new ArrayList<>();
 
+
+    /**
+     * This method gets the search results and displays the results, if there are any
+     * @param username
+     *      The searched username
+     */
     @Override
     public void searchUser(String username){
         int l = dataList.size();
@@ -156,18 +162,36 @@ public class LeaderboardHighScoreActivity extends HamburgerMenu implements Searc
             //playerScansCollection.addHighScoreRank(username,HighScoreRank);
         }
     }
+
+    /**
+     * This method allows user to shift to LeaderboardHighScoreActivity
+     * @param view
+     *      A view needed to change intents
+     */
     public void onClickHighScore(View view){
         String name = highScoreBtn.getText().toString();
         Intent intent = new Intent(this, LeaderboardHighScoreActivity.class);
         intent.putExtra("username", username);
         startActivity(intent);
     }
+
+    /**
+     * This method allows user to shift to LeaderboardClickActivity
+     * @param view
+     *      A view needed to change intents
+     */
     public void onClickCount(View view){
         String name = countBtn.getText().toString();
         Intent intent = new Intent(this, LeaderboardCountActivity.class);
         intent.putExtra("username", username);
         startActivity(intent);
     }
+
+    /**
+     * This method allows user to shift to LeaderboardTotalScoreActivity
+     * @param view
+     *      A view needed to change intents
+     */
     public void onClickTotalScore(View view){
         String name = totalScoreBtn.getText().toString();
         Intent intent = new Intent(this, LeaderboardTotalScoreActivity.class);

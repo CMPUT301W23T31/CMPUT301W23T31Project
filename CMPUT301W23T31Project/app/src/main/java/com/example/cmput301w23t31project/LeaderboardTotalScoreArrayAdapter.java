@@ -1,5 +1,6 @@
 package com.example.cmput301w23t31project;
 
+
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -14,6 +15,10 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
+
+/**
+ * A class that represents a total score leaderboard user object
+ */
 public class LeaderboardTotalScoreArrayAdapter extends ArrayAdapter<Player> {
     private Context context;
     private String Username;

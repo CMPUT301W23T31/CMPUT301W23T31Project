@@ -22,10 +22,6 @@ import java.util.List;
 /**
  * Creates Player Profile Activity
  */
-
-    
-
-
 public class PlayerProfileActivity extends HamburgerMenu {
     private FirebaseFirestore db;
     Player player;

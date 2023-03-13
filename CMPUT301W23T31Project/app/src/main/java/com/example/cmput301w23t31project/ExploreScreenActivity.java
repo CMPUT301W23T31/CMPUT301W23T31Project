@@ -1,10 +1,11 @@
 package com.example.cmput301w23t31project;
 
+
 //Reference: https://developers.google.com/maps/documentation/android-sdk/map#view_the_code
+//https://www.geeksforgeeks.org/how-to-add-dynamic-markers-in-google-maps-with-firebase-firstore/?ref=lbp
+
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
@@ -38,8 +39,6 @@ import java.util.List;
 import java.util.Objects;
 
 
-//https://www.geeksforgeeks.org/how-to-add-dynamic-markers-in-google-maps-with-firebase-firstore/?ref=lbp
-
 /**
  * Handles the Explore Screen (with map view, allowing players to view local QR codes nearby)
  */
@@ -70,7 +69,8 @@ public class ExploreScreenActivity extends HamburgerMenu
     @Override
     public void onMapReady(GoogleMap googleMap) {
         
-        if ( ContextCompat.checkSelfPermission( this, android.Manifest.permission.ACCESS_COARSE_LOCATION ) != PackageManager.PERMISSION_GRANTED ) {
+        if ( ContextCompat.checkSelfPermission( this, android.Manifest.permission.
+                ACCESS_COARSE_LOCATION ) != PackageManager.PERMISSION_GRANTED ) {
 
             googleMap.getUiSettings().setMyLocationButtonEnabled(true);
         }
@@ -86,13 +86,18 @@ public class ExploreScreenActivity extends HamburgerMenu
                         // and inside this method we are checking if the received
                         // query snapshot is empty or not.
                         for (QueryDocumentSnapshot document: queryDocumentSnapshots) {
-                                Log.d("TAG",(document.getString("Latitude")).getClass().toString());
-                                if((Double.parseDouble(Objects.requireNonNull(document.getString("Latitude")))==200)){
+                                Log.d("TAG",(document.getString("Latitude")).
+                                        getClass().toString());
+                                if((Double.parseDouble(Objects.requireNonNull(document.
+                                        getString("Latitude")))==200)){
                                     String coordinates = "No Location";
                                 }else{
 
-                                    LatLng location = new LatLng(Double.parseDouble(document.getString("Latitude")),Double.parseDouble(document.getString("Longitude")));
-                                    googleMap.addMarker(new MarkerOptions().position(location).title(document.getString("Name")));
+                                    LatLng location = new LatLng(Double.parseDouble(document.
+                                            getString("Latitude")), Double.parseDouble(
+                                                    document.getString("Longitude")));
+                                    googleMap.addMarker(new MarkerOptions().position(location).
+                                            title(document.getString("Name")));
                                 }
                             }
                         }
@@ -111,7 +116,8 @@ public class ExploreScreenActivity extends HamburgerMenu
                             for (QueryDocumentSnapshot document: task.getResult()) {
                                 if (document.getString("Name").equals(codeName)) {
                                     String hash_return =  document.getId();
-                                    Intent intent = new Intent(ExploreScreenActivity.this, QRCodeStatsActivity.class);
+                                    Intent intent = new Intent(ExploreScreenActivity.
+                                            this, QRCodeStatsActivity.class);
                                     Log.i("TAG", hash_return+"  "+username);
                                     intent.putExtra("Hash", hash_return);
                                     intent.putExtra("username", username);
@@ -165,7 +171,13 @@ public class ExploreScreenActivity extends HamburgerMenu
         return false;
     }
 
+    /**
+     * This method obtains the dimensions of the user's phone screen
+     * @return
+     *      The dimensions of the screen of the user's phone
+     */
     public int[] getScreenDimensions() {
-        return new int[]{getResources().getDisplayMetrics().heightPixels, getResources().getDisplayMetrics().widthPixels};
+        return new int[]{getResources().getDisplayMetrics().heightPixels,
+                getResources().getDisplayMetrics().widthPixels};
     }
 }

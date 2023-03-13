@@ -23,6 +23,7 @@ import java.util.List;
 
 import java.util.Map;
 
+
 /**
  * Class that stores a collection of a Player's Scans
  */

@@ -1,5 +1,6 @@
 package com.example.cmput301w23t31project;
 
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -23,6 +24,7 @@ import com.google.zxing.integration.android.IntentIntegrator;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+
 
 /**
  * Main class for "My Account" screen

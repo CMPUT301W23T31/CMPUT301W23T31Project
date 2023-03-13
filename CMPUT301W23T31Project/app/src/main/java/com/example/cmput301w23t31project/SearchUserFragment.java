@@ -1,5 +1,6 @@
 package com.example.cmput301w23t31project;
 
+
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -9,6 +10,7 @@ import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
+
 
 /**
  * Used to search for player by username

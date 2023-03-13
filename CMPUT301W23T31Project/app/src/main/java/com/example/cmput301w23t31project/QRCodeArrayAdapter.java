@@ -1,5 +1,6 @@
 package com.example.cmput301w23t31project;
 
+
 import static android.content.ContentValues.TAG;
 
 import android.content.Context;
@@ -24,6 +25,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
 
 /**
  * Array adapter for QR code visualization in listviews

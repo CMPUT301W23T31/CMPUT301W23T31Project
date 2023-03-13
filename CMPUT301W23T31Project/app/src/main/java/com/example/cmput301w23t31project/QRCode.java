@@ -1,5 +1,6 @@
 package com.example.cmput301w23t31project;
 
+
 /**
  * Represents a single QR Code object
  */

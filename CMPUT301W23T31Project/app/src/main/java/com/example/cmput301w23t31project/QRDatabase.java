@@ -4,6 +4,7 @@ package com.example.cmput301w23t31project;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+
 /**
  * This class creates an instance of the database we need for the program
  */
