@@ -55,7 +55,7 @@ public class wipeAccountsTest {
         AccountsCollection accounts = new AccountsCollection();
         QRCodesCollection codesCollection = new QRCodesCollection();
         QRPlayerScans playerScans = new QRPlayerScans();
-        PlayerScansCollection info = new PlayerScansCollection();
+        PlayerInfoCollection info = new PlayerInfoCollection();
 
         accounts.getReference().document("TestName").delete();
         accounts.getReference().document("NewTestName").delete();
