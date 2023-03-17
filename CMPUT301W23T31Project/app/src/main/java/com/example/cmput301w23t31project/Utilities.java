@@ -52,24 +52,29 @@ public class Utilities {
      * @return the score assigned to a particular QR Code
      */
     public static int getQRScore(String hash) {
-        int stringLength = hash.length();
+        boolean isNum = false;
+        int lowBound = 0;
+        int uppBound = 15000;
+
         int score = 0;
-        for (int i = 0; i < stringLength - 2; i++) {
-            int number = 1;
-            while (hash.charAt(i) == hash.charAt(i+1)) {
-                i++;
-                number += 1;
+        int partialProduct = 1;
+        int stringLength = hash.length();
+
+        for (int i = 0; i < stringLength; i++) {
+            if ((hash.charAt(i) <= '9')  ^ isNum) {
+                isNum = !isNum;
+                score = score + (partialProduct / 1000);
+                partialProduct = 1;
             }
-            if (number > 1) {
-                if (hash.charAt(i-1) == '0') {
-                    score += Math.pow(20, number - 1);
-                } else {
-                    score += Math.pow(Integer.parseInt(String.
-                            valueOf(hash.charAt(i - 1)), 16), number - 1);
-                    i--;
-                }
-            }
+            partialProduct = partialProduct * Integer.parseInt("" + hash.charAt(i), 16);
         }
+        // adjustments
+        score = (score + lowBound) % uppBound;
+        if (score > 5000) {
+            score = score / 2;
+        }
+
+
         return score;
     }
 
