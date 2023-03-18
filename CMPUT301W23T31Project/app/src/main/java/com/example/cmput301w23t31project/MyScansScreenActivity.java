@@ -131,6 +131,7 @@ public class MyScansScreenActivity extends HamburgerMenu implements SearchScanFr
         codes.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                int c =0;
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         if (document.getString("Name").equals(name)) {
@@ -139,7 +140,12 @@ public class MyScansScreenActivity extends HamburgerMenu implements SearchScanFr
                             intent.putExtra("Hash", hash_return);
                             intent.putExtra("username", username);
                             startActivity(intent);
+                            c += 1;
                         }
+                    }
+                    if(c==0)
+                    {
+                        new QRCodeNotFoundFragment().show(getSupportFragmentManager(), "Error Message");
                     }
                 }
             }
