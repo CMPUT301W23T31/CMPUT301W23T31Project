@@ -19,9 +19,20 @@ import java.util.Objects;
  * Organizes a collection of QR codes
  */
 public class QRCodesCollection extends QRDatabase {
+    double latitude;
+    double longitude;
 
     public QRCodesCollection() {
         super("QRCodes");
+    }
+
+    public void setLocation(double latitude, double longitude){
+        this.latitude = latitude;
+        this.longitude = longitude;
+        Log.d("RECIEVED:", " "+ latitude+ longitude);
+    }
+    public double getLocation(){
+        return latitude;
     }
 
     /**
@@ -30,10 +41,8 @@ public class QRCodesCollection extends QRDatabase {
      * @param name human-readable name of the QR code
      * @param score score of the scanned QR code
      * @param hash SHA-256 hash of the QR code
-     * @param latitude latitude of QR code
-     * @param longitude longitude of QR code
      */
-    public void processQRCodeInDatabase(String name, String score, String hash, double latitude, double longitude) {
+    public void processQRCodeInDatabase(String name, String score, String hash) {
         CollectionReference codes = getReference();
         collection.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -56,39 +65,15 @@ public class QRCodesCollection extends QRDatabase {
                             return;
                         }
                     }
+                    Log.d("RECORDED:", ""+latitude+longitude);
                     addQRCodeToDatabase(name, score, hash, latitude, longitude);
                 }
             }
         });
     }
 
-    /**
-     * This method updates # of times scanned and date last scanned for a provided QR code. If
-     * QR code is not found, transfer control to add it to the database
-     * @param name human-readable name of the QR code
-     * @param score score of the scanned QR code
-     * @param hash SHA-256 hash of the QR code
-     */
-    public void processQRCodeInDatabase(String name, String score, String hash) {
-        CollectionReference codes = getReference();
-        collection.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    for (QueryDocumentSnapshot document: task.getResult()) {
-                        if (document.getId().equals(hash)) {
-                            String timesScanned = String.valueOf(Integer.
-                                    parseInt(Objects.requireNonNull(document.getString("TimesScanned"))) + 1);
-                            codes.document(hash).update("TimesScanned", timesScanned);
-                            codes.document(hash).update("LastScanned", Utilities.getCurrentDate());
-                            return;
-                        }
-                    }
-                    addQRCodeToDatabase(name, score, hash);
-                }
-            }
-        });
-    }
+
+
 
     /**
      * Adds a QR code to the database
@@ -117,26 +102,5 @@ public class QRCodesCollection extends QRDatabase {
         codes.document(hash).set(stringData);
     }
 
-    /**
-     * Adds a QR code (with no location) to the database
-     * @param name human-readable name of the QR code
-     * @param score score of the scanned QR code
-     * @param hash SHA-256 hash of the QR code
-     */
-    public void addQRCodeToDatabase(String name, String score, String hash) {
-        // Get QR code name and score
-        CollectionReference codes = getReference();
 
-        // Add necessary fields of QR code data
-        HashMap<String, String> stringData = new HashMap<>();
-        stringData.put("Name", name);
-        stringData.put("Score", score);
-        stringData.put("Likes", "0");
-        stringData.put("Dislikes", "0");
-        stringData.put("TimesScanned", "1");
-        stringData.put("LastScanned", Utilities.getCurrentDate());
-
-        // Add the data to the database
-        codes.document(hash).set(stringData);
-    }
 }
