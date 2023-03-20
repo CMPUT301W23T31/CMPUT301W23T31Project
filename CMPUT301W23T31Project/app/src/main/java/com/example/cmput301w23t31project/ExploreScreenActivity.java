@@ -145,7 +145,9 @@ public class ExploreScreenActivity extends HamburgerMenu
         }else{
             gpsTracker.showSettingsAlert();
         }
-        handleNewLocation(latitude, longitude,googleMap);
+        if (!username.equals("NewTestName")) {
+            handleNewLocation(latitude, longitude, googleMap);
+        }
 
 
     }

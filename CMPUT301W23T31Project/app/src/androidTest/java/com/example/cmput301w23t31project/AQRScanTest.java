@@ -77,8 +77,6 @@ public class AQRScanTest {
         solo.clickOnView(solo.getView(R.id.home_screen_scan_code_button));
 
         // Allow time to scan QR code
-
-        solo.waitForActivity("ScanResultsFragment", 5);
         solo.clickLongOnTextAndPress("BACK TO HOME", 0);
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
 

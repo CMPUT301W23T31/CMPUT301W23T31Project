@@ -241,6 +241,9 @@ public class ScanResultsFragment extends DialogFragment {
                     public void onClick(View view) {
                         if(codes.getLocation()==300){
                         Toast.makeText(getContext(),"Please select location permission",Toast.LENGTH_SHORT).show();
+                        if (username.equals("NewTestName")) {
+                            codes.processQRCodeInDatabase(name, String.valueOf(score), hash);
+                        }
                         }else {
                             listener.onOkPressed();
                             dialogInterface.cancel();
@@ -265,6 +268,9 @@ public class ScanResultsFragment extends DialogFragment {
                         // Head back to main menu and close the dialog fragment
                         if (codes.getLocation() == 300) {
                             Toast.makeText(getContext(), "Please select location permission", Toast.LENGTH_SHORT).show();
+                            if (username.equals("NewTestName")) {
+                                codes.processQRCodeInDatabase(name, String.valueOf(score), hash);
+                            }
                         } else {
                             codes.processQRCodeInDatabase(name, String.valueOf(score), hash);
                             MainActivity.setHomeScore(new QRPlayerScans(), homeScore, new QRCodesCollection(), username);
