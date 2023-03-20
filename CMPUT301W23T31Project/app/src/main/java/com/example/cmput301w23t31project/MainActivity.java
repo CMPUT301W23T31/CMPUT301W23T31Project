@@ -5,10 +5,12 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -66,6 +68,8 @@ public class MainActivity extends HamburgerMenu implements ScanResultsFragment.O
         playerScansCollection.getPlayerScans();
         playerScansCollection.CreateLeaderBoard();
 
+        findNearbyCodes(QRCodes);
+
         //playerScansCollection.sortByCountList();
         //playerScansCollection.sortByHighScoreList();
         //playerScansCollection.sortByTotalScoreList();
@@ -88,6 +92,7 @@ public class MainActivity extends HamburgerMenu implements ScanResultsFragment.O
         ImageView playerInfoBtn = findViewById(R.id.home_screen_player_info_button);
         ImageView exploreBtn = findViewById(R.id.home_screen_explore_button);
         ImageView myScanBtn = findViewById(R.id.home_screen_my_scans_button);
+        Button nearbyBtn = findViewById(R.id.view_nearby);
 
         String home_username = "Welcome " + username + "!";
         home_screen_username.setText(home_username);
@@ -157,6 +162,18 @@ public class MainActivity extends HamburgerMenu implements ScanResultsFragment.O
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this,
                         MyScansScreenActivity.class);
+                intent.putExtra("username", username);
+                intent.putExtra("crnt_username", username);
+                startActivity(intent);
+            }
+        });
+
+        // "nearby scans" button functionality
+        nearbyBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,
+                        NearByCodesActivity.class);
                 intent.putExtra("username", username);
                 intent.putExtra("crnt_username", username);
                 startActivity(intent);
@@ -258,6 +275,8 @@ public class MainActivity extends HamburgerMenu implements ScanResultsFragment.O
             new ScanResultsFragment(n, "", score,0,0).show(getSupportFragmentManager(), "SCAN RESULTS");
 
         }
+
+
     }
 
     /**
@@ -302,6 +321,38 @@ public class MainActivity extends HamburgerMenu implements ScanResultsFragment.O
                 }
             }
         });
+    }
+
+    public void findNearbyCodes(QRCodesCollection QRCodes){
+        double crntLatitude = 0;
+        double crntLongitude = 0;
+        gpsTracker = new GpsTracker(MainActivity.this);
+        if(gpsTracker.canGetLocation()){
+            crntLatitude = gpsTracker.getLatitude();
+            crntLongitude = gpsTracker.getLongitude();
+        }else{
+            gpsTracker.showSettingsAlert();
+        }
+
+        double minLatitude = crntLatitude - (20/111.12);
+        double maxLatitude = crntLatitude + (20/111.12);
+        double minLongitude = crntLongitude - (20/111.12)*Math.cos(crntLatitude);
+        double maxLongitude = crntLongitude + (20/111.12)*Math.cos(crntLatitude);
+
+        QRCodes.getReference().get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                for (QueryDocumentSnapshot doc : task.getResult()) {
+                    double foundLat = Double.parseDouble(doc.getString("Latitude"));
+                    double foundLng = Double.parseDouble(doc.getString("Longitude"));
+                    if ((minLatitude<= foundLat && foundLat <= maxLatitude)&&(minLongitude<= foundLng && foundLng <= maxLongitude)) {
+                        Log.d("Codes nearby:",doc.getString("Name"));
+                    }
+                }
+
+            }
+        });
+
     }
 
 
