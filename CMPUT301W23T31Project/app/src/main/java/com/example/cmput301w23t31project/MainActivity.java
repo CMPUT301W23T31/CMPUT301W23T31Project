@@ -32,6 +32,10 @@ import java.util.Set;
 // implements onClickListener for the onclick behaviour of button
 // https://www.youtube.com/watch?v=UIIpCt2S5Ls
 
+// For style stuff
+// https://stackoverflow.com/questions/32671004/how-to-change-the-color-of-a-button
+// https://stackoverflow.com/questions/10266595/how-to-make-a-round-button
+
 
 /**
  * Main Activity Class for home screen of app (main menu)
