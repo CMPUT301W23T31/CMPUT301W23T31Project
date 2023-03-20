@@ -72,6 +72,7 @@ public class UserProfilesTest {
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
         solo.clickOnView(solo.getView(R.id.home_screen_scan_code_button));
         solo.waitForActivity("ScanResultsFragment", 5);
+        solo.clickOnView(solo.getView(R.id.location_button));
         solo.clickLongOnTextAndPress("SEE CODE DETAILS", 0);
         solo.assertCurrentActivity("Wrong Activity", QRCodeStatsActivity.class);
         solo.clickOnView(solo.getView(R.id.player_detail_view_profile_button));

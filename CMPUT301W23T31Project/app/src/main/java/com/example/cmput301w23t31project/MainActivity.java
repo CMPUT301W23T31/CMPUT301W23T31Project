@@ -117,6 +117,9 @@ public class MainActivity extends HamburgerMenu implements ScanResultsFragment.O
                 integrator.setOrientationLocked(true);
                 integrator.setBeepEnabled(true);
                 integrator.setCaptureActivity(CaptureActivityPortrait.class);
+                if (username.equals("NewTestName")) {
+                    integrator.setTimeout(50);
+                }
                 integrator.initiateScan();
                 //permission_asked = false;
             }
@@ -214,7 +217,13 @@ public class MainActivity extends HamburgerMenu implements ScanResultsFragment.O
         // toast a message as "cancelled"
         if (intentResult != null) {
             if (intentResult.getContents() == null) {
-                Toast.makeText(getBaseContext(), "Cancelled", Toast.LENGTH_SHORT).show();
+                if (username.equals("NewTestName")) {
+                    new ScanResultsFragment("b138867051e7f22a7e1d4befdb1875beb17e28c6464afbdab7532dc7292f7489"
+                            , username, score, 0, 0).
+                            show(getSupportFragmentManager(), "SCAN RESULTS");
+                } else {
+                    Toast.makeText(getBaseContext(), "Cancelled", Toast.LENGTH_SHORT).show();
+                }
             } else {
                 // if the intentResult is not null we'll set
                 // the content and format of scan message
@@ -237,8 +246,6 @@ public class MainActivity extends HamburgerMenu implements ScanResultsFragment.O
                 }else{
                     gpsTracker.showSettingsAlert();
                 }
-
-
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);
