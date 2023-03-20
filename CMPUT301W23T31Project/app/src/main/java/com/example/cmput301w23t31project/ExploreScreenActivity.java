@@ -23,6 +23,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -100,8 +101,12 @@ public class ExploreScreenActivity extends HamburgerMenu
                                     LatLng location = new LatLng(Double.parseDouble(document.
                                             getString("Latitude")), Double.parseDouble(
                                                     document.getString("Longitude")));
-                                    googleMap.addMarker(new MarkerOptions().position(location).
-                                            title(document.getString("Name")));
+                                    googleMap.addMarker(new MarkerOptions()
+                                            .position(location)
+                                            .title(document.getString("Name"))
+                                            .alpha(0.7f)  // transparency (for layering)
+                                            .icon(BitmapDescriptorFactory.defaultMarker(Integer.parseInt(document.getString("Score"))*240/7500)));  // color in hsv (h only)
+                                            // still need to properly have color matched to score (but need to make scores in new algorithm first)
                                 }
                             }
                         }
