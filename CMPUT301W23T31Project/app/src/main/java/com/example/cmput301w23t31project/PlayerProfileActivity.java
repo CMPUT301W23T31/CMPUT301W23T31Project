@@ -40,7 +40,6 @@ public class PlayerProfileActivity extends HamburgerMenu {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player_profile);
-
         TextView PlayerUsername, PlayerScore, PlayerLowestScoringQr, view_scans,PlayerScanCount;
 
         PlayerUsername = findViewById(R.id.player_profile_username);
