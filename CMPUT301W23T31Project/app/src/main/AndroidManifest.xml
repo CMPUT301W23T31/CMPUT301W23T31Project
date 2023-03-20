@@ -37,6 +37,10 @@
             android:exported="false"
             android:label="@string/title_activity_login" />
         <activity
+            android:name=".NearByCodesActivity"
+            android:exported="false"
+            android:label="Nearby Codes" />
+        <activity
             android:name=".MyAccountScreenActivity"
             android:exported="false">
             <meta-data
