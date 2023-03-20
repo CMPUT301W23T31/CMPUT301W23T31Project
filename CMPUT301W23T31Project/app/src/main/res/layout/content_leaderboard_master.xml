@@ -15,17 +15,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/leaderboard_content_player_name_text"
-            android:padding="5dp"
-            android:textSize="24sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:singleLine="true"
-            android:textStyle="bold"
-            android:hint="Player Name"
-            android:ellipsize="end"
-            android:maxEms="10"/>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -35,16 +24,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
-                android:textSize="18sp"
-                android:hint="Rank:"/>
+                android:textSize="20sp"
+                android:text="Ranking:"/>
+
             <TextView
                 android:id="@+id/leaderboard_content_rank"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:textSize="18sp"
-                android:hint="Rank"/>
+                android:padding="5dp"
+                android:textSize="20sp"
+                android:hint="123"/>
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -53,16 +44,20 @@
                 android:id="@+id/leaderboard_content_relevant_stat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginVertical="5dp"
                 android:padding="5dp"
-                android:hint="Total Score:"
-                android:textSize="18sp" />
+                android:textStyle="bold"
+                android:hint="Statistic:"
+                android:textSize="28sp" />
             <TextView
-                android:id="@+id/leaderboard_content_High_score"
+                android:id="@+id/leaderboard_content_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginVertical="5dp"
                 android:padding="5dp"
-                android:hint="Total Score"
-                android:textSize="18sp" />
+                android:textStyle="bold"
+                android:hint="321"
+                android:textSize="28sp" />
         </LinearLayout>
     </LinearLayout>
 
@@ -71,18 +66,34 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="end"
-        android:padding="5dp"
+        android:paddingTop="5dp"
+        android:paddingHorizontal="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/leaderboard_content_player_name_text"
+            android:paddingHorizontal="2dp"
+            android:textSize="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:textStyle="bold"
+            android:hint="Player Name"
+            android:ellipsize="end"
+            android:maxEms="10"/>
 
         <TextView
             android:id="@+id/leaderboard_content_user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="5dp"
+            android:paddingHorizontal="2dp"
             android:textStyle="italic"
             android:hint="Username"
-            android:textSize="20sp"/>
+            android:textSize="18sp"
+            android:singleLine="true"
+            android:maxEms="10"
+            android:ellipsize="end"/>
 
         <Button
             android:id="@+id/leaderboard_content_profile_button"
@@ -91,8 +102,8 @@
             android:fontFamily="sans-serif"
             android:backgroundTint="@color/view_profile_button_color"
             android:text="@string/view_profile_button"
-            android:padding="5dp"
-            android:textSize="15sp" />
+            android:padding="2dp"
+            android:textSize="12sp" />
     </LinearLayout>
 
 

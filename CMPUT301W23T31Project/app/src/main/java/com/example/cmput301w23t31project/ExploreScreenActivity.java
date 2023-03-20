@@ -97,6 +97,13 @@ public class ExploreScreenActivity extends HamburgerMenu
                                         getString("Latitude")))==200)){
                                     String coordinates = "No Location";
                                 }else{
+                                    int QRScore = Integer.parseInt(document.getString("Score"));
+                                    float markerColor = 0;
+                                    if (QRScore < 20) {markerColor = 170.0f;}
+                                    else if (QRScore < 200) {markerColor = 205.0f;}
+                                    else if (QRScore < 2000) {markerColor = 270.0f;}
+                                    else {markerColor = 320.0f;}
+
 
                                     LatLng location = new LatLng(Double.parseDouble(document.
                                             getString("Latitude")), Double.parseDouble(
@@ -105,8 +112,7 @@ public class ExploreScreenActivity extends HamburgerMenu
                                             .position(location)
                                             .title(document.getString("Name"))
                                             .alpha(0.7f)  // transparency (for layering)
-                                            .icon(BitmapDescriptorFactory.defaultMarker(Integer.parseInt(document.getString("Score"))*240/7500)));  // color in hsv (h only)
-                                            // still need to properly have color matched to score (but need to make scores in new algorithm first)
+                                            .icon(BitmapDescriptorFactory.defaultMarker(markerColor)));  // color in hsv (h only)
                                 }
                             }
                         }
