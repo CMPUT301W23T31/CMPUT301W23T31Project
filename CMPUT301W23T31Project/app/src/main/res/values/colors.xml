@@ -12,7 +12,7 @@
     <color name="login_button_brown">#7e5e60</color>
     <color name="dark_accent_green">#578564</color>
     <color name="stats_accent_green">#888eac7b</color>
-    <color name="view_profile_button_color">#03A9F4</color>
+    <color name="view_profile_button_color">#929292</color>
 
     <color name="tier_1_teal">#00FFD5</color> <!-- 170 on HSB-->
     <color name="tier_2_blue">#0095FF</color> <!-- 205 on HSB-->

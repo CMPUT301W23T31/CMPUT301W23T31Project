@@ -124,7 +124,7 @@ public class removeCodeTest {
         MyScansScreenActivity activity = (MyScansScreenActivity) solo.getCurrentActivity();
         final ArrayList<QRCode> datalist = activity.datalist;
         int list_size = datalist.size();
-        solo.clickOnView(solo.getView(R.id.delete));
+        solo.clickOnView(solo.getView(R.id.delete_button));
         assertEquals(datalist.size(), list_size-1);
     }
 
@@ -196,7 +196,7 @@ public class removeCodeTest {
         MyScansScreenActivity activity = (MyScansScreenActivity) solo.getCurrentActivity();
         final ArrayList<QRCode> datalist = activity.datalist;
         int list_size = datalist.size();
-        solo.clickOnView(solo.getView(R.id.delete));
+        solo.clickOnView(solo.getView(R.id.delete_button));
         assertEquals(datalist.size(), list_size-1);
         //assertEquals(1, 1);
     }

@@ -73,21 +73,27 @@ public class QRCodeArrayAdapter extends ArrayAdapter<QRCode> {
         QRCode QRCode = getItem(position);
         TextView QRCodeName = view.findViewById(R.id.code_detail_name);
         TextView QRCodePoints = view.findViewById(R.id.code_detail_points);
-        ImageView delete = view.findViewById(R.id.delete);
-        //if(!isVisibility()){
-        //    delete.setVisibility(View.GONE);
-        //}
-        //else{
-        //    delete.setVisibility(View.VISIBLE);
-        //}
+        ImageView delete = view.findViewById(R.id.delete_button);
+        View tier_indicator = view.findViewById(R.id.tier_indicator_marker);
+
         PlayerInfoCollection scans = new PlayerInfoCollection();
         QRdb = FirebaseFirestore.getInstance();
         String hash = QRCode.getHash();
 
-        Log.d(TAG,"ADAPT: " + QRCode.getName());
-        QRCodeName.setText(QRCode.getName());
-        QRCodePoints.setText("Points: " + QRCode.getScore());
+        // filling in details
+        String QRName = QRCode.getName();
+        Integer QRScore = QRCode.getScore();
+        Log.d(TAG,"ADAPT: " + QRName);
+        QRCodeName.setText(QRName);
+        QRCodePoints.setText("Points: " + QRScore);
 
+        // dynamically setting color
+        if (QRScore < 20) {tier_indicator.setBackgroundResource(R.color.tier_1_teal);}
+        else if (QRScore < 200) {tier_indicator.setBackgroundResource(R.color.tier_2_blue);}
+        else if (QRScore < 2000) {tier_indicator.setBackgroundResource(R.color.tier_3_purple);}
+        else {tier_indicator.setBackgroundResource(R.color.tier_4_pink);}
+
+        // delete button stuff
         if (!currentUser.equals(username)){
             delete.setVisibility(View.GONE);
             Log.i("TAG", currentUser+":crnt   display:"+username);
