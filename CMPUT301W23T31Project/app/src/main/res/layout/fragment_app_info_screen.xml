@@ -109,8 +109,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="2sp"
-        android:text="Common:  0-1k points"
-        android:textColor="@android:color/darker_gray"
+        android:text="Common:  0-19 points"
+        android:textColor="@color/tier_1_teal"
         android:textSize="20sp"/>
 
     <TextView
@@ -120,8 +120,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="2sp"
-        android:text="Uncommon:  1k-10k points"
-        android:textColor="@color/yellow"
+        android:text="Uncommon:  20-200 points"
+        android:textColor="@color/tier_2_blue"
         android:textSize="20sp"/>
 
     <TextView
@@ -131,8 +131,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="2sp"
-        android:text="Rare:  10k-100k points"
-        android:textColor="@color/purple_700"
+        android:text="Rare:  200-2000 points"
+        android:textColor="@color/tier_3_purple"
         android:textSize="20sp"/>
 
     <TextView
@@ -142,8 +142,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="2sp"
-        android:text="Special:  100k+ points"
-        android:textColor="@color/purple_200"
+        android:text="Special:  2000+ points"
+        android:textColor="@color/tier_4_pink"
         android:textSize="20sp"/>
 
 </LinearLayout>

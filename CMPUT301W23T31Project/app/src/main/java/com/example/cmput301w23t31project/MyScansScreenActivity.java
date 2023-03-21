@@ -175,7 +175,7 @@ public class MyScansScreenActivity extends HamburgerMenu implements SearchScanFr
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                             for (QueryDocumentSnapshot doc : task.getResult()) {
                                 if (finalCodes.contains(doc.getId())) {
-                                    Log.d(TAG, "VAL:"+doc.getString("Name")+"  "+doc.getString("Score"));
+                                    Log.d(TAG, "VAL:"+doc.getString("Name") + "  " + doc.getString("Score"));
                                     datalist.add(new QRCode(doc.getString("Name"), Integer.parseInt(doc.getString("Score")), doc.getId()));
                                 }
                             }

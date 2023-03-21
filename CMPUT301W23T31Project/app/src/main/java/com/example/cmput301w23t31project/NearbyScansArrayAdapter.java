@@ -65,7 +65,7 @@ public class NearbyScansArrayAdapter extends ArrayAdapter<QRCode> {
         QRCode QRCode = getItem(position);
         TextView QRCodeName = view.findViewById(R.id.code_detail_name);
         TextView QRCodePoints = view.findViewById(R.id.code_detail_points);
-        ImageView delete = view.findViewById(R.id.delete);
+        ImageView delete = view.findViewById(R.id.delete_button);
         //if(!isVisibility()){
         //    delete.setVisibility(View.GONE);
         //}
