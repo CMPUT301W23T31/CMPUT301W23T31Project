@@ -87,7 +87,6 @@ public class removeCodeTest {
 
         // Allow time to scan QR code
 
-        solo.waitForActivity("ScanResultsFragment", 5);
         solo.clickLongOnTextAndPress("BACK TO HOME", 0);
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
 
@@ -108,8 +107,9 @@ public class removeCodeTest {
             }
         });
     }
+
     @Test
-    public void QRCodeTest() {
+    public void QRCodeTest() throws InterruptedException {
 
 
         solo.assertCurrentActivity("Wrong Activity", TitleScreenActivity.class);
@@ -124,7 +124,12 @@ public class removeCodeTest {
         MyScansScreenActivity activity = (MyScansScreenActivity) solo.getCurrentActivity();
         final ArrayList<QRCode> datalist = activity.datalist;
         int list_size = datalist.size();
+<<<<<<< HEAD
         solo.clickOnView(solo.getView(R.id.delete_button));
+=======
+        Thread.sleep(100);
+        solo.clickOnView(solo.getView(R.id.delete));
+>>>>>>> dfeb4ab969de667640d879a6d542b8b5aa2efc37
         assertEquals(datalist.size(), list_size-1);
     }
 

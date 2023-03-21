@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -37,6 +38,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.zxing.integration.android.IntentIntegrator;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 
@@ -51,6 +53,8 @@ public class ExploreScreenActivity extends HamburgerMenu
     private GpsTracker gpsTracker;
     private FirebaseFirestore db;
     private String username;
+    double latitude;
+    double longitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,8 +146,37 @@ public class ExploreScreenActivity extends HamburgerMenu
             }
         });
 
+        //getting current location
+        gpsTracker = new GpsTracker(ExploreScreenActivity.this);
+        if(gpsTracker.canGetLocation()){
+            latitude = gpsTracker.getLatitude();
+            longitude = gpsTracker.getLongitude();
+            Toast.makeText(this, "l"+latitude+longitude, Toast.LENGTH_SHORT)
+                    .show();
+        }else{
+            gpsTracker.showSettingsAlert();
+        }
+        if (!username.equals("NewTestName")) {
+            handleNewLocation(latitude, longitude, googleMap);
+        }
+
 
     }
+
+    private void handleNewLocation(Double currentLatitude, Double currentLongitude, GoogleMap googleMap) {
+
+
+        LatLng latLng = new LatLng(currentLatitude, currentLongitude);
+
+        //mMap.addMarker(new MarkerOptions().position(new LatLng(currentLatitude, currentLongitude)).title("Current Location"));
+        MarkerOptions options = new MarkerOptions()
+                .position(latLng)
+                .title("I am here!");
+        googleMap.addMarker(options);
+        //googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(currentLatitude, currentLongitude), 12.0f));
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
