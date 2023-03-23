@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -54,7 +55,7 @@ public class QRCodeStatsActivity extends AppCompatActivity {
     String username;
     ListView datalist;
     DrawRepresentation visualRepresentation;
-
+    FloatingActionButton viewSurroundings;
     /**
      * This method creates the activity to display QR code stats
      * @param savedInstanceState a bundle required to create the activity
@@ -84,7 +85,7 @@ public class QRCodeStatsActivity extends AppCompatActivity {
         qrCodeStatsAdapter = new QRCodeStatsAdapter(this, playerList, username);
         datalist.setAdapter(qrCodeStatsAdapter);
         QRCodesCollection qr_codes = new QRCodesCollection();
-
+        viewSurroundings = findViewById(R.id.qr_code_stats_comments_view_surroundings);
         // generating and displaying visual representation
         View representationView = findViewById(R.id.qr_code_stats_visual_representation_view);
         visualRepresentation = new DrawRepresentation(hash, 80);
@@ -140,6 +141,16 @@ public class QRCodeStatsActivity extends AppCompatActivity {
                       }
                 });
         //setList(username);
+        viewSurroundings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(QRCodeStatsActivity.this,
+                        QRCodeStatsCommentsActivity.class);
+                //intent.putExtra("Hash", hash);
+                //intent.putExtra("username", username);
+                startActivity(intent);
+            }
+        });
     }
 
     /**

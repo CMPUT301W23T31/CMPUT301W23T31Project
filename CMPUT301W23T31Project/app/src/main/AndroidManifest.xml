@@ -118,6 +118,7 @@
         <activity android:name=".LeaderboardTotalScoreActivity" />
         <activity android:name=".QRCodeStatsActivity" />
         <activity android:name=".QRCodeStatsCommentsActivity" />
+        <activity android:name=".CameraActivity"/>
         <activity
             android:name=".FinishLoginActivity"
             android:exported="false" />
