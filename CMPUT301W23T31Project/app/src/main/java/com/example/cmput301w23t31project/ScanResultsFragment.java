@@ -54,6 +54,7 @@ public class ScanResultsFragment extends DialogFragment {
     private boolean impliesScoreChange = false;
 
     public ToggleButton toggleButton;
+    public Button cameraButton;
     public TextView stateOnOff;
 
     /**
@@ -148,6 +149,7 @@ public class ScanResultsFragment extends DialogFragment {
         scoreView.setText(s);
 
         toggleButton = (ToggleButton) view.findViewById(R.id.location_button);
+        cameraButton = view.findViewById(R.id.scan_results_camera_button);
         set_on_off = view.findViewById(R.id.set_on_off);
         //stateOnOff=(TextView) view.findViewById(R.id.tvstate);
         //stateOnOff.setText("OFF");
@@ -169,6 +171,16 @@ public class ScanResultsFragment extends DialogFragment {
             }
         });
         Log.d("Called:","now");
+
+        cameraButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), CameraActivity.class);
+                intent.putExtra("Hash", hash);
+                intent.putExtra("Username", username);
+                startActivity(intent);
+            }
+        });
         //codes.processQRCodeInDatabase(name, String.valueOf(score), hash);
 //        set_on_off = view.findViewById(R.id.set_on_off);
 //        String on_off = set_on_off.getText().toString();
