@@ -8,4 +8,5 @@ import com.journeyapps.barcodescanner.CaptureActivity;
  * This class connects to the camera activity and ensures the scanning is portrait
  */
 public class CaptureActivityPortrait extends CaptureActivity {
+    // WE NEED THIS
 }
