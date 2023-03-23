@@ -44,9 +44,12 @@ public class MyScansScreenActivity extends HamburgerMenu implements SearchScanFr
     ListView qrcodeList;
     ArrayAdapter<QRCode> qrCodeAdapter;
     ArrayList<QRCode> datalist;
+    private ArrayList<QRCode> datalist2 = new ArrayList<>();
     String username;
     String player;
     String currentUser;
+
+    ListView QRCodeList;
 
     /**
      * On Create method
@@ -126,30 +129,40 @@ public class MyScansScreenActivity extends HamburgerMenu implements SearchScanFr
      */
     @Override
     public void onDisplayOkPressed(String name) {
-        QRCodesCollection QR_codes = new QRCodesCollection();
-        CollectionReference codes = QR_codes.getReference();
-        codes.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                int c =0;
-                if (task.isSuccessful()) {
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        if (document.getString("Name").equals(name)) {
-                            String hash_return = document.getId();
-                            Intent intent = new Intent(MyScansScreenActivity.this, QRCodeStatsActivity.class);
-                            intent.putExtra("Hash", hash_return);
-                            intent.putExtra("username", username);
-                            startActivity(intent);
-                            c += 1;
-                        }
-                    }
-                    if(c==0)
-                    {
-                        new QRCodeNotFoundFragment().show(getSupportFragmentManager(), "Error Message");
-                    }
-                }
+        int c =0;
+        int l = datalist.size();
+        Intent intent = getIntent();
+        username = intent.getStringExtra("username");
+        currentUser = intent.getStringExtra("crnt_username");
+        datalist2 = new ArrayList<>();
+        for(int i=0;i<l;i++) {
+            if (name.trim().equalsIgnoreCase(datalist.get(i).getName())){
+                datalist2.add(datalist.get(i));
+                QRCodeList = findViewById(R.id.leaderboard_list);
+                qrCodeAdapter = new QRCodeArrayAdapter(this, datalist2, username ,currentUser);
+                QRCodeList.setAdapter(qrCodeAdapter);
+                c+=1;
             }
-        });
+            else if((datalist.get(i).getName()).startsWith(name.toLowerCase().trim())){
+                datalist2.add(datalist.get(i));
+                QRCodeList = findViewById(R.id.leaderboard_list);
+                qrCodeAdapter = new QRCodeArrayAdapter(this, datalist2, username ,currentUser);
+                QRCodeList.setAdapter(qrCodeAdapter);
+                c+=1;
+            }
+            else if((datalist.get(i).getName()).contains(name.toLowerCase().trim())){
+                datalist2.add(datalist.get(i));
+                QRCodeList = findViewById(R.id.leaderboard_list);
+                qrCodeAdapter = new QRCodeArrayAdapter(this, datalist2, username ,currentUser);
+                QRCodeList.setAdapter(qrCodeAdapter);
+                c+=1;
+            }
+        }
+
+        if(c==0)
+        {
+            new QRCodeNotFoundFragment().show(getSupportFragmentManager(), "Error Message");
+        }
     }
 
     /**
@@ -187,5 +200,4 @@ public class MyScansScreenActivity extends HamburgerMenu implements SearchScanFr
             }
         });
     }
-
 }
