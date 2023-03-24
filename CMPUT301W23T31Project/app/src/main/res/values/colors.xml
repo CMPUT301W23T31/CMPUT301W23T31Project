@@ -18,9 +18,11 @@
     <color name="profile_back">#D8EFF8</color>
     <color name="profile_button_back">#D8E1FF</color>
 
+    <color name="app_primary_color">#00D6FF</color>
     <color name="login_buttons_brown">#7e5e60</color>
     <color name="light_background_tint">#888eac7b</color>
     <color name="dark_background_tint">#888eac7b</color>
+    <color name="forehead_bar_color">@color/app_primary_color</color>
     <color name="floating_button_color">#00D3B9</color>
     <color name="activity_navigation_button_color">#FF6200EE</color>
     <color name="activity_selected_button_color">#FF41009A</color>
