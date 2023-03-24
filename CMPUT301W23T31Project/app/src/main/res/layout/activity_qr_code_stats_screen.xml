@@ -14,7 +14,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:padding="10dp"
-        android:background="@color/stats_accent_green">
+        android:background="@color/light_background_tint">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -136,12 +136,13 @@
             android:layout_margin="5dp"
             android:paddingVertical="3dp"
             android:paddingHorizontal="30dp"
-            android:background="@color/stats_accent_green">
+            android:background="@color/dark_background_tint">
 
             <Button
                 android:id="@+id/qr_code_stats_comment_like_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@color/activity_action_button_color"
                 android:text="Like"
                 android:onClick="onLike"/>
 
@@ -167,6 +168,7 @@
                 android:id="@+id/qr_code_stats_comment_dislike_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@color/activity_action_button_color"
                 android:text="Dislike"
                 android:clickable="true"/>
 
@@ -189,6 +191,7 @@
             android:id="@+id/qr_code_stats_comment_list_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/activity_navigation_button_color"
             android:text="Comments"
             android:layout_marginHorizontal="20dp"/>
 
@@ -196,6 +199,7 @@
             android:id="@+id/qr_code_stats_scanned_by_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/activity_selected_button_color"
             android:text="Scanned By"
             android:layout_marginHorizontal="20dp"
             />

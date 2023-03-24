@@ -45,9 +45,8 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:backgroundTint="@color/view_profile_button_color"
         android:text="View\nProfile"
-        android:textSize="20dp"
-        android:drawableTintMode="src_atop"
-        android:drawableRight="@drawable/hamburger_menu" />
+        android:textSize="20dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
