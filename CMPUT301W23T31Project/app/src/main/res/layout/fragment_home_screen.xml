@@ -147,16 +147,5 @@
         app:layout_constraintTop_toBottomOf="@+id/home_screen_explore_button"
         app:srcCompat="@drawable/scan" />
 
-    <Button
-        android:id="@+id/view_nearby"
-        android:layout_width="95dp"
-        android:layout_height="55dp"
-        android:text="View nearby"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/home_screen_my_scans_button"
-        app:srcCompat="@drawable/scan" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

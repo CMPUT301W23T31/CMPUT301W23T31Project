@@ -17,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -55,17 +56,31 @@ public class ExploreScreenActivity extends HamburgerMenu
     private String username;
     double latitude;
     double longitude;
+    Button nearbyBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_explore_screen);
 
+        nearbyBtn = findViewById(R.id.nearby_button);
+
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         Intent intent = getIntent();
         username = intent.getStringExtra("username");
+
+        nearbyBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ExploreScreenActivity.this,
+                        NearByCodesActivity.class);
+                intent.putExtra("username", username);
+                intent.putExtra("crnt_username", username);
+                startActivity(intent);
+            }
+        });
     }
 
     /**
