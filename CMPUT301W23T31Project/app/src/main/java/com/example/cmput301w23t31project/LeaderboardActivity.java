@@ -114,7 +114,7 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
                             },250);
 
 
-                Button searchUser;
+        Button searchUser;
         searchUser = findViewById(R.id.leaderboard_search_user_button);
         searchUser.setOnClickListener(new View.OnClickListener() {
             @Override
