@@ -89,17 +89,6 @@ public class NearByCodesActivity extends HamburgerMenu implements SearchScanFrag
         QRCodesCollection QRCodes = new QRCodesCollection();
         findNearbyCodes(QRCodes);
 
-        // functionality for when a QR code is chosen from list
-        qrcodeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(NearByCodesActivity.this, QRCodeStatsActivity.class);
-                intent.putExtra("Hash", datalist.get(i).getHash());
-                intent.putExtra("username", username);
-                startActivity(intent);
-            }
-        });
-
         Button searchScan;
         searchScan = findViewById(R.id.nearby_scans_search_scan_button);
         searchScan.setOnClickListener(new View.OnClickListener() {
