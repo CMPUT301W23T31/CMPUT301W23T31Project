@@ -92,7 +92,6 @@ public class MainActivity extends HamburgerMenu implements ScanResultsFragment.O
         ImageView playerInfoBtn = findViewById(R.id.home_screen_player_info_button);
         ImageView exploreBtn = findViewById(R.id.home_screen_explore_button);
         ImageView myScanBtn = findViewById(R.id.home_screen_my_scans_button);
-        Button nearbyBtn = findViewById(R.id.view_nearby);
 
         String home_username = "Welcome " + username + "!";
         home_screen_username.setText(home_username);
@@ -168,17 +167,7 @@ public class MainActivity extends HamburgerMenu implements ScanResultsFragment.O
             }
         });
 
-        // "nearby scans" button functionality
-        nearbyBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,
-                        NearByCodesActivity.class);
-                intent.putExtra("username", username);
-                intent.putExtra("crnt_username", username);
-                startActivity(intent);
-            }
-        });
+
 
     }
 

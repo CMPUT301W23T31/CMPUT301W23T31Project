@@ -55,7 +55,7 @@ public class QRCodeStatsActivity extends AppCompatActivity {
     String username;
     ListView datalist;
     DrawRepresentation visualRepresentation;
-    FloatingActionButton viewSurroundings;
+    Button viewSurroundings;
     /**
      * This method creates the activity to display QR code stats
      * @param savedInstanceState a bundle required to create the activity
