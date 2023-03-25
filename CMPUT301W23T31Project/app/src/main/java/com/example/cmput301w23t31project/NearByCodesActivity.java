@@ -25,14 +25,53 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.Set;
 //https://stackoverflow.com/questions/3067530/how-can-i-get-minimum-and-maximum-latitude-and-longitude-using-current-location
-//https://stackoverflow.com/questions/27928/calculate-distance-between-two-latitude-longitude-points-haversine-formula
-public class NearByCodesActivity extends HamburgerMenu{
+
+
+public class NearByCodesActivity extends HamburgerMenu implements SearchScanFragment.OnFragmentInteractionListener{
+
 
     ListView qrcodeList;
     ArrayAdapter<QRCode> qrCodeAdapter;
-    ArrayList<QRCode> datalist;
+    ArrayList<QRCode> datalist, datalist2;
     String username;
     String currentUser;
+
+    @Override
+    public void onDisplayOkPressed(String name) {
+        int c =0;
+        int l = datalist.size();
+        datalist2 = new ArrayList<>();
+        for(int i=0;i<l;i++) {
+            if (name.trim().equalsIgnoreCase(datalist.get(i).getName())){
+                datalist2.add(datalist.get(i));
+                qrcodeList = findViewById(R.id.leaderboard_list);
+                qrCodeAdapter = new NearbyScansArrayAdapter(this, datalist2);
+                qrcodeList.setAdapter(qrCodeAdapter);
+                c+=1;
+            }
+            else if((datalist.get(i).getName()).startsWith(name.toLowerCase().trim())){
+                datalist2.add(datalist.get(i));
+                qrcodeList = findViewById(R.id.leaderboard_list);
+                qrCodeAdapter = new NearbyScansArrayAdapter(this, datalist2);
+                qrcodeList.setAdapter(qrCodeAdapter);
+                c+=1;
+            }
+            else if((datalist.get(i).getName()).contains(name.toLowerCase().trim())){
+                datalist2.add(datalist.get(i));
+                qrcodeList = findViewById(R.id.leaderboard_list);
+                qrCodeAdapter = new NearbyScansArrayAdapter(this, datalist2);
+                qrcodeList.setAdapter(qrCodeAdapter);
+                c+=1;
+            }
+        }
+
+        if(c==0)
+        {
+            new QRCodeNotFoundFragment().show(getSupportFragmentManager(), "Error Message");
+        }
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,14 +91,12 @@ public class NearByCodesActivity extends HamburgerMenu{
         QRCodesCollection QRCodes = new QRCodesCollection();
         findNearbyCodes(QRCodes);
 
-        // functionality for when a QR code is chosen from list
-        qrcodeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        Button searchScan;
+        searchScan = findViewById(R.id.nearby_scans_search_scan_button);
+        searchScan.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(NearByCodesActivity.this, QRCodeStatsActivity.class);
-                intent.putExtra("Hash", datalist.get(i).getHash());
-                intent.putExtra("username", username);
-                startActivity(intent);
+            public void onClick(View v) {
+                new SearchScanFragment().show(getSupportFragmentManager(),"Search Scan");
             }
         });
 

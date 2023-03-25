@@ -85,19 +85,6 @@ public class MyScansScreenActivity extends HamburgerMenu implements SearchScanFr
                 new SearchScanFragment().show(getSupportFragmentManager(), "Search Scan");
             }
         });
-
-        // functionality for when a QR code is chosen from list
-        qrcodeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Log.d(TAG, "REACHED HERE!!");
-                Intent intent = new Intent(MyScansScreenActivity.this, QRCodeStatsActivity.class);
-                intent.putExtra("Hash", datalist.get(i).getHash());
-                intent.putExtra("username", username);
-                startActivity(intent);
-            }
-        });
-
     }
 
     /**

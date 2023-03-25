@@ -28,9 +28,9 @@
                 android:id="@+id/leaderboard_by_high_score_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@color/activity_navigation_button_color"
                 android:onClick="onClickHighScore"
                 android:text="High Score"
-
                 android:textSize="8dp"
                 android:layout_margin="3dp"/>
 
@@ -38,9 +38,9 @@
                 android:id="@+id/leaderboard_by_count_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@color/activity_navigation_button_color"
                 android:onClick="onClickCount"
                 android:text="Count"
-
                 android:textSize="10dp"
                 android:layout_margin="3dp"/>
 
@@ -48,9 +48,9 @@
                 android:id="@+id/leaderboard_by_total_score_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@color/activity_selected_button_color"
                 android:onClick="onClickTotalScore"
                 android:text="Total Score"
-
                 android:textSize="10dp"
                 android:layout_margin="3dp"/>
 
@@ -58,9 +58,9 @@
                 android:id="@+id/leaderboard_by_regional_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@color/activity_navigation_button_color"
                 android:onClick="onClickRegional"
                 android:text="Regional"
-
                 android:textSize="10dp"
                 android:layout_margin="3dp"/>
         </LinearLayout>

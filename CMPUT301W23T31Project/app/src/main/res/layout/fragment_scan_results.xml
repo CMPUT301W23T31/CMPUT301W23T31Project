@@ -30,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Record Location?"></ToggleButton>
+            android:text="Record Location?"/>
 
         <TextView
             android:id="@+id/set_on_off"
@@ -56,6 +56,7 @@
         android:id="@+id/scan_results_camera_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/activity_action_button_color"
         android:textSize="20sp"
         android:text="Upload image of QR code location"/>
 
