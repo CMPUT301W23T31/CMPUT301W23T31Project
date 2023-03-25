@@ -158,16 +158,17 @@ public class NearByCodesActivity extends HamburgerMenu implements SearchScanFrag
                         datalist.add(new QRCode(doc.getString("Name"), Integer.parseInt(doc.getString("Score")), doc.getId(),dist));
                     }
                 }
+                sortList();
                 qrCodeAdapter.notifyDataSetChanged();
             }
         });
-        sortList();
+
     }
 
     public void sortList() {
         for (int i = 0; i < datalist.size() - 1; i++)
             for (int j = 0; j < datalist.size() - i - 1; j++)
-                if (datalist.get(j).getDistance() > datalist.get(j + 1).getDistance()) {
+                if (datalist.get(j).getDistance()> datalist.get(j + 1).getDistance()) {
                     QRCode temp = datalist.get(j);
                     datalist.set(j, datalist.get(j + 1));
                     datalist.set(j + 1, temp);
