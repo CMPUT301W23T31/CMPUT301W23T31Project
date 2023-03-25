@@ -25,7 +25,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.Set;
 //https://stackoverflow.com/questions/3067530/how-can-i-get-minimum-and-maximum-latitude-and-longitude-using-current-location
-
+//https://stackoverflow.com/questions/27928/calculate-distance-between-two-latitude-longitude-points-haversine-formula
 public class NearByCodesActivity extends HamburgerMenu{
 
     ListView qrcodeList;
@@ -106,20 +106,46 @@ public class NearByCodesActivity extends HamburgerMenu{
         double minLongitude = crntLongitude - (20/111.12)*Math.cos(crntLatitude);
         double maxLongitude = crntLongitude + (20/111.12)*Math.cos(crntLatitude);
 
+        double finalCrntLatitude = crntLatitude;
+        double finalCrntLongitude = crntLongitude;
         QRCodes.getReference().get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 for (QueryDocumentSnapshot doc : task.getResult()) {
                     double foundLat = Double.parseDouble(doc.getString("Latitude"));
                     double foundLng = Double.parseDouble(doc.getString("Longitude"));
+                    double dist = distanceToCode(foundLat, foundLng, finalCrntLatitude, finalCrntLongitude);
+                    Log.d("distances in km: ", " "+dist);
                     if ((minLatitude<= foundLat && foundLat <= maxLatitude)&&(minLongitude<= foundLng && foundLng <= maxLongitude)) {
                         Log.d("Codes nearby:",doc.getString("Name"));
-                        datalist.add(new QRCode(doc.getString("Name"), Integer.parseInt(doc.getString("Score")), doc.getId()));
+                        datalist.add(new QRCode(doc.getString("Name"), Integer.parseInt(doc.getString("Score")), doc.getId(),dist));
                     }
                 }
                 qrCodeAdapter.notifyDataSetChanged();
             }
         });
+        sortList();
+    }
 
+    public void sortList() {
+        for (int i = 0; i < datalist.size() - 1; i++)
+            for (int j = 0; j < datalist.size() - i - 1; j++)
+                if (datalist.get(j).getDistance() > datalist.get(j + 1).getDistance()) {
+                    QRCode temp = datalist.get(j);
+                    datalist.set(j, datalist.get(j + 1));
+                    datalist.set(j + 1, temp);
+
+                }
+        qrCodeAdapter.notifyDataSetChanged();
+    }
+
+    private double distanceToCode(double lat1,double lon1,double lat2,double lon2){
+        double p = 0.017453292519943295;    // Math.PI / 180
+
+        double a = 0.5 - Math.cos((lat2 - lat1) * p)/2 +
+                Math.cos(lat1 * p) * Math.cos(lat2 * p) *
+                        (1 - Math.cos((lon2 - lon1) * p))/2;
+
+        return 12742 * Math.asin(Math.sqrt(a)); // 2 * R; R = 6371 km
     }
 }
