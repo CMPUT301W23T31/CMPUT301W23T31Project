@@ -85,11 +85,18 @@ public class NearbyScansArrayAdapter extends ArrayAdapter<QRCode> {
 
         // Filling in details
         String QRName = QRCode.getName();
+        double QRDistance = QRCode.getDistance();
         Integer QRScore = QRCode.getScore();
+
+        if (QRDistance < 1){
+            QRDistance = QRDistance * 100;
+            QRCodePoints.setText(QRScore + " pts | "+String.format("%.2f",QRDistance)+" m away");
+        }else{
+            QRCodePoints.setText(QRScore + " pts | "+String.format("%.2f",QRDistance)+" km away");
+        }
 
         Log.d(TAG, "ADAPT: " + QRName);
         QRCodeName.setText(QRCode.getName());
-        QRCodePoints.setText("Points: " + QRScore);
         delete.setVisibility(View.GONE);
 
         // dynamically setting color

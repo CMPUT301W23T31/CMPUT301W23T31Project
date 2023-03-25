@@ -8,6 +8,7 @@ public class QRCode {
     private String name;
     private int score;
     private String hash;
+    private double distance;
 
     /**
      * Creates a new instance of a QR code
@@ -19,6 +20,20 @@ public class QRCode {
         this.name = name;
         this.score = score;
         this.hash =hash;
+    }
+    QRCode(String name, int score, String hash, double distance) {
+        this.name = name;
+        this.score = score;
+        this.hash =hash;
+        this.distance = distance;
+    }
+
+    public double getDistance() {
+        return distance;
+    }
+
+    public void setDistance(double distance) {
+        this.distance = distance;
     }
 
     public String getHash() {
