@@ -12,11 +12,6 @@
         app:layout_constraintStart_toStartOf="parent"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/leaderboard_title_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Total Score Screen" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -64,6 +59,8 @@
                 android:textSize="10dp"
                 android:layout_margin="3dp"/>
         </LinearLayout>
+
+
 
         <ListView
             android:id="@+id/leaderboard_list"
