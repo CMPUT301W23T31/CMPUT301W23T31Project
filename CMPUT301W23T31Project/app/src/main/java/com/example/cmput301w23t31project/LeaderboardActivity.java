@@ -39,8 +39,13 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
     Button countBtn;
     Button totalScoreBtn;
     Button regionalBtn;
+    String total_score;
+    String high_score;
+    String count;
+    TextView high_score_text;
+    TextView total_score_text;
+    TextView count_text;
     private String username;
-
     private ArrayList<Player> dataList = new ArrayList<>();
     private ArrayList<Player> dataList2 = new ArrayList<>();
     private LeaderboardArrayAdapter leaderboardArrayAdapter;
@@ -53,33 +58,33 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
 
     /**
      * This method gets the search results and displays the results, if there are any
-     * @param username
+     * @param search_username
      *      The searched username
      */
     @Override
-    public void searchUser(String username){
+    public void searchUser(String search_username){
         int l = dataList.size();
         int c = 0;
         dataList2 = new ArrayList<>();
         for(int i=0;i<l;i++) {
-            if (username.trim().equalsIgnoreCase(dataList.get(i).getUsername())) {
+            if (search_username.trim().equalsIgnoreCase(dataList.get(i).getUsername())) {
                 dataList2.add(dataList.get(i));
                 LeaderboardList = findViewById(R.id.leaderboard_list);
-                leaderboardArrayAdapter = new LeaderboardArrayAdapter(this, dataList2,username);
+                leaderboardArrayAdapter = new LeaderboardArrayAdapter(this, dataList2,search_username);
                 LeaderboardList.setAdapter(leaderboardArrayAdapter);
                 c += 1;
             }
-            else if(((dataList.get(i).getUsername()).toLowerCase()).startsWith(username.toLowerCase().trim())){
+            else if(((dataList.get(i).getUsername()).toLowerCase()).startsWith(search_username.toLowerCase().trim())){
                 dataList2.add(dataList.get(i));
                 LeaderboardList = findViewById(R.id.leaderboard_list);
-                leaderboardArrayAdapter = new LeaderboardArrayAdapter(this, dataList2,username);
+                leaderboardArrayAdapter = new LeaderboardArrayAdapter(this, dataList2,search_username);
                 LeaderboardList.setAdapter(leaderboardArrayAdapter);
                 c += 1;
             }
-            else if(((dataList.get(i).getUsername()).toLowerCase()).contains(username.toLowerCase().trim())){
+            else if(((dataList.get(i).getUsername()).toLowerCase()).contains(search_username.toLowerCase().trim())){
                 dataList2.add(dataList.get(i));
                 LeaderboardList = findViewById(R.id.leaderboard_list);
-                leaderboardArrayAdapter = new LeaderboardArrayAdapter(this, dataList2,username);
+                leaderboardArrayAdapter = new LeaderboardArrayAdapter(this, dataList2,search_username);
                 LeaderboardList.setAdapter(leaderboardArrayAdapter);
                 c += 1;
             }
@@ -108,8 +113,11 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
         LeaderboardList = findViewById(R.id.leaderboard_list);
         leaderboardArrayAdapter = new LeaderboardArrayAdapter(this, dataList,username);
         LeaderboardList.setAdapter(leaderboardArrayAdapter);
-        //PlayerScansCollection playerScansCollection = new PlayerScansCollection();
-        //playerScansCollection.getPlayerScans();
+        high_score_text = findViewById(R.id.current_high_score);
+        total_score_text = findViewById(R.id.current_total_score);
+        count_text = findViewById(R.id.current_count);
+        setStats();
+
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
                                 @Override
@@ -128,6 +136,9 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
                 new SearchUserFragment().show(getSupportFragmentManager(),"Search Username");
             }
         });
+
+
+
 
     }
 
@@ -168,6 +179,37 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
                         i++;
                     }
                     leaderboardArrayAdapter.notifyDataSetChanged();
+
+                }}});
+
+    }
+
+    public void setStats(){
+        db = FirebaseFirestore.getInstance();
+        db.collection("PlayerInfo").get() .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                Log.d("Stats",username);
+                // after getting the data we are calling on success method
+                // and inside this method we are checking if the received
+                // query snapshot is empty or not.
+                if (!queryDocumentSnapshots.isEmpty()) {
+                    // if the snapshot is not empty we are
+                    // hiding our progress bar and adding
+                    // our data in a list.
+                    List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+                    for (DocumentSnapshot document : list) {
+                        if(document.getId().equals(username)){
+                            total_score = document.getString("Total Score");
+                            high_score = document.getString("Highest Scoring QR Code");
+                            count = document.getString("Total Scans");
+                            high_score_text.setText(high_score);
+                            total_score_text.setText(total_score);
+                            count_text.setText(count);
+                            Log.d("Stats",username+" "+total_score+" "+high_score+" "+count);
+                        }
+
+                    }
 
                 }}});
 

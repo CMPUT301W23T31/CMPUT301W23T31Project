@@ -60,6 +60,125 @@
                 android:layout_margin="3dp"/>
         </LinearLayout>
 
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:alpha="0.5"
+            android:background="@drawable/drawable_ui"
+            android:backgroundTint="#025E8F"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/trophy"
+                    android:layout_width="180dp"
+                    android:layout_height="140dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp"
+                    android:padding="10dp"
+
+                    app:srcCompat="@drawable/trophy" />
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:fontFamily="sans-serif-condensed-medium"
+                        android:layout_height="wrap_content"
+                        android:textSize="20dp"
+                        android:textColor="#ffffff"
+                        android:textStyle="bold"
+                        android:text="High Score"></TextView>
+                    <TextView
+                        android:id="@+id/current_high_score"
+                        android:fontFamily="sans-serif-condensed-medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="20dp"
+                        android:textColor="#ffffff"
+                        android:text="High Score"></TextView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:fontFamily="sans-serif-condensed-medium"
+                        android:layout_height="wrap_content"
+                        android:textSize="20dp"
+                        android:textColor="#ffffff"
+                        android:textStyle="bold"
+                        android:text="Total Score"></TextView>
+                    <TextView
+                        android:id="@+id/current_total_score"
+                        android:fontFamily="sans-serif-condensed-medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="20dp"
+                        android:textColor="#ffffff"
+                        android:text="Total Score"></TextView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-condensed-medium"
+                        android:textSize="20dp"
+                        android:textColor="#ffffff"
+                        android:textStyle="bold"
+                        android:text="Count"></TextView>
+                    <TextView
+                        android:id="@+id/current_count"
+                        android:fontFamily="sans-serif-condensed-medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="20dp"
+                        android:textColor="#ffffff"
+                        android:text="count"></TextView>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
         <ListView
             android:id="@+id/leaderboard_list"
             android:layout_width="match_parent"
