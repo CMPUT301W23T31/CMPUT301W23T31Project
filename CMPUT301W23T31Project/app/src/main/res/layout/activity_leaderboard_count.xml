@@ -8,55 +8,175 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="center_horizontal">
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/leaderboard_by_high_score_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:background="@color/white"
                 android:backgroundTint="@color/activity_navigation_button_color"
                 android:onClick="onClickHighScore"
                 android:text="High Score"
-                android:textSize="@dimen/leaderboard_button_text_size"
-                android:layout_margin="3dp"/>
+                android:textSize="@dimen/leaderboard_button_text_size" />
 
             <Button
                 android:id="@+id/leaderboard_by_count_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="3dp"
                 android:backgroundTint="@color/activity_selected_button_color"
                 android:onClick="onClickCount"
                 android:text="Count"
-                android:textSize="@dimen/leaderboard_button_text_size"
-                android:layout_margin="3dp"/>
+                android:textSize="@dimen/leaderboard_button_text_size" />
 
             <Button
                 android:id="@+id/leaderboard_by_total_score_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="3dp"
                 android:backgroundTint="@color/activity_navigation_button_color"
                 android:onClick="onClickTotalScore"
                 android:text="Total Score"
-                android:textSize="@dimen/leaderboard_button_text_size"
-                android:layout_margin="3dp"/>
+                android:textSize="@dimen/leaderboard_button_text_size" />
 
             <Button
                 android:id="@+id/leaderboard_by_regional_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="3dp"
                 android:backgroundTint="@color/activity_navigation_button_color"
                 android:onClick="onClickRegional"
                 android:text="Regional"
-                android:textSize="@dimen/leaderboard_button_text_size"
-                android:layout_margin="3dp"/>
+                android:textSize="@dimen/leaderboard_button_text_size" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:alpha="0.5"
+            android:background="@drawable/drawable_ui"
+            android:backgroundTint="#025E8F"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/trophy"
+                    android:layout_width="180dp"
+                    android:layout_height="140dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp"
+                    android:padding="10dp"
+
+                    app:srcCompat="@drawable/trophy" />
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-condensed-medium"
+                        android:text="High Score"
+                        android:textColor="#ffffff"
+                        android:textSize="20dp"
+                        android:textStyle="bold"></TextView>
+                    <TextView
+                        android:id="@+id/current_high_score"
+                        android:fontFamily="sans-serif-condensed-medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="20dp"
+                        android:textColor="#ffffff"
+                        android:text="High Score"></TextView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-condensed-medium"
+                        android:textSize="20dp"
+                        android:textColor="#ffffff"
+                        android:textStyle="bold"
+                        android:text="Total Score"></TextView>
+                    <TextView
+                        android:id="@+id/current_total_score"
+                        android:layout_width="wrap_content"
+                        android:fontFamily="sans-serif-condensed-medium"
+                        android:layout_height="wrap_content"
+                        android:textSize="20dp"
+                        android:textColor="#ffffff"
+                        android:text="Total Score"></TextView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+                    <TextView
+                        android:fontFamily="sans-serif-condensed-medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="20dp"
+                        android:textColor="#ffffff"
+                        android:textStyle="bold"
+                        android:text="Count"></TextView>
+                    <TextView
+                        android:id="@+id/current_count"
+                        android:fontFamily="sans-serif-condensed-medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="20dp"
+                        android:textColor="#ffffff"
+                        android:text="count"></TextView>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
         </LinearLayout>
 
         <ListView

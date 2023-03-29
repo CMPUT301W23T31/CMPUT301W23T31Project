@@ -32,8 +32,13 @@ public class LeaderboardTotalScoreActivity extends HamburgerMenu implements Sear
     Button countBtn;
     Button totalScoreBtn;
     Button regionalBtn;
+    String total_score;
+    String high_score;
+    String count;
+    TextView high_score_text;
+    TextView total_score_text;
+    TextView count_text;
     private String username;
-
     private ArrayList<Player> dataList = new ArrayList<>();
     private ArrayList<Player> dataList2 = new ArrayList<>();
     private LeaderboardTotalScoreArrayAdapter leaderboardTotalScoreArrayAdapter;
@@ -99,6 +104,12 @@ public class LeaderboardTotalScoreActivity extends HamburgerMenu implements Sear
         LeaderboardList = findViewById(R.id.leaderboard_list);
         leaderboardTotalScoreArrayAdapter = new LeaderboardTotalScoreArrayAdapter(this, dataList,username);
         LeaderboardList.setAdapter(leaderboardTotalScoreArrayAdapter);
+
+        high_score_text = findViewById(R.id.current_high_score);
+        total_score_text = findViewById(R.id.current_total_score);
+        count_text = findViewById(R.id.current_count);
+        setStats();
+
         PlayerInfoCollection playerScansCollection = new PlayerInfoCollection();
         playerScansCollection.getPlayerScans();
         final Handler handler = new Handler();
@@ -118,6 +129,35 @@ public class LeaderboardTotalScoreActivity extends HamburgerMenu implements Sear
                 new SearchUserFragment().show(getSupportFragmentManager(),"Search Username");
             }
         });
+
+    }
+
+    public void setStats(){
+        db = FirebaseFirestore.getInstance();
+        db.collection("PlayerInfo").get() .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                // after getting the data we are calling on success method
+                // and inside this method we are checking if the received
+                // query snapshot is empty or not.
+                if (!queryDocumentSnapshots.isEmpty()) {
+                    // if the snapshot is not empty we are
+                    // hiding our progress bar and adding
+                    // our data in a list.
+                    List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+                    for (DocumentSnapshot document : list) {
+                        if(document.getId().equals(username)){
+                            total_score = document.getString("Total Score");
+                            high_score = document.getString("Highest Scoring QR Code");
+                            count = document.getString("Total Scans");
+                            high_score_text.setText(high_score);
+                            total_score_text.setText(total_score);
+                            count_text.setText(count);
+                        }
+
+                    }
+
+                }}});
 
     }
 
