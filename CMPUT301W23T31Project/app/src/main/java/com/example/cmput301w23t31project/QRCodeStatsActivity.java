@@ -14,6 +14,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -63,6 +64,10 @@ public class QRCodeStatsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         // Get access to the database
         super.onCreate(savedInstanceState);
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setCustomView(R.layout.title_bar);
+        TextView title = findViewById(R.id.myTitle);
+        title.setText("QR STATS");
         setContentView(R.layout.activity_qr_code_stats_screen);
         Intent intent = getIntent();
         hash = intent.getStringExtra("Hash");

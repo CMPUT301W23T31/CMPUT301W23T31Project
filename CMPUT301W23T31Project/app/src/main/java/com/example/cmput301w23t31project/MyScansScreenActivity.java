@@ -4,6 +4,7 @@ package com.example.cmput301w23t31project;
 import static android.content.ContentValues.TAG;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -59,6 +60,10 @@ public class MyScansScreenActivity extends HamburgerMenu implements SearchScanFr
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setCustomView(R.layout.title_bar);
+        TextView title = findViewById(R.id.myTitle);
+        title.setText("SCAN LIST");
         setContentView(R.layout.activity_my_scans_screen);
 
         Button searchScan;

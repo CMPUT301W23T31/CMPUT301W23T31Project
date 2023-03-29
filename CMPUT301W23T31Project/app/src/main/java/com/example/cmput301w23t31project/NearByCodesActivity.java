@@ -13,8 +13,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -75,6 +77,10 @@ public class NearByCodesActivity extends HamburgerMenu implements SearchScanFrag
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setCustomView(R.layout.title_bar);
+        TextView title = findViewById(R.id.myTitle);
+        title.setText("Nearby Codes");
         setContentView(R.layout.activity_nearby_scans);
 
         Intent intent = getIntent();
@@ -158,16 +164,17 @@ public class NearByCodesActivity extends HamburgerMenu implements SearchScanFrag
                         datalist.add(new QRCode(doc.getString("Name"), Integer.parseInt(doc.getString("Score")), doc.getId(),dist));
                     }
                 }
+                sortList();
                 qrCodeAdapter.notifyDataSetChanged();
             }
         });
-        sortList();
+
     }
 
     public void sortList() {
         for (int i = 0; i < datalist.size() - 1; i++)
             for (int j = 0; j < datalist.size() - i - 1; j++)
-                if (datalist.get(j).getDistance() > datalist.get(j + 1).getDistance()) {
+                if (datalist.get(j).getDistance()> datalist.get(j + 1).getDistance()) {
                     QRCode temp = datalist.get(j);
                     datalist.set(j, datalist.get(j + 1));
                     datalist.set(j + 1, temp);
