@@ -26,6 +26,7 @@
                 android:onClick="onClickHighScore"
                 android:text="High Score"
                 android:textSize="@dimen/leaderboard_button_text_size"
+                android:background="@color/white"
                 android:layout_margin="3dp"/>
 
             <Button
@@ -58,6 +59,25 @@
                 android:textSize="@dimen/leaderboard_button_text_size"
                 android:layout_margin="3dp"/>
         </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="360dp"
+            android:layout_height="360dp"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="?actionBarSize"
+            android:layout_marginEnd="?actionBarSize"
+            android:alpha="0.5"
+            android:background="@drawable/drawable_ui"
+            android:backgroundTint="#B3B1B1"
+            android:elevation="60dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rank"></TextView>
+        </RelativeLayout>
+
+
 
         <ListView
             android:id="@+id/leaderboard_list"
