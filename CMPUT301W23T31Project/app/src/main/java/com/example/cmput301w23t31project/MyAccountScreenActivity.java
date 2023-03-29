@@ -2,6 +2,7 @@ package com.example.cmput301w23t31project;
 
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -41,6 +42,10 @@ public class MyAccountScreenActivity extends HamburgerMenu {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setCustomView(R.layout.title_bar);
+        TextView title = findViewById(R.id.myTitle);
+        title.setText("MY ACCOUNT");
         setContentView(R.layout.activity_my_account_screen);
         Intent intent = getIntent();
         username = intent.getStringExtra("username");
