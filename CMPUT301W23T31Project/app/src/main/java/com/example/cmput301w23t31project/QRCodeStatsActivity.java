@@ -150,6 +150,8 @@ public class QRCodeStatsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(QRCodeStatsActivity.this, SurroundingsActivity.class);
+                intent.putExtra("username", username);
+                intent.putExtra("hash", hash);
                 startActivity(intent);
             }
         });
