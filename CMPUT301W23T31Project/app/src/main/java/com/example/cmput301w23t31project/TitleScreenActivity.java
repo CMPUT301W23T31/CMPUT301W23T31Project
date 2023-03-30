@@ -36,8 +36,8 @@ public class TitleScreenActivity extends AppCompatActivity {
         title.setText("QR HUNTER");
         //requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
         setContentView(R.layout.fragment_title_screen);
-        PlayerInfoCollection playerScansCollection = new PlayerInfoCollection();
-        playerScansCollection.getPlayerScans();
+        //PlayerInfoCollection playerScansCollection = new PlayerInfoCollection();
+        //playerScansCollection.getPlayerScans();
         //getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.title_bar);
 
 

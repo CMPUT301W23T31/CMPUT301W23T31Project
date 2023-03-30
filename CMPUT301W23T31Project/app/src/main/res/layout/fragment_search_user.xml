@@ -8,6 +8,8 @@
         android:id="@+id/search_user"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Username"/>
+
+        android:hint="Username"
+        style="@style/basic_medium_text"/>
 
 </LinearLayout>

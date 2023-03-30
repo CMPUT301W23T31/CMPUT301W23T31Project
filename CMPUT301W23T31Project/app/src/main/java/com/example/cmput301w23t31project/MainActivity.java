@@ -73,10 +73,6 @@ public class MainActivity extends HamburgerMenu implements ScanResultsFragment.O
         playerScansCollection.CreateLeaderBoard();
 
         findNearbyCodes(QRCodes);
-
-        //playerScansCollection.sortByCountList();
-        //playerScansCollection.sortByHighScoreList();
-        //playerScansCollection.sortByTotalScoreList();
         String ID = Utilities.getDeviceId(this);
 
         //get login details
@@ -202,7 +198,7 @@ public class MainActivity extends HamburgerMenu implements ScanResultsFragment.O
      * @param view relevant view
      */
     public void onClickLeaderboard(View view){
-        Intent intent = new Intent(this, LeaderboardActivity.class);
+        Intent intent = new Intent(this, LeaderboardCountActivity.class);
         intent.putExtra("username", username);
         intent.putExtra("state", "COUNT");
         startActivity(intent);

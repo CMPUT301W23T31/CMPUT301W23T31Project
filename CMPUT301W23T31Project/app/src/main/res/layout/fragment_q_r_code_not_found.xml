@@ -8,9 +8,9 @@
         android:id="@+id/error_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+
         android:text="QRCode Not Found!"
         android:layout_margin="20dp"
-        android:textStyle="bold"
-        android:textSize="15dp"/>
+        style="@style/accent_medium_header"/>
 
 </LinearLayout>

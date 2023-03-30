@@ -26,13 +26,17 @@
                 android:id="@+id/qr_code_stats_code_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="------- QR Name (Long) -------"/>
+
+                android:hint="------- QR Name (Long) -------"
+                style="@style/bold_mini_header"/>
 
             <TextView
                 android:id="@+id/qr_code_stats_code_coordinates"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="Coordinates of Code"/>
+
+                android:hint="Coordinates of Code"
+                style="@style/basic_small_text"/>
 
         </LinearLayout>
 
@@ -53,8 +57,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+
                     android:text="Quick Overview"
-                    android:textStyle="bold" />
+                    style="@style/bold_mini_header"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -65,13 +70,17 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Score Points: " />
+
+                        android:text="Score Points: "
+                        style="@style/basic_small_text"/>
 
                     <TextView
                         android:id="@+id/qr_code_stats_code_score"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:hint="Score" />
+
+                        android:hint="Score"
+                        style="@style/italic_small_text"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -83,13 +92,17 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Last Scanned: " />
+
+                        android:text="Last Scanned: "
+                        style="@style/basic_small_text"/>
 
                     <TextView
                         android:id="@+id/qr_code_stats_code_last_scanned_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:hint="Date" />
+
+                        android:hint="Date"
+                        style="@style/italic_small_text"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -101,13 +114,17 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Times Scanned: " />
+
+                        android:text="Times Scanned: "
+                        style="@style/basic_small_text"/>
 
                     <TextView
                         android:id="@+id/qr_code_stats_code_total_scans"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:hint="0" />
+
+                        android:hint="0"
+                        style="@style/italic_small_text"/>
                 </LinearLayout>
 
             </LinearLayout>
@@ -144,9 +161,10 @@
                 android:id="@+id/qr_code_stats_comment_like_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/activity_action_button_color"
+                android:onClick="onLike"
+
                 android:text="Like"
-                android:onClick="onLike"/>
+                style="@style/action_button_style"/>
 
             <Space
                 android:layout_width="20dp"
@@ -156,11 +174,9 @@
                 android:id="@+id/qr_code_stats_code_likes_dislikes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="L|D"
-                android:textColor="@color/black"
-                android:paddingRight="5dp"
-                android:textSize="24sp"
-                android:textStyle="bold" />
+
+                android:hint="L | D"
+                style="@style/bold_sub_header"/>
 
             <Space
                 android:layout_width="20dp"
@@ -170,9 +186,10 @@
                 android:id="@+id/qr_code_stats_comment_dislike_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/activity_action_button_color"
+                android:clickable="true"
+
                 android:text="Dislike"
-                android:clickable="true"/>
+                style="@style/action_button_style"/>
 
         </LinearLayout>
 
@@ -193,18 +210,20 @@
             android:id="@+id/qr_code_stats_comment_list_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/activity_navigation_button_color"
+            android:layout_marginHorizontal="20dp"
+
             android:text="Comments"
-            android:layout_marginHorizontal="20dp"/>
+            style="@style/action_button_style"/>
 
         <Button
             android:id="@+id/qr_code_stats_scanned_by_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+
             android:backgroundTint="@color/activity_selected_button_color"
             android:text="Scanned By"
-            android:layout_marginHorizontal="20dp"
-            />
+            style="@style/navigation_button_style"/>
 
     </LinearLayout>
 
@@ -226,10 +245,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
-        android:layout_margin="8dp"
-        android:backgroundTint="@color/floating_button_color"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:text="View Surroundings"/>
+
+        android:text="View Surroundings"
+        style="@style/floating_button_style"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
