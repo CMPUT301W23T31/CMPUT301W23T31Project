@@ -207,6 +207,7 @@
                 android:text="Username"></TextView>
 
             <TextView
+                android:id="@+id/stat_text"
                 android:layout_marginRight="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

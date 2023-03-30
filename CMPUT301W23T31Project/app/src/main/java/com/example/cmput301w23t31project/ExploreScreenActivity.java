@@ -119,13 +119,7 @@ public class ExploreScreenActivity extends HamburgerMenu
                                     String coordinates = "No Location";
                                 }else{
                                     int QRScore = Integer.parseInt(document.getString("Score"));
-                                    float markerColor = 0;
-                                    if (QRScore < 20) {markerColor = 170.0f;}
-                                    else if (QRScore < 200) {markerColor = 205.0f;}
-                                    else if (QRScore < 2000) {markerColor = 270.0f;}
-                                    else {markerColor = 320.0f;}
-
-
+                                    float markerColor = getMarkerColor(QRScore);
                                     LatLng location = new LatLng(Double.parseDouble(document.
                                             getString("Latitude")), Double.parseDouble(
                                                     document.getString("Longitude")));
@@ -244,5 +238,19 @@ public class ExploreScreenActivity extends HamburgerMenu
     public int[] getScreenDimensions() {
         return new int[]{getResources().getDisplayMetrics().heightPixels,
                 getResources().getDisplayMetrics().widthPixels};
+    }
+
+    public float getMarkerColor(int QRScore) {
+        float markerColor;
+        if (QRScore < 20) {
+            markerColor = 170.0f;
+        } else if (QRScore < 200) {
+            markerColor = 205.0f;
+        } else if (QRScore < 2000) {
+            markerColor = 270.0f;
+        } else {
+            markerColor = 320.0f;
+        }
+        return markerColor;
     }
 }

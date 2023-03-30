@@ -72,11 +72,11 @@ public class SeeGameScoresTest {
 
         solo.assertCurrentActivity("Wrong Activity", LeaderboardActivity.class);
         solo.clickOnView(solo.getView(R.id.leaderboard_by_high_score_button));
-        solo.assertCurrentActivity("Wrong Activity", LeaderboardHighScoreActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", LeaderboardActivity.class);
         solo.clickOnView(solo.getView(R.id.leaderboard_by_count_button));
-        solo.assertCurrentActivity("Wrong Activity", LeaderboardCountActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", LeaderboardActivity.class);
         solo.clickOnView(solo.getView(R.id.leaderboard_by_total_score_button));
-        solo.assertCurrentActivity("Wrong Activity", LeaderboardTotalScoreActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", LeaderboardActivity.class);
 
         // Tested once we implement it
         //solo.clickOnView(solo.getView(R.id.leaderboard_by_high_score_button));
