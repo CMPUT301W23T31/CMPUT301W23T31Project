@@ -49,6 +49,7 @@ public class LeaderboardCountActivity extends HamburgerMenu implements SearchUse
     boolean leaderboardListVisible;
     boolean leaderboardTotalScoreListVisible;
     boolean leaderboardHighScoreListVisible;
+
     /**
      * This method gets the search results and displays the results, if there are any
      * @param username
@@ -56,32 +57,83 @@ public class LeaderboardCountActivity extends HamburgerMenu implements SearchUse
      */
     @Override
     public void searchUser(String username){
+
         int l = dataList.size();
         int c = 0;
         dataList2 = new ArrayList<>();
         for(int i=0;i<l;i++)
         {
-            if(username.trim().equalsIgnoreCase(dataList.get(i).getUsername())){
-                dataList2.add(dataList.get(i));
-                LeaderboardList = findViewById(R.id.leaderboard_list);
-                leaderboardCountArrayAdapter = new LeaderboardCountArrayAdapter(this, dataList2,username);
-                LeaderboardList.setAdapter(leaderboardCountArrayAdapter);
-                c+=1;
+            if(leaderboardListVisible){
+                if(username.trim().equalsIgnoreCase(dataList.get(i).getUsername())){
+                    dataList2.add(dataList.get(i));
+                    LeaderboardList = findViewById(R.id.leaderboard_count_list);
+                    leaderboardCountArrayAdapter = new LeaderboardCountArrayAdapter(this, dataList2,username);
+                    LeaderboardList.setAdapter(leaderboardCountArrayAdapter);
+                    c+=1;
+                 }
+                else if(((dataList.get(i).getUsername()).toLowerCase()).startsWith(username.toLowerCase().trim())){
+                    dataList2.add(dataList.get(i));
+                    LeaderboardList = findViewById(R.id.leaderboard_count_list);
+                    leaderboardCountArrayAdapter = new LeaderboardCountArrayAdapter(this, dataList2,username);
+                    LeaderboardList.setAdapter(leaderboardCountArrayAdapter);
+                    c += 1;
+                }
+                else if(((dataList.get(i).getUsername()).toLowerCase()).contains(username.toLowerCase().trim())){
+                    dataList2.add(dataList.get(i));
+                    LeaderboardList = findViewById(R.id.leaderboard_count_list);
+                    leaderboardCountArrayAdapter = new LeaderboardCountArrayAdapter(this, dataList2,username);
+                    LeaderboardList.setAdapter(leaderboardCountArrayAdapter);
+                    c += 1;
+                }
+        }
+            if(leaderboardTotalScoreListVisible){
+                if(username.trim().equalsIgnoreCase(dataList.get(i).getUsername())){
+                    dataList2.add(dataList.get(i));
+                    LeaderboardTotalScoreList = findViewById(R.id.leaderboard_total_score_list);
+                    leaderboardTotalScoreArrayAdapter = new LeaderboardTotalScoreArrayAdapter(this, dataList2,username);
+                    LeaderboardTotalScoreList.setAdapter(leaderboardTotalScoreArrayAdapter);
+                    c+=1;
+                }
+                else if(((dataList.get(i).getUsername()).toLowerCase()).startsWith(username.toLowerCase().trim())){
+                    dataList2.add(dataList.get(i));
+                    LeaderboardTotalScoreList = findViewById(R.id.leaderboard_total_score_list);
+                    leaderboardTotalScoreArrayAdapter = new LeaderboardTotalScoreArrayAdapter(this, dataList2,username);
+                    LeaderboardTotalScoreList.setAdapter(leaderboardTotalScoreArrayAdapter);
+                    c += 1;
+                }
+                else if(((dataList.get(i).getUsername()).toLowerCase()).contains(username.toLowerCase().trim())){
+                    dataList2.add(dataList.get(i));
+                    LeaderboardTotalScoreList = findViewById(R.id.leaderboard_total_score_list);
+                    leaderboardTotalScoreArrayAdapter = new LeaderboardTotalScoreArrayAdapter(this, dataList2,username);
+                    LeaderboardTotalScoreList.setAdapter(leaderboardTotalScoreArrayAdapter);
+                    c += 1;
+                }
             }
-            else if(((dataList.get(i).getUsername()).toLowerCase()).startsWith(username.toLowerCase().trim())){
-                dataList2.add(dataList.get(i));
-                LeaderboardList = findViewById(R.id.leaderboard_list);
-                leaderboardCountArrayAdapter = new LeaderboardCountArrayAdapter(this, dataList2,username);
-                LeaderboardList.setAdapter(leaderboardCountArrayAdapter);
-                c += 1;
+            if(leaderboardHighScoreListVisible){
+                if(username.trim().equalsIgnoreCase(dataList.get(i).getUsername())){
+                    dataList2.add(dataList.get(i));
+                    LeaderboardHighScoreList = findViewById(R.id.leaderboard_high_score_list);
+                    leaderboardHighScoreArrayAdapter = new LeaderboardHighScoreArrayAdapter(this, dataList2,username);
+                    LeaderboardHighScoreList.setAdapter(leaderboardHighScoreArrayAdapter);
+                    c+=1;
+                }
+                else if(((dataList.get(i).getUsername()).toLowerCase()).startsWith(username.toLowerCase().trim())){
+                    dataList2.add(dataList.get(i));
+                    LeaderboardHighScoreList = findViewById(R.id.leaderboard_high_score_list);
+                    leaderboardHighScoreArrayAdapter = new LeaderboardHighScoreArrayAdapter(this, dataList2,username);
+                    LeaderboardHighScoreList.setAdapter(leaderboardHighScoreArrayAdapter);
+                    c += 1;
+                }
+                else if(((dataList.get(i).getUsername()).toLowerCase()).contains(username.toLowerCase().trim())){
+                    dataList2.add(dataList.get(i));
+                    LeaderboardHighScoreList = findViewById(R.id.leaderboard_high_score_list);
+                    leaderboardHighScoreArrayAdapter = new LeaderboardHighScoreArrayAdapter(this, dataList2,username);
+                    LeaderboardHighScoreList.setAdapter(leaderboardHighScoreArrayAdapter);
+                    c += 1;
+                }
             }
-            else if(((dataList.get(i).getUsername()).toLowerCase()).contains(username.toLowerCase().trim())){
-                dataList2.add(dataList.get(i));
-                LeaderboardList = findViewById(R.id.leaderboard_list);
-                leaderboardCountArrayAdapter = new LeaderboardCountArrayAdapter(this, dataList2,username);
-                LeaderboardList.setAdapter(leaderboardCountArrayAdapter);
-                c += 1;
-            }
+
+
         }
         if(c==0)
         {
@@ -239,11 +291,15 @@ public class LeaderboardCountActivity extends HamburgerMenu implements SearchUse
      *      A view needed to change intents
      */
     public void onClickHighScore(View view){
+        leaderboardListVisible = false;
+        leaderboardTotalScoreListVisible = false;
+        leaderboardHighScoreListVisible = true;
         LeaderboardList.setVisibility(View.GONE);
         LeaderboardTotalScoreList.setVisibility(View.GONE);
         LeaderboardHighScoreList.setVisibility(View.VISIBLE);
         sortByHighScoreList();
         giveRank();
+        highScoreBtn.setBackgroundColor(687484);
         StatisticText.setText("|  High Score");
     }
 
@@ -253,12 +309,16 @@ public class LeaderboardCountActivity extends HamburgerMenu implements SearchUse
      *      A view needed to change intents
      */
     public void onClickCount(View view){
+        leaderboardListVisible = true;
+        leaderboardTotalScoreListVisible = false;
+        leaderboardHighScoreListVisible = false;
         LeaderboardList.setVisibility(View.VISIBLE);
         LeaderboardTotalScoreList.setVisibility(View.GONE);
         LeaderboardHighScoreList.setVisibility(View.GONE);
         sortList();
         giveRank();
         StatisticText.setText("|  Count");
+        countBtn.setBackgroundColor(687484);
     }
 
     /**
@@ -267,12 +327,17 @@ public class LeaderboardCountActivity extends HamburgerMenu implements SearchUse
      *      A view needed to change intents
      */
     public void onClickTotalScore(View view){
+        leaderboardListVisible = false;
+        leaderboardTotalScoreListVisible = true;
+        leaderboardHighScoreListVisible = false;
         LeaderboardList.setVisibility(View.GONE);
         LeaderboardTotalScoreList.setVisibility(View.VISIBLE);
         LeaderboardHighScoreList.setVisibility(View.GONE);
         sortByTotalScoreList();
         giveRank();
         StatisticText.setText("|  Total Score");
+        //totalScoreBtn.setB(687484);
+        //countBtn.setBackgroundColor(getColor(94A4AC));
     }
 
     public void sortList() {

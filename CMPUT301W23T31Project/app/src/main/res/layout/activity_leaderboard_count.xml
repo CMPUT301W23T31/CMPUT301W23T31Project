@@ -23,7 +23,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="3dp"
-                android:background="@color/white"
                 android:backgroundTint="@color/activity_navigation_button_color"
                 android:onClick="onClickHighScore"
                 android:text="High Score"
