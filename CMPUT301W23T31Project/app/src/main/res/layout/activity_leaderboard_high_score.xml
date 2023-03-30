@@ -191,9 +191,11 @@
                 android:backgroundTint="@color/activity_navigation_button_color"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
+                android:textStyle="bold"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:fontFamily="sans-serif-condensed-medium"
+                android:textColor="@color/black"
                 android:text="Rank   |"></TextView>
 
             <TextView
@@ -202,6 +204,8 @@
                 android:textSize="20dp"
                 android:layout_marginLeft="2dp"
                 android:layout_marginRight="160dp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
                 android:fontFamily="sans-serif-condensed-medium"
                 android:text="Username"></TextView>
 
@@ -209,7 +213,9 @@
                 android:layout_marginRight="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/black"
                 android:textSize="20dp"
+                android:textStyle="bold"
                 android:fontFamily="sans-serif-condensed-medium"
                 android:text="|  Count"></TextView>
         </LinearLayout>
