@@ -5,20 +5,28 @@ package com.example.cmput301w23t31project;
 //https://www.geeksforgeeks.org/how-to-add-dynamic-markers-in-google-maps-with-firebase-firstore/?ref=lbp
 
 
+import static android.content.ContentValues.TAG;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +48,8 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.zxing.integration.android.IntentIntegrator;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -59,6 +69,7 @@ public class ExploreScreenActivity extends HamburgerMenu
     double latitude;
     double longitude;
     Button nearbyBtn;
+    EditText mSearchText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +77,7 @@ public class ExploreScreenActivity extends HamburgerMenu
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.title_bar);
         TextView title = findViewById(R.id.myTitle);
+        ImageView search = findViewById(R.id.ic_magnify);
         title.setText("Explore");
         setContentView(R.layout.activity_explore_screen);
 
@@ -76,6 +88,22 @@ public class ExploreScreenActivity extends HamburgerMenu
         mapFragment.getMapAsync(this);
         Intent intent = getIntent();
         username = intent.getStringExtra("username");
+        mSearchText = findViewById(R.id.input_search);
+
+//        nearbyBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                //getting current location
+//                gpsTracker = new GpsTracker(ExploreScreenActivity.this);
+//                if(gpsTracker.canGetLocation()){
+//                    latitude = gpsTracker.getLatitude();
+//                    longitude = gpsTracker.getLongitude();
+//                }else{
+//                    gpsTracker.showSettingsAlert();
+//                }
+//                handleNewLocation(latitude, longitude, googleMap);
+//            }
+//        });
 
         nearbyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -172,8 +200,8 @@ public class ExploreScreenActivity extends HamburgerMenu
         if(gpsTracker.canGetLocation()){
             latitude = gpsTracker.getLatitude();
             longitude = gpsTracker.getLongitude();
-            Toast.makeText(this, "l"+latitude+longitude, Toast.LENGTH_SHORT)
-                    .show();
+            //Toast.makeText(this, "l"+latitude+longitude, Toast.LENGTH_SHORT)
+                    //.show();
         }else{
             gpsTracker.showSettingsAlert();
         }
@@ -181,8 +209,60 @@ public class ExploreScreenActivity extends HamburgerMenu
             handleNewLocation(latitude, longitude, googleMap);
         }
 
+        init(googleMap);
+
 
     }
+
+    private void init(GoogleMap g){
+        //Log.d(TAG, "init: initializing");
+
+        mSearchText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
+                if(actionId == EditorInfo.IME_ACTION_SEARCH
+                        || actionId == EditorInfo.IME_ACTION_DONE
+                        || keyEvent.getAction() == KeyEvent.ACTION_DOWN
+                        || keyEvent.getAction() == KeyEvent.KEYCODE_ENTER){
+
+                    //execute our method for searching
+                    geoLocate(g);
+                }
+
+                return false;
+            }
+        });
+    }
+
+    private void geoLocate(GoogleMap g){
+        Log.d(TAG, "geoLocate: geolocating");
+
+        String searchString = mSearchText.getText().toString();
+
+        Geocoder geocoder = new Geocoder(ExploreScreenActivity.this);
+        List<Address> list = new ArrayList<>();
+        try{
+            list = geocoder.getFromLocationName(searchString, 1);
+        }catch (IOException e){
+            Log.e(TAG, "geoLocate: IOException: " + e.getMessage() );
+        }
+
+        if(list.size() > 0){
+            Address address = list.get(0);
+
+            Log.d(TAG, "geoLocate: found a location: " + address.toString());
+            LatLng latlng = new LatLng(address.getLatitude(), address.getLongitude());
+            moveCamera(latlng,12.0f, g);
+            //Toast.makeText(this, address.toString(), Toast.LENGTH_SHORT).show();
+
+        }
+    }
+
+    private void moveCamera(LatLng latLng, float zoom, GoogleMap googleMap){
+        Log.d(TAG, "moveCamera: moving the camera to: lat: " + latLng.latitude + ", lng: " + latLng.longitude );
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
+    }
+
 
     private void handleNewLocation(Double currentLatitude, Double currentLongitude, GoogleMap googleMap) {
 
