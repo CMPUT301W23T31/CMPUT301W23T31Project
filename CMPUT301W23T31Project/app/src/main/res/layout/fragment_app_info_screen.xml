@@ -14,16 +14,16 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:text="Made by Team 31 for CMPUT301"
-        android:textSize="18sp"/>
+        style="@style/italic_small_text"/>
 
     <TextView
         android:layout_gravity="start"
         android:paddingTop="10dp"
+        android:paddingStart="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Tutorial"
-        android:textSize="36sp"
-        android:textStyle="bold"/>
+        style="@style/bold_medium_header"/>
 
     <TextView
         android:layout_gravity="start"
@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="2dp"
         android:text="1. Scan QR Codes to earn points. The more points earned, the better!"
-        android:textSize="18sp"/>
+        style="@style/basic_small_text"/>
 
     <TextView
         android:layout_gravity="start"
@@ -43,7 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="2dp"
         android:text="2. Access the map to see nearby codes. You can also view the list to see the nearest codes to you"
-        android:textSize="18sp"/>
+        style="@style/basic_small_text"/>
 
     <TextView
         android:layout_gravity="start"
@@ -53,7 +53,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="2dp"
         android:text="3. You can see your own personal stats and manage your scans under the 'Player Stats' tab"
-        android:textSize="18sp"/>
+        style="@style/basic_small_text"/>
 
     <TextView
         android:layout_gravity="start"
@@ -63,7 +63,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="2dp"
         android:text="4. You can view other players' scores and search for friends in the 'Leaderboard'"
-        android:textSize="18sp"/>
+        style="@style/basic_small_text"/>
 
     <TextView
         android:layout_gravity="start"
@@ -73,7 +73,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="2dp"
         android:text="5. You can change your profile information in your account page"
-        android:textSize="18sp"/>
+        style="@style/basic_small_text"/>
 
     <TextView
         android:layout_gravity="start"
@@ -83,16 +83,16 @@
         android:layout_height="wrap_content"
         android:layout_margin="2dp"
         android:text="6. Have fun!"
-        android:textSize="18sp"/>
+        style="@style/basic_small_text"/>
 
     <TextView
         android:layout_gravity="start"
         android:paddingTop="10dp"
+        android:paddingStart="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="QR Code Color Rankings"
-        android:textSize="35sp"
-        android:textStyle="bold"/>
+        style="@style/bold_medium_header"/>
 
     <TextView
         android:layout_gravity="start"
@@ -102,8 +102,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="2sp"
         android:text="Common:  0-19 points"
-        android:textColor="@color/tier_1_teal"
-        android:textSize="20sp"/>
+        style="@style/basic_medium_text"
+        android:textColor="@color/tier_1_teal" />
 
     <TextView
         android:layout_gravity="start"
@@ -113,8 +113,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="2sp"
         android:text="Uncommon:  20-200 points"
-        android:textColor="@color/tier_2_blue"
-        android:textSize="20sp"/>
+        style="@style/basic_medium_text"
+        android:textColor="@color/tier_2_blue" />
 
     <TextView
         android:layout_gravity="start"
@@ -124,8 +124,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="2sp"
         android:text="Rare:  200-2000 points"
-        android:textColor="@color/tier_3_purple"
-        android:textSize="20sp"/>
+        style="@style/basic_medium_text"
+        android:textColor="@color/tier_3_purple" />
 
     <TextView
         android:layout_gravity="start"
@@ -135,7 +135,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="2sp"
         android:text="Special:  2000+ points"
-        android:textColor="@color/tier_4_pink"
-        android:textSize="20sp"/>
+        style="@style/basic_medium_text"
+        android:textColor="@color/tier_4_pink" />
 
 </LinearLayout>
