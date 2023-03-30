@@ -21,19 +21,19 @@
                 android:id="@+id/player_detail_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+
                 android:hint="2023-02-02"
-                android:textStyle="italic"
-                android:textSize="24dp"
-                android:layout_margin="2dp"/>
+                style="@style/italic_medium_text" />
 
             <TextView
                 android:id="@+id/player_detail_username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+
                 android:hint="Player Username"
-                android:textSize="24dp"
-                android:textStyle="bold"
-                android:layout_margin="2dp"/>
+                style="@style/bold_sub_header"/>
 
         </LinearLayout>
 
@@ -45,8 +45,8 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:backgroundTint="@color/view_profile_button_color"
+
         android:text="View\nProfile"
-        android:textSize="20dp" />
+        style="@style/code_info_button_style" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

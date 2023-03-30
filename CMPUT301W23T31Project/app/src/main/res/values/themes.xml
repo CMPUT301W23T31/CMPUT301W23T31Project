@@ -39,8 +39,16 @@
         <item name="android:textSize">18sp</item>
     </style>
 
+    <style name="italic_medium_text" parent="basic_medium_text">
+        <item name="android:textStyle">italic</item>
+    </style>
+
     <style name="basic_medium_text" parent="basic_text">
         <item name="android:textSize">22sp</item>
+    </style>
+
+    <style name="italic_large_text" parent="basic_large_text">
+        <item name="android:textStyle">italic</item>
     </style>
 
     <style name="basic_large_text" parent="basic_text">
@@ -91,6 +99,18 @@
     <style name="action_button_style" parent="button_style">
         <item name="android:textSize">20sp</item>
         <item name="android:backgroundTint">@color/activity_action_button_color</item>
+    </style>
+
+    <style name="code_info_button_style" parent="button_style">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:backgroundTint">@color/view_code_details_color</item>
+    </style>
+
+    <style name="player_info_button_style" parent="button_style">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:backgroundTint">@color/view_profile_button_color</item>
     </style>
 
     <style name="floating_button_style" parent="basic_text">
