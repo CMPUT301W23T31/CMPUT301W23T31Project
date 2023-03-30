@@ -32,15 +32,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:fontFamily="sans-serif-condensed"
             android:gravity="center_horizontal"
             android:text="Welcome!"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:textSize="30dp"
+            style="@style/basic_large_header"
+
             app:layout_constraintBottom_toTopOf="@id/home_screen_current_points_text"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -48,12 +45,11 @@
             android:id="@+id/home_screen_current_points_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-condensed-medium"
             android:gravity="center_horizontal"
-            android:textStyle="bold"
+            
             android:text="Current Points:"
-            android:textColor="@color/white"
-            android:textSize="24dp"
+            style="@style/bold_sub_header"
+
             app:layout_constraintBottom_toTopOf="@id/home_screen_current_points"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -63,15 +59,30 @@
             android:id="@+id/home_screen_current_points"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-smallcaps"
             android:gravity="center_horizontal"
-            android:textStyle="bold"
+
             android:text="0"
-            android:textColor="@color/white"
-            android:textSize="36dp"
+            style="@style/basic_large_text"
+
+            app:layout_constraintBottom_toTopOf="@id/home_screen_quick_access_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/home_screen_current_points_text" />
+
+        <TextView
+            android:id="@+id/home_screen_quick_access_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center_horizontal"
+
+            android:text="Quick Access"
+            style="@style/basic_medium_text"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/home_screen_current_points" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
