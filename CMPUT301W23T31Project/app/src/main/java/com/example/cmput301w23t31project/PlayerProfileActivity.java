@@ -78,7 +78,7 @@ public class PlayerProfileActivity extends HamburgerMenu {
                                     int highestScoringQR = Integer.parseInt(document.getString("Highest Scoring QR Code"));
                                     int lowestScoringQR = Integer.parseInt(document.getString("Lowest Scoring QR Code"));
                                     int rank = Integer.parseInt(document.getString("Rank"));
-                                    PlayerUsername.setText(username);
+                                    PlayerUsername.setText(username+"'s Stats!");
                                     PlayerScore.setText(String.valueOf(totalScore));
                                     PlayerHighestScoringQr.setText(String.valueOf(highestScoringQR));
                                     PlayerLowestScoringQr.setText(String.valueOf(lowestScoringQR));
