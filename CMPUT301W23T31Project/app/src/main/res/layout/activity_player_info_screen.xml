@@ -10,7 +10,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="104dp"
+        android:layout_height="wrap_content"
         android:gravity="end"
         android:orientation="vertical">
 
@@ -18,16 +18,14 @@
             android:id="@+id/player_info_my_account_button"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:src="@drawable/account_icon"
-            />
+            android:src="@drawable/account_icon" />
 
         <TextView
-            android:layout_width="70dp"
-            android:layout_height="30dp"
-            android:text="My Account"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
 
-            android:textSize="12sp"
-            android:textStyle="bold" />
+            android:text="My Account"
+            style="@style/bold_tiny_header"/>
 
     </LinearLayout>
 
@@ -35,132 +33,124 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="2sp"
+
         android:text="Player Info"
-        android:textSize="30sp"
-        android:textStyle="bold" />
+        style="@style/bold_medium_header" />
 
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="0dp"
+
         android:text="Username"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        style="@style/bold_mini_header" />
 
     <TextView
         android:id="@+id/player_info_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="0dp"
+
         android:hint="Player Username"
-        android:textSize="24sp" />
+        style="@style/basic_medium_text"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="0dp"
+
         android:text="Total Score"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        style="@style/bold_mini_header" />
 
     <TextView
         android:id="@+id/player_info_total_score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="0dp"
+
         android:hint="Score"
-        android:textSize="24sp" />
+        style="@style/basic_medium_text"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="0dp"
+
         android:text="Total Scans"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        style="@style/bold_mini_header" />
 
     <TextView
         android:id="@+id/player_info_total_scans"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="0dp"
+
         android:hint="Scans"
-        android:textSize="24sp" />
+        style="@style/basic_medium_text"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="0dp"
+
         android:text="Rank (by Highest Total Score)"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        style="@style/bold_mini_header" />
 
     <TextView
         android:id="@+id/player_info_rank_by_total_score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="0dp"
+
         android:hint="Rank 1"
-        android:textSize="24sp" />
+        style="@style/basic_medium_text"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="2dp"
+
         android:text="Rank (by Highest Unique Score)"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        style="@style/bold_mini_header" />
 
     <TextView
         android:id="@+id/player_info_rank_by_unique_score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="0dp"
+
         android:hint="Rank 2"
-        android:textSize="24sp" />
+        style="@style/basic_medium_text"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="0dp"
+
         android:text="Highest Scoring QR Code"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        style="@style/bold_mini_header" />
 
     <TextView
         android:id="@+id/player_info_high_score"
         android:layout_width="wrap_content"
-        android:layout_height="37dp"
-        android:layout_margin="0dp"
+        android:layout_height="wrap_content"
+
         android:text="High"
-        android:textSize="35sp"
-        android:textStyle="bold|italic" />
+        style="@style/accent_medium_header" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="0dp"
+
         android:text="Lowest Scoring QR Code"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        style="@style/bold_mini_header" />
 
     <TextView
         android:id="@+id/player_info_low_score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="0dp"
+
         android:text="Low"
-        android:textSize="35sp"
-        android:textStyle="bold|italic" />
+        style="@style/accent_medium_header" />
 
     <Button
         android:id="@+id/player_info_see_scans_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="0dp"
-        android:backgroundTint="@color/activity_navigation_button_color"
+        android:layout_marginTop="5dp"
+
         android:text="View All Scans"
-        android:textSize="24sp" />
+        style="@style/navigation_button_style" />
 
 </LinearLayout>

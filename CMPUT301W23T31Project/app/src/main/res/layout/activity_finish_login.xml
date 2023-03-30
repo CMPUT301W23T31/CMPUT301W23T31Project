@@ -22,7 +22,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
+
         android:text="@string/enter_your_player_name_for_other_users_to_see"
+        style="@style/basic_small_text"
+
         app:layout_constraintBottom_toTopOf="@id/finish_login_activity_player_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -44,7 +47,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
+
         android:text="Upload an image"
+        style="@style/basic_small_text"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/finish_login_activity_player_name"/>
