@@ -270,7 +270,7 @@ public class QRCodeStatsActivity extends AppCompatActivity {
     }
     public String processString(String string,int number) {
         String LikesFinished = "";
-        String DisLikesFinished ="";
+        String DisLikesFinished = "";
         switch (number) {
             case 0:{
                 String[] numberOflikesArr = string.split("/");

@@ -114,15 +114,6 @@
 
             <View
                 android:id="@+id/qr_code_stats_visual_representation_view"
-<<<<<<< HEAD
-                android:layout_width="200dp"
-                android:layout_height="80dp"
-                android:layout_marginEnd="4dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
-=======
                 android:layout_width="169dp"
                 android:layout_height="75dp"
                 android:layout_gravity="right"
@@ -130,7 +121,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
->>>>>>> b9a4e4ef22167e13201769d9491fe8eef16521ef
+
 
         </FrameLayout>
 
