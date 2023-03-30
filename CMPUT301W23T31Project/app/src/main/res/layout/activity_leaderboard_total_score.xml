@@ -72,10 +72,20 @@
             android:backgroundTint="#025E8F"
             android:orientation="vertical"
             android:gravity="center_horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-condensed-medium"
+                android:text="Your Stats"
+                android:textColor="#ffffff"
+                android:textSize="20dp"
+                android:textStyle="bold"></TextView>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
+
+
                 <ImageView
                     android:id="@+id/trophy"
                     android:layout_width="180dp"
@@ -201,7 +211,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
                 android:layout_marginLeft="2dp"
-                android:layout_marginRight="160dp"
+                android:layout_marginRight="120dp"
                 android:fontFamily="sans-serif-condensed-medium"
                 android:text="Username"></TextView>
 
@@ -211,7 +221,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
                 android:fontFamily="sans-serif-condensed-medium"
-                android:text="|  Total Score"></TextView>
+                android:text="| Total Score"></TextView>
         </LinearLayout>
 
         <ListView
@@ -220,6 +230,7 @@
             android:layout_height="match_parent"
             android:divider="@color/black"
             android:dividerHeight="1dp"
+            android:visibility="visible"
             tools:listitem="@layout/content_leaderboard_list" />
     </LinearLayout>
 

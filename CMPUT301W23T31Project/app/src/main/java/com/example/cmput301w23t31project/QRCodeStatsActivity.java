@@ -292,6 +292,7 @@ public class QRCodeStatsActivity extends AppCompatActivity {
         String LikesFinished = "0";
         String DisLikesFinished ="0";
 
+
         switch (number) {
             case 0:{
                 String[] numberOflikesArr = string.split("/");
