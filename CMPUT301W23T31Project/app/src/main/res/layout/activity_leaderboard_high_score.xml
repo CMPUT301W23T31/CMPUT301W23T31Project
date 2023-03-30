@@ -234,6 +234,7 @@
             android:layout_height="match_parent"
             android:divider="@color/black"
             android:dividerHeight="1dp"
+            android:visibility="visible"
             tools:listitem="@layout/content_leaderboard_list" />
     </LinearLayout>
 
