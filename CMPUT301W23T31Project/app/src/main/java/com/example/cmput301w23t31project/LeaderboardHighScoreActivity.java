@@ -100,6 +100,7 @@ public class LeaderboardHighScoreActivity extends HamburgerMenu implements Searc
         leaderboardHighScoreArrayAdapter = new LeaderboardHighScoreArrayAdapter(this, dataList,username);
         LeaderboardList.setAdapter(leaderboardHighScoreArrayAdapter);
         CreateLeaderBoard();
+        highScoreBtn.setBackgroundColor(getColor(R.color.activity_selected_button_color));
 
         high_score_text = findViewById(R.id.current_high_score);
         total_score_text = findViewById(R.id.current_total_score);

@@ -103,6 +103,7 @@ public class LeaderboardCountActivity extends HamburgerMenu implements SearchUse
         leaderboardCountArrayAdapter = new LeaderboardCountArrayAdapter(this, dataList,username);
         LeaderboardList.setAdapter(leaderboardCountArrayAdapter);
 
+        countBtn.setBackgroundColor(getColor(R.color.activity_selected_button_color));
         high_score_text = findViewById(R.id.current_high_score);
         total_score_text = findViewById(R.id.current_total_score);
         count_text = findViewById(R.id.current_count);
