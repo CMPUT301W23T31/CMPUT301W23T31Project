@@ -299,7 +299,9 @@ public class LeaderboardCountActivity extends HamburgerMenu implements SearchUse
         LeaderboardHighScoreList.setVisibility(View.VISIBLE);
         sortByHighScoreList();
         giveRank();
-        highScoreBtn.setBackgroundColor(687484);
+        highScoreBtn.setBackgroundColor(getColor(R.color.activity_selected_button_color));
+        countBtn.setBackgroundColor(getColor(R.color.activity_navigation_button_color));
+        totalScoreBtn.setBackgroundColor(getColor(R.color.activity_navigation_button_color));
         StatisticText.setText("|  High Score");
     }
 
@@ -318,7 +320,9 @@ public class LeaderboardCountActivity extends HamburgerMenu implements SearchUse
         sortList();
         giveRank();
         StatisticText.setText("|  Count");
-        countBtn.setBackgroundColor(687484);
+        countBtn.setBackgroundColor(getColor(R.color.activity_selected_button_color));
+        highScoreBtn.setBackgroundColor(getColor(R.color.activity_navigation_button_color));
+        totalScoreBtn.setBackgroundColor(getColor(R.color.activity_navigation_button_color));
     }
 
     /**
@@ -336,6 +340,9 @@ public class LeaderboardCountActivity extends HamburgerMenu implements SearchUse
         sortByTotalScoreList();
         giveRank();
         StatisticText.setText("|  Total Score");
+        totalScoreBtn.setBackgroundColor(getColor(R.color.activity_selected_button_color));
+        countBtn.setBackgroundColor(getColor(R.color.activity_navigation_button_color));
+        highScoreBtn.setBackgroundColor(getColor(R.color.activity_navigation_button_color));
         //totalScoreBtn.setB(687484);
         //countBtn.setBackgroundColor(getColor(94A4AC));
     }
