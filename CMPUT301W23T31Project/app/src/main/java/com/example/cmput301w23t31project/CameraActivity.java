@@ -19,6 +19,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageMetadata;
 import com.google.firebase.storage.StorageReference;
@@ -48,14 +49,17 @@ public class CameraActivity extends Activity {
         images = new QRImages();
         Button photoButton = (Button) this.findViewById(R.id.button1);
         try {
-            images.getReference().document(username).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            images.getReference().get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
-                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                    String storage = task.getResult().getString(hash);
-                    Glide.with(CameraActivity.this)
-                            .load(storage)
-                            //.load("https://firebasestorage.googleapis.com/v0/b/cmput301w23t31.appspot.com/o/images%2Ffrench%2F356c9cccf52cafbe5bad5273da43c8038e1ca53b6648cf24cceabd36809394f0.png?alt=media&token=f669cd73-9db9-4db1-8c26-e5baf207608a").sizeMultiplier((float) 0.28)
-                            .into(imageView);
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    for (QueryDocumentSnapshot doc: task.getResult()) {
+                        if (doc.getId().equals(username) && doc.getData().containsKey(hash)) {
+                            String storage = doc.getString(hash);
+                            Glide.with(CameraActivity.this)
+                                    .load(storage)
+                                    .into(imageView);
+                        }
+                    }
                 }
             });
         } catch (Exception e) {
@@ -94,7 +98,6 @@ public class CameraActivity extends Activity {
 
     private void uploadImage() {
         FirebaseStorage storage = FirebaseStorage.getInstance();
-        Log.d("HEHEHEHEHEHEHEHEHE", "HI");
         StorageReference storageRef = storage.getReference();
         StorageReference imagesRef = storageRef.child("images/"+username+"/"+hash+".png");
         Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
