@@ -50,17 +50,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
-<<<<<<< HEAD
         android:layout_marginTop="12dp"
         android:layout_marginLeft="255dp"
         android:backgroundTint="@color/floating_button_color"
         android:text="Nearby Scans"/>
 
 </RelativeLayout>
-=======
-
-        android:text="Nearby Scans"
-        style="@style/floating_button_style"/>
 
 </fragment>
->>>>>>> 6ed8fabc4e5dcad4bcea488fbfb995f730e69175
