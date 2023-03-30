@@ -46,7 +46,7 @@ public class HamburgerMenu extends AppCompatActivity {
             case R.id.item5: {
                 if (!this.getLocalClassName().equals("LeaderboardActivity")) {
                     finish();
-                    Intent intent = new Intent(this, LeaderboardCountActivity.class);
+                    Intent intent = new Intent(this, LeaderboardActivity.class);
                     intent.putExtra("username", username);
                     startActivity(intent);
                 }

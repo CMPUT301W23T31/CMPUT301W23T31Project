@@ -198,7 +198,7 @@ public class MainActivity extends HamburgerMenu implements ScanResultsFragment.O
      * @param view relevant view
      */
     public void onClickLeaderboard(View view){
-        Intent intent = new Intent(this, LeaderboardCountActivity.class);
+        Intent intent = new Intent(this, LeaderboardActivity.class);
         intent.putExtra("username", username);
         intent.putExtra("state", "COUNT");
         startActivity(intent);
