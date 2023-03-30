@@ -56,7 +56,7 @@ public class OtherPlayerScansTest {
     public void viewFromLeaderboardTest() {
         solo.assertCurrentActivity("Wrong Activity", TitleScreenActivity.class);
 
-        solo.clickOnView(solo.getView(R.id.tap_to_enter));
+        solo.clickOnView(solo.getView(R.id.title));
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
         solo.clickOnView(solo.getView(R.id.imageView4));
         solo.assertCurrentActivity("Wrong Activity", LeaderboardActivity.class);
@@ -71,7 +71,7 @@ public class OtherPlayerScansTest {
     public void viewFromScanQRCode() {
         solo.assertCurrentActivity("Wrong Activity", TitleScreenActivity.class);
 
-        solo.clickOnView(solo.getView(R.id.tap_to_enter));
+        solo.clickOnView(solo.getView(R.id.title));
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
         solo.clickOnView(solo.getView(R.id.home_screen_scan_code_button));
         solo.waitForActivity("ScanResultsFragment", 5);
@@ -103,7 +103,7 @@ public class OtherPlayerScansTest {
             }
         });
         solo.assertCurrentActivity("Wrong Activity", TitleScreenActivity.class);
-        solo.clickOnView(solo.getView(R.id.tap_to_enter));
+        solo.clickOnView(solo.getView(R.id.title));
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
         solo.clickOnView(solo.getView(R.id.home_screen_explore_button));
         solo.assertCurrentActivity("Wrong Activity",  ExploreScreenActivity.class);

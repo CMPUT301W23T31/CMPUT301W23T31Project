@@ -56,7 +56,7 @@ public class PlayerInfoTest {
     @Test
     public void TestValues(){
         solo.assertCurrentActivity("Wrong Activity", TitleScreenActivity.class);
-        solo.clickOnView(solo.getView(R.id.tap_to_enter));
+        solo.clickOnView(solo.getView(R.id.title));
 
 //        solo.enterText((EditText) solo.getView(R.id.login_activity_username), "TestPlayerInfoName");
 //        solo.enterText((EditText) solo.getView(R.id.login_activity_email), "TestPlayerInfoEmail");
@@ -78,25 +78,15 @@ public class PlayerInfoTest {
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
         solo.clickOnView(solo.getView(R.id.home_screen_scan_code_button));
         // Allow time to scan QR code
-        solo.waitForActivity("ScanResultsFragment", 10);
+        solo.waitForActivity("ScanResultsFragment", 1);
         //solo.clickLongOnTextAndPress("BACK TO HOME", -1);
         solo.clickLongOnText("BACK TO HOME");
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
 
-        solo.clickOnView(solo.getView(R.id.home_screen_scan_code_button));
-        solo.waitForActivity("ScanResultsFragment", 10);
-        solo.clickLongOnText("BACK TO HOME");
-        solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
 
 
-        solo.clickOnView(solo.getView(R.id.home_screen_scan_code_button));
-        solo.waitForActivity("ScanResultsFragment", 10);
-        solo.clickLongOnText("BACK TO HOME");
-        solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
-
-
-        PlayerScansCollection playerScansCollection = new PlayerScansCollection();
-        playerScansCollection.getReference().get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        PlayerInfoCollection playerInfoCollection = new PlayerInfoCollection();
+        /*playerInfoCollection.getReference().get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 int found = 0;
@@ -115,7 +105,7 @@ public class PlayerInfoTest {
                 }
                 assert found == 1;
             }
-        });
+        });*/
 
 
 

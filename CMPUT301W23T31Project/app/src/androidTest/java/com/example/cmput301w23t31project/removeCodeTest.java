@@ -79,7 +79,7 @@ public class removeCodeTest {
 
         solo.assertCurrentActivity("Wrong Activity", TitleScreenActivity.class);
 
-        solo.clickOnView(solo.getView(R.id.tap_to_enter));
+        solo.clickOnView(solo.getView(R.id.title));
 
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
 
@@ -114,7 +114,7 @@ public class removeCodeTest {
 
         solo.assertCurrentActivity("Wrong Activity", TitleScreenActivity.class);
 
-        solo.clickOnView(solo.getView(R.id.tap_to_enter));
+        solo.clickOnView(solo.getView(R.id.title));
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
 
         solo.clickOnView(solo.getView(R.id.home_screen_my_scans_button));
@@ -124,12 +124,10 @@ public class removeCodeTest {
         MyScansScreenActivity activity = (MyScansScreenActivity) solo.getCurrentActivity();
         final ArrayList<QRCode> datalist = activity.datalist;
         int list_size = datalist.size();
-<<<<<<< HEAD
+
         solo.clickOnView(solo.getView(R.id.delete_button));
-=======
         Thread.sleep(100);
-        solo.clickOnView(solo.getView(R.id.delete));
->>>>>>> dfeb4ab969de667640d879a6d542b8b5aa2efc37
+        //solo.clickOnView(solo.getView(R.id.delete));
         assertEquals(datalist.size(), list_size-1);
     }
 
@@ -155,7 +153,7 @@ public class removeCodeTest {
 
         solo.assertCurrentActivity("Wrong Activity", TitleScreenActivity.class);
 
-        solo.clickOnView(solo.getView(R.id.tap_to_enter));
+        solo.clickOnView(solo.getView(R.id.title));
 
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
 
@@ -189,7 +187,7 @@ public class removeCodeTest {
     public void QRCodeTestThroughProfile() {
         solo.assertCurrentActivity("Wrong Activity", TitleScreenActivity.class);
 
-        solo.clickOnView(solo.getView(R.id.tap_to_enter));
+        solo.clickOnView(solo.getView(R.id.title));
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
         solo.clickOnView(solo.getView(R.id.home_screen_player_info_button));
 

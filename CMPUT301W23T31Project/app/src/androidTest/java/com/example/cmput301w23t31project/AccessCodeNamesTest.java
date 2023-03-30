@@ -52,14 +52,14 @@ public class AccessCodeNamesTest {
     public void SeeCodeNameTest() {
         solo.assertCurrentActivity("Wrong Activity", TitleScreenActivity.class);
 
-        solo.clickOnView(solo.getView(R.id.tap_to_enter));
+        solo.clickOnView(solo.getView(R.id.title));
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
 
         solo.clickOnView(solo.getView(R.id.home_screen_my_scans_button));
 
         solo.assertCurrentActivity("Wrong Activity", MyScansScreenActivity.class);
         assertTrue(solo.waitForView(R.id.code_detail_name, 1, 2000));
-        solo.clickOnView(solo.getView(R.id.code_detail_name));
+        solo.clickOnView(solo.getView(R.id.code_info_button));
         assertTrue(solo.waitForView(R.id.qr_code_stats_code_name));
 
     }
