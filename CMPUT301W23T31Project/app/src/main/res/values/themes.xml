@@ -26,12 +26,17 @@
         <item name="android:textColor">@color/default_text_color</item>
     </style>
 
-    <style name="basic_small_text" parent="basic_text">
-        <item name="android:textSize">16sp</item>
+    <style name="basic_mini_text" parent="basic_text">
+        <item name="android:textSize">12sp</item>
+
     </style>
 
     <style name="italic_small_text" parent="basic_small_text">
         <item name="android:textStyle">italic</item>
+    </style>
+
+    <style name="basic_small_text" parent="basic_text">
+        <item name="android:textSize">18sp</item>
     </style>
 
     <style name="basic_medium_text" parent="basic_text">
@@ -42,16 +47,29 @@
         <item name="android:textSize">32sp</item>
     </style>
 
-    <style name="bold_sub_header" parent="basic_text">
-        <item name="android:textSize">28sp</item>
+    <style name="bold_header" parent="basic_text">
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/header_accent_color</item>
     </style>
 
-    <style name="bold_medium_header" parent="basic_text">
+    <style name="bold_mini_header" parent="bold_header">
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="bold_tiny_header" parent="bold_header">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="bold_sub_header" parent="bold_header">
+        <item name="android:textSize">28sp</item>
+    </style>
+
+    <style name="bold_medium_header" parent="bold_header">
         <item name="android:textSize">32sp</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/header_accent_color</item>
+    </style>
+
+    <style name="accent_medium_header" parent="bold_medium_header">
+        <item name="android:textStyle">bold|italic</item>
     </style>
 
     <style name="basic_large_header" parent="basic_text">
@@ -59,6 +77,30 @@
         <item name="android:textColor">@color/black</item>
     </style>
 
+    <style name="button_style" parent="basic_text">
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="navigation_button_style" parent="button_style">
+        <item name="android:textSize">24sp</item>
+        <item name="android:backgroundTint">@color/activity_navigation_button_color</item>
+    </style>
+
+    <style name="action_button_style" parent="button_style">
+        <item name="android:textSize">20sp</item>
+        <item name="android:backgroundTint">@color/activity_action_button_color</item>
+    </style>
+
+    <style name="floating_button_style" parent="basic_text">
+        <item name="android:layout_margin">8dp</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:backgroundTint">@color/floating_button_color</item>
+        <item name="android:textColor">@color/floating_button_text</item>
+    </style>
 
 
 </resources>

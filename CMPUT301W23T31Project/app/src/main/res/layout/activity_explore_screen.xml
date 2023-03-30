@@ -12,7 +12,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
-        android:layout_margin="8dp"
-        android:backgroundTint="@color/floating_button_color"
-        android:text="Nearby Scans"/>
+
+        android:text="Nearby Scans"
+        style="@style/floating_button_style"/>
+
 </fragment>

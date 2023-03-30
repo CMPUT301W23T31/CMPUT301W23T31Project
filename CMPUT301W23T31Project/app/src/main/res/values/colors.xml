@@ -25,6 +25,7 @@
 
     <color name="forehead_bar_color">@color/app_primary_color</color>
     <color name="floating_button_color">#f3ac84</color>
+    <color name="floating_button_text">@color/header_accent_color</color>
 
     <color name="activity_navigation_button_color">#94a4ac</color>
     <color name="activity_selected_button_color">#637484</color>
