@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -40,15 +41,15 @@ public class LeaderboardTotalScoreArrayAdapter extends ArrayAdapter<Player> {
         Player player = getItem(position);
 
         TextView playerName = view.findViewById(R.id.leaderboard_content_player_name_text);
-        TextView score = view.findViewById(R.id.leaderboard_content_High_score);
+        TextView score = view.findViewById(R.id.leaderboard_content_total_score);
         TextView usernameText = view.findViewById(R.id.leaderboard_content_user_name);
-        Button profileBtn = view.findViewById(R.id.leaderboard_content_profile_button);
+        ImageView profileBtn = view.findViewById(R.id.leaderboard_content_profile_button);
         TextView rank = view.findViewById(R.id.leaderboard_content_rank);
         rank.setText(String.valueOf(player.getRank()));
-        playerName.setText(player.getPlayerName());
+        //playerName.setText(player.getPlayerName());
         score.setText(String.valueOf(player.getTotalScore()));
-        usernameText.setText(player.getUsername());
-        profileBtn.setText("View Profile");
+        playerName.setText(player.getUsername());
+
 
         profileBtn.setOnClickListener(new View.OnClickListener() {
             @Override
