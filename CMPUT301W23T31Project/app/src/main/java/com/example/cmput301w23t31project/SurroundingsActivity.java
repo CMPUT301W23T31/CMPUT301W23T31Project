@@ -6,10 +6,17 @@ import androidx.appcompat.app.ActionBar;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -27,6 +34,9 @@ public class SurroundingsActivity extends  HamburgerMenu{
 
     private String username;
     private String hash;
+    ListView surroundList;
+    ArrayAdapter<String> surroundArrayAdapter;
+    ArrayList<String> datalist;
     private ArrayList<Bitmap> dataList = new ArrayList<>();
     private LeaderboardArrayAdapter surroundingsAdapter;
     private TableLayout table;
@@ -39,8 +49,12 @@ public class SurroundingsActivity extends  HamburgerMenu{
         TextView title = findViewById(R.id.myTitle);
         title.setText("CODE SURROUNDINGS");
         setContentView(R.layout.activity_surroundings);
-        table = findViewById(R.id.surroundings_image_table);
-        image = findViewById(R.id.surroundings_image_view);
+
+        datalist = new ArrayList<>();
+        surroundList = findViewById(R.id.surround_list);
+        surroundArrayAdapter = new SurroundingsArrayAdapter(this, datalist);
+        surroundList.setAdapter(surroundArrayAdapter);
+
         Intent intent = getIntent();
         username = intent.getStringExtra("username");
         hash = intent.getStringExtra("hash");
@@ -72,28 +86,48 @@ public class SurroundingsActivity extends  HamburgerMenu{
 
     private void setImages() {
         QRImages images = new QRImages();
-        CollectionReference collection = images.getReference();
-        collection.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                TableRow row = (TableRow) SurroundingsActivity.this.getLayoutInflater().inflate(R.layout.table_row, null);
-                TableRow.LayoutParams l = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT);
-                row.setLayoutParams(l);
-                int i = 0;
-                for (QueryDocumentSnapshot doc: task.getResult()) {
-                    if (doc.getData().containsKey(hash)) {
-                        ImageView temp = row.findViewById(R.id.table_image);
-                        String storage_location = doc.getString(hash);
-                        Glide.with(SurroundingsActivity.this)
-                                .load(storage_location).into(temp);
-                        if (i < 3) {
-                            row.addView(temp);
-                            i++;
+//        CollectionReference collection = images.getReference();
+//        collection.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                TableRow row = (TableRow) SurroundingsActivity.this.getLayoutInflater().inflate(R.layout.table_row, null);
+//                TableRow.LayoutParams l = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT);
+//                row.setLayoutParams(l);
+//                int i = 0;
+//                for (QueryDocumentSnapshot doc: task.getResult()) {
+//                    if (doc.getData().containsKey(hash)) {
+//
+//                        String storage_location = doc.getString(hash);
+//                        Glide.with(SurroundingsActivity.this)
+//                                .load(storage_location).into(temp);
+//                        if (i < 3) {
+//                            row.addView(temp);
+//                            i++;
+//                        }
+//                    }
+//                }
+//                //table.addView(row, 0);
+//            }
+//        });
+
+        try {
+            images.getReference().get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    for (QueryDocumentSnapshot doc: task.getResult()) {
+                        if (doc.getId().equals(username) && doc.getData().containsKey(hash)) {
+                            String storage = doc.getString(hash);
+                            Log.d("surround", storage);
+                            datalist.add(storage);
+
                         }
                     }
+
                 }
-                table.addView(row, 0);
-            }
-        });
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        surroundArrayAdapter.notifyDataSetChanged();
     }
 }

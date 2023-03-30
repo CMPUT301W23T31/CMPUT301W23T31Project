@@ -1,12 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        <ImageView
+            android:padding="10dp"
+            android:layout_gravity="center"
+            android:id="@+id/surroundings_image_view"
+            android:layout_width="200dp"
+            android:layout_height="200dp"/>
 
-    </ImageView>
+        <TextView
+            android:id="@+id/surroundings_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:textSize="15dp"
+            android:layout_gravity="center_horizontal"></TextView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
