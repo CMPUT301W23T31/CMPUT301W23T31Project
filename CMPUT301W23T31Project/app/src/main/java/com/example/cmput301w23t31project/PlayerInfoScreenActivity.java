@@ -92,7 +92,7 @@ public class PlayerInfoScreenActivity extends HamburgerMenu {
         setRank();
 
         // set player username
-        player_info_username.setText(username);
+        player_info_username.setText(username+"'s Stats");
 
         // 'my scans' button functionality
         viewScanBtn.setOnClickListener(new View.OnClickListener() {

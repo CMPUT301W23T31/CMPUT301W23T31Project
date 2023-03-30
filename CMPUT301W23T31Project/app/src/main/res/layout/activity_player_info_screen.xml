@@ -2,155 +2,418 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="10dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".PlayerInfoScreenActivity"
-    android:layout_margin="10dp">
+    android:orientation="vertical">
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="end"
-        android:orientation="vertical">
+        android:padding="10dp"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:alpha="0.5"
+        android:background="@drawable/drawable_ui"
+        android:backgroundTint="#025E8F"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
 
-        <ImageView
-            android:id="@+id/player_info_my_account_button"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:src="@drawable/account_icon" />
-
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical">
 
-            android:text="My Account"
-            style="@style/bold_tiny_header"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/player_info_username"
+                    android:layout_width="171dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:textSize="30dp">
+
+                </TextView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/player_info_my_account_button"
+                        android:layout_width="39dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="end"
+                        android:src="@drawable/account_icon" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:layout_gravity="end"
+                        android:text="My Account"
+                        style="@style/bold_tiny_header"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <ImageView
+                android:layout_width="180dp"
+                android:layout_height="140dp"
+                android:layout_alignParentEnd="true"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:padding="10dp"
+                app:srcCompat="@drawable/player_stats" />
+
+            <Button
+                android:id="@+id/player_info_see_scans_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                android:textColor="@color/white"
+                android:background="@drawable/round_button"
+                app:backgroundTint="@color/profile_button_back"
+                android:fontFamily="@font/lato"
+                android:text="View All Scans"
+                android:textSize="24sp" />
+
+
+        </LinearLayout>
 
     </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="2sp"
+        android:padding="5dp"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal">
 
-        android:text="Player Info"
-        style="@style/bold_medium_header" />
+        <LinearLayout
+            android:layout_width="198dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:alpha="0.5"
+            android:background="@drawable/drawable_ui"
+            android:backgroundTint="#01283C"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="10dp">
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:gravity="center"
+                    android:text="Total Score"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/player_info_total_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="10dp"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:gravity="center"
+                    android:hint="Score"
+                    android:textColor="@color/white"
+                    android:textSize="19sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="148dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:alpha="0.5"
+            android:background="@drawable/drawable_ui"
+            android:backgroundTint="#025E8F"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:gravity="center"
+                    android:text="Total Scans"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/player_info_total_scans"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="10dp"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:gravity="center"
+                    android:hint="Scans"
+                    android:textColor="@color/white"
+                    android:textSize="19sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:padding="10dp"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:alpha="0.5"
+            android:background="@drawable/drawable_ui"
+            android:backgroundTint="#01283C"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
 
-        android:text="Username"
-        style="@style/bold_mini_header" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:text="Rank (by Highest Unique Score)"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/player_info_username"
-        android:layout_width="wrap_content"
+                <ImageView
+                    android:layout_width="69dp"
+                    android:layout_height="69dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_gravity="center_horizontal"
+                    app:srcCompat="@drawable/rank1" />
+
+                <TextView
+                    android:id="@+id/player_info_rank_by_unique_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="10dp"
+                    android:hint="Rank 2"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:textColor="@color/white"
+                    android:textSize="19sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:alpha="0.5"
+            android:background="@drawable/drawable_ui"
+            android:backgroundTint="#025E8F"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:text="Rank (by Highest Total Score)"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:layout_width="70dp"
+                    android:layout_height="66dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_gravity="center_horizontal"
+                    app:srcCompat="@drawable/rank2" />
+
+                <TextView
+                    android:id="@+id/player_info_rank_by_total_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="10dp"
+                    android:hint="Rank 1"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:textColor="@color/white"
+                    android:textSize="19sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:orientation="horizontal">
 
-        android:hint="Player Username"
-        style="@style/basic_medium_text"/>
+        <LinearLayout
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:alpha="0.5"
+            android:background="@drawable/drawable_ui"
+            android:backgroundTint="#01283C"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="10dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:orientation="vertical">
 
-        android:text="Total Score"
-        style="@style/bold_mini_header" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:gravity="center"
+                    android:text="Highest Scoring QR Code"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/player_info_total_score"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+                <ImageView
+                    android:layout_width="69dp"
+                    android:layout_height="61dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_gravity="center_horizontal"
+                    app:srcCompat="@drawable/highfive" />
 
-        android:hint="Score"
-        style="@style/basic_medium_text"/>
+                <TextView
+                    android:id="@+id/player_info_high_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="10dp"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:gravity="center"
+                    android:text="High"
+                    android:textColor="@color/white"
+                    android:textSize="19sp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+            </LinearLayout>
+        </LinearLayout>
 
-        android:text="Total Scans"
-        style="@style/bold_mini_header" />
+        <LinearLayout
+            android:layout_width="146dp"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:alpha="0.5"
+            android:background="@drawable/drawable_ui"
+            android:backgroundTint="#025E8F"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="10dp">
 
-    <TextView
-        android:id="@+id/player_info_total_scans"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+            <LinearLayout
+                android:layout_width="129dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:orientation="vertical">
 
-        android:hint="Scans"
-        style="@style/basic_medium_text"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:gravity="center"
+                    android:text="Lowest Scoring QR Code"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+                <ImageView
+                    android:layout_width="69dp"
+                    android:layout_height="61dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_gravity="center_horizontal"
+                    app:srcCompat="@drawable/goodluck" />
 
-        android:text="Rank (by Highest Total Score)"
-        style="@style/bold_mini_header" />
+                <TextView
+                    android:id="@+id/player_info_low_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="10dp"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:gravity="center"
+                    android:text="Low"
+                    android:textColor="@color/white"
+                    android:textSize="19sp" />
+            </LinearLayout>
+        </LinearLayout>
 
-    <TextView
-        android:id="@+id/player_info_rank_by_total_score"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:hint="Rank 1"
-        style="@style/basic_medium_text"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="2dp"
-
-        android:text="Rank (by Highest Unique Score)"
-        style="@style/bold_mini_header" />
-
-    <TextView
-        android:id="@+id/player_info_rank_by_unique_score"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:hint="Rank 2"
-        style="@style/basic_medium_text"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:text="Highest Scoring QR Code"
-        style="@style/bold_mini_header" />
-
-    <TextView
-        android:id="@+id/player_info_high_score"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:text="High"
-        style="@style/accent_medium_header" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:text="Lowest Scoring QR Code"
-        style="@style/bold_mini_header" />
-
-    <TextView
-        android:id="@+id/player_info_low_score"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:text="Low"
-        style="@style/accent_medium_header" />
-
-    <Button
-        android:id="@+id/player_info_see_scans_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-
-        android:text="View All Scans"
-        style="@style/navigation_button_style" />
-
+    </LinearLayout>
 </LinearLayout>
+
