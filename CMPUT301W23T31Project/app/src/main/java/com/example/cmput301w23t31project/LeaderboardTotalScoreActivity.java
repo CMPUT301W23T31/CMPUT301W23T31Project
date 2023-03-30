@@ -104,7 +104,7 @@ public class LeaderboardTotalScoreActivity extends HamburgerMenu implements Sear
         LeaderboardList = findViewById(R.id.leaderboard_list);
         leaderboardTotalScoreArrayAdapter = new LeaderboardTotalScoreArrayAdapter(this, dataList,username);
         LeaderboardList.setAdapter(leaderboardTotalScoreArrayAdapter);
-
+        totalScoreBtn.setBackgroundColor(getColor(R.color.activity_selected_button_color));
         high_score_text = findViewById(R.id.current_high_score);
         total_score_text = findViewById(R.id.current_total_score);
         count_text = findViewById(R.id.current_count);
