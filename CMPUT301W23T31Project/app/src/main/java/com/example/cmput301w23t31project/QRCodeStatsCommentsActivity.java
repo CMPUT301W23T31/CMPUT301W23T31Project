@@ -11,6 +11,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -57,6 +58,10 @@ public class QRCodeStatsCommentsActivity extends AppCompatActivity implements Ad
     protected void onCreate(Bundle savedInstanceState) {
         // Get access to the database
         super.onCreate(savedInstanceState);
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setCustomView(R.layout.title_bar);
+        TextView title = findViewById(R.id.myTitle);
+        title.setText("QR STATS");
         setContentView(R.layout.activity_qr_code_stats_comments);
         Intent intent = getIntent();
         hash = intent.getStringExtra("Hash");

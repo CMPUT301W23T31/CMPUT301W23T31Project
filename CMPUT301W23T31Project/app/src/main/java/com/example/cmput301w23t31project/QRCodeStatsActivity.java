@@ -14,10 +14,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -49,12 +51,12 @@ public class QRCodeStatsActivity extends AppCompatActivity {
     Button dislikebtn;
     Button likebtn;
     String coordinates;
-    private ArrayList<Player> playerList;
+    ArrayList<Player> playerList;
     private QRCodeStatsAdapter qrCodeStatsAdapter;
     String username;
     ListView datalist;
     DrawRepresentation visualRepresentation;
-
+    Button viewSurroundings;
     /**
      * This method creates the activity to display QR code stats
      * @param savedInstanceState a bundle required to create the activity
@@ -62,10 +64,15 @@ public class QRCodeStatsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         // Get access to the database
         super.onCreate(savedInstanceState);
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setCustomView(R.layout.title_bar);
+        TextView title = findViewById(R.id.myTitle);
+        title.setText("QR STATS");
         setContentView(R.layout.activity_qr_code_stats_screen);
         Intent intent = getIntent();
         hash = intent.getStringExtra("Hash");
         username = intent.getStringExtra("username");
+        Log.d("TAG", hash+" stats  "+ username);
 
         // Accesses all of the text fields
         nameView = findViewById(R.id.qr_code_stats_code_name);
@@ -83,7 +90,7 @@ public class QRCodeStatsActivity extends AppCompatActivity {
         qrCodeStatsAdapter = new QRCodeStatsAdapter(this, playerList, username);
         datalist.setAdapter(qrCodeStatsAdapter);
         QRCodesCollection qr_codes = new QRCodesCollection();
-
+        viewSurroundings = findViewById(R.id.qr_code_stats_comments_view_surroundings);
         // generating and displaying visual representation
         View representationView = findViewById(R.id.qr_code_stats_visual_representation_view);
         visualRepresentation = new DrawRepresentation(hash, 80);
@@ -113,7 +120,7 @@ public class QRCodeStatsActivity extends AppCompatActivity {
             }
         });
 
-        ///
+        setStats(hash);
         //Toast.makeText(getApplicationContext(),"hashstats: "+hash,Toast.LENGTH_SHORT).show();
         db = FirebaseFirestore.getInstance();
         db.collection("PlayerScans").get()
@@ -129,15 +136,23 @@ public class QRCodeStatsActivity extends AppCompatActivity {
                               // our data in a list.
                               List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
                               for (DocumentSnapshot document : list) {
+                                  Log.d("TAG",  document.getData().keySet()+"   "+hash);
                                   if(document.getData().containsKey(hash)){
-                                      setList(document.getId());
-                                      setStats(hash);}
+                                      Log.d("TAG", "Reached inside setting stats found doc");
+                                      setList(document.getId());}
 
                               }
                           }
                       }
                 });
         //setList(username);
+        viewSurroundings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(QRCodeStatsActivity.this, SurroundingsActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     /**
@@ -162,22 +177,26 @@ public class QRCodeStatsActivity extends AppCompatActivity {
                                 // Adding the required statistics to the text fields
                                 if (document != null) {
                                     if(document.getId().equals(hash)){
+                                        Log.d("TAG", "Reached inside setting statsijgsoigjaslkg");
                                     nameView.setText(document.getString("Name"));
                                     scoreView.setText(document.getString("Score"));
                                     if((Double.valueOf(document.getString("Latitude"))==200)){
                                         coordinates = "No Location";
+
                                     }else{
                                         coordinates = document.getString("Latitude") + ", " + document.getString("Longitude");
                                     }
                                     String likes = document.getString("Likes") + " / " + document.getString("Dislikes");
                                     coordinatesView.setText(coordinates);
                                     likesView.setText(likes);
-                                    }}
+                                    date.setText(document.getString("LastScanned"));
+                                    scanned.setText(document.getString("TimesScanned"));
+                                    }
 
-            date.setText(document.getString("LastScanned"));
-            scanned.setText(document.getString("TimesScanned"));
+
         }
-    }}});}
+    }}}});
+    }
 
     /**
      * sets and updates relevant listview for given QR code
@@ -227,14 +246,14 @@ public class QRCodeStatsActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         TextView LikesDislikesText = findViewById(R.id.qr_code_stats_code_likes_dislikes);
         String numberOfLikes = LikesDislikesText.getText().toString();
-        String likesStr = "";
+        String likesStr = "0";
         String LikesFinished = processString(numberOfLikes,number);
         String DisLikesFinished = processString(numberOfLikes,number);
 
 
         switch (number){
             case 0: {
-                int likes1 = Integer.valueOf(LikesFinished);
+                int likes1 = Integer.parseInt(LikesFinished);
                 int likes2 = likes1 + 1;
                 likesStr = (LikesFinished + " / " + DisLikesFinished);
                 String likes = String.valueOf(likes2);
@@ -242,7 +261,7 @@ public class QRCodeStatsActivity extends AppCompatActivity {
                 break;
             }
             case 1:{
-                int dislikes1 = Integer.valueOf(DisLikesFinished);
+                int dislikes1 = Integer.parseInt(DisLikesFinished);
                 int dislikes2 = dislikes1 + 1;
                 likesStr = (LikesFinished + " / " + DisLikesFinished);
                 String dislikes = String.valueOf(dislikes2);
@@ -269,8 +288,13 @@ public class QRCodeStatsActivity extends AppCompatActivity {
                 });
     }
     public String processString(String string,int number) {
+<<<<<<< HEAD
         String LikesFinished = "";
         String DisLikesFinished = "";
+=======
+        String LikesFinished = "0";
+        String DisLikesFinished ="0";
+>>>>>>> 18f4f9d1b50c3fba5d601999de84300bcba72bfb
         switch (number) {
             case 0:{
                 String[] numberOflikesArr = string.split("/");

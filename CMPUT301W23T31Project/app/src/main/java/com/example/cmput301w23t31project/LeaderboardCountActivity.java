@@ -10,7 +10,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -31,11 +33,22 @@ public class LeaderboardCountActivity extends HamburgerMenu implements SearchUse
     Button countBtn;
     Button totalScoreBtn;
     Button regionalBtn;
+    String total_score;
+    String high_score;
+    String count;
+    TextView high_score_text;
+    TextView total_score_text;
+    TextView count_text;
     private String username;
     private ArrayList<Player> dataList;
     private LeaderboardCountArrayAdapter leaderboardCountArrayAdapter;
     private ArrayList<Player> dataList2 = new ArrayList<>();
 
+    /**
+     * This method gets the search results and displays the results, if there are any
+     * @param username
+     *      The searched username
+     */
     @Override
     public void searchUser(String username){
         int l = dataList.size();
@@ -74,6 +87,10 @@ public class LeaderboardCountActivity extends HamburgerMenu implements SearchUse
     ListView LeaderboardList;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setCustomView(R.layout.title_bar);
+        TextView title = findViewById(R.id.myTitle);
+        title.setText("LEADERBOARD");
         setContentView(R.layout.activity_leaderboard_screen);
         Intent intent = getIntent();
         username = intent.getStringExtra("username");
@@ -85,6 +102,14 @@ public class LeaderboardCountActivity extends HamburgerMenu implements SearchUse
         LeaderboardList = findViewById(R.id.leaderboard_list);
         leaderboardCountArrayAdapter = new LeaderboardCountArrayAdapter(this, dataList,username);
         LeaderboardList.setAdapter(leaderboardCountArrayAdapter);
+
+        countBtn.setBackgroundColor(getColor(R.color.activity_selected_button_color));
+        high_score_text = findViewById(R.id.current_high_score);
+        total_score_text = findViewById(R.id.current_total_score);
+        count_text = findViewById(R.id.current_count);
+        setStats();
+
+
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
@@ -101,6 +126,35 @@ public class LeaderboardCountActivity extends HamburgerMenu implements SearchUse
                 new SearchUserFragment().show(getSupportFragmentManager(),"Search Username");
             }
         });
+
+    }
+
+    public void setStats(){
+        db = FirebaseFirestore.getInstance();
+        db.collection("PlayerInfo").get() .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                // after getting the data we are calling on success method
+                // and inside this method we are checking if the received
+                // query snapshot is empty or not.
+                if (!queryDocumentSnapshots.isEmpty()) {
+                    // if the snapshot is not empty we are
+                    // hiding our progress bar and adding
+                    // our data in a list.
+                    List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+                    for (DocumentSnapshot document : list) {
+                        if(document.getId().equals(username)){
+                            total_score = document.getString("Total Score");
+                            high_score = document.getString("Highest Scoring QR Code");
+                            count = document.getString("Total Scans");
+                            high_score_text.setText(high_score);
+                            total_score_text.setText(total_score);
+                            count_text.setText(count);
+                        }
+
+                    }
+
+                }}});
 
     }
     /**
@@ -163,6 +217,12 @@ public class LeaderboardCountActivity extends HamburgerMenu implements SearchUse
         return useHamburgerMenu(item, username);
 
     }
+
+    /**
+     * This method allows user to shift to LeaderboardHighScoreActivity
+     * @param view
+     *      A view needed to change intents
+     */
     public void onClickHighScore(View view){
         String name = highScoreBtn.getText().toString();
         //clickSort(name);
@@ -170,6 +230,12 @@ public class LeaderboardCountActivity extends HamburgerMenu implements SearchUse
         intent.putExtra("username", username);
         startActivity(intent);
     }
+
+    /**
+     * This method allows user to shift to LeaderboardCountActivity
+     * @param view
+     *      A view needed to change intents
+     */
     public void onClickCount(View view){
         String name = countBtn.getText().toString();
         //clickSort(name);
@@ -177,6 +243,12 @@ public class LeaderboardCountActivity extends HamburgerMenu implements SearchUse
         intent.putExtra("username", username);
         startActivity(intent);
     }
+
+    /**
+     * This method allows user to shift to LeaderboardTotalActivity
+     * @param view
+     *      A view needed to change intents
+     */
     public void onClickTotalScore(View view){
         String name = totalScoreBtn.getText().toString();
         //clickSort(name);

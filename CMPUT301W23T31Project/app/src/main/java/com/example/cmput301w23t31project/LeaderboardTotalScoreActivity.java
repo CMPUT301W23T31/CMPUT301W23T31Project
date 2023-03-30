@@ -4,15 +4,15 @@ package com.example.cmput301w23t31project;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.ActionBar;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -32,8 +32,13 @@ public class LeaderboardTotalScoreActivity extends HamburgerMenu implements Sear
     Button countBtn;
     Button totalScoreBtn;
     Button regionalBtn;
+    String total_score;
+    String high_score;
+    String count;
+    TextView high_score_text;
+    TextView total_score_text;
+    TextView count_text;
     private String username;
-
     private ArrayList<Player> dataList = new ArrayList<>();
     private ArrayList<Player> dataList2 = new ArrayList<>();
     private LeaderboardTotalScoreArrayAdapter leaderboardTotalScoreArrayAdapter;
@@ -43,7 +48,11 @@ public class LeaderboardTotalScoreActivity extends HamburgerMenu implements Sear
     }
 
 
-
+    /**
+     * This method gets the search results and displays the results, if there are any
+     * @param username
+     *      The searched username
+     */
     @Override
     public void searchUser(String username){
         int l = dataList.size();
@@ -81,6 +90,10 @@ public class LeaderboardTotalScoreActivity extends HamburgerMenu implements Sear
     ListView LeaderboardList;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setCustomView(R.layout.title_bar);
+        TextView title = findViewById(R.id.myTitle);
+        title.setText("LEADERBOARD");
         setContentView(R.layout.activity_leaderboard_total_score);
         Intent intent = getIntent();
         username = intent.getStringExtra("username");
@@ -91,7 +104,13 @@ public class LeaderboardTotalScoreActivity extends HamburgerMenu implements Sear
         LeaderboardList = findViewById(R.id.leaderboard_list);
         leaderboardTotalScoreArrayAdapter = new LeaderboardTotalScoreArrayAdapter(this, dataList,username);
         LeaderboardList.setAdapter(leaderboardTotalScoreArrayAdapter);
-        PlayerScansCollection playerScansCollection = new PlayerScansCollection();
+        totalScoreBtn.setBackgroundColor(getColor(R.color.activity_selected_button_color));
+        high_score_text = findViewById(R.id.current_high_score);
+        total_score_text = findViewById(R.id.current_total_score);
+        count_text = findViewById(R.id.current_count);
+        setStats();
+
+        PlayerInfoCollection playerScansCollection = new PlayerInfoCollection();
         playerScansCollection.getPlayerScans();
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -113,6 +132,35 @@ public class LeaderboardTotalScoreActivity extends HamburgerMenu implements Sear
 
     }
 
+    public void setStats(){
+        db = FirebaseFirestore.getInstance();
+        db.collection("PlayerInfo").get() .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                // after getting the data we are calling on success method
+                // and inside this method we are checking if the received
+                // query snapshot is empty or not.
+                if (!queryDocumentSnapshots.isEmpty()) {
+                    // if the snapshot is not empty we are
+                    // hiding our progress bar and adding
+                    // our data in a list.
+                    List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+                    for (DocumentSnapshot document : list) {
+                        if(document.getId().equals(username)){
+                            total_score = document.getString("Total Score");
+                            high_score = document.getString("Highest Scoring QR Code");
+                            count = document.getString("Total Scans");
+                            high_score_text.setText(high_score);
+                            total_score_text.setText(total_score);
+                            count_text.setText(count);
+                        }
+
+                    }
+
+                }}});
+
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -120,7 +168,8 @@ public class LeaderboardTotalScoreActivity extends HamburgerMenu implements Sear
         return true;
     }
     /**
-     from the playerinfo collection in the database access the username and fields and display the users in a listview
+     from the playerinfo collection in the database access the username and fields and
+     display the users in a listview
      then sort the list and give each player a rank
      */
     public void CreateLeaderBoard(){
@@ -171,6 +220,12 @@ public class LeaderboardTotalScoreActivity extends HamburgerMenu implements Sear
 
         return useHamburgerMenu(item, username);
     }
+
+    /**
+     * This method allows user to shift to LeaderboardHighScoreActivity
+     * @param view
+     *      A view needed to change intents
+     */
     public void onClickHighScore(View view){
         String name = highScoreBtn.getText().toString();
         //clickSort(name);
@@ -178,6 +233,12 @@ public class LeaderboardTotalScoreActivity extends HamburgerMenu implements Sear
         intent.putExtra("username", username);
         startActivity(intent);
     }
+
+    /**
+     * This method allows user to shift to LeaderboardCountActivity
+     * @param view
+     *      A view needed to change intents
+     */
     public void onClickCount(View view){
         String name = countBtn.getText().toString();
         //clickSort(name);
@@ -185,6 +246,12 @@ public class LeaderboardTotalScoreActivity extends HamburgerMenu implements Sear
         intent.putExtra("username", username);
         startActivity(intent);
     }
+
+    /**
+     * This method allows user to shift to LeaderboardTotalScoreActivity
+     * @param view
+     *      A view needed to change intents
+     */
     public void onClickTotalScore(View view){
         String name = totalScoreBtn.getText().toString();
         //clickSort(name);

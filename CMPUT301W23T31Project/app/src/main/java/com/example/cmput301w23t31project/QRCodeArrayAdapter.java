@@ -1,5 +1,6 @@
 package com.example.cmput301w23t31project;
 
+
 import static android.content.ContentValues.TAG;
 
 import android.content.Context;
@@ -8,28 +9,26 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+
 
 /**
  * Array adapter for QR code visualization in listviews
@@ -77,21 +76,30 @@ public class QRCodeArrayAdapter extends ArrayAdapter<QRCode> {
         QRCode QRCode = getItem(position);
         TextView QRCodeName = view.findViewById(R.id.code_detail_name);
         TextView QRCodePoints = view.findViewById(R.id.code_detail_points);
-        ImageView delete = view.findViewById(R.id.delete);
-        //if(!isVisibility()){
-        //    delete.setVisibility(View.GONE);
-        //}
-        //else{
-        //    delete.setVisibility(View.VISIBLE);
-        //}
-        PlayerScansCollection scans = new PlayerScansCollection();
+        ImageView delete = view.findViewById(R.id.delete_button);
+        View tier_indicator = view.findViewById(R.id.tier_indicator_marker);
+
+        Button CodeInfo;
+        CodeInfo = view.findViewById(R.id.code_info_button);
+
+        PlayerInfoCollection scans = new PlayerInfoCollection();
         QRdb = FirebaseFirestore.getInstance();
         String hash = QRCode.getHash();
 
-        Log.d(TAG,"ADAPT: " + QRCode.getName());
-        QRCodeName.setText(QRCode.getName());
-        QRCodePoints.setText("Points: " + QRCode.getScore());
+        // filling in details
+        String QRName = QRCode.getName();
+        Integer QRScore = QRCode.getScore();
+        Log.d(TAG,"ADAPT: " + QRName);
+        QRCodeName.setText(QRName);
+        QRCodePoints.setText("Points: " + QRScore);
 
+        // dynamically setting color
+        if (QRScore < 20) {tier_indicator.setBackgroundResource(R.color.tier_1_teal);}
+        else if (QRScore < 200) {tier_indicator.setBackgroundResource(R.color.tier_2_blue);}
+        else if (QRScore < 2000) {tier_indicator.setBackgroundResource(R.color.tier_3_purple);}
+        else {tier_indicator.setBackgroundResource(R.color.tier_4_pink);}
+
+        // delete button stuff
         if (!currentUser.equals(username)){
             delete.setVisibility(View.GONE);
             Log.i("TAG", currentUser+":crnt   display:"+username);
@@ -116,6 +124,21 @@ public class QRCodeArrayAdapter extends ArrayAdapter<QRCode> {
                 }
             });
         }
+
+        // functionality for when a QR code is chosen from list
+        CodeInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "REACHED HERE!!");
+                Intent intent = new Intent(context, QRCodeStatsActivity.class);
+                intent.putExtra("Hash", hash);
+                intent.putExtra("username", username);
+                context.startActivity(intent);
+            }
+        });
+
+
+
 
         return view;
     }

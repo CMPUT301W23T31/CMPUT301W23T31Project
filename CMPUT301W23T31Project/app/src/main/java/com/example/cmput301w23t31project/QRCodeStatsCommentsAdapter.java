@@ -1,5 +1,6 @@
 package com.example.cmput301w23t31project;
 
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
+
 
 /**
  * Adapter for QR code comment stats page

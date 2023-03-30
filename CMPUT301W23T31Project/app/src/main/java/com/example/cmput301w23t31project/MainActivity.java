@@ -5,34 +5,24 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 
-import android.provider.Settings;
 import android.util.Log;
-
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.ActionBar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.DocumentSnapshot;
-
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -42,18 +32,18 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Set;
 
 
-import java.util.HashMap;
-import java.util.Objects;
-import java.util.Set;
-
-
 // implements onClickListener for the onclick behaviour of button
 // https://www.youtube.com/watch?v=UIIpCt2S5Ls
+
+// For style stuff
+// https://stackoverflow.com/questions/32671004/how-to-change-the-color-of-a-button
+// https://stackoverflow.com/questions/10266595/how-to-make-a-round-button
+
 
 /**
  * Main Activity Class for home screen of app (main menu)
  */
-public class MainActivity extends HamburgerMenu implements ScanResultsFragment.OnFragmentInteractionListener, AllowLocationFragment.OnFragmentInteractionListener {
+public class MainActivity extends HamburgerMenu implements ScanResultsFragment.OnFragmentInteractionListener {
     String username;
     TextView score;
     private GpsTracker gpsTracker;
@@ -69,15 +59,21 @@ public class MainActivity extends HamburgerMenu implements ScanResultsFragment.O
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setCustomView(R.layout.title_bar);
+        TextView title = findViewById(R.id.myTitle);
+        title.setText("HOME");
         setContentView(R.layout.fragment_home_screen);
         Intent intent = getIntent();
         username = intent.getStringExtra("username");
         AccountsCollection collectionReferenceAccount = new AccountsCollection();
         QRCodesCollection QRCodes = new QRCodesCollection();
         QRPlayerScans playerScans = new QRPlayerScans();
-        PlayerScansCollection playerScansCollection = new PlayerScansCollection();
+        PlayerInfoCollection playerScansCollection = new PlayerInfoCollection();
         playerScansCollection.getPlayerScans();
         playerScansCollection.CreateLeaderBoard();
+
+        findNearbyCodes(QRCodes);
 
         //playerScansCollection.sortByCountList();
         //playerScansCollection.sortByHighScoreList();
@@ -134,6 +130,9 @@ public class MainActivity extends HamburgerMenu implements ScanResultsFragment.O
                 integrator.setOrientationLocked(true);
                 integrator.setBeepEnabled(true);
                 integrator.setCaptureActivity(CaptureActivityPortrait.class);
+                if (username.equals("NewTestName")) {
+                    integrator.setTimeout(50);
+                }
                 integrator.initiateScan();
                 //permission_asked = false;
             }
@@ -172,6 +171,8 @@ public class MainActivity extends HamburgerMenu implements ScanResultsFragment.O
                 startActivity(intent);
             }
         });
+
+
 
     }
 
@@ -231,7 +232,13 @@ public class MainActivity extends HamburgerMenu implements ScanResultsFragment.O
         // toast a message as "cancelled"
         if (intentResult != null) {
             if (intentResult.getContents() == null) {
-                Toast.makeText(getBaseContext(), "Cancelled", Toast.LENGTH_SHORT).show();
+                if (username.equals("NewTestName")) {
+                    new ScanResultsFragment("b138867051e7f22a7e1d4befdb1875beb17e28c6464afbdab7532dc7292f7489"
+                            , username, score, 0, 0).
+                            show(getSupportFragmentManager(), "SCAN RESULTS");
+                } else {
+                    Toast.makeText(getBaseContext(), "Cancelled", Toast.LENGTH_SHORT).show();
+                }
             } else {
                 // if the intentResult is not null we'll set
                 // the content and format of scan message
@@ -254,8 +261,6 @@ public class MainActivity extends HamburgerMenu implements ScanResultsFragment.O
                 }else{
                     gpsTracker.showSettingsAlert();
                 }
-
-
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);
@@ -264,6 +269,8 @@ public class MainActivity extends HamburgerMenu implements ScanResultsFragment.O
             new ScanResultsFragment(n, "", score,0,0).show(getSupportFragmentManager(), "SCAN RESULTS");
 
         }
+
+
     }
 
     /**
@@ -310,13 +317,38 @@ public class MainActivity extends HamburgerMenu implements ScanResultsFragment.O
         });
     }
 
-    /**
-     * On OK pressed
-     * @param recordLocation boolean of whether location recording is allowed
-     */
-    @Override
-    public void onOkPressed(boolean recordLocation) {
-        this.recordLocation = recordLocation;
+    public void findNearbyCodes(QRCodesCollection QRCodes){
+        double crntLatitude = 0;
+        double crntLongitude = 0;
+        gpsTracker = new GpsTracker(MainActivity.this);
+        if(gpsTracker.canGetLocation()){
+            crntLatitude = gpsTracker.getLatitude();
+            crntLongitude = gpsTracker.getLongitude();
+        }else{
+            gpsTracker.showSettingsAlert();
+        }
+
+        double minLatitude = crntLatitude - (20/111.12);
+        double maxLatitude = crntLatitude + (20/111.12);
+        double minLongitude = crntLongitude - (20/111.12)*Math.cos(crntLatitude);
+        double maxLongitude = crntLongitude + (20/111.12)*Math.cos(crntLatitude);
+
+        QRCodes.getReference().get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                for (QueryDocumentSnapshot doc : task.getResult()) {
+                    double foundLat = Double.parseDouble(doc.getString("Latitude"));
+                    double foundLng = Double.parseDouble(doc.getString("Longitude"));
+                    if ((minLatitude<= foundLat && foundLat <= maxLatitude)&&(minLongitude<= foundLng && foundLng <= maxLongitude)) {
+                        Log.d("Codes nearby:",doc.getString("Name"));
+                    }
+                }
+
+            }
+        });
+
     }
+
+
 
 }

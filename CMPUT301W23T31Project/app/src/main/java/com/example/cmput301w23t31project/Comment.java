@@ -1,5 +1,6 @@
 package com.example.cmput301w23t31project;
 
+
 /**
  * Class represents a single instance of a comment made on a QR code
  * Stores all relevant info about comment (including comment contents)

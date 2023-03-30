@@ -1,6 +1,6 @@
 package com.example.cmput301w23t31project;
 
-import android.content.Context;
+
 import android.content.Intent;
 import android.view.MenuItem;
 
@@ -8,8 +8,20 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 
-public class HamburgerMenu extends AppCompatActivity {
 
+/**
+ * This class provides a method to operate a hamburger menu on many activities
+ */
+public class HamburgerMenu extends AppCompatActivity {
+    /**
+     * This method allows proper functionality for the Hamburger Menu
+     * @param item
+     *      A reference to the menu item click on the menu
+     * @param username
+     *      The username of the current user
+     * @return
+     *      Whether or not the menu worked properly
+     */
     public boolean useHamburgerMenu(MenuItem item, String username) {
         switch(item.getItemId()){
             case R.id.item2: {

@@ -1,8 +1,10 @@
 package com.example.cmput301w23t31project;
 
+
 import static android.content.ContentValues.TAG;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -34,6 +36,7 @@ import org.checkerframework.checker.units.qual.A;
 import java.util.ArrayList;
 import java.util.Set;
 
+
 /**
  * Activity class for "My Scans" Screen
  */
@@ -42,9 +45,12 @@ public class MyScansScreenActivity extends HamburgerMenu implements SearchScanFr
     ListView qrcodeList;
     ArrayAdapter<QRCode> qrCodeAdapter;
     ArrayList<QRCode> datalist;
+    private ArrayList<QRCode> datalist2 = new ArrayList<>();
     String username;
     String player;
     String currentUser;
+
+    ListView QRCodeList;
 
     /**
      * On Create method
@@ -54,6 +60,10 @@ public class MyScansScreenActivity extends HamburgerMenu implements SearchScanFr
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setCustomView(R.layout.title_bar);
+        TextView title = findViewById(R.id.myTitle);
+        title.setText("SCAN LIST");
         setContentView(R.layout.activity_my_scans_screen);
 
         Button searchScan;
@@ -80,19 +90,6 @@ public class MyScansScreenActivity extends HamburgerMenu implements SearchScanFr
                 new SearchScanFragment().show(getSupportFragmentManager(), "Search Scan");
             }
         });
-
-        // functionality for when a QR code is chosen from list
-        qrcodeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Log.d(TAG, "REACHED HERE!!");
-                Intent intent = new Intent(MyScansScreenActivity.this, QRCodeStatsActivity.class);
-                intent.putExtra("Hash", datalist.get(i).getHash());
-                intent.putExtra("username", username);
-                startActivity(intent);
-            }
-        });
-
     }
 
     /**
@@ -124,24 +121,40 @@ public class MyScansScreenActivity extends HamburgerMenu implements SearchScanFr
      */
     @Override
     public void onDisplayOkPressed(String name) {
-        QRCodesCollection QR_codes = new QRCodesCollection();
-        CollectionReference codes = QR_codes.getReference();
-        codes.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        if (document.getString("Name").equals(name)) {
-                            String hash_return = document.getId();
-                            Intent intent = new Intent(MyScansScreenActivity.this, QRCodeStatsActivity.class);
-                            intent.putExtra("Hash", hash_return);
-                            intent.putExtra("username", username);
-                            startActivity(intent);
-                        }
-                    }
-                }
+        int c =0;
+        int l = datalist.size();
+        Intent intent = getIntent();
+        username = intent.getStringExtra("username");
+        currentUser = intent.getStringExtra("crnt_username");
+        datalist2 = new ArrayList<>();
+        for(int i=0;i<l;i++) {
+            if (name.trim().equalsIgnoreCase(datalist.get(i).getName())){
+                datalist2.add(datalist.get(i));
+                QRCodeList = findViewById(R.id.leaderboard_list);
+                qrCodeAdapter = new QRCodeArrayAdapter(this, datalist2, username ,currentUser);
+                QRCodeList.setAdapter(qrCodeAdapter);
+                c+=1;
             }
-        });
+            else if((datalist.get(i).getName()).startsWith(name.toLowerCase().trim())){
+                datalist2.add(datalist.get(i));
+                QRCodeList = findViewById(R.id.leaderboard_list);
+                qrCodeAdapter = new QRCodeArrayAdapter(this, datalist2, username ,currentUser);
+                QRCodeList.setAdapter(qrCodeAdapter);
+                c+=1;
+            }
+            else if((datalist.get(i).getName()).contains(name.toLowerCase().trim())){
+                datalist2.add(datalist.get(i));
+                QRCodeList = findViewById(R.id.leaderboard_list);
+                qrCodeAdapter = new QRCodeArrayAdapter(this, datalist2, username ,currentUser);
+                QRCodeList.setAdapter(qrCodeAdapter);
+                c+=1;
+            }
+        }
+
+        if(c==0)
+        {
+            new QRCodeNotFoundFragment().show(getSupportFragmentManager(), "Error Message");
+        }
     }
 
     /**
@@ -167,7 +180,7 @@ public class MyScansScreenActivity extends HamburgerMenu implements SearchScanFr
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                             for (QueryDocumentSnapshot doc : task.getResult()) {
                                 if (finalCodes.contains(doc.getId())) {
-                                    Log.d(TAG, "VAL:"+doc.getString("Name")+"  "+doc.getString("Score"));
+                                    Log.d(TAG, "VAL:"+doc.getString("Name") + "  " + doc.getString("Score"));
                                     datalist.add(new QRCode(doc.getString("Name"), Integer.parseInt(doc.getString("Score")), doc.getId()));
                                 }
                             }
@@ -179,5 +192,4 @@ public class MyScansScreenActivity extends HamburgerMenu implements SearchScanFr
             }
         });
     }
-
 }
