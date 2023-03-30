@@ -39,11 +39,16 @@ public class LeaderboardCountActivity extends HamburgerMenu implements SearchUse
     TextView high_score_text;
     TextView total_score_text;
     TextView count_text;
+    TextView StatisticText;
     private String username;
     private ArrayList<Player> dataList;
     private LeaderboardCountArrayAdapter leaderboardCountArrayAdapter;
+    private LeaderboardTotalScoreArrayAdapter leaderboardTotalScoreArrayAdapter;
+    private LeaderboardHighScoreArrayAdapter leaderboardHighScoreArrayAdapter;
     private ArrayList<Player> dataList2 = new ArrayList<>();
-
+    boolean leaderboardListVisible;
+    boolean leaderboardTotalScoreListVisible;
+    boolean leaderboardHighScoreListVisible;
     /**
      * This method gets the search results and displays the results, if there are any
      * @param username
@@ -85,13 +90,15 @@ public class LeaderboardCountActivity extends HamburgerMenu implements SearchUse
     }
 
     ListView LeaderboardList;
+    ListView LeaderboardTotalScoreList;
+    ListView LeaderboardHighScoreList;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.title_bar);
         TextView title = findViewById(R.id.myTitle);
         title.setText("LEADERBOARD");
-        setContentView(R.layout.activity_leaderboard_screen);
+        setContentView(R.layout.activity_leaderboard_count);
         Intent intent = getIntent();
         username = intent.getStringExtra("username");
         dataList = new ArrayList<>();
@@ -99,7 +106,16 @@ public class LeaderboardCountActivity extends HamburgerMenu implements SearchUse
         countBtn = findViewById(R.id.leaderboard_by_count_button);
         totalScoreBtn = findViewById(R.id.leaderboard_by_total_score_button);
         regionalBtn = findViewById(R.id.leaderboard_by_regional_button);
-        LeaderboardList = findViewById(R.id.leaderboard_list);
+        LeaderboardList = findViewById(R.id.leaderboard_count_list);
+        LeaderboardHighScoreList = findViewById(R.id.leaderboard_high_score_list);
+        LeaderboardTotalScoreList = findViewById(R.id.leaderboard_total_score_list);
+
+        leaderboardTotalScoreArrayAdapter = new LeaderboardTotalScoreArrayAdapter(this, dataList,username);
+        LeaderboardTotalScoreList.setAdapter(leaderboardTotalScoreArrayAdapter);
+
+        leaderboardHighScoreArrayAdapter = new LeaderboardHighScoreArrayAdapter(this,dataList,username);
+        LeaderboardHighScoreList.setAdapter(leaderboardHighScoreArrayAdapter);
+
         leaderboardCountArrayAdapter = new LeaderboardCountArrayAdapter(this, dataList,username);
         LeaderboardList.setAdapter(leaderboardCountArrayAdapter);
 
@@ -107,6 +123,7 @@ public class LeaderboardCountActivity extends HamburgerMenu implements SearchUse
         high_score_text = findViewById(R.id.current_high_score);
         total_score_text = findViewById(R.id.current_total_score);
         count_text = findViewById(R.id.current_count);
+        StatisticText = findViewById(R.id.stat);
         setStats();
 
 
@@ -188,7 +205,7 @@ public class LeaderboardCountActivity extends HamburgerMenu implements SearchUse
                         i++;
                     }
                     leaderboardCountArrayAdapter.notifyDataSetChanged();
-                    sortList();
+                    sortByHighScoreList();
                     giveRank();
                 }}});
 
@@ -200,8 +217,6 @@ public class LeaderboardCountActivity extends HamburgerMenu implements SearchUse
                         dataList.get(i).setRank(rank);
                         String username = dataList.get(i).getUsername();
                         String CountRank = String.valueOf(rank);
-                        //PlayerScansCollection playerScansCollection = new PlayerScansCollection();
-                        //playerScansCollection.addCountScoreRank(username,CountRank);
                         }
     }
 
@@ -224,11 +239,12 @@ public class LeaderboardCountActivity extends HamburgerMenu implements SearchUse
      *      A view needed to change intents
      */
     public void onClickHighScore(View view){
-        String name = highScoreBtn.getText().toString();
-        //clickSort(name);
-        Intent intent = new Intent(this, LeaderboardHighScoreActivity.class);
-        intent.putExtra("username", username);
-        startActivity(intent);
+        LeaderboardList.setVisibility(View.GONE);
+        LeaderboardTotalScoreList.setVisibility(View.GONE);
+        LeaderboardHighScoreList.setVisibility(View.VISIBLE);
+        sortByHighScoreList();
+        giveRank();
+        StatisticText.setText("|  High Score");
     }
 
     /**
@@ -237,11 +253,12 @@ public class LeaderboardCountActivity extends HamburgerMenu implements SearchUse
      *      A view needed to change intents
      */
     public void onClickCount(View view){
-        String name = countBtn.getText().toString();
-        //clickSort(name);
-        Intent intent = new Intent(this, LeaderboardCountActivity.class);
-        intent.putExtra("username", username);
-        startActivity(intent);
+        LeaderboardList.setVisibility(View.VISIBLE);
+        LeaderboardTotalScoreList.setVisibility(View.GONE);
+        LeaderboardHighScoreList.setVisibility(View.GONE);
+        sortList();
+        giveRank();
+        StatisticText.setText("|  Count");
     }
 
     /**
@@ -250,11 +267,12 @@ public class LeaderboardCountActivity extends HamburgerMenu implements SearchUse
      *      A view needed to change intents
      */
     public void onClickTotalScore(View view){
-        String name = totalScoreBtn.getText().toString();
-        //clickSort(name);
-        Intent intent = new Intent(this, LeaderboardTotalScoreActivity.class);
-        intent.putExtra("username", username);
-        startActivity(intent);
+        LeaderboardList.setVisibility(View.GONE);
+        LeaderboardTotalScoreList.setVisibility(View.VISIBLE);
+        LeaderboardHighScoreList.setVisibility(View.GONE);
+        sortByTotalScoreList();
+        giveRank();
+        StatisticText.setText("|  Total Score");
     }
 
     public void sortList() {
@@ -265,7 +283,34 @@ public class LeaderboardCountActivity extends HamburgerMenu implements SearchUse
                     dataList.set(j, dataList.get(j + 1));
                     dataList.set(j + 1, temp);
 
+
                 }
         leaderboardCountArrayAdapter.notifyDataSetChanged();
     }
+    public void sortByTotalScoreList() {
+        for (int i = 0; i < dataList.size() - 1; i++)
+            for (int j = 0; j < dataList.size() - i - 1; j++)
+                if (dataList.get(j).getTotalScore() < dataList.get(j + 1).getTotalScore()) {
+                    Player temp = dataList.get(j);
+                    dataList.set(j, dataList.get(j + 1));
+                    dataList.set(j + 1, temp);
+
+                }
+        leaderboardTotalScoreArrayAdapter.notifyDataSetChanged();
+    }
+    public void sortByHighScoreList() {
+        for (int i = 0; i < dataList.size() - 1; i++)
+            for (int j = 0; j < dataList.size() - i - 1; j++)
+                if (dataList.get(j).getHighestScoringQR() < dataList.get(j + 1).getHighestScoringQR()) {
+                    Player temp = dataList.get(j);
+                    dataList.set(j, dataList.get(j + 1));
+                    dataList.set(j + 1, temp);
+
+                }
+        leaderboardHighScoreArrayAdapter.notifyDataSetChanged();
+    }
+
+
+
+
 }
