@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -37,7 +38,7 @@ public class PlayerInfoScreenActivity extends HamburgerMenu {
 
     private FirebaseFirestore db;
     Button viewScanBtn;
-    ImageButton myAccountBtn;
+    ImageView myAccountBtn;
     TextView player_info_username;
     TextView player_scans_textview;
     TextView playerTotalScoreRank;
