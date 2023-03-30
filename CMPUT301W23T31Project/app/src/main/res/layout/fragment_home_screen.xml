@@ -4,15 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="20dp">
 
-    
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/home_screen_upper_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
+        android:layout_centerInParent="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:alpha="0.5"
+        android:background="@drawable/drawable_ui"
+        android:backgroundTint="#025E8F"
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:gravity="center_horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -23,15 +32,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:fontFamily="sans-serif-condensed"
             android:gravity="center_horizontal"
-
             android:text="Welcome!"
-            android:textColor="@color/black"
-            android:textSize="30dp"
+            style="@style/basic_large_header"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toTopOf="@id/home_screen_current_points_text"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -39,12 +45,10 @@
             android:id="@+id/home_screen_current_points_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-condensed-medium"
             android:gravity="center_horizontal"
+            android:textColor="@color/white"
             android:text="Current Points:"
-
-            android:textColor="@color/black"
-            android:textSize="24dp"
+            style="@style/bold_sub_header"
             app:layout_constraintBottom_toTopOf="@id/home_screen_current_points"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -54,41 +58,42 @@
             android:id="@+id/home_screen_current_points"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-smallcaps"
             android:gravity="center_horizontal"
             android:text="0"
-
-            android:textColor="@color/black"
-            android:textSize="36dp"
-            app:layout_constraintBottom_toTopOf="@id/home_screen_quick_access_text"
+            android:textColor="@color/white"
+            style="@style/basic_large_text"
+            app:layout_constraintTop_toBottomOf="@id/home_screen_current_points_text"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/home_screen_current_points_text" />
+            app:layout_constraintStart_toStartOf="parent" />
 
-        <TextView
-            android:id="@+id/home_screen_quick_access_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:fontFamily="sans-serif-condensed-light"
-            android:gravity="center_horizontal"
-            android:text="Quick Access"
 
-            android:textColor="@color/black"
-            android:textSize="20dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/home_screen_current_points" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <TextView
+        android:id="@+id/home_screen_quick_access_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="sans-serif-condensed-light"
+        android:gravity="center_horizontal"
+        android:text="Quick Access"
+        android:textColor="@color/black"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/home_screen_explore_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.85"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/home_screen_upper_text" />
+
     <ImageView
         android:id="@+id/imageView4"
-        android:layout_width="180dp"
-        android:layout_height="140dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="25dp"
+        android:layout_width="184dp"
+        android:layout_height="137dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="14dp"
         android:onClick="onClickLeaderboard"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/home_screen_upper_text"
@@ -98,8 +103,8 @@
         android:id="@+id/home_screen_player_info_button"
         android:layout_width="180dp"
         android:layout_height="140dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="25dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="14dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView4"
         app:srcCompat="@drawable/player" />
@@ -108,8 +113,8 @@
         android:id="@+id/imageView8"
         android:layout_width="180dp"
         android:layout_height="140dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="25dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="14dp"
         android:onClick="onClickAppInfo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/home_screen_player_info_button"
@@ -120,7 +125,7 @@
         android:layout_width="180dp"
         android:layout_height="140dp"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="40dp"
         app:layout_constraintEnd_toStartOf="@+id/imageView4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/home_screen_upper_text"
@@ -131,7 +136,7 @@
         android:layout_width="180dp"
         android:layout_height="140dp"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintEnd_toStartOf="@+id/imageView8"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/home_screen_scan_code_button"
@@ -142,7 +147,7 @@
         android:layout_width="180dp"
         android:layout_height="140dp"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintEnd_toStartOf="@+id/home_screen_player_info_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/home_screen_explore_button"

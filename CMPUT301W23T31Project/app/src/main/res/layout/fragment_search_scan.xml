@@ -8,6 +8,8 @@
         android:id="@+id/search_scan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Scan ID"/>
+
+        android:hint="Scan ID"
+        style="@style/basic_medium_text"/>
 
 </LinearLayout>

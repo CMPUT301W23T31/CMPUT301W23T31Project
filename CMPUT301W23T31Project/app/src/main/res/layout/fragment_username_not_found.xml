@@ -8,9 +8,9 @@
         android:id="@+id/error_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Username Not Found!"
         android:layout_margin="20dp"
-        android:textStyle="bold"
-        android:textSize="15dp"/>
+
+        android:text="Username Not Found!"
+        style="@style/bold_medium_header"/>
 
 </LinearLayout>

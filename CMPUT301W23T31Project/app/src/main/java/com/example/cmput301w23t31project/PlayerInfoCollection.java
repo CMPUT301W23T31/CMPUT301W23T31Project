@@ -60,7 +60,7 @@ public class PlayerInfoCollection extends QRDatabase{
         PlayerInfo.put("Total Score", SumScore);
         PlayerInfo.put("Total Scans", count);
         PlayerInfo.put("Lowest Scoring QR Code", min);
-        Log.i("TAG",min);
+        Log.i("The Rank",rank);
         PlayerInfo.put("Highest Scoring QR Code", max);
         PlayerInfo.put("Rank",rank);
         //PlayerInfo.put("field test",temp);
@@ -76,60 +76,64 @@ public class PlayerInfoCollection extends QRDatabase{
     public void addHighScoreRank(String username, String HighScoreRank) {
         String userName = username;
         CollectionReference scans = getReference();
-        Log.i("TAG","test2");
+        //Log.i("TAG","test2");
         //DocumentReference scan = QRdb.collection("PlayerInfo").document(username);
         Map<String, Object> m = new HashMap<>();
         db = FirebaseFirestore.getInstance();
+        Log.i("The High Rank",HighScoreRank);
         m.put("High Score Rank", HighScoreRank);
-        Log.i("TAG",userName);
+        //Log.i("TAG",userName);
         db.collection("PlayerInfo").document(userName)
                 .set(m, SetOptions.merge())
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Log.d(TAG, "DocumentSnapshot successfully written!");
+                        Log.d(TAG, "HighScore Rank successfully written!");
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error writing document", e);
+                        Log.w(TAG, "HighScore Rank  Error writing document", e);
                     }
                 });
     }
     public void addCountScoreRank(String username, String CountScoreRank){
         String userName = username;
         CollectionReference scans = getReference();
-        Log.i("TAG","test2");
+        //Log.i("TAG","test2");
         //DocumentReference scan = QRdb.collection("PlayerInfo").document(username);
         Map<String, Object> m = new HashMap<>();
         db = FirebaseFirestore.getInstance();
+        Log.i("The Count Rank",CountScoreRank);
         m.put("Count Score Rank", CountScoreRank);
-        Log.i("TAG",userName);
+        //Log.i("TAG",userName);
         db.collection("PlayerInfo").document(userName)
                 .set(m, SetOptions.merge())
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Log.d(TAG, "DocumentSnapshot successfully written!");
+                        //Log.d(TAG, "DocumentSnapshot successfully written!");
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error writing document", e);
+                        //Log.w(TAG, "Error writing document", e);
                     }
                 });
     }
     public void addTotalScoreRank(String username, String TotalScoreRank){
         String userName = username;
         CollectionReference scans = getReference();
-        Log.i("TAG","test2");
+        //Log.i("TAG","test2");
         //DocumentReference scan = QRdb.collection("PlayerInfo").document(username);
         Map<String, Object> m = new HashMap<>();
         db = FirebaseFirestore.getInstance();
-        m.put("Total Score Rank", TotalScoreRank);
         Log.i("TAG",userName);
+        Log.i("The Total Rank",TotalScoreRank);
+        m.put("Total Score Rank", TotalScoreRank);
+        //Log.i("TAG",userName);
         db.collection("PlayerInfo").document(userName)
                 .set(m, SetOptions.merge())
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -159,7 +163,7 @@ public class PlayerInfoCollection extends QRDatabase{
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document: task.getResult()) {
-                        Log.i("VAL",document.getId());
+                        //Log.i("VAL",document.getId());
                         if (document.getId().equals(username)) {
 
                             Map data = document.getData();

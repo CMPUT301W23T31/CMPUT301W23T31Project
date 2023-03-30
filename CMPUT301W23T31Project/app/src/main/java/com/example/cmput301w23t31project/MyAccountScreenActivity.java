@@ -3,7 +3,8 @@ package com.example.cmput301w23t31project;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.drawable.RoundedBitmapDrawable;
+import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -20,7 +21,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.zxing.integration.android.IntentIntegrator;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -106,9 +106,11 @@ public class MyAccountScreenActivity extends HamburgerMenu {
     {
         try {
             File f=new File(path, Utilities.getDeviceId(this)+".png");
-            Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
+            Bitmap bitmap = BitmapFactory.decodeStream(new FileInputStream(f));
+            RoundedBitmapDrawable b = RoundedBitmapDrawableFactory.create(getResources(), bitmap);
             ImageView img=(ImageView) findViewById(R.id.imgPicker);
-            img.setImageBitmap(b);
+            b.setCircular(true);
+            img.setImageDrawable(b);
         }
         catch (FileNotFoundException e)
         {

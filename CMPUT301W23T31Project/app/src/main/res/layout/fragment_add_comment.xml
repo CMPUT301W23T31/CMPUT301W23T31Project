@@ -8,27 +8,33 @@
         android:id="@+id/add_comment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Add Comment"/>
+
+        android:hint="Add Comment"
+        style="@style/basic_medium_text"/>
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_gravity="center_horizontal">
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:backgroundTint="@color/activity_action_button_color"
-            android:id="@+id/_add_button"
-            android:text="ADD"/>
 
         <Button
+            android:id="@+id/_add_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:backgroundTint="@color/activity_action_button_color"
+
+            android:text="ADD"
+            style="@style/action_button_style"/>
+
+        <Button
             android:id="@+id/comments_cancel_button"
-            android:text="CANCEL"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+
+            android:text="CANCEL"
+            style="@style/action_button_style"/>
     </LinearLayout>
 
 </LinearLayout>

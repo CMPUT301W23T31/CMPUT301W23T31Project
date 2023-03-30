@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
@@ -8,95 +9,184 @@
     android:layout_margin="10dp">
 
 
-    <ImageView
-        android:id="@+id/imgPicker"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:maxWidth="50dp"
-        >
+    <LinearLayout
+        android:layout_width="400dp"
+        android:layout_height="650dp"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:alpha="1"
+        android:background="@drawable/drawable_ui"
+        android:backgroundTint="#76d7ea"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="40dp">
 
-    </ImageView>
+        <ImageView
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="2sp"
-        android:text="Account Info"
-        android:gravity="center"
-        android:textSize="30sp"
-        android:textStyle="bold" />
+            android:id="@+id/imgPicker"
+            android:layout_width="260dp"
+            android:layout_height="260dp"
+            android:layout_gravity="center"
+            />
+
+        <TextView
+            android:id="@+id/account_info_name"
+            style="@style/basic_medium_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+
+            android:gravity="center"
+            android:hint="Player Name"
+            android:padding="10dp"
+            android:textSize="24sp" />
+
+        <LinearLayout
+            android:layout_width="360dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp"
+
+            >
+            <TextView
+                style="@style/bold_medium_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_margin="0sp"
+                android:gravity="center"
+                android:text="Account Info" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/account_icon">
+                </ImageView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="  "
+                    android:layout_height="wrap_content">
+
+                </TextView>
+                <TextView
+                    style="@style/bold_mini_header"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="0dp"
+                    android:gravity="center"
+                    android:text="Username" />
+
+            </LinearLayout>
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="0dp"
-        android:text="Player Name"
-        android:gravity="center"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+            <TextView
+                android:id="@+id/account_info_total_username"
+                style="@style/basic_medium_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
 
-    <TextView
-        android:id="@+id/account_info_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="0dp"
-        android:hint="Player Name"
-        android:gravity="center"
-        android:textSize="24sp" />
+                android:layout_margin="0dp"
+                android:gravity="left"
+                android:hint="Username" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="0dp"
-        android:text="Username"
-        android:gravity="center"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/account_info_total_username"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="0dp"
-        android:hint="Username"
-        android:gravity="center"
-        android:textSize="24sp" />
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/phone">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="0dp"
-        android:text="Phone Number"
-        android:textSize="18sp"
-        android:gravity="center"
-        android:textStyle="bold" />
+                </ImageView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="  "
+                    android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/account_info_phone_number"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="0dp"
-        android:gravity="center"
-        android:hint="(xxx) xxx-xxxx"
-        android:textSize="24sp" />
+                </TextView>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="0dp"
-        android:text="Email"
-        android:gravity="center"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+                <TextView
+                    style="@style/bold_mini_header"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
 
-    <TextView
-        android:id="@+id/account_info_email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="0dp"
-        android:gravity="center"
-        android:hint="xxxxxx@mail.com"
-        android:textSize="24sp" />
+                    android:layout_margin="0dp"
+                    android:gravity="center"
+                    android:text="Phone Number" />
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/account_info_phone_number"
+                style="@style/basic_medium_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_margin="0dp"
+                android:gravity="left"
+                android:hint="(xxx) xxx-xxxx" />
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/icon_of_email">
+
+                </ImageView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="  ">
+
+                </TextView>
+                <TextView
+                    style="@style/bold_mini_header"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_margin="0dp"
+                    android:gravity="center"
+                    android:text="Email" />
+
+
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/account_info_email"
+                style="@style/basic_medium_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_margin="0dp"
+                android:gravity="left"
+                android:hint="xxxxxx@mail.com" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
 
 </LinearLayout>
