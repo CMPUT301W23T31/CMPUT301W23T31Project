@@ -42,7 +42,7 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
     private String username;
     private String state;
     private ArrayList<Player> dataList;
-    private LeaderboardArrayAdapter leaderboardCountArrayAdapter;
+    private LeaderboardArrayAdapter leaderboardArrayAdapter;
     private ArrayList<Player> dataList2 = new ArrayList<>();
 
     /**
@@ -60,8 +60,8 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
             if (dataList.get(i).getUsername().toLowerCase().contains(username.trim().toLowerCase())){
                 dataList2.add(dataList.get(i));
                 LeaderboardList = findViewById(R.id.leaderboard_list);
-                leaderboardCountArrayAdapter = new LeaderboardArrayAdapter(this, dataList2,username, state);
-                LeaderboardList.setAdapter(leaderboardCountArrayAdapter);
+                leaderboardArrayAdapter = new LeaderboardArrayAdapter(this, dataList2,username, state);
+                LeaderboardList.setAdapter(leaderboardArrayAdapter);
                 c += 1;
             }
         }
@@ -87,10 +87,10 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
         countBtn = findViewById(R.id.leaderboard_by_count_button);
         totalScoreBtn = findViewById(R.id.leaderboard_by_total_score_button);
         regionalBtn = findViewById(R.id.leaderboard_by_regional_button);
-        LeaderboardList = findViewById(R.id.leaderboard_list);
+        LeaderboardList = findViewById(R.id.leaderboard_count_list);
         stat_text = findViewById(R.id.stat_text);
-        leaderboardCountArrayAdapter = new LeaderboardArrayAdapter(this, dataList,username, state);
-        LeaderboardList.setAdapter(leaderboardCountArrayAdapter);
+        leaderboardArrayAdapter = new LeaderboardArrayAdapter(this, dataList,username, state);
+        LeaderboardList.setAdapter(leaderboardArrayAdapter);
         if(state.equals("COUNT")) {
             stat_text.setText(R.string.stat_count);
         } else if(state.equals("HIGHSCORE")) {
@@ -182,7 +182,7 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
                         Log.i("Size", Integer.toString(dataList.size()));
                         i++;
                     }
-                    leaderboardCountArrayAdapter.notifyDataSetChanged();
+                    leaderboardArrayAdapter.notifyDataSetChanged();
                     sortList();
                     giveRank();
                 }}});
@@ -271,6 +271,6 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
                     dataList.set(j, dataList.get(j + 1));
                     dataList.set(j + 1, temp);
                 }
-        leaderboardCountArrayAdapter.notifyDataSetChanged();
+        leaderboardArrayAdapter.notifyDataSetChanged();
     }
 }
