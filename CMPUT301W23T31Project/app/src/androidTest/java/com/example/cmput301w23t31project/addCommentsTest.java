@@ -78,7 +78,7 @@ public class addCommentsTest {
     public void QRCodeTestThroughProfile() {
         solo.assertCurrentActivity("Wrong Activity", TitleScreenActivity.class);
 
-        solo.clickOnView(solo.getView(R.id.tap_to_enter));
+        solo.clickOnView(solo.getView(R.id.title));
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
         solo.clickOnView(solo.getView(R.id.home_screen_player_info_button));
 
@@ -86,9 +86,8 @@ public class addCommentsTest {
         solo.clickOnView(solo.getView(R.id.player_info_see_scans_button));
 
         solo.assertCurrentActivity("Wrong Activity", MyScansScreenActivity.class);
-        MyScansScreenActivity activity = (MyScansScreenActivity) solo.getCurrentActivity();
-        final ListView qrCodes = activity.qrcodeList; // Get the listview
-        solo.clickInList((int)qrCodes.getItemIdAtPosition(1)); //Select ClEAR ALL
+        assertTrue(solo.waitForView(R.id.code_detail_name, 1, 2000));
+        solo.clickOnView(solo.getView(R.id.code_info_button));
         solo.assertCurrentActivity("Wrong Activity", QRCodeStatsActivity.class);
         solo.clickOnView(solo.getView(R.id.qr_code_stats_comment_list_button));
         solo.assertCurrentActivity("Wrong Activity", QRCodeStatsCommentsActivity.class);

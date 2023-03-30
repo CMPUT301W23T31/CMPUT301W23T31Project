@@ -288,8 +288,11 @@ public class QRCodeStatsActivity extends AppCompatActivity {
                 });
     }
     public String processString(String string,int number) {
+
         String LikesFinished = "0";
         String DisLikesFinished ="0";
+
+
         switch (number) {
             case 0:{
                 String[] numberOflikesArr = string.split("/");

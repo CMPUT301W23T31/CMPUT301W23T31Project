@@ -52,7 +52,7 @@ public class SeeSumQRCodesTest {
     public void SeeSumFromPlayerInfo() {
         solo.assertCurrentActivity("Wrong Activity", TitleScreenActivity.class);
 
-        solo.clickOnView(solo.getView(R.id.tap_to_enter));
+        solo.clickOnView(solo.getView(R.id.title));
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
 
         solo.clickOnView(solo.getView(R.id.home_screen_player_info_button));
@@ -65,7 +65,7 @@ public class SeeSumQRCodesTest {
     public void SeeSumFromHomeScreen() {
         solo.assertCurrentActivity("Wrong Activity", TitleScreenActivity.class);
 
-        solo.clickOnView(solo.getView(R.id.tap_to_enter));
+        solo.clickOnView(solo.getView(R.id.title));
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
         assertTrue(solo.waitForView(R.id.home_screen_current_points));
 
