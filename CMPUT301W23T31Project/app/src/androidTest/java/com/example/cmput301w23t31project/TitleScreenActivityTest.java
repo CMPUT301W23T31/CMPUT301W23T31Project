@@ -52,7 +52,7 @@ public class TitleScreenActivityTest {
     public void loginTest() {
         solo.assertCurrentActivity("Wrong Activity", TitleScreenActivity.class);
 
-        solo.clickOnView(solo.getView(R.id.tap_to_enter));
+        solo.clickOnView(solo.getView(R.id.title));
 
         assertThrows(AssertionError.class, () -> {
             if (!solo.getCurrentActivity().getLocalClassName().equals("LoginActivity") &&

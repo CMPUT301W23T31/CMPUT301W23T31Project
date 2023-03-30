@@ -52,7 +52,7 @@ public class ViewMapTest {
     public void SeeCodeNameTest() {
         solo.assertCurrentActivity("Wrong Activity", TitleScreenActivity.class);
 
-        solo.clickOnView(solo.getView(R.id.tap_to_enter));
+        solo.clickOnView(solo.getView(R.id.title));
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
 
         solo.clickOnView(solo.getView(R.id.home_screen_explore_button));

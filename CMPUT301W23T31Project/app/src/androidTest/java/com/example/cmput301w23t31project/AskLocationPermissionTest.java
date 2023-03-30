@@ -75,7 +75,7 @@ public class AskLocationPermissionTest {
 
         solo.assertCurrentActivity("Wrong Activity", TitleScreenActivity.class);
 
-        solo.clickOnView(solo.getView(R.id.tap_to_enter));
+        solo.clickOnView(solo.getView(R.id.title));
 
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
 
@@ -90,9 +90,7 @@ public class AskLocationPermissionTest {
         solo.clickOnView(solo.getView(R.id.home_screen_my_scans_button));
         solo.assertCurrentActivity("Wrong Activity", MyScansScreenActivity.class);
         assertTrue(solo.waitForView(R.id.leaderboard_list));
-        MyScansScreenActivity activity = (MyScansScreenActivity) solo.getCurrentActivity();
-        final ListView qrcodes = activity.qrcodeList; // Get the listview
-        solo.clickInList((int)qrcodes.getItemIdAtPosition(1));
+        solo.clickOnView(solo.getView(R.id.code_info_button));
         solo.assertCurrentActivity("Wrong Activity", QRCodeStatsActivity.class);
         assertTrue(solo.waitForText("No Location", 1, 3000));
     }
