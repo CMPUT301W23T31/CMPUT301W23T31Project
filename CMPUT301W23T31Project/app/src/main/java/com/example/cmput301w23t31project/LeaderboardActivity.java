@@ -113,6 +113,19 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
         LeaderboardList = findViewById(R.id.leaderboard_list);
         leaderboardArrayAdapter = new LeaderboardArrayAdapter(this, dataList,username);
         LeaderboardList.setAdapter(leaderboardArrayAdapter);
+<<<<<<< Updated upstream
+=======
+        if(state.equals("COUNT")) {
+            stat_text.setText(R.string.stat_count);
+            countBtn.setBackgroundColor(getColor(R.color.activity_selected_button_color));
+        } else if(state.equals("HIGHSCORE")) {
+            stat_text.setText(R.string.stat_high);
+            highScoreBtn.setBackgroundColor(getColor(R.color.activity_selected_button_color));
+        } else if(state.equals("TOTALSCORE")) {
+            totalScoreBtn.setBackgroundColor(getColor(R.color.activity_selected_button_color));
+            stat_text.setText(R.string.stat_total);
+        }
+>>>>>>> Stashed changes
         high_score_text = findViewById(R.id.current_high_score);
         total_score_text = findViewById(R.id.current_total_score);
         count_text = findViewById(R.id.current_count);
@@ -183,6 +196,16 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
                 }}});
 
     }
+<<<<<<< Updated upstream
+=======
+    public void giveRank(){
+                    for(int i = 0;i < dataList.size();i++){
+                        int rank;
+                        rank = 1+i;
+                        dataList.get(i).setRank(rank);
+                        }
+    }
+>>>>>>> Stashed changes
 
     public void setStats(){
         db = FirebaseFirestore.getInstance();

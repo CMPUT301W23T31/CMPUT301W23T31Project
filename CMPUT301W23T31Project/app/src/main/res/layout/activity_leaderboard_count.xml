@@ -33,7 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="3dp"
-                android:backgroundTint="@color/activity_selected_button_color"
+                android:backgroundTint="@color/activity_navigation_button_color"
                 android:onClick="onClickCount"
                 android:text="Count"
                 android:textSize="@dimen/leaderboard_button_text_size" />
@@ -231,6 +231,7 @@
             android:divider="@color/black"
             android:dividerHeight="1dp"
             android:visibility="visible"
+<<<<<<< Updated upstream
             tools:listitem="@layout/content_leaderboard_list" />
         <ListView
             android:id="@+id/leaderboard_high_score_list"
@@ -248,6 +249,10 @@
             android:dividerHeight="1dp"
             android:visibility="gone"
             tools:listitem="@layout/content_leaderboard_list" />
+=======
+            tools:listitem="@layout/content_leaderboard_count_list" />
+
+>>>>>>> Stashed changes
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
