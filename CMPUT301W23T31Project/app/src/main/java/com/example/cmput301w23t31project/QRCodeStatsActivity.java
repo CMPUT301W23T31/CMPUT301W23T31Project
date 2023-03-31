@@ -97,6 +97,7 @@ public class QRCodeStatsActivity extends AppCompatActivity {
         date = findViewById(R.id.qr_code_stats_code_last_scanned_date);
         scanned = findViewById(R.id.qr_code_stats_code_total_scans);
         gotoComments = findViewById(R.id.qr_code_stats_comment_list_button);
+        viewSurroundings = findViewById(R.id.qr_code_stats_comments_view_surroundings);
         datalist = findViewById(R.id.qr_code_stats_scanned_by_list);
         scanbtn = findViewById(R.id.qr_code_stats_comment_like_button);
         // Setting up listview
