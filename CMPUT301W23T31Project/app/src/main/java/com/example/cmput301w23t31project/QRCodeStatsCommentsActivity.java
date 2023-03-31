@@ -43,6 +43,7 @@ public class QRCodeStatsCommentsActivity extends AppCompatActivity implements Ad
     TextView scanned;
     String hash;
     Button add_comment;
+    Button viewSurroundings;
     Button scanned_by;
 
     private ArrayList<Comment> commentList;
@@ -80,6 +81,7 @@ public class QRCodeStatsCommentsActivity extends AppCompatActivity implements Ad
         date = findViewById(R.id.qr_code_stats_comment_code_last_scanned_date);
         scanned = findViewById(R.id.qr_code_stats_comment_code_total_scans);
         add_comment = findViewById(R.id.comments_add_button);
+        viewSurroundings = findViewById(R.id.qr_code_stats_comments_view_surroundings);
         scanned_by = findViewById(R.id.qr_code_stats_scanned_by_button);
         datalist = findViewById(R.id.qr_code_stats_comments_by_list);
 
@@ -115,7 +117,17 @@ public class QRCodeStatsCommentsActivity extends AppCompatActivity implements Ad
             @Override
             public void onClick(View v) {
                 finish();
-            } //TODO: WILL THIS ALWAYS GO BACK TO THE CORRECT SPOT?
+            }
+        });
+
+        viewSurroundings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(QRCodeStatsCommentsActivity.this, SurroundingsActivity.class);
+                intent.putExtra("username", username);
+                intent.putExtra("hash", hash);
+                startActivity(intent);
+            }
         });
 
         ///
