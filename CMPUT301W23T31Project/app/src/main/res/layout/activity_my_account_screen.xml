@@ -10,53 +10,46 @@
 
 
     <LinearLayout
-        android:layout_width="400dp"
-        android:layout_height="650dp"
-        android:layout_centerInParent="true"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginVertical="10dp"
         android:alpha="1"
         android:background="@drawable/drawable_ui"
-        android:backgroundTint="#76d7ea"
+        android:backgroundTint="@color/light_background_tint"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        android:padding="40dp">
+        android:padding="20dp">
 
         <ImageView
-
             android:id="@+id/imgPicker"
             android:layout_width="260dp"
             android:layout_height="260dp"
-            android:layout_gravity="center"
-            />
+            android:layout_gravity="center"/>
 
         <TextView
             android:id="@+id/account_info_name"
-            style="@style/basic_medium_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="0dp"
-
-            android:gravity="center"
-            android:hint="Player Name"
             android:padding="10dp"
-            android:textSize="24sp" />
+            android:gravity="center"
+
+            android:hint="Player Name"
+            style="@style/basic_medium_text" />
 
         <LinearLayout
-            android:layout_width="360dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="20dp"
+            android:background="@color/dark_background_tint">
 
-            >
             <TextView
-                style="@style/bold_medium_header"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
-                android:layout_margin="0sp"
                 android:gravity="center"
-                android:text="Account Info" />
+
+                android:text="Account Info"
+                style="@style/bold_medium_header"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -67,34 +60,27 @@
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:src="@drawable/account_icon">
-                </ImageView>
+                    android:src="@drawable/account_icon"/>
+                <Space
+                    android:layout_width="10dp"
+                    android:layout_height="match_parent"/>
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:text="  "
-                    android:layout_height="wrap_content">
-
-                </TextView>
-                <TextView
-                    style="@style/bold_mini_header"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="0dp"
                     android:gravity="center"
-                    android:text="Username" />
+
+                    android:text="Username"
+                    style="@style/bold_mini_header"/>
 
             </LinearLayout>
-
 
             <TextView
                 android:id="@+id/account_info_total_username"
-                style="@style/basic_medium_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
-                android:layout_margin="0dp"
-                android:gravity="left"
-                android:hint="Username" />
+                android:hint="Username"
+                style="@style/basic_medium_text"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -105,37 +91,27 @@
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:src="@drawable/phone">
-
-                </ImageView>
+                    android:src="@drawable/phone"/>
+                <Space
+                    android:layout_width="10dp"
+                    android:layout_height="match_parent"/>
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:text="  "
-                    android:layout_height="wrap_content">
-
-                </TextView>
-
-                <TextView
-                    style="@style/bold_mini_header"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
-                    android:layout_margin="0dp"
                     android:gravity="center"
-                    android:text="Phone Number" />
+
+                    android:text="Phone Number"
+                    style="@style/bold_mini_header"/>
 
             </LinearLayout>
-
 
             <TextView
                 android:id="@+id/account_info_phone_number"
-                style="@style/basic_medium_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
-                android:layout_margin="0dp"
-                android:gravity="left"
-                android:hint="(xxx) xxx-xxxx" />
+                android:hint="(xxx) xxx-xxxx"
+                style="@style/basic_medium_text"/>
 
 
             <LinearLayout
@@ -147,46 +123,30 @@
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/icon_of_email">
-
-                </ImageView>
-
+                    android:src="@drawable/icon_of_email"/>
+                <Space
+                    android:layout_width="10dp"
+                    android:layout_height="match_parent"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="  ">
-
-                </TextView>
-                <TextView
-                    style="@style/bold_mini_header"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-                    android:layout_margin="0dp"
                     android:gravity="center"
-                    android:text="Email" />
 
-
+                    android:text="Email"
+                    style="@style/bold_mini_header"/>
 
             </LinearLayout>
 
-
             <TextView
                 android:id="@+id/account_info_email"
-                style="@style/basic_medium_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
-                android:layout_margin="0dp"
-                android:gravity="left"
-                android:hint="xxxxxx@mail.com" />
+                android:hint="xxxxxx@mail.com"
+                style="@style/basic_medium_text"/>
 
         </LinearLayout>
 
     </LinearLayout>
-
-
-
 
 </LinearLayout>
