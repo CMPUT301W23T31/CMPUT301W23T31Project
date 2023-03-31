@@ -135,15 +135,17 @@ public class QRCodeStatsActivity extends AppCompatActivity {
             }
         });
 
-        setStats(hash);
+
 //        if(intent.getStringExtra("score")==null){
 //            setStats(hash);
 //        }else{
-//            lat = intent.getStringExtra("lat");
-//            name = intent.getStringExtra("name");
-//            sc = intent.getStringExtra("score");
-//            setexceptStats();
+//
 //        }
+        lat = intent.getStringExtra("lat");
+        name = intent.getStringExtra("name");
+        sc = intent.getStringExtra("score");
+        setexceptStats();
+        setStats(hash);
 
 
 
