@@ -96,24 +96,7 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
 
         leaderboardArrayAdapter = new LeaderboardArrayAdapter(this, dataList,username, state);
         LeaderboardList.setAdapter(leaderboardArrayAdapter);
-
-        switch (state) {
-            case "COUNT":
-                stat_text.setText(R.string.stat_count);
-                countBtn.setBackgroundColor(getColor(R.color.activity_selected_button_color));
-                break;
-            case "HIGHSCORE":
-                stat_text.setText(R.string.stat_high);
-                highScoreBtn.setBackgroundColor(getColor(R.color.activity_selected_button_color));
-                break;
-            case "TOTALSCORE":
-                stat_text.setText(R.string.stat_total);
-                totalScoreBtn.setBackgroundColor(getColor(R.color.activity_selected_button_color));
-                break;
-            case "REGIONAL":
-                stat_text.setText(R.string.stat_regional);
-                regionalBtn.setBackgroundColor(getColor(R.color.activity_selected_button_color));
-                break;
+        setBtnColor();
 
         high_score_text = findViewById(R.id.current_high_score);
         total_score_text = findViewById(R.id.current_total_score);
@@ -140,34 +123,7 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
 
     }
 
-    public void setStats(){
-        db = FirebaseFirestore.getInstance();
-        db.collection("PlayerInfo").get() .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-            @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                // after getting the data we are calling on success method
-                // and inside this method we are checking if the received
-                // query snapshot is empty or not.
-                if (!queryDocumentSnapshots.isEmpty()) {
-                    // if the snapshot is not empty we are
-                    // hiding our progress bar and adding
-                    // our data in a list.
-                    List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
-                    for (DocumentSnapshot document : list) {
-                        if(document.getId().equals(username)){
-                            total_score = document.getString("Total Score");
-                            high_score = document.getString("Highest Scoring QR Code");
-                            count = document.getString("Total Scans");
-                            high_score_text.setText(high_score);
-                            total_score_text.setText(total_score);
-                            count_text.setText(count);
-                        }
 
-                    }
-
-                }}});
-
-    }
     /**
      from the playerinfo collection in the database access the username and fields and display the users in a listview
      then sort the list and give each player a rank
@@ -188,14 +144,13 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
                     for (DocumentSnapshot document : list) {
                         int i = 0;
                         String userName = document.getId();
-                        Log.i("TAG", userName);
                         int totalScore = Integer.parseInt(document.getString("Total Score"));
                         int totalScans = Integer.parseInt(document.getString("Total Scans"));
                         int highestScoringQR = Integer.parseInt(document.getString("Highest Scoring QR Code"));
                         int lowestScoringQR = Integer.parseInt(document.getString("Lowest Scoring QR Code"));
                         int rank = Integer.parseInt(document.getString("Rank"));
                         dataList.add(i,new Player(userName,totalScans,totalScore,highestScoringQR,lowestScoringQR,rank));
-                        Log.i("Size", Integer.toString(dataList.size()));
+                        //Log.i("Size", Integer.toString(dataList.size()));
                         i++;
                     }
                     leaderboardArrayAdapter.notifyDataSetChanged();
@@ -205,6 +160,25 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
             }
         });
 
+    }
+    public void setBtnColor(){
+        switch (state) {
+            case "COUNT":
+                stat_text.setText(R.string.stat_count);
+                countBtn.setBackgroundColor(getColor(R.color.activity_selected_button_color));
+                break;
+            case "HIGHSCORE":
+                stat_text.setText(R.string.stat_high);
+                highScoreBtn.setBackgroundColor(getColor(R.color.activity_selected_button_color));
+                break;
+            case "TOTALSCORE":
+                stat_text.setText(R.string.stat_total);
+                totalScoreBtn.setBackgroundColor(getColor(R.color.activity_selected_button_color));
+                break;
+            case "REGIONAL":
+                stat_text.setText(R.string.stat_regional);
+                regionalBtn.setBackgroundColor(getColor(R.color.activity_selected_button_color));
+                break;}
     }
 
     public void giveRank(){
@@ -220,7 +194,7 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
         db.collection("PlayerInfo").get() .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                Log.d("Stats",username);
+                //Log.d("Stats",username);
                 // after getting the data we are calling on success method
                 // and inside this method we are checking if the received
                 // query snapshot is empty or not.
@@ -230,18 +204,20 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
                     // our data in a list.
                     List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
                     for (DocumentSnapshot document : list) {
-                        if(document.getId().equals(username)){
+                        if (document.getId().equals(username)) {
                             total_score = document.getString("Total Score");
                             high_score = document.getString("Highest Scoring QR Code");
                             count = document.getString("Total Scans");
                             high_score_text.setText(high_score);
                             total_score_text.setText(total_score);
                             count_text.setText(count);
-                            Log.d("Stats",username+" "+total_score+" "+high_score+" "+count);
+                            //Log.d("Stats", username + " " + total_score + " " + high_score + " " + count);
 
                         }
 
-    }
+                    }
+                }}});}
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
