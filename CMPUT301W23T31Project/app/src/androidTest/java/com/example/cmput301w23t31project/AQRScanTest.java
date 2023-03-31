@@ -98,5 +98,19 @@ public class AQRScanTest {
         });
     }
 
-    
+    @Test
+    public void scanNumberTwo() {
+        solo.assertCurrentActivity("Wrong Activity", TitleScreenActivity.class);
+
+        solo.clickOnView(solo.getView(R.id.title));
+
+        solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
+
+        solo.clickOnView(solo.getView(R.id.home_screen_scan_code_button));
+
+        // Allow time to scan QR code
+        solo.clickLongOnTextAndPress("OFF", 0);
+        solo.clickLongOnTextAndPress("SEE CODE DETAILS", 0);
+        solo.assertCurrentActivity("Wrong Activity", QRCodeStatsActivity.class);
+    }
 }
