@@ -128,34 +128,7 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
 
     }
 
-    public void setStats(){
-        db = FirebaseFirestore.getInstance();
-        db.collection("PlayerInfo").get() .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-            @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                // after getting the data we are calling on success method
-                // and inside this method we are checking if the received
-                // query snapshot is empty or not.
-                if (!queryDocumentSnapshots.isEmpty()) {
-                    // if the snapshot is not empty we are
-                    // hiding our progress bar and adding
-                    // our data in a list.
-                    List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
-                    for (DocumentSnapshot document : list) {
-                        if(document.getId().equals(username)){
-                            total_score = document.getString("Total Score");
-                            high_score = document.getString("Highest Scoring QR Code");
-                            count = document.getString("Total Scans");
-                            high_score_text.setText(high_score);
-                            total_score_text.setText(total_score);
-                            count_text.setText(count);
-                        }
 
-                    }
-
-                }}});
-
-    }
     /**
      from the playerinfo collection in the database access the username and fields and display the users in a listview
      then sort the list and give each player a rank
@@ -215,17 +188,18 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
                     // our data in a list.
                     List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
                     for (DocumentSnapshot document : list) {
-                        if(document.getId().equals(username)){
+                        if (document.getId().equals(username)) {
                             total_score = document.getString("Total Score");
                             high_score = document.getString("Highest Scoring QR Code");
                             count = document.getString("Total Scans");
                             high_score_text.setText(high_score);
                             total_score_text.setText(total_score);
                             count_text.setText(count);
-                            Log.d("Stats",username+" "+total_score+" "+high_score+" "+count);
+                            Log.d("Stats", username + " " + total_score + " " + high_score + " " + count);
 
                         }
-    }
+                    }
+                }}});}
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
