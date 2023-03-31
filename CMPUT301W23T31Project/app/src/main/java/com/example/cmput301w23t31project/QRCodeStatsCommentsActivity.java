@@ -157,11 +157,17 @@ public class QRCodeStatsCommentsActivity extends AppCompatActivity implements Ad
         // Add the required statistics to the text fields
 
         if (document != null) {
+            String coordinates = "No Location";
             //Toast.makeText(getApplicationContext(),"not null",Toast.LENGTH_SHORT).show();
             nameView.setText(document.getString("Name"));
             scoreView.setText(document.getString("Score"));
-            String coordinates = document.getString("Latitude") + ", " +
-                    document.getString("Longitude");
+            if(document.getString("Latitude").equals("200")){
+                coordinates = "No Location";
+            }else{
+                coordinates = document.getString("Latitude") + ", " +
+                        document.getString("Longitude");
+            }
+
             String likes = document.getString("Likes") + " / " +
                     document.getString("Dislikes");
             coordinatesView.setText(coordinates);
