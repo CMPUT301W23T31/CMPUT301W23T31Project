@@ -70,6 +70,15 @@ public class SearchOtherUsersTest {
         Log.d("Coords", w.getBounds().centerX() + "" + w.getBounds().centerY());
         assertTrue(solo.waitForText("NewTestName", 1, 2000));
 
+        solo.clickOnView(solo.getView(R.id.leaderboard_search_user_button));
+
+        solo.enterText((EditText) solo.getView(R.id.search_user), "Te");
+        WindowMetrics w2 = rule.getActivity().getWindowManager().getCurrentWindowMetrics();
+        solo.clickOnScreen(w2.getBounds().centerX()+270, w2.getBounds().centerY()+100);
+        Log.d("Coords", w2.getBounds().centerX() + "" + w2.getBounds().centerY());
+        assertTrue(solo.waitForText("NewTestName", 1, 2000));
+
+
         solo.clickOnView(solo.getView(R.id.leaderboard_by_high_score_button));
 
         solo.assertCurrentActivity("Wrong Activity", LeaderboardActivity.class);
@@ -79,6 +88,14 @@ public class SearchOtherUsersTest {
         solo.enterText((EditText) solo.getView(R.id.search_user), "Test");
         w = rule.getActivity().getWindowManager().getCurrentWindowMetrics();
         solo.clickOnScreen(w.getBounds().centerX()+270, w.getBounds().centerY()+100);
+        assertTrue(solo.waitForText("NewTestName", 1, 2000));
+
+        solo.clickOnView(solo.getView(R.id.leaderboard_search_user_button));
+
+        solo.enterText((EditText) solo.getView(R.id.search_user), "Te");
+        w2 = rule.getActivity().getWindowManager().getCurrentWindowMetrics();
+        solo.clickOnScreen(w2.getBounds().centerX()+270, w2.getBounds().centerY()+100);
+        Log.d("Coords", w2.getBounds().centerX() + "" + w2.getBounds().centerY());
         assertTrue(solo.waitForText("NewTestName", 1, 2000));
 
         solo.clickOnView(solo.getView(R.id.leaderboard_by_count_button));
@@ -92,6 +109,14 @@ public class SearchOtherUsersTest {
         solo.clickOnScreen(w.getBounds().centerX()+270, w.getBounds().centerY()+100);
         assertTrue(solo.waitForText("NewTestName", 1, 2000));
 
+        solo.clickOnView(solo.getView(R.id.leaderboard_search_user_button));
+
+        solo.enterText((EditText) solo.getView(R.id.search_user), "Te");
+        w2 = rule.getActivity().getWindowManager().getCurrentWindowMetrics();
+        solo.clickOnScreen(w2.getBounds().centerX()+270, w2.getBounds().centerY()+100);
+        Log.d("Coords", w2.getBounds().centerX() + "" + w2.getBounds().centerY());
+        assertTrue(solo.waitForText("NewTestName", 1, 2000));
+
         solo.clickOnView(solo.getView(R.id.leaderboard_by_total_score_button));
 
         solo.assertCurrentActivity("Wrong Activity", LeaderboardActivity.class);
@@ -101,6 +126,14 @@ public class SearchOtherUsersTest {
         solo.enterText((EditText) solo.getView(R.id.search_user), "Test");
         w = rule.getActivity().getWindowManager().getCurrentWindowMetrics();
         solo.clickOnScreen(w.getBounds().centerX()+270, w.getBounds().centerY()+100);
+        assertTrue(solo.waitForText("NewTestName", 1, 2000));
+
+        solo.clickOnView(solo.getView(R.id.leaderboard_search_user_button));
+
+        solo.enterText((EditText) solo.getView(R.id.search_user), "Te");
+        w2 = rule.getActivity().getWindowManager().getCurrentWindowMetrics();
+        solo.clickOnScreen(w2.getBounds().centerX()+270, w2.getBounds().centerY()+100);
+        Log.d("Coords", w2.getBounds().centerX() + "" + w2.getBounds().centerY());
         assertTrue(solo.waitForText("NewTestName", 1, 2000));
 
         /* Done when regional is implemented
