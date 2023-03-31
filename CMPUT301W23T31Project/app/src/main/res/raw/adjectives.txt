@@ -111,7 +111,7 @@ boggy
 bogus
 bold
 bone
-boned
+boney
 bonny
 bony
 boon
@@ -165,7 +165,7 @@ clean
 clear
 cleft
 close
-cocky
+cosey
 cod
 cold
 color
@@ -191,7 +191,7 @@ cute
 cyan
 daft
 daily
-damn
+darn
 damp
 dandy
 dank
@@ -397,7 +397,7 @@ holy
 home
 homey
 honey
-horny
+horsy
 hot
 huffy
 huge
@@ -778,7 +778,7 @@ sign
 silky
 silly
 silty
-sissy
+sired
 six
 sixth
 sixty

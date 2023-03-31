@@ -126,7 +126,7 @@ public class Utilities {
 
         for (int i = 0; i < 3; i++) {
             if (i > 0) {name = name.concat(" ");}
-            // adjective
+            // adding word
             tempScore = 0;
             for (int j = 0; j < groupingSize; j++) {
                 tempScore += hash.charAt(j + i * groupingSize) * 2 ^ j;
