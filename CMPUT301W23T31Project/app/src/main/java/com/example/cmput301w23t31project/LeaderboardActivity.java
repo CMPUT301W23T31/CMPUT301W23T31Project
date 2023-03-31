@@ -96,24 +96,7 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
 
         leaderboardArrayAdapter = new LeaderboardArrayAdapter(this, dataList,username, state);
         LeaderboardList.setAdapter(leaderboardArrayAdapter);
-
-        switch (state) {
-            case "COUNT":
-                stat_text.setText(R.string.stat_count);
-                countBtn.setBackgroundColor(getColor(R.color.activity_selected_button_color));
-                break;
-            case "HIGHSCORE":
-                stat_text.setText(R.string.stat_high);
-                highScoreBtn.setBackgroundColor(getColor(R.color.activity_selected_button_color));
-                break;
-            case "TOTALSCORE":
-                stat_text.setText(R.string.stat_total);
-                totalScoreBtn.setBackgroundColor(getColor(R.color.activity_selected_button_color));
-                break;
-            case "REGIONAL":
-                stat_text.setText(R.string.stat_regional);
-                regionalBtn.setBackgroundColor(getColor(R.color.activity_selected_button_color));
-                break;
+        setBtnColor();
 
         high_score_text = findViewById(R.id.current_high_score);
         total_score_text = findViewById(R.id.current_total_score);
@@ -177,6 +160,25 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
             }
         });
 
+    }
+    public void setBtnColor(){
+        switch (state) {
+            case "COUNT":
+                stat_text.setText(R.string.stat_count);
+                countBtn.setBackgroundColor(getColor(R.color.activity_selected_button_color));
+                break;
+            case "HIGHSCORE":
+                stat_text.setText(R.string.stat_high);
+                highScoreBtn.setBackgroundColor(getColor(R.color.activity_selected_button_color));
+                break;
+            case "TOTALSCORE":
+                stat_text.setText(R.string.stat_total);
+                totalScoreBtn.setBackgroundColor(getColor(R.color.activity_selected_button_color));
+                break;
+            case "REGIONAL":
+                stat_text.setText(R.string.stat_regional);
+                regionalBtn.setBackgroundColor(getColor(R.color.activity_selected_button_color));
+                break;}
     }
 
     public void giveRank(){
