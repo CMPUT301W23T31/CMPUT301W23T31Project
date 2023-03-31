@@ -22,15 +22,27 @@ public class AccountsCollection extends QRDatabase {
      */
     public void addAccountToCollection(String username, Intent intent, String ID) {
         HashMap<String, String> AccountData = new HashMap<>();
-        AccountData.put("DeviceID", ID);
-        collection.document(username).set(AccountData);
-        AccountData.put("email", intent.getStringExtra("email"));
-        collection.document(username).set(AccountData);
-        AccountData.put("phone", intent.getStringExtra("phone"));
-        collection.document(username).set(AccountData);
-        AccountData.put("playername", intent.getStringExtra("playername"));
-        collection.document(username).set(AccountData);
-        AccountData.put("path", intent.getStringExtra("path"));
+        if (intent == null) {
+            AccountData.put("DeviceID", ID);
+            collection.document(username).set(AccountData);
+            AccountData.put("email", "JUnitEmail");
+            collection.document(username).set(AccountData);
+            AccountData.put("phone", "JUnitPhone");
+            collection.document(username).set(AccountData);
+            AccountData.put("playername", "JUnitName");
+            collection.document(username).set(AccountData);
+            AccountData.put("path", "JUnitPath");
+        } else {
+            AccountData.put("DeviceID", ID);
+            collection.document(username).set(AccountData);
+            AccountData.put("email", intent.getStringExtra("email"));
+            collection.document(username).set(AccountData);
+            AccountData.put("phone", intent.getStringExtra("phone"));
+            collection.document(username).set(AccountData);
+            AccountData.put("playername", intent.getStringExtra("playername"));
+            collection.document(username).set(AccountData);
+            AccountData.put("path", intent.getStringExtra("path"));
+        }
         collection.document(username).set(AccountData);
     }
 }

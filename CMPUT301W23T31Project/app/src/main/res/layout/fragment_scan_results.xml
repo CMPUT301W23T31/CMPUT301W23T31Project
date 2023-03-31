@@ -1,29 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:gravity="center_horizontal">
 
     <TextView
         android:id="@+id/scan_results_score"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+
         android:hint="Results Score"
-        android:textSize="20sp"
-        android:textStyle="bold" />
-    <LinearLayout
+        style="@style/bold_sub_header"/>
+
+    <Space
         android:layout_width="match_parent"
+        android:layout_height="20dp"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
 
         <TextView
             android:id="@+id/scan_results_location"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+
             android:hint="Record Location?"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            style="@style/bold_medium_header" />
 
         <ToggleButton
             android:id="@+id/location_button"
@@ -34,30 +41,32 @@
 
         <TextView
             android:id="@+id/set_on_off"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="location"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+
+            android:hint="Location"
+            style="@style/bold_sub_header"/>
+
     </LinearLayout>
 
-
-
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp"/>
 
     <TextView
         android:id="@+id/scan_results_data"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+
         android:hint="Results Data"
-        android:textSize="20sp"
-        android:textStyle="bold"/>
+        style="@style/bold_sub_header"/>
 
     <Button
         android:id="@+id/scan_results_camera_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/activity_action_button_color"
-        android:textSize="20sp"
-        android:text="Upload image of QR code location"/>
+
+        android:text="Upload image of QR code location"
+        style="@style/action_button_style"/>
 
 </LinearLayout>

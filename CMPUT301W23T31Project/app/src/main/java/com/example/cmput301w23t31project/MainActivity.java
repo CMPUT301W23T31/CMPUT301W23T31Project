@@ -10,7 +10,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -199,12 +198,9 @@ public class MainActivity extends HamburgerMenu implements ScanResultsFragment.O
      * @param view relevant view
      */
     public void onClickLeaderboard(View view){
-        Intent intent = new Intent(this, LeaderboardCountActivity.class);
+        Intent intent = new Intent(this, LeaderboardActivity.class);
         intent.putExtra("username", username);
-<<<<<<< Updated upstream
-=======
         intent.putExtra("state", "HIGHSCORE");
->>>>>>> Stashed changes
         startActivity(intent);
     }
 
