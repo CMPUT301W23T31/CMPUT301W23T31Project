@@ -66,6 +66,7 @@
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:layout_margin="10dp"
+            android:padding="10dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
