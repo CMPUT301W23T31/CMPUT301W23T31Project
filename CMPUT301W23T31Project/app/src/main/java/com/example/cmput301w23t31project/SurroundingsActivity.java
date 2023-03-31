@@ -52,6 +52,8 @@ public class SurroundingsActivity extends  HamburgerMenu{
 
         datalist = new ArrayList<>();
         surroundList = findViewById(R.id.surround_list);
+        surroundArrayAdapter = new SurroundingsArrayAdapter(SurroundingsActivity.this, datalist);
+        surroundList.setAdapter(surroundArrayAdapter);
         //surroundArrayAdapter = new SurroundingsArrayAdapter(this, datalist);
         //surroundList.setAdapter(surroundArrayAdapter);
 
@@ -120,8 +122,6 @@ public class SurroundingsActivity extends  HamburgerMenu{
                             String storage = doc.getString(hash);
                             Log.d("surround", storage);
                             datalist.add(new Image(storage,doc.getId()));
-                            surroundArrayAdapter = new SurroundingsArrayAdapter(SurroundingsActivity.this, datalist);
-                            surroundList.setAdapter(surroundArrayAdapter);
                         }
                     }
                     surroundArrayAdapter.notifyDataSetChanged();
