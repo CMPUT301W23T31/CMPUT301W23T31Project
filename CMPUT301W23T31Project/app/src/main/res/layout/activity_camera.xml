@@ -18,7 +18,12 @@
         android:layout_gravity="center"
         android:backgroundTint="@color/activity_action_button_color"
         android:text="Open Camera"/>
-
+    <TextView android:id="@+id/no_picture_message"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="You have not taken a photo of this QR code yet"/>
     <ImageView android:id="@+id/imageView1"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
@@ -27,10 +32,10 @@
         android:layout_gravity="center"
         android:layout_marginTop="30dp"
         android:layout_marginBottom="30dp"
-        android:minHeight="200dp"
-        android:minWidth="200dp"
-        android:maxWidth="200dp"
-        android:maxHeight="200dp"/>
+        android:minHeight="400dp"
+        android:minWidth="400dp"
+        android:maxWidth="400dp"
+        android:maxHeight="400dp"/>
 
     <Button android:id="@+id/confirm_taken_photo"
         android:layout_width="wrap_content"
@@ -38,5 +43,11 @@
         android:layout_gravity="center"
         android:visibility="invisible"
         android:text="Upload image"/>
+    <TextView android:id="@+id/error_message"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Error occurred, image could not be uploaded"/>
 
 </LinearLayout>
