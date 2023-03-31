@@ -114,7 +114,6 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
                 stat_text.setText(R.string.stat_regional);
                 regionalBtn.setBackgroundColor(getColor(R.color.activity_selected_button_color));
                 break;
-        }
 
         high_score_text = findViewById(R.id.current_high_score);
         total_score_text = findViewById(R.id.current_total_score);
@@ -207,16 +206,41 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
         });
 
     }
+
     public void giveRank(){
-        for(int i = 0;i < dataList.size();i++){
-            int rank;
-            rank = 1+i;
-            dataList.get(i).setRank(rank);
-            String username = dataList.get(i).getUsername();
-            String CountRank = String.valueOf(rank);
-            //PlayerScansCollection playerScansCollection = new PlayerScansCollection();
-            //playerScansCollection.addCountScoreRank(username,CountRank);
-        }
+
+                    for(int i = 0;i < dataList.size();i++){
+                        int rank;
+                        rank = 1+i;
+                        dataList.get(i).setRank(rank);}
+    }
+
+    public void setStats(){
+        db = FirebaseFirestore.getInstance();
+        db.collection("PlayerInfo").get() .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                Log.d("Stats",username);
+                // after getting the data we are calling on success method
+                // and inside this method we are checking if the received
+                // query snapshot is empty or not.
+                if (!queryDocumentSnapshots.isEmpty()) {
+                    // if the snapshot is not empty we are
+                    // hiding our progress bar and adding
+                    // our data in a list.
+                    List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+                    for (DocumentSnapshot document : list) {
+                        if(document.getId().equals(username)){
+                            total_score = document.getString("Total Score");
+                            high_score = document.getString("Highest Scoring QR Code");
+                            count = document.getString("Total Scans");
+                            high_score_text.setText(high_score);
+                            total_score_text.setText(total_score);
+                            count_text.setText(count);
+                            Log.d("Stats",username+" "+total_score+" "+high_score+" "+count);
+
+                        }
+
     }
 
     @Override

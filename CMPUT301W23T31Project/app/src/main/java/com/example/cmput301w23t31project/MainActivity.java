@@ -200,7 +200,7 @@ public class MainActivity extends HamburgerMenu implements ScanResultsFragment.O
     public void onClickLeaderboard(View view){
         Intent intent = new Intent(this, LeaderboardActivity.class);
         intent.putExtra("username", username);
-        intent.putExtra("state", "COUNT");
+        intent.putExtra("state", "HIGHSCORE");
         startActivity(intent);
     }
 
