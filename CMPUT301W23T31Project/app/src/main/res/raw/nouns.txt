@@ -241,9 +241,9 @@ bolt
 bomb
 bond
 bone
-boner
+bonds
 bones
-bong
+bonn
 bongo
 bonus
 boo
@@ -557,7 +557,7 @@ cows
 cozy
 crab
 crabs
-crack
+crave
 craft
 cramp
 crane
@@ -884,7 +884,7 @@ flake
 flame
 flank
 flap
-flaps
+flam
 flare
 flash
 flask
@@ -1319,7 +1319,7 @@ jewel
 jig
 jive
 job
-jock
+jockey
 jog
 join
 joint
@@ -1492,7 +1492,7 @@ loner
 look
 loom
 loon
-loony
+loons
 loop
 loot
 lord
@@ -1660,7 +1660,7 @@ movie
 mow
 mucus
 mud
-muff
+muffin
 mug
 mulch
 mule
@@ -2255,8 +2255,8 @@ slang
 slant
 slap
 slash
+slat
 slate
-slave
 slaw
 sled
 sleep
@@ -2778,7 +2778,7 @@ whisk
 white
 who
 whole
-whore
+whom
 why
 wick
 widow
