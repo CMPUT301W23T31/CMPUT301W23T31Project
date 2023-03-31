@@ -180,6 +180,9 @@ public class QRCodeStatsCommentsActivity extends AppCompatActivity implements Ad
                         if (!queryDocumentSnapshots.isEmpty()) {
                             List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
                             for (DocumentSnapshot document : list) {
+                                Log.i("user", username);
+                                //Log.i("user", CurrentUser);
+                                Log.i("Testing QR comment", document.getId());
                                 if(document.getId().equals(CurrentUser)){
                                     if(document.getData().containsKey(hash)){
                                         hasQR = true;
