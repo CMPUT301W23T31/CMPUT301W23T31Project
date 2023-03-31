@@ -16,6 +16,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -59,8 +60,7 @@ public class QRCodeStatsActivity extends AppCompatActivity {
     TextView dislikesView;
     Button gotoComments;
     String hash;
-    Button dislikebtn;
-    Button likebtn;
+    Button scanbtn;
     String coordinates;
     ArrayList<Player> playerList;
     private QRCodeStatsAdapter qrCodeStatsAdapter;
@@ -69,6 +69,8 @@ public class QRCodeStatsActivity extends AppCompatActivity {
     ListView datalist;
     DrawRepresentation visualRepresentation;
     Button viewSurroundings;
+    double latitude = 0;
+    double longitude = 0;
     /**
      * This method creates the activity to display QR code stats
      * @param savedInstanceState a bundle required to create the activity
@@ -92,14 +94,12 @@ public class QRCodeStatsActivity extends AppCompatActivity {
         nameView = findViewById(R.id.qr_code_stats_code_name);
         scoreView = findViewById(R.id.qr_code_stats_code_score);
         coordinatesView = findViewById(R.id.qr_code_stats_code_coordinates);
-        likesView = findViewById(R.id.qr_code_stats_code_likes_dislikes);
         date = findViewById(R.id.qr_code_stats_code_last_scanned_date);
         scanned = findViewById(R.id.qr_code_stats_code_total_scans);
         gotoComments = findViewById(R.id.qr_code_stats_comment_list_button);
         viewSurroundings = findViewById(R.id.qr_code_stats_comments_view_surroundings);
         datalist = findViewById(R.id.qr_code_stats_scanned_by_list);
-        dislikebtn = findViewById(R.id.qr_code_stats_comment_dislike_button);
-        likebtn = findViewById(R.id.qr_code_stats_comment_like_button);
+        scanbtn = findViewById(R.id.qr_code_stats_comment_like_button);
         // Setting up listview
         playerList = new ArrayList<>();
         qrCodeStatsAdapter = new QRCodeStatsAdapter(this, playerList, username);
@@ -120,21 +120,13 @@ public class QRCodeStatsActivity extends AppCompatActivity {
                 intent.putExtra("Hash", hash);
                 intent.putExtra("username", username);
                 intent.putExtra("currentUser",CurrentUser);
+                intent.putExtra("latitude",String.valueOf(latitude));
+                intent.putExtra("longitude",String.valueOf(longitude));
                 startActivity(intent);
             }
         });
-        dislikebtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                HitLikeDislike(1);
-            }
-        });
-        likebtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                HitLikeDislike(0);
-            }
-        });
+
+
 
 
 //        if(intent.getStringExtra("score")==null){
@@ -148,6 +140,26 @@ public class QRCodeStatsActivity extends AppCompatActivity {
         setexceptStats();
         setStats(hash);
 
+
+
+            scanbtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(!coordinates.equals("No Location")) {
+
+
+                        Intent intent = new Intent(QRCodeStatsActivity.this,
+                                ExploreScreenActivity.class);
+                        intent.putExtra("latitude", String.valueOf(latitude));
+                        intent.putExtra("longitude", String.valueOf(longitude));
+                        intent.putExtra("username", username);
+                        startActivity(intent);
+                    }else{
+                        Toast.makeText(QRCodeStatsActivity.this,"Code Has No Location",Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+            });
 
 
         //Toast.makeText(getApplicationContext(),"hashstats: "+hash,Toast.LENGTH_SHORT).show();
@@ -216,11 +228,11 @@ public class QRCodeStatsActivity extends AppCompatActivity {
                                         coordinates = "No Location";
 
                                     }else{
-                                        coordinates = document.getString("Latitude") + ", " + document.getString("Longitude");
+                                        latitude = Double.parseDouble(document.getString("Latitude"));
+                                        longitude = Double.parseDouble(document.getString("Longitude"));
+                                        coordinates = latitude + ", " + longitude;
                                     }
-                                    String likes = document.getString("Likes") + " / " + document.getString("Dislikes");
                                     coordinatesView.setText(coordinates);
-                                    likesView.setText(likes);
                                     date.setText(document.getString("LastScanned"));
                                     scanned.setText(document.getString("TimesScanned"));
                                     }
@@ -228,9 +240,6 @@ public class QRCodeStatsActivity extends AppCompatActivity {
 
         }
     }}}});
-        if(nameView.getText().toString()==null){
-            setexceptStats();
-        }
     }
 
     public void setexceptStats(){
@@ -242,8 +251,6 @@ public class QRCodeStatsActivity extends AppCompatActivity {
                 coordinates = "No Location";
             }else{
                 GpsTracker gpsTracker = new GpsTracker(QRCodeStatsActivity.this);
-                double latitude = 0;
-                double longitude = 0;
                 if(gpsTracker.canGetLocation()){
                     latitude = gpsTracker.getLatitude();
                     longitude = gpsTracker.getLongitude();
@@ -256,8 +263,6 @@ public class QRCodeStatsActivity extends AppCompatActivity {
             }
         }
         coordinatesView.setText(coordinates);
-        String like = "0" + " / " + "0";
-        likesView.setText(like);
         date.setText(Utilities.getCurrentDate());
         scanned.setText("1");
     }
@@ -306,50 +311,50 @@ public class QRCodeStatsActivity extends AppCompatActivity {
 
 
         //DocumentReference scan = QRdb.collection("PlayerInfo").document(username);
-        Map<String, Object> m = new HashMap<>();
-        db = FirebaseFirestore.getInstance();
-        TextView LikesDislikesText = findViewById(R.id.qr_code_stats_code_likes_dislikes);
-        String numberOfLikes = LikesDislikesText.getText().toString();
-        String likesStr = "0";
-        String LikesFinished = processString(numberOfLikes,number);
-        String DisLikesFinished = processString(numberOfLikes,number);
-
-
-        switch (number){
-            case 0: {
-                int likes1 = Integer.parseInt(LikesFinished);
-                int likes2 = likes1 + 1;
-                likesStr = (LikesFinished + " / " + DisLikesFinished);
-                String likes = String.valueOf(likes2);
-                m.put("Likes", likes);
-                break;
-            }
-            case 1:{
-                int dislikes1 = Integer.parseInt(DisLikesFinished);
-                int dislikes2 = dislikes1 + 1;
-                likesStr = (LikesFinished + " / " + DisLikesFinished);
-                String dislikes = String.valueOf(dislikes2);
-                m.put("Dislikes", dislikes);
-                break;
-            }
-
-        }
-        String finalLikesStr = likesStr;
-        db.collection("QRCodes").document(hash)
-                .set(m, SetOptions.merge())
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        setStats(hash);
-                        Log.d(TAG, "DocumentSnapshot successfully written!");
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error writing document", e);
-                    }
-                });
+//        Map<String, Object> m = new HashMap<>();
+//        db = FirebaseFirestore.getInstance();
+//        TextView LikesDislikesText = findViewById(R.id.qr_code_stats_code_likes_dislikes);
+//        String numberOfLikes = LikesDislikesText.getText().toString();
+//        String likesStr = "0";
+//        String LikesFinished = processString(numberOfLikes,number);
+//        String DisLikesFinished = processString(numberOfLikes,number);
+//
+//
+//        switch (number){
+//            case 0: {
+//                int likes1 = Integer.parseInt(LikesFinished);
+//                int likes2 = likes1 + 1;
+//                likesStr = (LikesFinished + " / " + DisLikesFinished);
+//                String likes = String.valueOf(likes2);
+//                m.put("Likes", likes);
+//                break;
+//            }
+//            case 1:{
+//                int dislikes1 = Integer.parseInt(DisLikesFinished);
+//                int dislikes2 = dislikes1 + 1;
+//                likesStr = (LikesFinished + " / " + DisLikesFinished);
+//                String dislikes = String.valueOf(dislikes2);
+//                m.put("Dislikes", dislikes);
+//                break;
+//            }
+//
+//        }
+//        String finalLikesStr = likesStr;
+//        db.collection("QRCodes").document(hash)
+//                .set(m, SetOptions.merge())
+//                .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                    @Override
+//                    public void onSuccess(Void aVoid) {
+//                        setStats(hash);
+//                        Log.d(TAG, "DocumentSnapshot successfully written!");
+//                    }
+//                })
+//                .addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull Exception e) {
+//                        Log.w(TAG, "Error writing document", e);
+//                    }
+//                });
     }
     public String processString(String string,int number) {
 

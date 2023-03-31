@@ -71,6 +71,7 @@ public class ExploreScreenActivity extends HamburgerMenu
     Button nearbyBtn;
     EditText mSearchText;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,6 +89,8 @@ public class ExploreScreenActivity extends HamburgerMenu
         mapFragment.getMapAsync(this);
         Intent intent = getIntent();
         username = intent.getStringExtra("username");
+        latitude = Double.parseDouble(intent.getStringExtra("latitude"));
+        longitude = Double.parseDouble(intent.getStringExtra("longitude"));
         mSearchText = findViewById(R.id.input_search);
 
 //        nearbyBtn.setOnClickListener(new View.OnClickListener() {
@@ -189,16 +192,7 @@ public class ExploreScreenActivity extends HamburgerMenu
             }
         });
 
-        //getting current location
-        gpsTracker = new GpsTracker(ExploreScreenActivity.this);
-        if(gpsTracker.canGetLocation()){
-            latitude = gpsTracker.getLatitude();
-            longitude = gpsTracker.getLongitude();
-            //Toast.makeText(this, "l"+latitude+longitude, Toast.LENGTH_SHORT)
-                    //.show();
-        }else{
-            gpsTracker.showSettingsAlert();
-        }
+
         if (!username.equals("NewTestName")) {
             handleNewLocation(latitude, longitude, googleMap);
         }

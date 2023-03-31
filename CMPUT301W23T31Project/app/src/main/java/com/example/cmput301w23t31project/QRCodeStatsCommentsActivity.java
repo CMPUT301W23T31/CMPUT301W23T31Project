@@ -45,6 +45,7 @@ public class QRCodeStatsCommentsActivity extends AppCompatActivity implements Ad
     Button add_comment;
     Button viewSurroundings;
     Button scanned_by;
+    String coordinates;
 
     private ArrayList<Comment> commentList;
     private QRCodeStatsCommentsAdapter qrCodeStatsCommentsAdapter;
@@ -52,6 +53,8 @@ public class QRCodeStatsCommentsActivity extends AppCompatActivity implements Ad
     String username;
     String CurrentUser;
     String date_text;
+    String latitude;
+    String longitude;
     boolean hasQR;
     DrawRepresentation visualRepresentation;
 
@@ -72,18 +75,21 @@ public class QRCodeStatsCommentsActivity extends AppCompatActivity implements Ad
         hash = intent.getStringExtra("Hash");
         username = intent.getStringExtra("username");
         CurrentUser = intent.getStringExtra("currentUser");
+        latitude = intent.getStringExtra("latitude");
+        longitude = intent.getStringExtra("longitude");
+
 
         // Accesses all of the text fields
         nameView = findViewById(R.id.qr_code_stats_comment_code_name);
         scoreView = findViewById(R.id.qr_code_stats_comment_code_score);
         coordinatesView = findViewById(R.id.qr_code_stats_comment_code_coordinates);
-        likesView = findViewById(R.id.qr_code_stats_comment_code_likes_dislikes);
         date = findViewById(R.id.qr_code_stats_comment_code_last_scanned_date);
         scanned = findViewById(R.id.qr_code_stats_comment_code_total_scans);
         add_comment = findViewById(R.id.comments_add_button);
         viewSurroundings = findViewById(R.id.qr_code_stats_comments_view_surroundings);
         scanned_by = findViewById(R.id.qr_code_stats_scanned_by_button);
         datalist = findViewById(R.id.qr_code_stats_comments_by_list);
+        scanbtn = findViewById(R.id.qr_code_stats_comment_like_button);
 
         // Setting up Listview
         commentList = new ArrayList<>();
@@ -103,6 +109,7 @@ public class QRCodeStatsCommentsActivity extends AppCompatActivity implements Ad
         date_text = df.format(c);
 
         setButtonVisibility();
+
 
         // handles 'add comment' button
         add_comment.setOnClickListener(new View.OnClickListener() {
@@ -158,6 +165,25 @@ public class QRCodeStatsCommentsActivity extends AppCompatActivity implements Ad
                     }
                 });
         setList(hash);
+
+        scanbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!coordinates.equals("No Location")) {
+
+
+                    Intent intent = new Intent(QRCodeStatsCommentsActivity.this,
+                            ExploreScreenActivity.class);
+                    intent.putExtra("latitude", String.valueOf(latitude));
+                    intent.putExtra("longitude", String.valueOf(longitude));
+                    intent.putExtra("username", username);
+                    startActivity(intent);
+                }else{
+                    Toast.makeText(QRCodeStatsCommentsActivity.this,"Code Has No Location",Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
     }
 
     /**
@@ -169,7 +195,6 @@ public class QRCodeStatsCommentsActivity extends AppCompatActivity implements Ad
         // Add the required statistics to the text fields
 
         if (document != null) {
-            String coordinates = "No Location";
             //Toast.makeText(getApplicationContext(),"not null",Toast.LENGTH_SHORT).show();
             nameView.setText(document.getString("Name"));
             scoreView.setText(document.getString("Score"));
