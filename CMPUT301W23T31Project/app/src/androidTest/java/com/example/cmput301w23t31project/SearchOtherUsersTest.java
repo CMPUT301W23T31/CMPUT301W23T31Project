@@ -78,7 +78,6 @@ public class SearchOtherUsersTest {
         Log.d("Coords", w2.getBounds().centerX() + "" + w2.getBounds().centerY());
         assertTrue(solo.waitForText("NewTestName", 1, 2000));
 
-
         solo.clickOnView(solo.getView(R.id.leaderboard_by_high_score_button));
 
         solo.assertCurrentActivity("Wrong Activity", LeaderboardActivity.class);
