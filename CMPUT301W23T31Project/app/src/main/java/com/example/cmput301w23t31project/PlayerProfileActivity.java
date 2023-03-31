@@ -56,6 +56,8 @@ public class PlayerProfileActivity extends HamburgerMenu {
         Intent intent = getIntent();
         username = intent.getStringExtra("username");
         crnt_username = intent.getStringExtra("crnt_username");
+        Log.i("myusername",crnt_username);
+        Log.i("rando",username);
 
         /////
         db = FirebaseFirestore.getInstance();
