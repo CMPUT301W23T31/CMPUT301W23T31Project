@@ -57,13 +57,20 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
         dataList2 = new ArrayList<>();
         for(int i=0;i<l;i++)
         {
-            if (dataList.get(i).getUsername().toLowerCase().contains(username.trim().toLowerCase())){
+            if(username.trim().isEmpty()){
+               new UsernameNotFoundFragment().show(getSupportFragmentManager(), "Error Message");
+               c+=1;
+               break;
+            }
+            else if (dataList.get(i).getUsername().toLowerCase().contains(username.trim().toLowerCase())){
+                Log.d("The username output:  ",username);
                 dataList2.add(dataList.get(i));
                 LeaderboardList = findViewById(R.id.leaderboard_count_list);
                 leaderboardArrayAdapter = new LeaderboardArrayAdapter(this, dataList2,username, state);
                 LeaderboardList.setAdapter(leaderboardArrayAdapter);
                 c += 1;
             }
+
         }
         if(c==0)
         {
