@@ -4,6 +4,7 @@ package com.example.cmput301w23t31project;
 import android.content.Intent;
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.View;
 
 import android.widget.Button;
@@ -49,6 +50,7 @@ public class QRCodeStatsCommentsActivity extends AppCompatActivity implements Ad
     ListView datalist;
     String username;
     String date_text;
+    boolean hasQR;
     DrawRepresentation visualRepresentation;
 
     /**
@@ -56,6 +58,7 @@ public class QRCodeStatsCommentsActivity extends AppCompatActivity implements Ad
      * @param savedInstanceState a bundle required to create the activity
      */
     protected void onCreate(Bundle savedInstanceState) {
+        hasQR = false;
         // Get access to the database
         super.onCreate(savedInstanceState);
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
@@ -94,6 +97,8 @@ public class QRCodeStatsCommentsActivity extends AppCompatActivity implements Ad
         Date c = Calendar.getInstance().getTime();
         SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
         date_text = df.format(c);
+
+        setButtonVisibility();
 
         // handles 'add comment' button
         add_comment.setOnClickListener(new View.OnClickListener() {
@@ -161,6 +166,31 @@ public class QRCodeStatsCommentsActivity extends AppCompatActivity implements Ad
             likesView.setText(likes);
             date.setText(document.getString("LastScanned"));
             scanned.setText(document.getString("TimesScanned"));
+        }
+    }
+    public void setButtonVisibility(){
+        //hasQR = false;
+        db = FirebaseFirestore.getInstance();
+        db.collection("PlayerScans").get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        if (!queryDocumentSnapshots.isEmpty()) {
+                            List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+                            for (DocumentSnapshot document : list) {
+                                if(document.getId().equals(username)){
+                                    if(document.getData().containsKey(hash)){
+                                        hasQR = true;
+
+
+                                Log.i("Testing QR comment", document.getId());
+                                        Log.i("user", username);
+                            }}}
+
+
+                        }}});
+        if(!hasQR){
+            add_comment.setVisibility(View.GONE);
         }
     }
 
