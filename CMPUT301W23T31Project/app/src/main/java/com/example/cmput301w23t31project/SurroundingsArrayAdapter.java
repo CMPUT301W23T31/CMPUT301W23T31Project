@@ -1,11 +1,15 @@
 package com.example.cmput301w23t31project;
 
+import static android.content.ContentValues.TAG;
+
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,8 +17,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SurroundingsArrayAdapter extends ArrayAdapter<Image> {
     ArrayList<Image> links;
@@ -41,15 +52,13 @@ public class SurroundingsArrayAdapter extends ArrayAdapter<Image> {
         Image link = getItem(position);
         String storage = link.getLink();
         ImageView image = view.findViewById(R.id.surroundings_image_view);
-        TextView username = view.findViewById(R.id.surroundings_username_text);
-        TextView date = view.findViewById(R.id.surroundings_date_text);
+        TextView scanner = view.findViewById(R.id.surroundings_text_view);
 
         Log.d("arrayadapt", storage);
         Glide.with(getContext())
                 .load(storage)
                 .into(image);
-        username.setText(link.getUser());
-        date.setText("2023-03-30");  // TODO: ACTUALLY MAKE THIS FUNCTIONAL
+        scanner.setText("Taken by: "+link.getUser());
 
         return view;
     }
