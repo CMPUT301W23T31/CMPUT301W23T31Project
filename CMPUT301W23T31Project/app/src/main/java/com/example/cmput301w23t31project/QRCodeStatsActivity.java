@@ -54,6 +54,7 @@ public class QRCodeStatsActivity extends AppCompatActivity {
     ArrayList<Player> playerList;
     private QRCodeStatsAdapter qrCodeStatsAdapter;
     String username;
+    String CurrentUser;
     ListView datalist;
     DrawRepresentation visualRepresentation;
     Button viewSurroundings;
@@ -72,6 +73,7 @@ public class QRCodeStatsActivity extends AppCompatActivity {
         Intent intent = getIntent();
         hash = intent.getStringExtra("Hash");
         username = intent.getStringExtra("username");
+        CurrentUser = intent.getStringExtra("currentUser");
         Log.d("TAG", hash+" stats  "+ username);
 
         // Accesses all of the text fields
@@ -104,6 +106,7 @@ public class QRCodeStatsActivity extends AppCompatActivity {
                         QRCodeStatsCommentsActivity.class);
                 intent.putExtra("Hash", hash);
                 intent.putExtra("username", username);
+                intent.putExtra("currentUser",CurrentUser);
                 startActivity(intent);
             }
         });
