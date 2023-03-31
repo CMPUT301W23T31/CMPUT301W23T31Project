@@ -27,12 +27,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SurroundingsArrayAdapter extends ArrayAdapter<String> {
-    ArrayList<String> links;
+public class SurroundingsArrayAdapter extends ArrayAdapter<Image> {
+    ArrayList<Image> links;
+    private Context context;
 
-    public SurroundingsArrayAdapter(@NonNull Context context, ArrayList<String> links) {
-        super(context, 0);
-        this.links = links;
+    public SurroundingsArrayAdapter(@NonNull Context context, ArrayList<Image> links) {
+        super(context,0,links);
+        this.context = context;
+        //String temp = links.get(0).getLink();
+        Log.d("arrayadapt", "enters"+links.get(0).getLink());
     }
 
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -46,14 +49,16 @@ public class SurroundingsArrayAdapter extends ArrayAdapter<String> {
             view = convertView;
         }
 
-        String link = getItem(position);
+        Image link = getItem(position);
+        String storage = link.getLink();
         ImageView image = view.findViewById(R.id.surroundings_image_view);
         TextView scanner = view.findViewById(R.id.surroundings_text_view);
 
-        Log.d("arrayadapt", link);
+        Log.d("arrayadapt", storage);
         Glide.with(getContext())
-                .load(link)
+                .load(storage)
                 .into(image);
+        scanner.setText("Taken by: "+link.getUser());
 
         return view;
     }

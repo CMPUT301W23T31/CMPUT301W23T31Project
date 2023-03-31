@@ -35,9 +35,9 @@ public class SurroundingsActivity extends  HamburgerMenu{
     private String username;
     private String hash;
     ListView surroundList;
-    ArrayAdapter<String> surroundArrayAdapter;
-    ArrayList<String> datalist;
-    private ArrayList<Bitmap> dataList = new ArrayList<>();
+    ArrayAdapter<Image> surroundArrayAdapter;
+    ArrayList<Image> datalist;
+    //private ArrayList<Bitmap> dataList = new ArrayList<>();
     private LeaderboardArrayAdapter surroundingsAdapter;
     private TableLayout table;
     private ImageView image;
@@ -52,8 +52,8 @@ public class SurroundingsActivity extends  HamburgerMenu{
 
         datalist = new ArrayList<>();
         surroundList = findViewById(R.id.surround_list);
-        surroundArrayAdapter = new SurroundingsArrayAdapter(this, datalist);
-        surroundList.setAdapter(surroundArrayAdapter);
+        //surroundArrayAdapter = new SurroundingsArrayAdapter(this, datalist);
+        //surroundList.setAdapter(surroundArrayAdapter);
 
         Intent intent = getIntent();
         username = intent.getStringExtra("username");
@@ -115,19 +115,22 @@ public class SurroundingsActivity extends  HamburgerMenu{
                 @Override
                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
                     for (QueryDocumentSnapshot doc: task.getResult()) {
-                        if (doc.getId().equals(username) && doc.getData().containsKey(hash)) {
+                        if (/*doc.getId().equals(username) &&*/ doc.getData().containsKey(hash)) {
+                            Log.d("surround hash", hash+ " "+ doc.getId());
                             String storage = doc.getString(hash);
                             Log.d("surround", storage);
-                            datalist.add(storage);
-
+                            datalist.add(new Image(storage,doc.getId()));
+                            surroundArrayAdapter = new SurroundingsArrayAdapter(SurroundingsActivity.this, datalist);
+                            surroundList.setAdapter(surroundArrayAdapter);
                         }
                     }
+                    surroundArrayAdapter.notifyDataSetChanged();
 
                 }
             });
         } catch (Exception e) {
             e.printStackTrace();
         }
-        surroundArrayAdapter.notifyDataSetChanged();
+
     }
 }
