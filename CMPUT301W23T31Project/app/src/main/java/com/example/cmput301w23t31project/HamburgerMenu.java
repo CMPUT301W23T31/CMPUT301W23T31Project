@@ -48,6 +48,7 @@ public class HamburgerMenu extends AppCompatActivity {
                     finish();
                     Intent intent = new Intent(this, LeaderboardActivity.class);
                     intent.putExtra("username", username);
+                    intent.putExtra("state", "HIGHSCORE");
                     startActivity(intent);
                 }
                 return true;

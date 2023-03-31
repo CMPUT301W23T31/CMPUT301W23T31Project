@@ -60,12 +60,12 @@ public class PlayerInfoCollection extends QRDatabase{
         PlayerInfo.put("Total Score", SumScore);
         PlayerInfo.put("Total Scans", count);
         PlayerInfo.put("Lowest Scoring QR Code", min);
-        Log.i("The Rank",rank);
+        //Log.i("The Rank",rank);
         PlayerInfo.put("Highest Scoring QR Code", max);
         PlayerInfo.put("Rank",rank);
         //PlayerInfo.put("field test",temp);
         PlayerInfo.put("High Score Rank",rank);
-        Log.i("TAG","field");
+        //Log.i("TAG","field");
         PlayerInfo.put("Count Score Rank",rank);
         PlayerInfo.put("Total Score Rank",rank);
 
@@ -80,7 +80,7 @@ public class PlayerInfoCollection extends QRDatabase{
         //DocumentReference scan = QRdb.collection("PlayerInfo").document(username);
         Map<String, Object> m = new HashMap<>();
         db = FirebaseFirestore.getInstance();
-        Log.i("The High Rank",HighScoreRank);
+        //Log.i("The High Rank",HighScoreRank);
         m.put("High Score Rank", HighScoreRank);
         //Log.i("TAG",userName);
         db.collection("PlayerInfo").document(userName)
@@ -105,7 +105,7 @@ public class PlayerInfoCollection extends QRDatabase{
         //DocumentReference scan = QRdb.collection("PlayerInfo").document(username);
         Map<String, Object> m = new HashMap<>();
         db = FirebaseFirestore.getInstance();
-        Log.i("The Count Rank",CountScoreRank);
+        //Log.i("The Count Rank",CountScoreRank);
         m.put("Count Score Rank", CountScoreRank);
         //Log.i("TAG",userName);
         db.collection("PlayerInfo").document(userName)
@@ -130,8 +130,8 @@ public class PlayerInfoCollection extends QRDatabase{
         //DocumentReference scan = QRdb.collection("PlayerInfo").document(username);
         Map<String, Object> m = new HashMap<>();
         db = FirebaseFirestore.getInstance();
-        Log.i("TAG",userName);
-        Log.i("The Total Rank",TotalScoreRank);
+        //Log.i("TAG",userName);
+        //Log.i("The Total Rank",TotalScoreRank);
         m.put("Total Score Rank", TotalScoreRank);
         //Log.i("TAG",userName);
         db.collection("PlayerInfo").document(userName)
@@ -139,13 +139,13 @@ public class PlayerInfoCollection extends QRDatabase{
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Log.d(TAG, "DocumentSnapshot successfully written!");
+                        //Log.d(TAG, "DocumentSnapshot successfully written!");
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error writing document", e);
+                       // Log.w(TAG, "Error writing document", e);
                     }
                 });
     }
@@ -253,7 +253,7 @@ public class PlayerInfoCollection extends QRDatabase{
 
                                     if(QRHash.contains(document.getId())){
                                         numberScore = Integer.parseInt(document.getString("Score"));
-                                        Log.i("Score",document.getString("Score"));
+                                        //Log.i("Score",document.getString("Score"));
                                         sumScore = sumScore + numberScore;
                                         if(min == 0){
                                             min = numberScore;
