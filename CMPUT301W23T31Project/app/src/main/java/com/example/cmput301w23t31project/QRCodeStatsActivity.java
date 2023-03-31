@@ -236,21 +236,23 @@ public class QRCodeStatsActivity extends AppCompatActivity {
 
         nameView.setText(name);
         scoreView.setText(sc);
-        if((Double.valueOf(lat)==200)){
-            coordinates = "No Location";
-        }else{
-            GpsTracker gpsTracker = new GpsTracker(QRCodeStatsActivity.this);
-            double latitude = 0;
-            double longitude = 0;
-            if(gpsTracker.canGetLocation()){
-                latitude = gpsTracker.getLatitude();
-                longitude = gpsTracker.getLongitude();
-                //Toast.makeText(this, "l"+latitude+longitude, Toast.LENGTH_SHORT)
-                //.show();
+        if (lat != null){
+            if((Double.valueOf(lat)==200)){
+                coordinates = "No Location";
             }else{
-                gpsTracker.showSettingsAlert();
+                GpsTracker gpsTracker = new GpsTracker(QRCodeStatsActivity.this);
+                double latitude = 0;
+                double longitude = 0;
+                if(gpsTracker.canGetLocation()){
+                    latitude = gpsTracker.getLatitude();
+                    longitude = gpsTracker.getLongitude();
+                    //Toast.makeText(this, "l"+latitude+longitude, Toast.LENGTH_SHORT)
+                    //.show();
+                }else{
+                    gpsTracker.showSettingsAlert();
+                }
+                coordinates = latitude + ", " + longitude;
             }
-            coordinates = latitude + ", " + longitude;
         }
         coordinatesView.setText(coordinates);
         String like = "0" + " / " + "0";
