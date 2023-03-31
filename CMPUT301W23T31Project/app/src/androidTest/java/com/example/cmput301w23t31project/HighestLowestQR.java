@@ -7,9 +7,14 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
+import androidx.annotation.NonNull;
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.robotium.solo.Solo;
 
 import static junit.framework.TestCase.assertTrue;
@@ -60,6 +65,7 @@ public class HighestLowestQR {
         solo.assertCurrentActivity("Wrong Activity", PlayerInfoScreenActivity.class);
         assertTrue(solo.waitForText("Highest Scoring QR Code", 1, 2000));
         assertTrue(solo.waitForText("Lowest Scoring QR Code", 1, 2000));
+
         //assertEquals(1, 1);
     }
 
