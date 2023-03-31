@@ -13,15 +13,23 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
+import android.os.Handler;
+import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.Objects;
 
@@ -47,6 +55,13 @@ public class ScanResultsFragment extends DialogFragment {
     String location;
     Boolean recordlocation;
     TextView set_on_off;
+
+    String crnt_date;
+    String timesScanned;
+    String likes;
+    String dislikes;
+    String lat;
+    String lng;
 
     public String[] QRNameAdjectives = new String[1010];
     public String[] QRNameColors = new String[128];
@@ -258,18 +273,28 @@ public class ScanResultsFragment extends DialogFragment {
                         }
                         }else {
                             listener.onOkPressed();
-                            dialogInterface.cancel();
                             codes.processQRCodeInDatabase(name, String.valueOf(score), hash);
-                            dialog.dismiss();
-                            // Send Hash and Device ID to a new fragment that shows QR Code statistics
+                            dialogInterface.cancel();
+                            // Intent is used to switch from one activity to another.
+                            processQRCode( name,  String.valueOf(score), hash);
                             Intent intent = new Intent(getContext(), QRCodeStatsActivity.class);
                             intent.putExtra("Hash", hash);
                             intent.putExtra("username", username);
-                            intent.putExtra("currentUser",username);
+                            intent.putExtra("currentUser", username);
+                            intent.putExtra("score", String.valueOf(score));
+                            intent.putExtra("name", name);
+                            intent.putExtra("timesScanned", timesScanned);
+                            intent.putExtra("crnt_date", crnt_date);
+                            if(codes.getLocation()==200){
+                                intent.putExtra("lat", "200");
+                            }else{
+                                intent.putExtra("lat", "0");
+                            }
+                            intent.putExtra("likes", likes);
+                            intent.putExtra("dislikes", dislikes);
                             startActivity(intent);
 
                         }
-
                     }
                 });
 
@@ -297,4 +322,30 @@ public class ScanResultsFragment extends DialogFragment {
         dialog.show();
         return dialog;
     }
+
+    public void processQRCode(String name, String score, String hash) {
+        QRCodesCollection codes = new QRCodesCollection();
+        codes.getReference().get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document: task.getResult()) {
+                        if (document.getId().equals(hash)) {
+                            likes = String.valueOf(Integer.
+                                    parseInt(Objects.requireNonNull(document.getString("Likes"))));
+                            dislikes = String.valueOf(Integer.
+                                    parseInt(Objects.requireNonNull(document.getString("Dislikes"))));
+                            lat = Objects.requireNonNull(document.getString("Latitude"));
+                            lng = Objects.requireNonNull(document.getString("Longitude"));
+                            timesScanned = String.valueOf(Integer.
+                                    parseInt(Objects.requireNonNull(document.getString("TimesScanned"))) + 1);
+                            crnt_date = Utilities.getCurrentDate();
+                            return;
+                        }
+                    }
+                }
+            }
+        });
+    }
 }
+

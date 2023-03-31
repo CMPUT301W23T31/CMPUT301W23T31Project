@@ -3,12 +3,16 @@ package com.example.cmput301w23t31project;
 
 import static android.content.ContentValues.TAG;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -16,9 +20,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -32,6 +39,7 @@ import java.util.List;
 
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Objects;
 
 
 /**
@@ -43,6 +51,9 @@ public class QRCodeStatsActivity extends AppCompatActivity {
     TextView scoreView;
     TextView coordinatesView;
     TextView likesView;
+    String name;
+    String sc;
+    String lat;
     TextView date;
     TextView scanned;
     TextView dislikesView;
@@ -74,7 +85,8 @@ public class QRCodeStatsActivity extends AppCompatActivity {
         hash = intent.getStringExtra("Hash");
         username = intent.getStringExtra("username");
         CurrentUser = intent.getStringExtra("currentUser");
-        Log.d("TAG", hash+" stats  "+ username);
+        boolean res = intent.getStringExtra("user")==null;
+        Log.d("loc_testing", " "+res);
 
         // Accesses all of the text fields
         nameView = findViewById(R.id.qr_code_stats_code_name);
@@ -124,6 +136,17 @@ public class QRCodeStatsActivity extends AppCompatActivity {
         });
 
         setStats(hash);
+//        if(intent.getStringExtra("score")==null){
+//            setStats(hash);
+//        }else{
+//            lat = intent.getStringExtra("lat");
+//            name = intent.getStringExtra("name");
+//            sc = intent.getStringExtra("score");
+//            setexceptStats();
+//        }
+
+
+
         //Toast.makeText(getApplicationContext(),"hashstats: "+hash,Toast.LENGTH_SHORT).show();
         db = FirebaseFirestore.getInstance();
         db.collection("PlayerScans").get()
@@ -184,6 +207,7 @@ public class QRCodeStatsActivity extends AppCompatActivity {
                                     if(document.getId().equals(hash)){
                                         Log.d("TAG", "Reached inside setting statsijgsoigjaslkg");
                                     nameView.setText(document.getString("Name"));
+                                    Log.d("first name", document.getString("Name"));
                                     scoreView.setText(document.getString("Score"));
                                     if((Double.valueOf(document.getString("Latitude"))==200)){
                                         coordinates = "No Location";
@@ -201,6 +225,36 @@ public class QRCodeStatsActivity extends AppCompatActivity {
 
         }
     }}}});
+        if(nameView.getText().toString()==null){
+            setexceptStats();
+        }
+    }
+
+    public void setexceptStats(){
+
+        nameView.setText(name);
+        scoreView.setText(sc);
+        if((Double.valueOf(lat)==200)){
+            coordinates = "No Location";
+        }else{
+            GpsTracker gpsTracker = new GpsTracker(QRCodeStatsActivity.this);
+            double latitude = 0;
+            double longitude = 0;
+            if(gpsTracker.canGetLocation()){
+                latitude = gpsTracker.getLatitude();
+                longitude = gpsTracker.getLongitude();
+                //Toast.makeText(this, "l"+latitude+longitude, Toast.LENGTH_SHORT)
+                //.show();
+            }else{
+                gpsTracker.showSettingsAlert();
+            }
+            coordinates = latitude + ", " + longitude;
+        }
+        coordinatesView.setText(coordinates);
+        String like = "0" + " / " + "0";
+        likesView.setText(like);
+        date.setText(Utilities.getCurrentDate());
+        scanned.setText("1");
     }
 
     /**
@@ -320,6 +374,8 @@ public class QRCodeStatsActivity extends AppCompatActivity {
         }
 
     }
+
+
 
 
 
