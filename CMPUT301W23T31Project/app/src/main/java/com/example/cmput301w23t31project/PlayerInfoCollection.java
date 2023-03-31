@@ -88,13 +88,13 @@ public class PlayerInfoCollection extends QRDatabase{
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Log.d(TAG, "HighScore Rank successfully written!");
+                        //Log.d(TAG, "HighScore Rank successfully written!");
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "HighScore Rank  Error writing document", e);
+                        //Log.w(TAG, "HighScore Rank  Error writing document", e);
                     }
                 });
     }
