@@ -1,15 +1,24 @@
 package com.example.cmput301w23t31project;
 
 import android.app.Activity;
+import android.util.Log;
+import android.view.WindowMetrics;
+import android.widget.EditText;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
+import androidx.annotation.NonNull;
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.robotium.solo.Solo;
 
 import static junit.framework.TestCase.assertTrue;
@@ -17,6 +26,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.fail;
+
+import java.util.Objects;
 
 public class SeeUserScansTest{
     private Solo solo;
