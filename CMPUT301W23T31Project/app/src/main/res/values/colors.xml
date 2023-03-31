@@ -18,21 +18,21 @@
     <color name="profile_back">#D8EFF8</color>
     <color name="profile_button_back">#D8E1FF</color>
 
-    <color name="app_primary_color">#F19054</color>
-    <color name="login_buttons_brown">#e4d3ac</color>
+    <color name="app_primary_color">#f7b28b</color>
+    <color name="login_buttons_brown">#e8d9b2</color>
     <color name="light_background_tint">#b4c3c4</color>
     <color name="dark_background_tint">#94a4ac</color>
 
     <color name="forehead_bar_color">@color/app_primary_color</color>
-    <color name="floating_button_color">#f3ac84</color>
+    <color name="floating_button_color">@color/app_primary_color</color>
     <color name="floating_button_text">@color/header_accent_color</color>
 
     <color name="activity_navigation_button_color">#94a4ac</color>
     <color name="activity_selected_button_color">#637484</color>
-    <color name="activity_action_button_color">#b4c3c4</color>
+    <color name="activity_action_button_color">#bfcecf</color>
 
-    <color name="view_profile_button_color">#e4d3ac</color>
-    <color name="view_code_details_color">#e4d3ac</color>
+    <color name="view_profile_button_color">@color/login_buttons_brown</color>
+    <color name="view_code_details_color">@color/login_buttons_brown</color>
 
     <color name="default_text_color">#222222</color>
     <color name="header_accent_color">#444444</color>

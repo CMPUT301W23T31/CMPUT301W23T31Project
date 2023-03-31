@@ -76,32 +76,44 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
         super.onCreate(savedInstanceState);
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.title_bar);
+
         TextView title = findViewById(R.id.myTitle);
         title.setText("LEADERBOARD");
+
         setContentView(R.layout.activity_leaderboard_count);
         Intent intent = getIntent();
+
         state = intent.getStringExtra("state");
         username = intent.getStringExtra("username");
         dataList = new ArrayList<>();
+
         highScoreBtn = findViewById(R.id.leaderboard_by_high_score_button);
         countBtn = findViewById(R.id.leaderboard_by_count_button);
         totalScoreBtn = findViewById(R.id.leaderboard_by_total_score_button);
         regionalBtn = findViewById(R.id.leaderboard_by_regional_button);
         LeaderboardList = findViewById(R.id.leaderboard_count_list);
         stat_text = findViewById(R.id.stat_text);
+
         leaderboardArrayAdapter = new LeaderboardArrayAdapter(this, dataList,username, state);
         LeaderboardList.setAdapter(leaderboardArrayAdapter);
 
-        if(state.equals("COUNT")) {
-            stat_text.setText(R.string.stat_count);
-            countBtn.setBackgroundColor(getColor(R.color.activity_selected_button_color));
-        } else if(state.equals("HIGHSCORE")) {
-            stat_text.setText(R.string.stat_high);
-            highScoreBtn.setBackgroundColor(getColor(R.color.activity_selected_button_color));
-        } else if(state.equals("TOTALSCORE")) {
-            totalScoreBtn.setBackgroundColor(getColor(R.color.activity_selected_button_color));
-            stat_text.setText(R.string.stat_total);
-        }
+        switch (state) {
+            case "COUNT":
+                stat_text.setText(R.string.stat_count);
+                countBtn.setBackgroundColor(getColor(R.color.activity_selected_button_color));
+                break;
+            case "HIGHSCORE":
+                stat_text.setText(R.string.stat_high);
+                highScoreBtn.setBackgroundColor(getColor(R.color.activity_selected_button_color));
+                break;
+            case "TOTALSCORE":
+                stat_text.setText(R.string.stat_total);
+                totalScoreBtn.setBackgroundColor(getColor(R.color.activity_selected_button_color));
+                break;
+            case "REGIONAL":
+                stat_text.setText(R.string.stat_regional);
+                regionalBtn.setBackgroundColor(getColor(R.color.activity_selected_button_color));
+                break;
 
         high_score_text = findViewById(R.id.current_high_score);
         total_score_text = findViewById(R.id.current_total_score);
@@ -189,11 +201,14 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
                     leaderboardArrayAdapter.notifyDataSetChanged();
                     sortList();
                     giveRank();
-                }}});
+                }
+            }
+        });
 
     }
 
     public void giveRank(){
+
                     for(int i = 0;i < dataList.size();i++){
                         int rank;
                         rank = 1+i;
@@ -225,6 +240,7 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
                             Log.d("Stats",username+" "+total_score+" "+high_score+" "+count);
 
                         }
+
     }
 
     @Override
@@ -282,6 +298,20 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
         startActivity(intent);
     }
 
+    /**
+     * This method allows user to shift to LeaderboardTotalActivity
+     * @param view
+     *      A view needed to change intents
+     */
+    public void onClickRegional(View view){
+        state="REGIONAL";
+        finish();
+        Intent intent = new Intent(this, LeaderboardActivity.class);
+        intent.putExtra("username", username);
+        intent.putExtra("state", "REGIONAL");
+        startActivity(intent);
+    }
+
     public void sortList() {
         for (int i = 0; i < dataList.size() - 1; i++)
             for (int j = 0; j < dataList.size() - i - 1; j++)
@@ -294,6 +324,10 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
                     dataList.set(j, dataList.get(j + 1));
                     dataList.set(j + 1, temp);
                 } else if (state.equals("TOTALSCORE")&&dataList.get(j).getTotalScore() < dataList.get(j + 1).getTotalScore()) {
+                    Player temp = dataList.get(j);
+                    dataList.set(j, dataList.get(j + 1));
+                    dataList.set(j + 1, temp);
+                } else if (state.equals("REGIONAL")&&dataList.get(j).getTotalScore() < dataList.get(j + 1).getTotalScore()) {
                     Player temp = dataList.get(j);
                     dataList.set(j, dataList.get(j + 1));
                     dataList.set(j + 1, temp);
