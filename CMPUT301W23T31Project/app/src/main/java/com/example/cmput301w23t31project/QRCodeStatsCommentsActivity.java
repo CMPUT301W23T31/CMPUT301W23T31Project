@@ -46,7 +46,7 @@ public class QRCodeStatsCommentsActivity extends AppCompatActivity implements Ad
     Button viewSurroundings;
     Button scanned_by;
     String coordinates;
-
+    Button scanbtn;
     private ArrayList<Comment> commentList;
     private QRCodeStatsCommentsAdapter qrCodeStatsCommentsAdapter;
     ListView datalist;
@@ -208,7 +208,6 @@ public class QRCodeStatsCommentsActivity extends AppCompatActivity implements Ad
             String likes = document.getString("Likes") + " / " +
                     document.getString("Dislikes");
             coordinatesView.setText(coordinates);
-            likesView.setText(likes);
             date.setText(document.getString("LastScanned"));
             scanned.setText(document.getString("TimesScanned"));
         }
