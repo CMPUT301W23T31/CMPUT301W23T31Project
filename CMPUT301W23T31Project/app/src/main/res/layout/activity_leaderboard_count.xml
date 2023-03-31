@@ -23,30 +23,30 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="3dp"
-                android:backgroundTint="@color/activity_navigation_button_color"
                 android:onClick="onClickHighScore"
                 android:text="High Score"
-                android:textSize="@dimen/leaderboard_button_text_size" />
+                android:textSize="@dimen/leaderboard_button_text_size"
+                style="@style/navigation_button_style"/>
 
             <Button
                 android:id="@+id/leaderboard_by_count_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="3dp"
-                android:backgroundTint="@color/activity_selected_button_color"
                 android:onClick="onClickCount"
                 android:text="Count"
-                android:textSize="@dimen/leaderboard_button_text_size" />
+                android:textSize="@dimen/leaderboard_button_text_size"
+                style="@style/navigation_button_style"/>
 
             <Button
                 android:id="@+id/leaderboard_by_total_score_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="3dp"
-                android:backgroundTint="@color/activity_navigation_button_color"
                 android:onClick="onClickTotalScore"
                 android:text="Total Score"
-                android:textSize="@dimen/leaderboard_button_text_size" />
+                android:textSize="@dimen/leaderboard_button_text_size"
+                style="@style/navigation_button_style"/>
 
             <Button
                 android:layout_marginRight="10dp"
@@ -54,10 +54,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="3dp"
-                android:backgroundTint="@color/activity_navigation_button_color"
                 android:onClick="onClickRegional"
                 android:text="Regional"
-                android:textSize="@dimen/leaderboard_button_text_size" />
+                android:textSize="@dimen/leaderboard_button_text_size"
+                style="@style/navigation_button_style"/>
         </LinearLayout>
 
 
@@ -80,7 +80,7 @@
                 android:text="Your Stats"
                 android:textColor="#ffffff"
                 android:textSize="20dp"
-                android:textStyle="bold"></TextView>
+                android:textStyle="bold"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -95,8 +95,6 @@
                     android:padding="10dp"
 
                     app:srcCompat="@drawable/trophy" />
-
-
 
             </LinearLayout>
 
@@ -117,19 +115,19 @@
 
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-condensed-medium"
+
                         android:text="High Score"
                         android:textColor="#ffffff"
-                        android:textSize="20dp"
-                        android:textStyle="bold"/>
+                        style="@style/bold_mini_header"/>
+
                     <TextView
                         android:id="@+id/current_high_score"
-                        android:fontFamily="sans-serif-condensed-medium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="20dp"
+
+                        android:text="High Score"
                         android:textColor="#ffffff"
-                        android:text="High Score"/>
+                        style="@style/basic_medium_text"/>
 
                 </LinearLayout>
 
@@ -139,22 +137,23 @@
                     android:padding="10dp"
                     android:gravity="center"
                     android:orientation="vertical">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-condensed-medium"
-                        android:textSize="20dp"
+
+                        android:text="Total Score"
                         android:textColor="#ffffff"
-                        android:textStyle="bold"
-                        android:text="Total Score"/>
+                        style="@style/bold_mini_header"/>
+
                     <TextView
                         android:id="@+id/current_total_score"
                         android:layout_width="wrap_content"
-                        android:fontFamily="sans-serif-condensed-medium"
                         android:layout_height="wrap_content"
-                        android:textSize="20dp"
+
+                        android:text="Total Score"
                         android:textColor="#ffffff"
-                        android:text="Total Score"/>
+                        style="@style/basic_medium_text"/>
 
                 </LinearLayout>
 
@@ -164,68 +163,76 @@
                     android:padding="10dp"
                     android:gravity="center"
                     android:orientation="vertical">
+
                     <TextView
-                        android:fontFamily="sans-serif-condensed-medium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="20dp"
+
+                        android:text="Count"
                         android:textColor="#ffffff"
-                        android:textStyle="bold"
-                        android:text="Count"/>
+                        style="@style/bold_mini_header"/>
+
                     <TextView
                         android:id="@+id/current_count"
-                        android:fontFamily="sans-serif-condensed-medium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="20dp"
+
+                        android:text="Count"
                         android:textColor="#ffffff"
-                        android:text="count"/>
+                        style="@style/basic_medium_text"/>
 
                 </LinearLayout>
 
             </LinearLayout>
 
-
         </LinearLayout>
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="5dp"
-            android:backgroundTint="@color/activity_navigation_button_color">
+            android:padding="5dp">
+
+            <TextView
+                android:id="@+id/stats_rank_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+
+                android:text="Rank   |"
+                style="@style/bold_mini_header"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
             <TextView
                 android:layout_width="wrap_content"
-                android:backgroundTint="@color/activity_navigation_button_color"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:fontFamily="sans-serif-condensed-medium"
-                android:text="Rank   |"/>
+                android:layout_marginHorizontal="15dp"
+
+                android:text="Username"
+                style="@style/bold_mini_header"
+
+                app:layout_constraintStart_toEndOf="@id/stats_rank_label"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:layout_marginLeft="2dp"
-                android:layout_marginRight="160dp"
-                android:fontFamily="sans-serif-condensed-medium"
-                android:text="Username"/>
-
-            <TextView
-
                 android:id="@+id/stat_text"
-
-                android:layout_marginRight="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:fontFamily="sans-serif-condensed-medium"
-                android:text="| Count"/>
+                android:layout_marginHorizontal="15dp"
+                android:paddingEnd="35dp"
 
-        </LinearLayout>
+                android:text="| Count"
+                style="@style/bold_mini_header"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ListView
             android:id="@+id/leaderboard_count_list"
@@ -234,7 +241,7 @@
             android:divider="@color/black"
             android:dividerHeight="1dp"
             android:visibility="visible"
-            tools:listitem="@layout/content_leaderboard_list" />
+            tools:listitem="@layout/content_leaderboard_count_list" />
 
     </LinearLayout>
 
