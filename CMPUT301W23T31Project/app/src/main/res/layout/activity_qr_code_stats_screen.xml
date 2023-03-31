@@ -158,34 +158,7 @@
                 android:id="@+id/qr_code_stats_comment_like_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="onLike"
-
-                android:text="Like"
-                style="@style/action_button_style"/>
-
-            <Space
-                android:layout_width="20dp"
-                android:layout_height="wrap_content"/>
-
-            <TextView
-                android:id="@+id/qr_code_stats_code_likes_dislikes"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:hint="L | D"
-                style="@style/bold_sub_header"/>
-
-            <Space
-                android:layout_width="20dp"
-                android:layout_height="wrap_content"/>
-
-            <Button
-                android:id="@+id/qr_code_stats_comment_dislike_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-
-                android:text="Dislike"
+                android:text="SEE CODE ON MAP"
                 style="@style/action_button_style"/>
 
         </LinearLayout>

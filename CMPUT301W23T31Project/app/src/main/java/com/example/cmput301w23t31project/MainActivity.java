@@ -148,8 +148,20 @@ public class MainActivity extends HamburgerMenu implements ScanResultsFragment.O
         exploreBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //getting current location
+                gpsTracker = new GpsTracker(MainActivity.this);
+                if(gpsTracker.canGetLocation()){
+                    latitude = gpsTracker.getLatitude();
+                    longitude = gpsTracker.getLongitude();
+                    //Toast.makeText(this, "l"+latitude+longitude, Toast.LENGTH_SHORT)
+                    //.show();
+                }else{
+                    gpsTracker.showSettingsAlert();
+                }
                 Intent intent = new Intent(MainActivity.this,
                         ExploreScreenActivity.class);
+                intent.putExtra("latitude",String.valueOf(latitude));
+                intent.putExtra("longitude",String.valueOf(longitude));
                 intent.putExtra("username", username);
                 startActivity(intent);
             }
