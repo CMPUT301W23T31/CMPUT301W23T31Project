@@ -127,27 +127,19 @@ public class MyScansScreenActivity extends HamburgerMenu implements SearchScanFr
         username = intent.getStringExtra("username");
         currentUser = intent.getStringExtra("crnt_username");
         datalist2 = new ArrayList<>();
-        for(int i=0;i<l;i++) {
-            if (name.trim().equalsIgnoreCase(datalist.get(i).getName())){
-                datalist2.add(datalist.get(i));
-                QRCodeList = findViewById(R.id.leaderboard_list);
-                qrCodeAdapter = new QRCodeArrayAdapter(this, datalist2, username ,currentUser);
-                QRCodeList.setAdapter(qrCodeAdapter);
-                c+=1;
-            }
-            else if((datalist.get(i).getName()).startsWith(name.toLowerCase().trim())){
-                datalist2.add(datalist.get(i));
-                QRCodeList = findViewById(R.id.leaderboard_list);
-                qrCodeAdapter = new QRCodeArrayAdapter(this, datalist2, username ,currentUser);
-                QRCodeList.setAdapter(qrCodeAdapter);
-                c+=1;
-            }
-            else if((datalist.get(i).getName()).contains(name.toLowerCase().trim())){
-                datalist2.add(datalist.get(i));
-                QRCodeList = findViewById(R.id.leaderboard_list);
-                qrCodeAdapter = new QRCodeArrayAdapter(this, datalist2, username ,currentUser);
-                QRCodeList.setAdapter(qrCodeAdapter);
-                c+=1;
+        if(name.trim().isEmpty()){
+            new QRCodeNotFoundFragment().show(getSupportFragmentManager(), "Error Message");
+            c+=1;
+        }
+        else {
+            for (int i = 0; i < l; i++) {
+                if ((datalist.get(i).getName()).contains(name.toLowerCase().trim())) {
+                    datalist2.add(datalist.get(i));
+                    QRCodeList = findViewById(R.id.leaderboard_list);
+                    qrCodeAdapter = new QRCodeArrayAdapter(this, datalist2, username, currentUser);
+                    QRCodeList.setAdapter(qrCodeAdapter);
+                    c += 1;
+                }
             }
         }
 
