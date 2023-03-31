@@ -8,15 +8,19 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
@@ -35,6 +39,7 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
     String total_score;
     String high_score;
     String count;
+    Button searchUser;
     TextView high_score_text;
     TextView total_score_text;
     TextView count_text;
@@ -42,7 +47,9 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
     private String username;
     private String state;
     private ArrayList<Player> dataList;
+    private ArrayList<QRCode> codeList;
     private LeaderboardArrayAdapter leaderboardArrayAdapter;
+    private QRCodeArrayAdapter qrCodeArrayAdapter;
     private ArrayList<Player> dataList2 = new ArrayList<>();
 
     /**
@@ -79,6 +86,9 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
     }
 
     ListView LeaderboardList;
+    ListView CodesList;
+    LinearLayout stats_layout;
+    ConstraintLayout rank_description;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
@@ -93,15 +103,44 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
         state = intent.getStringExtra("state");
         username = intent.getStringExtra("username");
         dataList = new ArrayList<>();
+        codeList = new ArrayList<>();
 
         highScoreBtn = findViewById(R.id.leaderboard_by_high_score_button);
         countBtn = findViewById(R.id.leaderboard_by_count_button);
         totalScoreBtn = findViewById(R.id.leaderboard_by_total_score_button);
         regionalBtn = findViewById(R.id.leaderboard_by_regional_button);
         LeaderboardList = findViewById(R.id.leaderboard_count_list);
+        CodesList = findViewById(R.id.leaderboard_code_list);
+        stats_layout = findViewById(R.id.your_stats);
+        rank_description = findViewById(R.id.rank_description);
+        searchUser = findViewById(R.id.leaderboard_search_user_button);
         stat_text = findViewById(R.id.stat_text);
 
-        leaderboardArrayAdapter = new LeaderboardArrayAdapter(this, dataList,username, state);
+        if(state.equals("REGIONAL")){
+            searchUser.setVisibility(View.GONE);
+            LeaderboardList.setVisibility(View.GONE);
+            CodesList.setVisibility(View.VISIBLE);
+            stats_layout.setVisibility(View.GONE);
+            rank_description.setVisibility(View.GONE);
+            qrCodeArrayAdapter = new QRCodeArrayAdapter(this,codeList, username, "null");
+            CreateHighScores();
+            sortCodeList();
+
+        }else{
+            LeaderboardList.setVisibility(View.VISIBLE);
+            CodesList.setVisibility(View.GONE);
+            stats_layout.setVisibility(View.VISIBLE);
+            rank_description.setVisibility(View.VISIBLE);
+            leaderboardArrayAdapter = new LeaderboardArrayAdapter(this, dataList,username, state);
+            final Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    CreateLeaderBoard();
+                }
+            },250);
+        }
+        CodesList.setAdapter(qrCodeArrayAdapter);
         LeaderboardList.setAdapter(leaderboardArrayAdapter);
         setBtnColor();
 
@@ -110,17 +149,6 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
         count_text = findViewById(R.id.current_count);
         setStats();
 
-
-        final Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                CreateLeaderBoard();
-            }
-        },250);
-
-        Button searchUser;
-        searchUser = findViewById(R.id.leaderboard_search_user_button);
         searchUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -130,6 +158,34 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
 
     }
 
+    public void CreateHighScores(){
+        db = FirebaseFirestore.getInstance();
+        Query query= db.collection("QRCodes").orderBy("Score");
+        query.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                if (!queryDocumentSnapshots.isEmpty()) {
+                    // if the snapshot is not empty we are
+                    // hiding our progress bar and adding
+                    // our data in a list.
+                    List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+                    int i = 0;
+                    for (DocumentSnapshot doc : list) {
+                        if(i<101) {
+                            codeList.add(new QRCode(doc.getString("Name"), Integer.parseInt(doc.getString("Score")), doc.getId()));
+                        }
+                        i++;
+                        //Log.i("Size", Integer.toString(dataList.size()));
+
+                    }
+                    qrCodeArrayAdapter.notifyDataSetChanged();
+                    sortCodeList();
+                }
+            }
+        });
+
+
+    }
 
     /**
      from the playerinfo collection in the database access the username and fields and display the users in a listview
@@ -302,19 +358,34 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
                     Player temp = dataList.get(j);
                     dataList.set(j, dataList.get(j + 1));
                     dataList.set(j + 1, temp);
+                    leaderboardArrayAdapter.notifyDataSetChanged();
                 } else if (state.equals("HIGHSCORE")&& dataList.get(j).getHighestScoringQR() < dataList.get(j + 1).getHighestScoringQR()) {
                     Player temp = dataList.get(j);
                     dataList.set(j, dataList.get(j + 1));
                     dataList.set(j + 1, temp);
+                    leaderboardArrayAdapter.notifyDataSetChanged();
                 } else if (state.equals("TOTALSCORE")&&dataList.get(j).getTotalScore() < dataList.get(j + 1).getTotalScore()) {
                     Player temp = dataList.get(j);
                     dataList.set(j, dataList.get(j + 1));
                     dataList.set(j + 1, temp);
-                } else if (state.equals("REGIONAL")&&dataList.get(j).getTotalScore() < dataList.get(j + 1).getTotalScore()) {
-                    Player temp = dataList.get(j);
-                    dataList.set(j, dataList.get(j + 1));
-                    dataList.set(j + 1, temp);
+                    leaderboardArrayAdapter.notifyDataSetChanged();
                 }
-        leaderboardArrayAdapter.notifyDataSetChanged();
     }
+
+    public void sortCodeList() {
+        Log.d("sorting", "reached here");
+        for (int i = 0; i < codeList.size() - 1; i++) {
+            for (int j = 0; j < codeList.size() - i - 1; j++) {
+                if (codeList.get(j).getScore() < codeList.get(j + 1).getScore()) {
+                    Log.d("score", codeList.get(j).getName());
+                    QRCode temp = codeList.get(j);
+                    codeList.set(j, codeList.get(j + 1));
+                    codeList.set(j + 1, temp);
+                    qrCodeArrayAdapter.notifyDataSetChanged();
+                }
+            }
+        }
+
+    }
+
 }
