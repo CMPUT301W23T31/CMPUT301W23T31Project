@@ -49,6 +49,7 @@ public class QRCodeStatsCommentsActivity extends AppCompatActivity implements Ad
     private QRCodeStatsCommentsAdapter qrCodeStatsCommentsAdapter;
     ListView datalist;
     String username;
+    String CurrentUser;
     String date_text;
     boolean hasQR;
     DrawRepresentation visualRepresentation;
@@ -69,6 +70,7 @@ public class QRCodeStatsCommentsActivity extends AppCompatActivity implements Ad
         Intent intent = getIntent();
         hash = intent.getStringExtra("Hash");
         username = intent.getStringExtra("username");
+        CurrentUser = intent.getStringExtra("currentUser");
 
         // Accesses all of the text fields
         nameView = findViewById(R.id.qr_code_stats_comment_code_name);
@@ -169,7 +171,7 @@ public class QRCodeStatsCommentsActivity extends AppCompatActivity implements Ad
         }
     }
     public void setButtonVisibility(){
-        //hasQR = false;
+        add_comment.setVisibility(View.GONE);
         db = FirebaseFirestore.getInstance();
         db.collection("PlayerScans").get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -181,17 +183,14 @@ public class QRCodeStatsCommentsActivity extends AppCompatActivity implements Ad
                                 if(document.getId().equals(username)){
                                     if(document.getData().containsKey(hash)){
                                         hasQR = true;
-
-
-                                Log.i("Testing QR comment", document.getId());
+                                        add_comment.setVisibility(View.VISIBLE);
+                                        Log.i("Testing QR comment", document.getId());
                                         Log.i("user", username);
                             }}}
 
 
                         }}});
-        if(!hasQR){
-            add_comment.setVisibility(View.GONE);
-        }
+
     }
 
     /**

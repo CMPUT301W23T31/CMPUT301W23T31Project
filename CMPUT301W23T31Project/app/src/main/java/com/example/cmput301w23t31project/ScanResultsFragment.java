@@ -265,6 +265,7 @@ public class ScanResultsFragment extends DialogFragment {
                             Intent intent = new Intent(getContext(), QRCodeStatsActivity.class);
                             intent.putExtra("Hash", hash);
                             intent.putExtra("username", username);
+                            intent.putExtra("currentUser",username);
                             startActivity(intent);
 
                         }

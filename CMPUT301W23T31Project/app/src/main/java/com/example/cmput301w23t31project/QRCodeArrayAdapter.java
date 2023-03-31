@@ -133,6 +133,7 @@ public class QRCodeArrayAdapter extends ArrayAdapter<QRCode> {
                 Intent intent = new Intent(context, QRCodeStatsActivity.class);
                 intent.putExtra("Hash", hash);
                 intent.putExtra("username", username);
+                intent.putExtra("currentUser",currentUser);
                 context.startActivity(intent);
             }
         });
