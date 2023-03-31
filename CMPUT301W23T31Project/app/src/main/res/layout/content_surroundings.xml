@@ -1,73 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="horizontal">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_margin="10dp"
-            android:paddingStart="10dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
-
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-                    android:text="Recent Capture"
-                    style="@style/bold_sub_header"/>
-
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-                    android:text="Taken By:"
-                    style="@style/bold_mini_header"/>
-
-                <TextView
-                    android:id="@+id/surroundings_username_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-                    android:hint="Player Username"
-                    style="@style/basic_medium_text"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-                    android:text="Taken On:"
-                    style="@style/bold_mini_header"/>
-
-                <TextView
-                    android:id="@+id/surroundings_date_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-                    android:hint="Date Taken"
-                    style="@style/basic_medium_text"/>
-
-        </LinearLayout>
+    android:orientation="vertical">
 
         <ImageView
+            android:padding="10dp"
+            android:layout_gravity="center"
             android:id="@+id/surroundings_image_view"
             android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_margin="10dp"
-            android:padding="10dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            android:layout_height="200dp"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/surroundings_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:gravity="center_horizontal"
+            android:hint="Surroundings Description"
+            style="@style/italic_medium_text"/>
+
+</LinearLayout>
