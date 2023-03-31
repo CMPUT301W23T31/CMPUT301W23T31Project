@@ -58,7 +58,7 @@ public class SeeGameScoresTest {
         solo.clickOnView(solo.getView(R.id.imageView4));
 
         solo.assertCurrentActivity("Wrong Activity", LeaderboardActivity.class);
-        assertTrue(solo.waitForView(R.id.leaderboard_content_user_name));
+        assertTrue(solo.waitForView(R.id.leaderboard_content_player_name_text));
     }
 
     @Test
