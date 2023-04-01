@@ -80,7 +80,6 @@ public class PlayerProfileActivity extends HamburgerMenu {
                             // if the snapshot is not empty we are
                             // hiding our progress bar and adding
                             // our data in a list.
-                            //List<DocumentSnapshot> list = ;
                             for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
                                 if(document.getId().equals(username)){
                                     int totalScore = Integer.parseInt(document.getString("Total Score"));

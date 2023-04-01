@@ -2,6 +2,7 @@ package com.example.cmput301w23t31project;
 
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -14,6 +15,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -26,7 +30,7 @@ import java.util.Objects;
  * Also responsible for checking if the user device is recognized upon entry
  */
 public class TitleScreenActivity extends AppCompatActivity {
-
+    String DeviceID = MyDeviceID.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -34,11 +38,12 @@ public class TitleScreenActivity extends AppCompatActivity {
         getSupportActionBar().setCustomView(R.layout.title_bar);
         TextView title = findViewById(R.id.myTitle);
         title.setText("QR HUNTER");
-        //requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
         setContentView(R.layout.fragment_title_screen);
-        //PlayerInfoCollection playerScansCollection = new PlayerInfoCollection();
-        //playerScansCollection.getPlayerScans();
-        //getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.title_bar);
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA)
+                == PackageManager.PERMISSION_DENIED) {
+            ActivityCompat.requestPermissions(this, new String[] {android.Manifest.permission.CAMERA}, 100);
+        }
+
 
 
     }
@@ -55,7 +60,7 @@ public class TitleScreenActivity extends AppCompatActivity {
                 // Find if the user already has an account. If so, move to home screen
                 for (QueryDocumentSnapshot account : task.getResult()) {
                     if (Objects.equals(account.getString("DeviceID"),
-                            Utilities.getDeviceId(TitleScreenActivity.this))) {
+                            DeviceID)) {
                         intent = new Intent(TitleScreenActivity.
                                 this, MainActivity.class);
                         intent.putExtra("username", account.getId());

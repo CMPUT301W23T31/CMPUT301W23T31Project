@@ -50,7 +50,7 @@ public class ALoginActivityTest {
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 for (QueryDocumentSnapshot account : task.getResult()) {
                     if (Objects.equals(account.getString("DeviceID"),
-                            rule.getActivity().getDeviceID()) || Objects.equals(account.getId(),
+                            MyDeviceID.getInstance()) || Objects.equals(account.getId(),
                             "TestName")) {
                         account.getReference().delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override

@@ -166,8 +166,6 @@ public class ScanResultsFragment extends DialogFragment {
         toggleButton = (ToggleButton) view.findViewById(R.id.location_button);
         cameraButton = view.findViewById(R.id.scan_results_camera_button);
         set_on_off = view.findViewById(R.id.set_on_off);
-        //stateOnOff=(TextView) view.findViewById(R.id.tvstate);
-        //stateOnOff.setText("OFF");
         recordlocation = false;
         Log.v(TAG, "no location");
         codes.setLocation( 300, 300);
@@ -191,63 +189,12 @@ public class ScanResultsFragment extends DialogFragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), CameraActivity.class);
-                intent.putExtra("Hash", hash);
+                intent.putExtra("ImageDivider", hash);
                 intent.putExtra("Username", username);
                 startActivity(intent);
             }
         });
-        //codes.processQRCodeInDatabase(name, String.valueOf(score), hash);
-//        set_on_off = view.findViewById(R.id.set_on_off);
-//        String on_off = set_on_off.getText().toString();
-//        Log.d("TAG", "on_off text: "+on_off);
-//        if(on_off.equals("on")){
-//            Log.d("TAG", "ALLOWED LOCATION RECORD  "+latitude+"  "+longitude);
-//            codes.processQRCodeInDatabase(name, String.valueOf(score), hash, latitude, longitude);
-//        }else{
-//            latitude = 200;
-//            longitude = 200;
-//            Log.v(TAG, "no location");
-//            codes.processQRCodeInDatabase(name, String.valueOf(score), hash, latitude, longitude);
-//        }
 
-
-        // Build dialog fragment
-//        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-//        return builder
-//            .setView(view)
-//            .setTitle("SCAN RESULTS")
-//            .setNegativeButton("BACK TO HOME", new DialogInterface.OnClickListener() {
-//                @Override
-//                public void onClick(DialogInterface dialogInterface, int i) {
-//                    // Head back to main menu and close the dialog fragment
-//                    if(codes.getLocation()==300){
-//                        Toast.makeText(getContext(),"Please select location permission",Toast.LENGTH_SHORT).show();
-//                    }else {
-//                        codes.processQRCodeInDatabase(name, String.valueOf(score), hash);
-//                        MainActivity.setHomeScore(new QRPlayerScans(), homeScore, new QRCodesCollection(), username);
-//                        dialogInterface.cancel();
-//                    }
-//
-//                }
-//            })
-//            .setPositiveButton("SEE CODE DETAILS", new DialogInterface.OnClickListener() {
-//                @Override
-//                public void onClick(DialogInterface dialogInterface, int i) {
-//
-//                    if(codes.getLocation()==300){
-//                        Toast.makeText(getContext(),"Please select location permission",Toast.LENGTH_SHORT).show();
-//                    }else {
-//                        listener.onOkPressed();
-//                        dialogInterface.cancel();
-//                        codes.processQRCodeInDatabase(name, String.valueOf(score), hash);
-//                        // Send Hash and Device ID to a new fragment that shows QR Code statistics
-//                        Intent intent = new Intent(getContext(), QRCodeStatsActivity.class);
-//                        intent.putExtra("Hash", hash);
-//                        intent.putExtra("username", username);
-//                        startActivity(intent);
-//                    }
-//                }
-//            }).create();
 
         final AlertDialog dialog = new AlertDialog.Builder(getContext())
                 .setView(view)

@@ -144,15 +144,6 @@ public class QRCodeStatsActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
-
-
-//        if(intent.getStringExtra("score")==null){
-//            setStats(hash);
-//        }else{
-//
-//        }
         lat = intent.getStringExtra("lat");
         name = intent.getStringExtra("name");
         sc = intent.getStringExtra("score");
@@ -325,88 +316,5 @@ public class QRCodeStatsActivity extends AppCompatActivity {
                     }
                 });
     }
-
-    public void HitLikeDislike(int number){
-
-
-        //DocumentReference scan = QRdb.collection("PlayerInfo").document(username);
-//        Map<String, Object> m = new HashMap<>();
-//        db = FirebaseFirestore.getInstance();
-//        TextView LikesDislikesText = findViewById(R.id.qr_code_stats_code_likes_dislikes);
-//        String numberOfLikes = LikesDislikesText.getText().toString();
-//        String likesStr = "0";
-//        String LikesFinished = processString(numberOfLikes,number);
-//        String DisLikesFinished = processString(numberOfLikes,number);
-//
-//
-//        switch (number){
-//            case 0: {
-//                int likes1 = Integer.parseInt(LikesFinished);
-//                int likes2 = likes1 + 1;
-//                likesStr = (LikesFinished + " / " + DisLikesFinished);
-//                String likes = String.valueOf(likes2);
-//                m.put("Likes", likes);
-//                break;
-//            }
-//            case 1:{
-//                int dislikes1 = Integer.parseInt(DisLikesFinished);
-//                int dislikes2 = dislikes1 + 1;
-//                likesStr = (LikesFinished + " / " + DisLikesFinished);
-//                String dislikes = String.valueOf(dislikes2);
-//                m.put("Dislikes", dislikes);
-//                break;
-//            }
-//
-//        }
-//        String finalLikesStr = likesStr;
-//        db.collection("QRCodes").document(hash)
-//                .set(m, SetOptions.merge())
-//                .addOnSuccessListener(new OnSuccessListener<Void>() {
-//                    @Override
-//                    public void onSuccess(Void aVoid) {
-//                        setStats(hash);
-//                        Log.d(TAG, "DocumentSnapshot successfully written!");
-//                    }
-//                })
-//                .addOnFailureListener(new OnFailureListener() {
-//                    @Override
-//                    public void onFailure(@NonNull Exception e) {
-//                        Log.w(TAG, "Error writing document", e);
-//                    }
-//                });
-    }
-    public String processString(String string,int number) {
-
-        String LikesFinished = "0";
-        String DisLikesFinished ="0";
-
-
-        switch (number) {
-            case 0:{
-                String[] numberOflikesArr = string.split("/");
-                String numberOfLikesWSpace = numberOflikesArr[number];
-                String[] numberOfLikesWOSpace = numberOfLikesWSpace.split(" ");
-                LikesFinished = numberOfLikesWOSpace[number];
-                break;}
-            case 1:{
-                String[] numberOfDislikesArr = string.split("/");
-                String numberOfDisLikesWSpace = numberOfDislikesArr[1];
-                String[] numberOfDisLikesWOSpace = numberOfDisLikesWSpace.split(" ");
-                DisLikesFinished = numberOfDisLikesWOSpace[1];
-                break;}
-            }
-        if(number==0){
-            return LikesFinished;
-        }
-        else{
-            return DisLikesFinished;
-        }
-
-    }
-
-//    @Override protected void onDestroy() {
-//        super.onDestroy();
-//        SvgLoader.pluck().close();
-//    }
 
 }

@@ -138,7 +138,6 @@ public class QRCodeStatsCommentsActivity extends AppCompatActivity implements Ad
         });
 
         ///
-        //Toast.makeText(getApplicationContext(),"hashstats: "+hash,Toast.LENGTH_SHORT).show();
         db = FirebaseFirestore.getInstance();
         CommentsCollection collectionReferenceAccount = new CommentsCollection();
         CommentsCollection comments = new CommentsCollection();

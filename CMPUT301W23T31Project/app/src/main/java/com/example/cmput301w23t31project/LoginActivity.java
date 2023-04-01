@@ -89,7 +89,4 @@ public class LoginActivity extends AppCompatActivity {
      * @return
      *      Device ID as a String
      */
-    public String getDeviceID() {
-        return Utilities.getDeviceId(this);
-    }
 }

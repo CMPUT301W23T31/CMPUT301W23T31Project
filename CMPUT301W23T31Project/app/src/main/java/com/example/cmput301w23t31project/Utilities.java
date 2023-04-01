@@ -163,15 +163,6 @@ public class Utilities {
         return fileData;
     }
 
-    /**
-     * This function returns the ID of the android device
-     * @param app references the activity that needs to access the device ID
-     * @return the ID of the android device
-     */
-    public static String getDeviceId(AppCompatActivity app) {
-        return Settings.Secure.getString(app.getContentResolver(), Settings.Secure.ANDROID_ID);
-    }
-
 
     /**
      * Saves the image to internal storage, in other words, saves the image to a path

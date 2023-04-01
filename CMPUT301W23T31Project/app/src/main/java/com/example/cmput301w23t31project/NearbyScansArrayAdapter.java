@@ -72,13 +72,6 @@ public class NearbyScansArrayAdapter extends ArrayAdapter<QRCode> {
 
         Button CodeInfo;
         CodeInfo = view.findViewById(R.id.code_info_button);
-
-        //if(!isVisibility()){
-        //    delete.setVisibility(View.GONE);
-        //}
-        //else{
-        //    delete.setVisibility(View.VISIBLE);
-        //}
         PlayerInfoCollection scans = new PlayerInfoCollection();
         QRdb = FirebaseFirestore.getInstance();
         String hash = QRCode.getHash();
@@ -95,7 +88,6 @@ public class NearbyScansArrayAdapter extends ArrayAdapter<QRCode> {
             QRCodePoints.setText(QRScore + " pts | "+String.format("%.2f",QRDistance)+" km away");
         }
 
-        Log.d(TAG, "ADAPT: " + QRName);
         QRCodeName.setText(QRCode.getName());
         delete.setVisibility(View.GONE);
 

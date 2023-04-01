@@ -145,27 +145,5 @@ public class QRCodeArrayAdapter extends ArrayAdapter<QRCode> {
 
         return view;
     }
-//    public boolean isVisibility(){
-//        Utilities utilities = new Utilities();
-//
-//        QRdb = FirebaseFirestore.getInstance();
-//        QRdb.collection("Accounts").get() .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-//            @Override
-//            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-//                // after getting the data we are calling on success method
-//                // and inside this method we are checking if the received
-//                // query snapshot is empty or not.
-//                if (!queryDocumentSnapshots.isEmpty()) {
-//                    // if the snapshot is not empty we are
-//                    // hiding our progress bar and adding
-//                    // our data in a list.
-//                    List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
-//                    for (DocumentSnapshot document : list) {
-//                        if(document.getId().equals(username));
-//                    }
-//
-//        }
-//    }});
-//
-//    }
+
 }

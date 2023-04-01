@@ -50,7 +50,7 @@ public class MainActivity extends HamburgerMenu implements ScanResultsFragment.O
     double latitude;
     double longitude;
     boolean recordLocation= true;
-
+    String DeviceID = MyDeviceID.getInstance();
     /**
      * On create method
      * Handles the setup of home screen button and other functionalities
@@ -74,13 +74,12 @@ public class MainActivity extends HamburgerMenu implements ScanResultsFragment.O
         playerScansCollection.CreateLeaderBoard();
 
         findNearbyCodes(QRCodes);
-        String ID = Utilities.getDeviceId(this);
 
         //get login details
 
         score = findViewById(R.id.home_screen_current_points);
         if (intent.hasExtra("path")) {
-            collectionReferenceAccount.addAccountToCollection(username, intent, ID);
+            collectionReferenceAccount.addAccountToCollection(username, intent, DeviceID);
         } else {
             username = intent.getStringExtra("username");
         }
@@ -115,16 +114,6 @@ public class MainActivity extends HamburgerMenu implements ScanResultsFragment.O
         scanBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // we need to create the object
-                // of IntentIntegrator class
-                // which is the class of QR library
-                /*
-                IntentIntegrator intentIntegrator = new IntentIntegrator(MainActivity.this);
-                intentIntegrator.setPrompt("Scan a barcode or QR Code");
-                intentIntegrator.setOrientationLocked(false);
-                intentIntegrator.initiateScan();
-                */
-
                 IntentIntegrator integrator = new IntentIntegrator(MainActivity.this);
                 integrator.setPrompt("Scan a barcode");
                 integrator.setCameraId(0); // Use a specific camera of the device
@@ -135,7 +124,6 @@ public class MainActivity extends HamburgerMenu implements ScanResultsFragment.O
                     integrator.setTimeout(50);
                 }
                 integrator.initiateScan();
-                //permission_asked = false;
             }
         });
 
@@ -159,8 +147,7 @@ public class MainActivity extends HamburgerMenu implements ScanResultsFragment.O
                 if(gpsTracker.canGetLocation()){
                     latitude = gpsTracker.getLatitude();
                     longitude = gpsTracker.getLongitude();
-                    //Toast.makeText(this, "l"+latitude+longitude, Toast.LENGTH_SHORT)
-                    //.show();
+
                 }else{
                     gpsTracker.showSettingsAlert();
                 }
