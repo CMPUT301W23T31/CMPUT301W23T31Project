@@ -65,13 +65,49 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/finish_login_activity_image_text" />
 
+    <TextView
+        android:id="@+id/finish_login_activity_take_photo_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+
+        android:text="Take a photo"
+        style="@style/basic_small_text"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/finish_login_activity_image"/>
+
+    <Button
+        android:id="@+id/finish_login_activity_take_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/login_buttons_brown"
+        android:selectAllOnFocus="true"
+        android:text="@string/take_photo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/finish_login_activity_take_photo_text" />
+
+    <TextView
+        android:id="@+id/finish_login_activity_image_exists"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+
+        android:text="Image successfully uploaded / taken"
+        style="@style/basic_small_text"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/finish_login_activity_take_image"/>
+
     <Button
         android:id="@+id/finish_login_activity_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/login_buttons_brown"
         android:text="@string/enter_app"
-        app:layout_constraintTop_toBottomOf="@+id/finish_login_activity_image"
+        app:layout_constraintTop_toBottomOf="@+id/finish_login_activity_image_exists"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

@@ -49,7 +49,7 @@ public class MainActivity extends HamburgerMenu implements ScanResultsFragment.O
     double latitude;
     double longitude;
     boolean recordLocation= true;
-
+    String DeviceID = MyDeviceID.getInstance();
     /**
      * On create method
      * Handles the setup of home screen button and other functionalities
@@ -73,13 +73,12 @@ public class MainActivity extends HamburgerMenu implements ScanResultsFragment.O
         playerScansCollection.CreateLeaderBoard();
 
         findNearbyCodes(QRCodes);
-        String ID = Utilities.getDeviceId(this);
 
         //get login details
 
         score = findViewById(R.id.home_screen_current_points);
         if (intent.hasExtra("path")) {
-            collectionReferenceAccount.addAccountToCollection(username, intent, ID);
+            collectionReferenceAccount.addAccountToCollection(username, intent, DeviceID);
         } else {
             username = intent.getStringExtra("username");
         }

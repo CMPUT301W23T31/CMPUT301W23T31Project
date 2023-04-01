@@ -48,7 +48,7 @@ public class CameraActivity extends Activity {
         setContentView(R.layout.activity_camera);
         this.imageView = this.findViewById(R.id.imageView1);
         Intent intent = getIntent();
-        hash = intent.getStringExtra("Hash");
+        hash = intent.getStringExtra("ImageDivider");
         username = intent.getStringExtra("Username");
         images = new QRImages();
         Button photoButton = (Button) this.findViewById(R.id.button1);
@@ -96,7 +96,7 @@ public class CameraActivity extends Activity {
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int result = uploadImage();
+                int result = uploadImage(username, hash);
                 Log.d("HEHEHEHEHEHEHEHEHEHEHEHEHE", String.valueOf(result));
                 if (result == 0) {
                     finish();
@@ -116,7 +116,7 @@ public class CameraActivity extends Activity {
         }
     }
 
-    private int uploadImage() {
+    private int uploadImage(String username, String hash) {
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReference();
         StorageReference imagesRef = storageRef.child("images/"+username+"/"+hash+".png");

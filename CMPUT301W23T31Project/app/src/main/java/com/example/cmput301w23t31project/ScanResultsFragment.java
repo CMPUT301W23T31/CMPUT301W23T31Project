@@ -191,7 +191,7 @@ public class ScanResultsFragment extends DialogFragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), CameraActivity.class);
-                intent.putExtra("Hash", hash);
+                intent.putExtra("ImageDivider", hash);
                 intent.putExtra("Username", username);
                 startActivity(intent);
             }
