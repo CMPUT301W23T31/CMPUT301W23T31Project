@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -56,12 +57,11 @@ public class QRCodeStatsAdapter extends ArrayAdapter<Player> implements Serializ
         // getting all attributes to update
         Player player = getItem(position);
         TextView playerName = view.findViewById(R.id.player_detail_username);
-        TextView date = view.findViewById(R.id.player_detail_date);
-        Button profileBtn = view.findViewById(R.id.player_detail_view_profile_button);
+        TextView date = view.findViewById(R.id.player_detail_total_score);
+        ImageView profileBtn = view.findViewById(R.id.player_detail_view_profile_button);
 
         playerName.setText(player.getUsername());
         date.setText(String.valueOf(player.getTotalScore()));
-        profileBtn.setText("View Profile");
 
         // functionality for 'view player profile' button
         profileBtn.setOnClickListener(new View.OnClickListener() {
