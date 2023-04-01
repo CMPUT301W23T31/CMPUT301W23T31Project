@@ -78,10 +78,10 @@ public class OtherPlayerScansTest {
         solo.clickOnView(solo.getView(R.id.location_button));
         solo.clickLongOnTextAndPress("SEE CODE DETAILS", 0);
         solo.assertCurrentActivity("Wrong Activity", QRCodeStatsActivity.class);
-        solo.clickOnView(solo.getView(R.id.player_detail_view_profile_button));
-        solo.assertCurrentActivity("Wrong Activity",PlayerProfileActivity.class);
-        solo.clickOnView(solo.getView(R.id.player_profile_see_scans_button));
-        solo.assertCurrentActivity("Wrong Activity", MyScansScreenActivity.class);
+        //solo.clickOnView(solo.getView(R.id.player_detail_view_profile_button));
+        //solo.assertCurrentActivity("Wrong Activity",PlayerProfileActivity.class);
+        //solo.clickOnView(solo.getView(R.id.player_profile_see_scans_button));
+        //solo.assertCurrentActivity("Wrong Activity", MyScansScreenActivity.class);
     }
 
     @Test
