@@ -22,6 +22,12 @@
             android:layout_marginEnd="10dp"
             android:background="@color/tier_0_default" />
 
+        <ImageView
+            android:id="@+id/qr_code_visual_representation_view"
+            android:layout_width="75dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="10dp" />
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -30,10 +36,11 @@
 
             <TextView
                 android:id="@+id/code_detail_name"
-                android:layout_width="wrap_content"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="2dp"
-
+                android:ellipsize="end"
+                android:singleLine="true"
                 android:hint="Name Here"
                 style="@style/italic_medium_text" />
 

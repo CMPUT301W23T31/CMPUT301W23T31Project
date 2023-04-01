@@ -13,6 +13,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 
 
@@ -54,6 +56,10 @@ public class LeaderboardArrayAdapter extends ArrayAdapter<Player> {
             score.setText(String.valueOf(player.getTotalScore()));
         }
         playerName.setText(player.getUsername());
+
+        Glide.with(context)
+                .load("https://api.dicebear.com/6.x/pixel-art/png?seed="+player.getUsername())
+                .into(profileBtn);
 
         profileBtn.setOnClickListener(new View.OnClickListener() {
             @Override
