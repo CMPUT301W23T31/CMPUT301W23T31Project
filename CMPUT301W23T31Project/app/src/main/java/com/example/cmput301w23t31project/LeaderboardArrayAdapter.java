@@ -34,7 +34,7 @@ public class LeaderboardArrayAdapter extends ArrayAdapter<Player> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View view;
         if (convertView == null) {
-            view = LayoutInflater.from(context).inflate(R.layout.content_leaderboard_count_list, parent, false);
+            view = LayoutInflater.from(context).inflate(R.layout.content_leaderboard_list, parent, false);
         } else {
             view = convertView;
         }
@@ -43,11 +43,9 @@ public class LeaderboardArrayAdapter extends ArrayAdapter<Player> {
 
         TextView playerName = view.findViewById(R.id.leaderboard_content_player_name_text);
         TextView score = view.findViewById(R.id.leaderboard_content_count);
-        TextView usernameText = view.findViewById(R.id.leaderboard_content_user_name);
         ImageView profileBtn = view.findViewById(R.id.leaderboard_content_profile_button);
         TextView rank = view.findViewById(R.id.leaderboard_content_rank);
         rank.setText(String.valueOf(player.getRank()));
-        //playerName.setText(player.getPlayerName());
         if (state.equals("COUNT")) {
             score.setText(String.valueOf(player.getCount()));
         } else if (state.equals("HIGHSCORE")) {

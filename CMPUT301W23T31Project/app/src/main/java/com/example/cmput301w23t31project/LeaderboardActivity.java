@@ -8,7 +8,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -35,7 +34,7 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
     Button highScoreBtn;
     Button countBtn;
     Button totalScoreBtn;
-    Button regionalBtn;
+    Button TopCodesBtn;
     String total_score;
     String high_score;
     String count;
@@ -97,7 +96,7 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
         TextView title = findViewById(R.id.myTitle);
         title.setText("LEADERBOARD");
 
-        setContentView(R.layout.activity_leaderboard_count);
+        setContentView(R.layout.activity_leaderboard);
         Intent intent = getIntent();
 
         state = intent.getStringExtra("state");
@@ -108,7 +107,7 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
         highScoreBtn = findViewById(R.id.leaderboard_by_high_score_button);
         countBtn = findViewById(R.id.leaderboard_by_count_button);
         totalScoreBtn = findViewById(R.id.leaderboard_by_total_score_button);
-        regionalBtn = findViewById(R.id.leaderboard_by_regional_button);
+        TopCodesBtn = findViewById(R.id.leaderboard_by_top_codes_button);
         LeaderboardList = findViewById(R.id.leaderboard_count_list);
         CodesList = findViewById(R.id.leaderboard_code_list);
         stats_layout = findViewById(R.id.your_stats);
@@ -116,7 +115,7 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
         searchUser = findViewById(R.id.leaderboard_search_user_button);
         stat_text = findViewById(R.id.stat_text);
 
-        if(state.equals("REGIONAL")){
+        if(state.equals("TOPCODES")){
             searchUser.setVisibility(View.GONE);
             LeaderboardList.setVisibility(View.GONE);
             CodesList.setVisibility(View.VISIBLE);
@@ -224,6 +223,9 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
         });
 
     }
+    /**
+     * This method uses the current state to determine which button to highlight/change colour
+     */
     public void setBtnColor(){
         switch (state) {
             case "COUNT":
@@ -238,12 +240,13 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
                 stat_text.setText(R.string.stat_total);
                 totalScoreBtn.setBackgroundColor(getColor(R.color.activity_selected_button_color));
                 break;
-            case "REGIONAL":
-                stat_text.setText(R.string.stat_regional);
-                regionalBtn.setBackgroundColor(getColor(R.color.activity_selected_button_color));
+            case "TOPCODES":
+                TopCodesBtn.setBackgroundColor(getColor(R.color.activity_selected_button_color));
                 break;}
     }
-
+    /**
+     * This method goes through each player in the list and gives them a rank
+     */
     public void giveRank(){
 
                     for(int i = 0;i < dataList.size();i++){
@@ -251,7 +254,9 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
                         rank = 1+i;
                         dataList.get(i).setRank(rank);}
     }
-
+    /**
+     * This method goes into the database and gets certain values from the user and displays them in the leaderboards
+     */
     public void setStats(){
         db = FirebaseFirestore.getInstance();
         db.collection("PlayerInfo").get() .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -296,7 +301,7 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
     }
 
     /**
-     * This method allows user to shift to LeaderboardHighScoreActivity
+     * This method changes the state to high score
      * @param view
      *      A view needed to change intents
      */
@@ -310,7 +315,7 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
     }
 
     /**
-     * This method allows user to shift to LeaderboardCountActivity
+     * This method changes the state to count
      * @param view
      *      A view needed to change intents
      */
@@ -324,7 +329,7 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
     }
 
     /**
-     * This method allows user to shift to LeaderboardTotalActivity
+     * This method changes the state to total score
      * @param view
      *      A view needed to change intents
      */
@@ -338,16 +343,16 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
     }
 
     /**
-     * This method allows user to shift to LeaderboardTotalActivity
+     * This method changes the state to Top codes
      * @param view
      *      A view needed to change intents
      */
     public void onClickRegional(View view){
-        state="REGIONAL";
+        state="TOPCODES";
         finish();
         Intent intent = new Intent(this, LeaderboardActivity.class);
         intent.putExtra("username", username);
-        intent.putExtra("state", "REGIONAL");
+        intent.putExtra("state", "TOPCODES");
         startActivity(intent);
     }
 
@@ -373,11 +378,11 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
     }
 
     public void sortCodeList() {
-        Log.d("sorting", "reached here");
+
         for (int i = 0; i < codeList.size() - 1; i++) {
             for (int j = 0; j < codeList.size() - i - 1; j++) {
                 if (codeList.get(j).getScore() < codeList.get(j + 1).getScore()) {
-                    Log.d("score", codeList.get(j).getName());
+                    
                     QRCode temp = codeList.get(j);
                     codeList.set(j, codeList.get(j + 1));
                     codeList.set(j + 1, temp);
