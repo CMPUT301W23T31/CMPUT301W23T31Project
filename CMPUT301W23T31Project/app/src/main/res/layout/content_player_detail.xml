@@ -3,8 +3,71 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:descendantFocusability="blocksDescendants">
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginHorizontal="10dp"
+        android:gravity="center_vertical"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <ImageView
+            android:id="@+id/player_detail_view_profile_button"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginHorizontal="5dp"
+            app:srcCompat="@drawable/profile_icon" />
+
+        <TextView
+            android:id="@+id/player_detail_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="5dp"
+
+            android:hint="Username"
+            style="@style/bold_mini_header"
+            android:maxEms="10"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/player_detail_total_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="5dp"
+
+        android:hint="SCORE"
+        style="@style/italic_medium_text"
+
+        app:layout_constraintEnd_toStartOf="@id/player_detail_points_text"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/player_detail_points_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
+        android:layout_marginHorizontal="5dp"
+
+        android:text="points"
+        style="@style/italic_medium_text"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+    <!--
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -18,12 +81,12 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/player_detail_date"
+                android:id="@+id/player_detail_total_score"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="2dp"
 
-                android:hint="2023-02-02"
+                android:hint="2023-03-02"
                 style="@style/italic_medium_text" />
 
             <TextView
@@ -48,5 +111,7 @@
 
         android:text="View\nProfile"
         style="@style/code_info_button_style" />
+
+        -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
