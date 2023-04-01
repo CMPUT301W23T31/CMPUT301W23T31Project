@@ -156,6 +156,9 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
         });
 
     }
+    /**
+     from the QRCodes collection in the database sort the fields by score and display the codes in a listview
+     */
 
     public void CreateHighScores(){
         db = FirebaseFirestore.getInstance();
@@ -355,7 +358,9 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
         intent.putExtra("state", "TOPCODES");
         startActivity(intent);
     }
-
+    /**
+     * sort the list depending on state
+     */
     public void sortList() {
         for (int i = 0; i < dataList.size() - 1; i++)
             for (int j = 0; j < dataList.size() - i - 1; j++)
@@ -376,13 +381,15 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
                     leaderboardArrayAdapter.notifyDataSetChanged();
                 }
     }
-
+    /**
+     * If the state is Top codes then sort this list
+     */
     public void sortCodeList() {
 
         for (int i = 0; i < codeList.size() - 1; i++) {
             for (int j = 0; j < codeList.size() - i - 1; j++) {
                 if (codeList.get(j).getScore() < codeList.get(j + 1).getScore()) {
-                    
+
                     QRCode temp = codeList.get(j);
                     codeList.set(j, codeList.get(j + 1));
                     codeList.set(j + 1, temp);

@@ -37,7 +37,7 @@ public class SurroundingsActivity extends  HamburgerMenu{
     ListView surroundList;
     ArrayAdapter<Image> surroundArrayAdapter;
     ArrayList<Image> datalist;
-    //private ArrayList<Bitmap> dataList = new ArrayList<>();
+
     private LeaderboardArrayAdapter surroundingsAdapter;
     private TableLayout table;
     private ImageView image;
@@ -49,14 +49,10 @@ public class SurroundingsActivity extends  HamburgerMenu{
         TextView title = findViewById(R.id.myTitle);
         title.setText("CODE SURROUNDINGS");
         setContentView(R.layout.activity_surroundings);
-
         datalist = new ArrayList<>();
         surroundList = findViewById(R.id.surround_list);
         surroundArrayAdapter = new SurroundingsArrayAdapter(SurroundingsActivity.this, datalist);
         surroundList.setAdapter(surroundArrayAdapter);
-        //surroundArrayAdapter = new SurroundingsArrayAdapter(this, datalist);
-        //surroundList.setAdapter(surroundArrayAdapter);
-
         Intent intent = getIntent();
         username = intent.getStringExtra("username");
         hash = intent.getStringExtra("hash");
@@ -88,29 +84,6 @@ public class SurroundingsActivity extends  HamburgerMenu{
 
     private void setImages() {
         QRImages images = new QRImages();
-//        CollectionReference collection = images.getReference();
-//        collection.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//            @Override
-//            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                TableRow row = (TableRow) SurroundingsActivity.this.getLayoutInflater().inflate(R.layout.table_row, null);
-//                TableRow.LayoutParams l = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT);
-//                row.setLayoutParams(l);
-//                int i = 0;
-//                for (QueryDocumentSnapshot doc: task.getResult()) {
-//                    if (doc.getData().containsKey(hash)) {
-//
-//                        String storage_location = doc.getString(hash);
-//                        Glide.with(SurroundingsActivity.this)
-//                                .load(storage_location).into(temp);
-//                        if (i < 3) {
-//                            row.addView(temp);
-//                            i++;
-//                        }
-//                    }
-//                }
-//                //table.addView(row, 0);
-//            }
-//        });
 
         try {
             images.getReference().get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {

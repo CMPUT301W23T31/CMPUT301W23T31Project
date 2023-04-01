@@ -93,20 +93,6 @@ public class ExploreScreenActivity extends HamburgerMenu
         longitude = Double.parseDouble(intent.getStringExtra("longitude"));
         mSearchText = findViewById(R.id.input_search);
 
-//        nearbyBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                //getting current location
-//                gpsTracker = new GpsTracker(ExploreScreenActivity.this);
-//                if(gpsTracker.canGetLocation()){
-//                    latitude = gpsTracker.getLatitude();
-//                    longitude = gpsTracker.getLongitude();
-//                }else{
-//                    gpsTracker.showSettingsAlert();
-//                }
-//                handleNewLocation(latitude, longitude, googleMap);
-//            }
-//        });
 
         nearbyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
