@@ -38,15 +38,12 @@ public class TitleScreenActivity extends AppCompatActivity {
         getSupportActionBar().setCustomView(R.layout.title_bar);
         TextView title = findViewById(R.id.myTitle);
         title.setText("QR HUNTER");
-        //requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
         setContentView(R.layout.fragment_title_screen);
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA)
                 == PackageManager.PERMISSION_DENIED) {
             ActivityCompat.requestPermissions(this, new String[] {android.Manifest.permission.CAMERA}, 100);
         }
-        //PlayerInfoCollection playerScansCollection = new PlayerInfoCollection();
-        //playerScansCollection.getPlayerScans();
-        //getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.title_bar);
+
 
 
     }

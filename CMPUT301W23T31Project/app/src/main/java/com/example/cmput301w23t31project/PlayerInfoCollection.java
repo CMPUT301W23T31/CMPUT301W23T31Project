@@ -35,7 +35,7 @@ public class PlayerInfoCollection extends QRDatabase{
     private ArrayList<Player> TotalScoreDataList = new ArrayList<>();
     private String username;
     ArrayList<String> QRHash = new ArrayList<>();
-    //HashMap<String, String> PlayerInfo = new HashMap<>();
+
 
 
     public PlayerInfoCollection() {
@@ -53,19 +53,15 @@ public class PlayerInfoCollection extends QRDatabase{
      */
     public void addPlayerInfoToCollection(String username, String max, String min, String count, String SumScore, String rank) {
         CollectionReference codes = getReference();
-        String temp = "test";
 
         // Add necessary fields of QR code data
         HashMap<String, String> PlayerInfo = new HashMap<>();
         PlayerInfo.put("Total Score", SumScore);
         PlayerInfo.put("Total Scans", count);
         PlayerInfo.put("Lowest Scoring QR Code", min);
-        //Log.i("The Rank",rank);
         PlayerInfo.put("Highest Scoring QR Code", max);
         PlayerInfo.put("Rank",rank);
-        //PlayerInfo.put("field test",temp);
         PlayerInfo.put("High Score Rank",rank);
-        //Log.i("TAG","field");
         PlayerInfo.put("Count Score Rank",rank);
         PlayerInfo.put("Total Score Rank",rank);
 
@@ -76,11 +72,8 @@ public class PlayerInfoCollection extends QRDatabase{
     public void addHighScoreRank(String username, String HighScoreRank) {
         String userName = username;
         CollectionReference scans = getReference();
-        //Log.i("TAG","test2");
-        //DocumentReference scan = QRdb.collection("PlayerInfo").document(username);
         Map<String, Object> m = new HashMap<>();
         db = FirebaseFirestore.getInstance();
-        //Log.i("The High Rank",HighScoreRank);
         m.put("High Score Rank", HighScoreRank);
         //Log.i("TAG",userName);
         db.collection("PlayerInfo").document(userName)
@@ -101,13 +94,9 @@ public class PlayerInfoCollection extends QRDatabase{
     public void addCountScoreRank(String username, String CountScoreRank){
         String userName = username;
         CollectionReference scans = getReference();
-        //Log.i("TAG","test2");
-        //DocumentReference scan = QRdb.collection("PlayerInfo").document(username);
         Map<String, Object> m = new HashMap<>();
         db = FirebaseFirestore.getInstance();
-        //Log.i("The Count Rank",CountScoreRank);
         m.put("Count Score Rank", CountScoreRank);
-        //Log.i("TAG",userName);
         db.collection("PlayerInfo").document(userName)
                 .set(m, SetOptions.merge())
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -126,14 +115,9 @@ public class PlayerInfoCollection extends QRDatabase{
     public void addTotalScoreRank(String username, String TotalScoreRank){
         String userName = username;
         CollectionReference scans = getReference();
-        //Log.i("TAG","test2");
-        //DocumentReference scan = QRdb.collection("PlayerInfo").document(username);
         Map<String, Object> m = new HashMap<>();
         db = FirebaseFirestore.getInstance();
-        //Log.i("TAG",userName);
-        //Log.i("The Total Rank",TotalScoreRank);
         m.put("Total Score Rank", TotalScoreRank);
-        //Log.i("TAG",userName);
         db.collection("PlayerInfo").document(userName)
                 .set(m, SetOptions.merge())
                 .addOnSuccessListener(new OnSuccessListener<Void>() {

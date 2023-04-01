@@ -34,12 +34,9 @@ public class SurroundingsArrayAdapter extends ArrayAdapter<Image> {
     public SurroundingsArrayAdapter(@NonNull Context context, ArrayList<Image> links) {
         super(context,0,links);
         this.context = context;
-        //String temp = links.get(0).getLink();
-        //Log.d("arrayadapt", "enters"+links.get(0).getLink());
     }
 
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        //return super.getView(position, convertView, parent);
 
         View view;
         if (convertView == null) {

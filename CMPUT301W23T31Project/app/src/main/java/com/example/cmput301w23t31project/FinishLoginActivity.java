@@ -136,7 +136,6 @@ public class FinishLoginActivity extends AppCompatActivity {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
         byte[] data = baos.toByteArray();
-        Log.d("HEHEHEHEHEHEHEHE", String.valueOf(data.length));
         if (data.length > 102400) {
             photo_text.setText("Error occurred uploading image");
             return;
