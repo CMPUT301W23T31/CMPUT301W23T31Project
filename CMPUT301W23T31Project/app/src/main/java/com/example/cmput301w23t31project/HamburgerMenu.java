@@ -13,6 +13,9 @@ import com.google.zxing.integration.android.IntentIntegrator;
  * This class provides a method to operate a hamburger menu on many activities
  */
 public class HamburgerMenu extends AppCompatActivity {
+    private GpsTracker gpsTracker;
+    double latitude;
+    double longitude;
     /**
      * This method allows proper functionality for the Hamburger Menu
      * @param item
@@ -56,8 +59,20 @@ public class HamburgerMenu extends AppCompatActivity {
             case R.id.item4: {
                 if (!this.getLocalClassName().equals("ExploreScreenActivity")) {
                     finish();
+                    gpsTracker = new GpsTracker(this);
+                    if(gpsTracker.canGetLocation()){
+                        latitude = gpsTracker.getLatitude();
+                        longitude = gpsTracker.getLongitude();
+                        //Toast.makeText(this, "l"+latitude+longitude, Toast.LENGTH_SHORT)
+                        //.show();
+                    }else{
+                        gpsTracker.showSettingsAlert();
+                    }
                     Intent intent = new Intent(this, ExploreScreenActivity.class);
                     intent.putExtra("username", username);
+                    intent.putExtra("latitude",String.valueOf(latitude));
+                    intent.putExtra("longitude",String.valueOf(longitude));
+
                     startActivity(intent);
                 }
                 return true;
