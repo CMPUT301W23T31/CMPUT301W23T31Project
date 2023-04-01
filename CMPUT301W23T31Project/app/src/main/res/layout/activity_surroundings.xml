@@ -10,7 +10,7 @@
         android:id="@+id/surround_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:divider="@color/black"
+        android:divider="@null"
         android:dividerHeight="1dp"
         tools:listitem="@layout/content_surroundings"
         android:clickable="true" />

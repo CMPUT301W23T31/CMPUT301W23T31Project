@@ -58,7 +58,7 @@ public class SurroundingsArrayAdapter extends ArrayAdapter<Image> {
         Glide.with(getContext())
                 .load(storage)
                 .into(image);
-        scanner.setText("Taken by: "+link.getUser());
+        scanner.setText(" "+link.getUser());
 
         return view;
     }

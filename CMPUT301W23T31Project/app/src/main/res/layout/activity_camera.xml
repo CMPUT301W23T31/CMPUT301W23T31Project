@@ -1,53 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout android:id="@+id/home_screen_upper_text"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="true"
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="10dp"
+    android:layout_marginTop="50dp"
+    android:alpha="0.5"
+    android:background="@drawable/drawable_ui"
+    android:backgroundTint="#596267"
     android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:padding="10dp"
+    android:gravity="center_horizontal"
+    xmlns:android="http://schemas.android.com/apk/res/android">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
-
-        android:text="Upload an image of the QR code location"
+        android:textColor="@color/white"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:text="Upload an image of the surroundings"
         style="@style/basic_large_text"/>
 
-    <Button android:id="@+id/button1"
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"></Space>
+
+    <Button
+        android:id="@+id/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        android:text="Open Camera"
+        android:textColor="@color/white"
         android:layout_gravity="center"
-        android:backgroundTint="@color/activity_action_button_color"
-        android:text="Open Camera"/>
+        android:textSize="15dp"
+        android:backgroundTint="#884824"/>
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"></Space>
+
     <TextView android:id="@+id/no_picture_message"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
+        android:textStyle="bold"
         android:layout_gravity="center"
+        android:textColor="@color/white"
+        android:textSize="15dp"
+        android:fontFamily="sans-serif-condensed-medium"
         android:gravity="center"
-        android:text="You have not taken a photo of this QR code yet"/>
-    <ImageView android:id="@+id/imageView1"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:src="@drawable/test_qr_code"
-        android:visibility="invisible"
+        android:text="You have not taken a photo of this QR code location yet"/>
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="228dp"
+        android:layout_height="191dp"
         android:layout_gravity="center"
         android:layout_marginTop="30dp"
         android:layout_marginBottom="30dp"
-        android:minHeight="400dp"
-        android:minWidth="400dp"
         android:maxWidth="400dp"
-        android:maxHeight="400dp"/>
+        android:maxHeight="400dp"
+        android:minWidth="400dp"
+        android:minHeight="400dp"
+        android:src="@drawable/cloudupload" />
 
-    <Button android:id="@+id/confirm_taken_photo"
+    <Button
+        android:id="@+id/confirm_taken_photo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        android:text="Upload image"
+        android:textColor="@color/white"
         android:layout_gravity="center"
         android:visibility="invisible"
-        android:text="Upload image"/>
+        android:textSize="15dp"
+        android:backgroundTint="#884824"/>
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"></Space>
+
     <TextView android:id="@+id/error_message"
         android:layout_width="wrap_content"
         android:layout_gravity="center"
         android:layout_height="wrap_content"
+        android:textColor="@color/white"
         android:gravity="center"
+        android:visibility="invisible"
+        android:textStyle="bold"
+        android:textSize="15dp"
+        android:fontFamily="sans-serif-condensed-medium"
         android:text="Error occurred, image could not be uploaded"/>
 
 </LinearLayout>
