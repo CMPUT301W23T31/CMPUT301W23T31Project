@@ -18,6 +18,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
@@ -82,6 +83,9 @@ public class QRCodeArrayAdapter extends ArrayAdapter<QRCode> {
         Button CodeInfo;
         CodeInfo = view.findViewById(R.id.code_info_button);
 
+        ImageView VisualRep;
+        VisualRep = view.findViewById(R.id.qr_code_visual_representation_view);
+
         PlayerInfoCollection scans = new PlayerInfoCollection();
         QRdb = FirebaseFirestore.getInstance();
         String hash = QRCode.getHash();
@@ -124,6 +128,10 @@ public class QRCodeArrayAdapter extends ArrayAdapter<QRCode> {
                 }
             });
         }
+
+        Glide.with(context)
+                .load("https://api.dicebear.com/6.x/bottts/png?seed="+hash)
+                .into(VisualRep);
 
         // functionality for when a QR code is chosen from list
         CodeInfo.setOnClickListener(new View.OnClickListener() {
