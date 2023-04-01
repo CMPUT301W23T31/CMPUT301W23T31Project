@@ -20,7 +20,7 @@
         android:background="@drawable/drawable_ui"
         android:backgroundTint="#025E8F"
         android:orientation="vertical"
-        android:padding="20dp"
+        android:padding="5dp"
         android:gravity="center_horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -29,17 +29,27 @@
 
         <TextView
             android:id="@+id/home_screen_welcome_text"
+            style="@style/basic_large_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
             android:gravity="center_horizontal"
             android:text="Welcome!"
-            style="@style/basic_large_header"
             android:textColor="@color/white"
-            app:layout_constraintBottom_toTopOf="@id/home_screen_current_points_text"
+            app:layout_constraintBottom_toTopOf="@+id/player_image"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="center_horizontal"
+            app:layout_constraintTop_toBottomOf="@id/home_screen_welcome_text"
+            app:layout_constraintBottom_toTopOf="@+id/home_screen_current_points_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:id="@+id/player_image"/>
 
         <TextView
             android:id="@+id/home_screen_current_points_text"
@@ -52,7 +62,7 @@
             app:layout_constraintBottom_toTopOf="@id/home_screen_current_points"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/home_screen_welcome_text" />
+            app:layout_constraintTop_toBottomOf="@id/player_image" />
 
         <TextView
             android:id="@+id/home_screen_current_points"
@@ -80,7 +90,7 @@
         android:gravity="center_horizontal"
         android:text="Quick Access"
         android:textColor="@color/black"
-        android:textSize="25dp"
+        android:textSize="15dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/home_screen_explore_button"
         app:layout_constraintEnd_toEndOf="parent"

@@ -5,6 +5,8 @@ import static android.content.ContentValues.TAG;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.drawable.PictureDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 
 import android.os.Handler;
@@ -14,6 +16,7 @@ import android.view.View;
 
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,6 +26,10 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+//import com.ahmadrosid.svgloader.SvgLoader;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.model.StreamEncoder;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -35,6 +42,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.SetOptions;
 
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 
@@ -67,7 +75,7 @@ public class QRCodeStatsActivity extends AppCompatActivity {
     String username;
     String CurrentUser;
     ListView datalist;
-    DrawRepresentation visualRepresentation;
+    ImageView visualRepresentation;
     Button viewSurroundings;
     double latitude = 0;
     double longitude = 0;
@@ -107,9 +115,20 @@ public class QRCodeStatsActivity extends AppCompatActivity {
         QRCodesCollection qr_codes = new QRCodesCollection();
         viewSurroundings = findViewById(R.id.qr_code_stats_comments_view_surroundings);
         // generating and displaying visual representation
-        View representationView = findViewById(R.id.qr_code_stats_visual_representation_view);
-        visualRepresentation = new DrawRepresentation(hash, 80);
-        representationView.setForeground(visualRepresentation);
+        ImageView visualRepresentation= findViewById(R.id.qr_code_stats_visual_representation_view);
+
+        Glide.with(this)
+                .load("https://api.dicebear.com/6.x/bottts/png?seed="+hash)
+                .into(visualRepresentation);
+
+//        SvgLoader.pluck()
+//                .with(this)
+//                .setPlaceHolder(R.mipmap.ic_launcher, R.mipmap.ic_launcher)
+//                .load("https://api.dicebear.com/6.x/pixel-art/svg", visualRepresentation);
+        //"https://api.dicebear.com/6.x/pixel-art/svg"
+        //visualRepresentation = new DrawRepresentation(hash, 80);
+
+        //representationView.setForeground(visualRepresentation);
 
         // handles functionality for going to QR code info comment view
         gotoComments.setOnClickListener(new View.OnClickListener() {
@@ -385,8 +404,9 @@ public class QRCodeStatsActivity extends AppCompatActivity {
 
     }
 
-
-
-
+//    @Override protected void onDestroy() {
+//        super.onDestroy();
+//        SvgLoader.pluck().close();
+//    }
 
 }
