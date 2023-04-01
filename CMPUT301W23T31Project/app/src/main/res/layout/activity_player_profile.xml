@@ -28,10 +28,12 @@
         android:orientation="vertical">
         <TextView
             android:id="@+id/player_profile_username"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_gravity="center_horizontal"
             android:fontFamily="sans-serif-condensed-medium"
             android:textSize="30dp"
+            android:singleLine="true"
+            android:ellipsize="end"
             android:textColor="@color/white"
             android:layout_height="wrap_content">
 
