@@ -13,9 +13,11 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -25,6 +27,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.Objects;
 
 
 /**
@@ -33,6 +36,8 @@ import java.io.FileNotFoundException;
 public class MyAccountScreenActivity extends HamburgerMenu {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private String username;
+    String DeviceID = MyDeviceID.getInstance();
+    ImageView image;
     /**
      * On Create method
      * Sets up button (and other) functionality
@@ -53,15 +58,13 @@ public class MyAccountScreenActivity extends HamburgerMenu {
         TextView username = findViewById(R.id.account_info_total_username);
         TextView email = findViewById(R.id.account_info_email);
         TextView phone_number = findViewById(R.id.account_info_phone_number);
-
+        image = findViewById(R.id.imgPicker);
         db.collection("Accounts").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
-                        if (document.getString("DeviceID").equals(Utilities.
-                                getDeviceId(MyAccountScreenActivity.this))) {
-
+                        if (Objects.equals(document.getString("DeviceID"), DeviceID)) {
                             player_name.setText(document.getString("playername"));
                             username.setText(document.getId());
                             email.setText(document.getString("email"));
@@ -104,18 +107,23 @@ public class MyAccountScreenActivity extends HamburgerMenu {
      */
     private void loadImageFromStorage(String path)
     {
+        QRImages images = new QRImages();
         try {
-            File f=new File(path, Utilities.getDeviceId(this)+".png");
-            Bitmap bitmap = BitmapFactory.decodeStream(new FileInputStream(f));
-            RoundedBitmapDrawable b = RoundedBitmapDrawableFactory.create(getResources(), bitmap);
-            ImageView img=(ImageView) findViewById(R.id.imgPicker);
-            b.setCircular(true);
-            img.setImageDrawable(b);
-        }
-        catch (FileNotFoundException e)
-        {
+            images.getReference().get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    for (QueryDocumentSnapshot doc: task.getResult()) {
+                        if (doc.getId().equals(username) && doc.getData().containsKey("profile")) {
+                            String storage = doc.getString("profile");
+                            Glide.with(MyAccountScreenActivity.this)
+                                    .load(storage)
+                                    .into(image);
+                        }
+                    }
+                }
+            });
+        } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 }
