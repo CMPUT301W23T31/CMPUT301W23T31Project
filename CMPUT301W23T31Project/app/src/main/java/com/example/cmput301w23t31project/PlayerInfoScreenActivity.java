@@ -15,6 +15,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -75,6 +76,10 @@ public class PlayerInfoScreenActivity extends HamburgerMenu {
         score = findViewById(R.id.player_info_total_score);
         high_score  = findViewById(R.id.player_info_high_score);
         low_score = findViewById(R.id.player_info_low_score);
+        ImageView image = findViewById(R.id.player_image);
+        Glide.with(this)
+                .load("https://api.dicebear.com/6.x/pixel-art/png?seed="+username)
+                .into(image);
 
         //set total scans
         QRPlayerScans playerScans = new QRPlayerScans();

@@ -19,6 +19,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 
 import com.google.android.gms.tasks.Task;
@@ -82,6 +83,11 @@ public class MainActivity extends HamburgerMenu implements ScanResultsFragment.O
         } else {
             username = intent.getStringExtra("username");
         }
+
+        ImageView image = findViewById(R.id.player_image);
+        Glide.with(this)
+                .load("https://api.dicebear.com/6.x/pixel-art/png?seed="+username)
+                .into(image);
 
         setHomeScore(playerScans, score, QRCodes, username);
 

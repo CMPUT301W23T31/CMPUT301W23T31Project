@@ -10,8 +10,10 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -53,12 +55,18 @@ public class PlayerProfileActivity extends HamburgerMenu {
         PlayerLowestScoringQr = findViewById(R.id.player_profile_low_score);
         PlayerScanCount = findViewById(R.id.player_profile_total_scans);
         view_scans = findViewById(R.id.player_profile_see_scans_button);
+        ImageView image = findViewById(R.id.player_image);
+
+
         Intent intent = getIntent();
         username = intent.getStringExtra("username");
         crnt_username = intent.getStringExtra("crnt_username");
         Log.i("myusername",crnt_username);
         Log.i("rando",username);
 
+        Glide.with(this)
+                .load("https://api.dicebear.com/6.x/pixel-art/png?seed="+username)
+                .into(image);
         /////
         db = FirebaseFirestore.getInstance();
         db.collection("PlayerInfo").get()
