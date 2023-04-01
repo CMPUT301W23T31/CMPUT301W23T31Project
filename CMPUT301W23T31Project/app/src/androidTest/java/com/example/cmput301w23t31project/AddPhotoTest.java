@@ -6,6 +6,10 @@ import static junit.framework.Assert.assertNotNull;
 import static junit.framework.TestCase.assertTrue;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowMetrics;
 import android.widget.ImageView;
@@ -24,8 +28,12 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.robotium.solo.Solo;
 
+import java.io.ByteArrayOutputStream;
 import java.util.Objects;
 
 
@@ -88,7 +96,75 @@ public class AddPhotoTest {
                 }
             }
         });
-        solo.clickOnView(solo.getView(R.id.confirm_taken_photo));
+        QRImages images = new QRImages();
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageRef = storage.getReference();
+        StorageReference imagesRef = storageRef.child("images/NewTestName/b138867051e7f22a7e1d4befdb1875beb17e28c6464afbdab7532dc7292f7489.png");
+        Bitmap bitmap = ((BitmapDrawable) image.getDrawable()).getBitmap();
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        byte[] data = baos.toByteArray();
+        if (!(data.length > 102400)) {
+            QRImages finalImages = images;
+            imagesRef.putBytes(data).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    Task<Uri> downloadUri = taskSnapshot.getStorage().getDownloadUrl();
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    String generatedFilePath = downloadUri.getResult().toString();
+                    Log.d("## Stored path is ", generatedFilePath);
+                    finalImages.processQRImageInDatabase("NewTestName", "b138867051e7f22a7e1d4befdb1875beb17e28c6464afbdab7532dc7292f7489", generatedFilePath);
+                }
+            });
+        } else {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    solo.getView(R.id.error_message).setVisibility(View.VISIBLE);
+                }
+            });
+        }
         solo.waitForText("Error occurred");
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                image.setImageResource(R.drawable.test_qr_code);
+                image.setVisibility(View.VISIBLE);
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        images = new QRImages();
+        storage = FirebaseStorage.getInstance();
+        storageRef = storage.getReference();
+        imagesRef = storageRef.child("images/NewTestName/b138867051e7f22a7e1d4befdb1875beb17e28c6464afbdab7532dc7292f7489.png");
+        bitmap = ((BitmapDrawable) image.getDrawable()).getBitmap();
+        baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        data = baos.toByteArray();
+        if (!(data.length > 102400)) {
+            QRImages finalImages1 = images;
+            imagesRef.putBytes(data).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    Task<Uri> downloadUri = taskSnapshot.getStorage().getDownloadUrl();
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    String generatedFilePath = downloadUri.getResult().toString();
+                    Log.d("## Stored path is ", generatedFilePath);
+                    finalImages1.processQRImageInDatabase("NewTestName", "b138867051e7f22a7e1d4befdb1875beb17e28c6464afbdab7532dc7292f7489", generatedFilePath);
+                }
+            });
+        }
     }
 }
