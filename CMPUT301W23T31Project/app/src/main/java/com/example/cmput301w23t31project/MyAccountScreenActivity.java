@@ -108,6 +108,7 @@ public class MyAccountScreenActivity extends HamburgerMenu {
     private void loadImageFromStorage(String path)
     {
         QRImages images = new QRImages();
+        image = findViewById(R.id.imgPicker);
         try {
             images.getReference().get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override

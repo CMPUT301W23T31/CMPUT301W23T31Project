@@ -9,12 +9,13 @@ import org.junit.Test;
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
 import com.robotium.solo.Solo;
-import static junit.framework.Assert.assertNotNull;
 import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.assertNotNull;
 
 
-public class ViewMapTest {
+public class SeeSurroundingsTest {
     private Solo solo;
+
 
     @Rule
     public ActivityTestRule<TitleScreenActivity> rule = new ActivityTestRule<>
@@ -42,16 +43,21 @@ public class ViewMapTest {
     }
 
     /**
-     * Tests to see if user can see map (Explore activity)
+     * Tests if the user is able to view surrounding photos of a scanned QR code
      */
     @Test
-    public void SeeMapTest() {
+    public void SurroundingsTest() {
         solo.assertCurrentActivity("Wrong Activity", TitleScreenActivity.class);
         solo.clickOnView(solo.getView(R.id.title));
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
-        solo.clickOnView(solo.getView(R.id.home_screen_explore_button));
-        solo.assertCurrentActivity("Wrong Activity", ExploreScreenActivity.class);
-        assertTrue(solo.waitForView(R.id.map));
+        solo.clickOnView(solo.getView(R.id.home_screen_my_scans_button));
+        solo.assertCurrentActivity("Wrong Activity", MyScansScreenActivity.class);
+        assertTrue(solo.waitForView(R.id.code_detail_name, 1, 2000));
+        solo.clickOnView(solo.getView(R.id.code_info_button));
+        solo.assertCurrentActivity("Wrong Activity", QRCodeStatsActivity.class);
+        solo.clickOnView(solo.getView(R.id.qr_code_stats_comments_view_surroundings));
+        solo.assertCurrentActivity("Wrong Activity", SurroundingsActivity.class);
+        solo.clickLongOnTextAndPress("Taken", 0);
     }
 
     /**
