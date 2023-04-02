@@ -76,6 +76,9 @@ public class Utilities {
         if (score > 5000) {
             score = score / 2;
         }
+        if (score < 0) {
+            score = -1*score;
+        }
 
 
         return score;
