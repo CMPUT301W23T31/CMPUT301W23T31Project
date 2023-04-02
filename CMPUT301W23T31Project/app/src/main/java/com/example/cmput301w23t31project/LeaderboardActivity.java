@@ -48,7 +48,7 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
     private ArrayList<Player> dataList;
     private ArrayList<QRCode> codeList;
     private LeaderboardArrayAdapter leaderboardArrayAdapter;
-    private QRCodeArrayAdapter qrCodeArrayAdapter;
+    private NearbyScansArrayAdapter qrCodeArrayAdapter;
     private ArrayList<Player> dataList2 = new ArrayList<>();
 
     /**
@@ -121,7 +121,7 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
             CodesList.setVisibility(View.VISIBLE);
             stats_layout.setVisibility(View.GONE);
             rank_description.setVisibility(View.GONE);
-            qrCodeArrayAdapter = new QRCodeArrayAdapter(this,codeList, username, "null");
+            qrCodeArrayAdapter = new NearbyScansArrayAdapter(this,codeList, "leaderboard");
             CreateHighScores();
             sortCodeList();
 

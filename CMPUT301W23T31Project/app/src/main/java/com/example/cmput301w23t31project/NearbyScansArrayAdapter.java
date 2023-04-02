@@ -33,6 +33,7 @@ public class NearbyScansArrayAdapter extends ArrayAdapter<QRCode> {
     private ArrayList<QRCode> QRCodes;
     private Context context;
     FirebaseFirestore QRdb;
+    String activity;
 
     /**
      * Sets up listview for use
@@ -40,10 +41,11 @@ public class NearbyScansArrayAdapter extends ArrayAdapter<QRCode> {
      * @param context relevant context
      * @param codes   QR codes
      */
-    public NearbyScansArrayAdapter(Context context, ArrayList<QRCode> codes) {
+    public NearbyScansArrayAdapter(Context context, ArrayList<QRCode> codes, String activity) {
         super(context, 0, codes);
         this.QRCodes = codes;
         this.context = context;
+        this.activity = activity;
     }
 
     /**
@@ -60,7 +62,7 @@ public class NearbyScansArrayAdapter extends ArrayAdapter<QRCode> {
 
         View view;
         if (convertView == null) {
-            view = LayoutInflater.from(context).inflate(R.layout.content_code_detail, parent, false);
+            view = LayoutInflater.from(context).inflate(R.layout.code_public_content_detail, parent, false);
         } else {
             view = convertView;
         }
@@ -68,7 +70,6 @@ public class NearbyScansArrayAdapter extends ArrayAdapter<QRCode> {
         QRCode QRCode = getItem(position);
         TextView QRCodeName = view.findViewById(R.id.code_detail_name);
         TextView QRCodePoints = view.findViewById(R.id.code_detail_points);
-        ImageView delete = view.findViewById(R.id.delete_button);
         View tier_indicator = view.findViewById(R.id.tier_indicator_marker);
 
         Button CodeInfo;
@@ -86,15 +87,18 @@ public class NearbyScansArrayAdapter extends ArrayAdapter<QRCode> {
         double QRDistance = QRCode.getDistance();
         Integer QRScore = QRCode.getScore();
 
-        if (QRDistance < 1){
-            QRDistance = QRDistance * 1000;
-            QRCodePoints.setText(QRScore + " pts | "+String.format("%.2f",QRDistance)+" m");
+        if(activity.equals("leaderboard")){
+            QRCodePoints.setText("Points: "+QRScore);
         }else{
-            QRCodePoints.setText(QRScore + " pts | "+String.format("%.2f",QRDistance)+" km");
+            if (QRDistance < 1){
+                QRDistance = QRDistance * 1000;
+                QRCodePoints.setText(QRScore + " pts | "+String.format("%.2f",QRDistance)+" m away");
+            }else{
+                QRCodePoints.setText(QRScore + " pts | "+String.format("%.2f",QRDistance)+" km away");
+            }
         }
 
         QRCodeName.setText(QRCode.getName());
-        delete.setVisibility(View.GONE);
 
         // dynamically setting color
         if (QRScore < 20) {tier_indicator.setBackgroundResource(R.color.tier_1_teal);}

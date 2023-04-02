@@ -19,7 +19,7 @@
             android:layout_height="match_parent"
             android:divider="@color/black"
             android:dividerHeight="1dp"
-            tools:listitem="@layout/content_code_detail"
+            tools:listitem="@layout/code_public_content_detail"
             android:clickable="true"/>
     </LinearLayout>
 

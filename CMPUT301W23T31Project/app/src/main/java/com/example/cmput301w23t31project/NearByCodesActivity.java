@@ -51,7 +51,7 @@ public class NearByCodesActivity extends HamburgerMenu implements SearchScanFrag
             if((datalist.get(i).getName()).contains(name.toLowerCase().trim())){
                 datalist2.add(datalist.get(i));
                 qrcodeList = findViewById(R.id.leaderboard_list);
-                qrCodeAdapter = new NearbyScansArrayAdapter(this, datalist2);
+                qrCodeAdapter = new NearbyScansArrayAdapter(this, datalist2,"nearby");
                 qrcodeList.setAdapter(qrCodeAdapter);
                 c+=1;
             }
@@ -81,7 +81,7 @@ public class NearByCodesActivity extends HamburgerMenu implements SearchScanFrag
 
         // setting up listview of scans
         datalist = new ArrayList<>();
-        qrCodeAdapter = new NearbyScansArrayAdapter(this, datalist);
+        qrCodeAdapter = new NearbyScansArrayAdapter(this, datalist,"nearby");
         qrcodeList.setAdapter(qrCodeAdapter);
 
         QRCodesCollection QRCodes = new QRCodesCollection();
