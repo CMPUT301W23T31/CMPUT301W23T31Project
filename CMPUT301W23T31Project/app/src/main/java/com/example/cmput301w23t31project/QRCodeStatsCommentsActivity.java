@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -33,7 +35,7 @@ import java.util.Locale;
 /**
  * This class displays statistics for a particular QR code that has been scanned at least once
  */
-public class QRCodeStatsCommentsActivity extends AppCompatActivity implements AddCommentFragment.OnFragmentInteractionListener{
+public class QRCodeStatsCommentsActivity extends HamburgerMenu implements AddCommentFragment.OnFragmentInteractionListener{
     private FirebaseFirestore db;
     TextView nameView;
     TextView scoreView;
@@ -98,9 +100,12 @@ public class QRCodeStatsCommentsActivity extends AppCompatActivity implements Ad
         QRCodesCollection qr_codes = new QRCodesCollection();
 
         // generating and displaying visual representation
-        View representationView = findViewById(R.id.qr_code_stats_visual_representation_view);
-        visualRepresentation = new DrawRepresentation(hash, 80);
-        representationView.setForeground(visualRepresentation);
+        ImageView representationView = findViewById(R.id.qr_code_stats_visual_representation_view);
+        Glide.with(this)
+                .load("https://api.dicebear.com/6.x/bottts/png?seed="+hash)
+                .into(representationView);
+//        visualRepresentation = new DrawRepresentation(hash, 80);
+//        representationView.setForeground(visualRepresentation);
 
 
         //set date

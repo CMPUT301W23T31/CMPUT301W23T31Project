@@ -177,7 +177,6 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
                             codeList.add(new QRCode(doc.getString("Name"), Integer.parseInt(doc.getString("Score")), doc.getId()));
                         }
                         i++;
-                        //Log.i("Size", Integer.toString(dataList.size()));
 
                     }
                     qrCodeArrayAdapter.notifyDataSetChanged();
@@ -215,7 +214,6 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
                         int lowestScoringQR = Integer.parseInt(document.getString("Lowest Scoring QR Code"));
                         int rank = Integer.parseInt(document.getString("Rank"));
                         dataList.add(i,new Player(userName,totalScans,totalScore,highestScoringQR,lowestScoringQR,rank));
-                        //Log.i("Size", Integer.toString(dataList.size()));
                         i++;
                     }
                     leaderboardArrayAdapter.notifyDataSetChanged();
@@ -265,7 +263,6 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
         db.collection("PlayerInfo").get() .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                //Log.d("Stats",username);
                 // after getting the data we are calling on success method
                 // and inside this method we are checking if the received
                 // query snapshot is empty or not.
@@ -282,7 +279,6 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
                             high_score_text.setText(high_score);
                             total_score_text.setText(total_score);
                             count_text.setText(count);
-                            //Log.d("Stats", username + " " + total_score + " " + high_score + " " + count);
 
                         }
 
@@ -350,7 +346,7 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
      * @param view
      *      A view needed to change intents
      */
-    public void onClickRegional(View view){
+    public void onClickTopCodes(View view){
         state="TOPCODES";
         finish();
         Intent intent = new Intent(this, LeaderboardActivity.class);

@@ -104,8 +104,6 @@ public class PlayerProfileActivity extends HamburgerMenu {
         view_scans.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //PlayerScansCollection scans = new PlayerScansCollection();
-                //scans.processPlayerScansInDatabase(username);
                 Intent intent = new Intent(PlayerProfileActivity.this, MyScansScreenActivity.class);
                 intent.putExtra("username", username);
                 intent.putExtra("crnt_username", crnt_username);

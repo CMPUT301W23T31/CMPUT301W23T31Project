@@ -56,9 +56,20 @@ public class SearchQRCodeTest {
         assertTrue(solo.waitForView(R.id.leaderboard_list));
         solo.clickOnView(solo.getView(R.id.nearby_scans_search_scan_button));
         solo.enterText((EditText) solo.getView(R.id.search_scan), "Obese Orchid Sixty");
-        solo.clickOnText("Search");
-        assertTrue(solo.waitForText("obese orchid sixty",
-                1, 2000));
+        solo.clickOnButton("Search");
+        assertTrue(solo.waitForText("obese orchid sixty", 1, 2000));
+
+        solo.clickOnView(solo.getView(R.id.nearby_scans_search_scan_button));
+
+        solo.enterText((EditText) solo.getView(R.id.search_scan), "Obese Orch");
+        solo.clickOnButton("Search");
+        assertTrue(solo.waitForText("obese orchid sixty", 1, 2000));
+
+        solo.clickOnView(solo.getView(R.id.nearby_scans_search_scan_button));
+
+        solo.enterText((EditText) solo.getView(R.id.search_scan), "khgv");
+        solo.clickOnButton("Search");
+        assertTrue(solo.waitForFragmentByTag("Error Message", 2000));
     }
 
 }
