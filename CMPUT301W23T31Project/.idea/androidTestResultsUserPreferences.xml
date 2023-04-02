@@ -21,8 +21,10 @@
             <AndroidTestResultsTableState>
               <option name="preferredColumnWidths">
                 <map>
+                  <entry key="Copy_of_Pixel_6_Pro_API_33" value="120" />
                   <entry key="Duration" value="90" />
                   <entry key="Pixel_6_Pro_API_33" value="120" />
+                  <entry key="Pixel_6_Pro_API_33_2" value="120" />
                   <entry key="Tests" value="360" />
                 </map>
               </option>

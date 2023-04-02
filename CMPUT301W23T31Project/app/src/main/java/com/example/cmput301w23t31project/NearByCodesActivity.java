@@ -43,22 +43,12 @@ public class NearByCodesActivity extends HamburgerMenu implements SearchScanFrag
         int c =0;
         int l = datalist.size();
         datalist2 = new ArrayList<>();
+        if(name.trim().isEmpty()){
+            new UsernameNotFoundFragment().show(getSupportFragmentManager(), "Error Message");
+            c+=1;
+        }
         for(int i=0;i<l;i++) {
-            if (name.trim().equalsIgnoreCase(datalist.get(i).getName())){
-                datalist2.add(datalist.get(i));
-                qrcodeList = findViewById(R.id.leaderboard_list);
-                qrCodeAdapter = new NearbyScansArrayAdapter(this, datalist2);
-                qrcodeList.setAdapter(qrCodeAdapter);
-                c+=1;
-            }
-            else if((datalist.get(i).getName()).startsWith(name.toLowerCase().trim())){
-                datalist2.add(datalist.get(i));
-                qrcodeList = findViewById(R.id.leaderboard_list);
-                qrCodeAdapter = new NearbyScansArrayAdapter(this, datalist2);
-                qrcodeList.setAdapter(qrCodeAdapter);
-                c+=1;
-            }
-            else if((datalist.get(i).getName()).contains(name.toLowerCase().trim())){
+            if((datalist.get(i).getName()).contains(name.toLowerCase().trim())){
                 datalist2.add(datalist.get(i));
                 qrcodeList = findViewById(R.id.leaderboard_list);
                 qrCodeAdapter = new NearbyScansArrayAdapter(this, datalist2);
