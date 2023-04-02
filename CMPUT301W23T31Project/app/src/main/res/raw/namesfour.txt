@@ -12,7 +12,6 @@ Con
 Coo
 Cop
 Cot
-Cwm
 Dam
 Der
 Die
@@ -24,16 +23,13 @@ Dry
 Ego
 Emo
 Erg
-Ess
 Exe
 Exy
 Fab
 Fad
-Fag
 Fam
 Fan
 Far
-Fat
 Few
 Fin
 Fit
@@ -51,11 +47,8 @@ Gut
 Guy
 Ham
 Hat
-Her
-Hit
 Hod
 Hog
-Hot
 How
 Hut
 Ich

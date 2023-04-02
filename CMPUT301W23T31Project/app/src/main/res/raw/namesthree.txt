@@ -104,11 +104,9 @@ Ass
 Ate
 Awe
 Awk
-Aww
 Axe
 Aye
 Ayu
-B
 Baa
 Bac
 Bad
@@ -299,7 +297,6 @@ Fool
 Fork
 Form
 Fort
-Foul
 Four
 Fowl
 Fray
@@ -333,12 +330,10 @@ Bot
 Bow
 Box
 Boy
-Bra
 Bro
 Brr
 Bud
 Bug
-Bum
 Bun
 Bus
 But
