@@ -63,9 +63,11 @@ public class ScanResultsFragment extends DialogFragment {
     String lat;
     String lng;
 
-    public String[] QRNameAdjectives = new String[1010];
-    public String[] QRNameColors = new String[128];
-    public String[] QRNameNouns = new String[2876];
+    public String[] QRName = new String[351];
+    public String[] QRName2 = new String[349];
+    public String[] QRName3 = new String[350];
+    public String[] QRName4 = new String[235];
+    public String[] QRName5 = new String[350];
     private boolean impliesScoreChange = false;
 
     public ToggleButton toggleButton;
@@ -145,12 +147,14 @@ public class ScanResultsFragment extends DialogFragment {
 
 
         // Get access to adjectives, colors, and nouns to name scanned QR codes
-        QRNameAdjectives = Utilities.retrieveFileData(this.getResources(), 241, R.raw.adjectives);
-        QRNameColors = Utilities.retrieveFileData(this.getResources(), 16, R.raw.colors);
-        QRNameNouns = Utilities.retrieveFileData(this.getResources(), 1045, R.raw.nouns);
+        QRName = Utilities.retrieveFileData(this.getResources(), 351, R.raw.names);
+        QRName2 = Utilities.retrieveFileData(this.getResources(), 349, R.raw.namestwo);
+        QRName3 = Utilities.retrieveFileData(this.getResources(), 350, R.raw.namesthree);
+        QRName4 = Utilities.retrieveFileData(this.getResources(), 235, R.raw.namesfour);
+        QRName5 = Utilities.retrieveFileData(this.getResources(), 350, R.raw.namesfive);
 
         // Calculates score and name from hash
-        String name = Utilities.getQRCodeName(hash, QRNameAdjectives, QRNameColors, QRNameNouns);
+        String name = Utilities.getQRCodeName(hash, QRName, QRName2, QRName3, QRName4, QRName5);
         int score = Utilities.getQRScore(hash);
 
         // Get access to the database
