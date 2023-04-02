@@ -35,7 +35,7 @@ public class PlayerInfoCollection extends QRDatabase{
     private ArrayList<Player> TotalScoreDataList = new ArrayList<>();
     private String username;
     ArrayList<String> QRHash = new ArrayList<>();
-
+    PlayerInfoSorts sortFunctions = new PlayerInfoSorts();
 
 
     public PlayerInfoCollection() {
@@ -259,13 +259,14 @@ public class PlayerInfoCollection extends QRDatabase{
                         TotalScoreDataList.add(i,new Player(userName,totalScans,totalScore,highestScoringQR,lowestScoringQR,rank));
                         i++;
                     }
-                    sortByTotalScoreList();
+                    sortFunctions.sortByTotalScoreList(TotalScoreDataList);
                     final Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
 
-                            sortByTotalScoreList();
+                            sortFunctions.sortByTotalScoreList(TotalScoreDataList);
+                            giveTotalScoreRank();
                         }
                     },1000);
 
@@ -273,7 +274,8 @@ public class PlayerInfoCollection extends QRDatabase{
                         @Override
                         public void run() {
 
-                            sortByCountList();
+                            sortFunctions.sortByCountList(CountScoreDataList);
+                            giveCountRank();
 
                         }
                     },1000);
@@ -281,7 +283,8 @@ public class PlayerInfoCollection extends QRDatabase{
                         @Override
                         public void run() {
 
-                            sortByHighScoreList();
+                            sortFunctions.sortByHighScoreList(HighScoreDataList);
+                            giveHighScoreRank();
                         }
                     },1000);
 
@@ -291,42 +294,6 @@ public class PlayerInfoCollection extends QRDatabase{
 
     }
 
-
-
-    public void sortByCountList() {
-        for (int i = 0; i < CountScoreDataList.size() - 1; i++)
-            for (int j = 0; j < CountScoreDataList.size() - i - 1; j++)
-                if (CountScoreDataList.get(j).getCount() < CountScoreDataList.get(j + 1).getCount()) {
-                    Player temp = CountScoreDataList.get(j);
-                    CountScoreDataList.set(j, CountScoreDataList.get(j + 1));
-                    CountScoreDataList.set(j + 1, temp);
-
-                }
-        giveCountRank();
-
-    }
-    public void sortByTotalScoreList() {
-        for (int i = 0; i < TotalScoreDataList.size() - 1; i++)
-            for (int j = 0; j < TotalScoreDataList.size() - i - 1; j++)
-                if (TotalScoreDataList.get(j).getTotalScore() < TotalScoreDataList.get(j + 1).getTotalScore()) {
-                    Player temp = TotalScoreDataList.get(j);
-                    TotalScoreDataList.set(j, TotalScoreDataList.get(j + 1));
-                    TotalScoreDataList.set(j + 1, temp);
-
-                }
-        giveTotalScoreRank();
-    }
-    public void sortByHighScoreList() {
-        for (int i = 0; i < HighScoreDataList.size() - 1; i++)
-            for (int j = 0; j < HighScoreDataList.size() - i - 1; j++)
-                if (HighScoreDataList.get(j).getHighestScoringQR() < HighScoreDataList.get(j + 1).getHighestScoringQR()) {
-                    Player temp = HighScoreDataList.get(j);
-                    HighScoreDataList.set(j, HighScoreDataList.get(j + 1));
-                    HighScoreDataList.set(j + 1, temp);
-
-                }
-        giveHighScoreRank();
-    }
     public void giveCountRank(){
         for(int i = 0;i < CountScoreDataList.size();i++){
             int rank;

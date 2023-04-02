@@ -37,7 +37,7 @@ public class    NearByCodesActivity extends HamburgerMenu implements SearchScanF
     ArrayList<QRCode> datalist, datalist2;
     String username;
     String currentUser;
-
+    NearByCodesFunctions near = new NearByCodesFunctions();
     @Override
     public void onDisplayOkPressed(String name) {
         int c =0;
@@ -147,39 +147,17 @@ public class    NearByCodesActivity extends HamburgerMenu implements SearchScanF
                 for (QueryDocumentSnapshot doc : task.getResult()) {
                     double foundLat = Double.parseDouble(doc.getString("Latitude"));
                     double foundLng = Double.parseDouble(doc.getString("Longitude"));
-                    double dist = distanceToCode(foundLat, foundLng, finalCrntLatitude, finalCrntLongitude);
+                    double dist = NearByCodesFunctions.distanceToCode(foundLat, foundLng, finalCrntLatitude, finalCrntLongitude);
                     Log.d("distances in km: ", " "+dist);
                     if ((minLatitude<= foundLat && foundLat <= maxLatitude)&&(minLongitude<= foundLng && foundLng <= maxLongitude)) {
                         Log.d("Codes nearby:",doc.getString("Name"));
                         datalist.add(new QRCode(doc.getString("Name"), Integer.parseInt(doc.getString("Score")), doc.getId(),dist));
                     }
                 }
-                sortList();
+                near.sortList(datalist);
                 qrCodeAdapter.notifyDataSetChanged();
             }
         });
 
-    }
-
-    public void sortList() {
-        for (int i = 0; i < datalist.size() - 1; i++)
-            for (int j = 0; j < datalist.size() - i - 1; j++)
-                if (datalist.get(j).getDistance()> datalist.get(j + 1).getDistance()) {
-                    QRCode temp = datalist.get(j);
-                    datalist.set(j, datalist.get(j + 1));
-                    datalist.set(j + 1, temp);
-
-                }
-        qrCodeAdapter.notifyDataSetChanged();
-    }
-
-    private double distanceToCode(double lat1,double lon1,double lat2,double lon2){
-        double p = 0.017453292519943295;    // Math.PI / 180
-
-        double a = 0.5 - Math.cos((lat2 - lat1) * p)/2 +
-                Math.cos(lat1 * p) * Math.cos(lat2 * p) *
-                        (1 - Math.cos((lon2 - lon1) * p))/2;
-
-        return 12742 * Math.asin(Math.sqrt(a)); // 2 * R; R = 6371 km
     }
 }

@@ -25,6 +25,7 @@ import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.provider.Settings;
 import android.util.Log;
 
@@ -104,7 +105,7 @@ public class Utilities {
      * @param hash the hash for a particular QR Code
      * @return String of hexadecimal values representing a QR Code
      */
-    private static String bytesToHex(byte[] hash) {
+    public static String bytesToHex(byte[] hash) {
         StringBuilder hexString = new StringBuilder(2 * hash.length);
         for (byte b : hash) {
             String hex = Integer.toHexString(0xff & b);
@@ -197,47 +198,13 @@ public class Utilities {
 
 
     /**
-     * Saves the image to internal storage, in other words, saves the image to a path
-     * in the users device that is called upon each time we need that image
-     * @param bitmapImage the bitmap of the image selected by the user
-     * @param context the context of the application at time of method call
-     * @param img_file_name the name of the image file provided (something like image.png)
-     * @return the absolute path in the user's device to the image for future usages
-     */
-    public static String saveToInternalStorage(Bitmap bitmapImage, Context context, String img_file_name){
-        ContextWrapper cw = new ContextWrapper(context.getApplicationContext());
-        // path to /data/data/yourapp/app_data/imageDir
-        File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
-        // Create imageDir, which is a directory on the user's device for photos
-        File mypath = new File(directory,img_file_name);
-
-        FileOutputStream fos = null;
-        try {
-            fos = new FileOutputStream(mypath);
-            // Use the compress method on the BitMap object to write image to the OutputStream
-            bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fos);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                assert fos != null;
-                fos.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return directory.getAbsolutePath();
-    }
-
-    /**
      * This function returns the current date in yyyy-MM-dd format
      * @return the current date in yyyy-MM-dd format
      */
     public static String getCurrentDate() {
         DateTimeFormatter dtf;
         // Update latest date scanned
-        if (android.os.Build.VERSION.SDK_INT >=
-                android.os.Build.VERSION_CODES.O) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             LocalDateTime now = LocalDateTime.now();
             return dtf.format(now);
