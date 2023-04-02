@@ -1,6 +1,6 @@
 package com.example.cmput301w23t31project;
 
-public class Image {
+public class    Image {
     private String link;
     private String user;
     public Image(String storage, String user) {

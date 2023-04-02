@@ -136,36 +136,6 @@ public class PlayerInfoCollection extends QRDatabase{
 
 
     /**
-     * Processes and gets scans from database that player has scanned
-     * @param username username of relevant player
-     */
-    public void processPlayerScansInDatabase(String username) {
-
-        CollectionReference codes = getReference();
-        collection.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    for (QueryDocumentSnapshot document: task.getResult()) {
-                        //Log.i("VAL",document.getId());
-                        if (document.getId().equals(username)) {
-
-                            Map data = document.getData();
-                            data.entrySet()
-                                    .forEach((entry) ->
-                                            Log.v(TAG,"VAL:"+entry.toString().split("=")[0]));
-
-                            QRHash.add(String.valueOf(data));
-
-                        }
-                    }
-
-                }
-            }
-        });
-    }
-
-    /**
      * Gets the players' scans from database
      */
     public void getPlayerScans(){

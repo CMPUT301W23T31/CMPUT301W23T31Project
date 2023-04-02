@@ -40,7 +40,7 @@ public class SurroundingsActivity extends  HamburgerMenu{
 
     private LeaderboardArrayAdapter surroundingsAdapter;
     private TableLayout table;
-    private ImageView image;
+        private ImageView image;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
