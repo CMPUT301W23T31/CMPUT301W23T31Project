@@ -45,9 +45,9 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:gravity="end">
 
-        <!--TODO: This may need populating and/or adjusting-->
         <TextView
             android:id="@+id/comment_detail_username"
             android:layout_width="wrap_content"
@@ -61,6 +61,7 @@
             android:id="@+id/comment_detail_username_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="end"
 
             android:text="View Profile"
             style="@style/player_info_button_style"/>

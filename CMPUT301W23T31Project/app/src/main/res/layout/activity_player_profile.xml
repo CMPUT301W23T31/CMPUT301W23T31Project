@@ -26,16 +26,19 @@
         android:padding="5dp"
         android:layout_gravity="center_horizontal"
         android:orientation="vertical">
+
         <TextView
             android:id="@+id/player_profile_username"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+
             android:fontFamily="sans-serif-condensed-medium"
             android:textSize="30dp"
+            android:hint="Player Name"
             android:singleLine="true"
             android:ellipsize="end"
-            android:textColor="@color/white"
-            android:layout_height="wrap_content">
+            android:textColor="@color/white">
 
         </TextView>
         <ImageView

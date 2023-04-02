@@ -95,7 +95,7 @@ public class QRCodeStatsCommentsActivity extends HamburgerMenu implements AddCom
 
         // Setting up Listview
         commentList = new ArrayList<>();
-        qrCodeStatsCommentsAdapter = new QRCodeStatsCommentsAdapter(this, commentList);
+        qrCodeStatsCommentsAdapter = new QRCodeStatsCommentsAdapter(this, commentList, username);
         datalist.setAdapter(qrCodeStatsCommentsAdapter);
         QRCodesCollection qr_codes = new QRCodesCollection();
 
