@@ -39,7 +39,7 @@ public class FinishLoginActivity extends AppCompatActivity {
     // access the user's photo gallery
     private static final int GET_FROM_GALLERY = 3;
     String path = "";
-    String DeviceID = MyDeviceID.getInstance();
+    String DeviceID;
     TextView photo_text;
     String username;
     @Override
@@ -51,6 +51,7 @@ public class FinishLoginActivity extends AppCompatActivity {
         title.setText("LOGIN");
         setContentView(R.layout.activity_finish_login);
         Intent oldIntent = getIntent();
+        DeviceID = new MyDeviceID(this).getInstance();
         // Get the previous login page's information, and access necessary xml fields
         username = oldIntent.getStringExtra("username");
         String email = oldIntent.getStringExtra("email");

@@ -50,7 +50,7 @@ public class MainActivity extends HamburgerMenu implements ScanResultsFragment.O
     double latitude;
     double longitude;
     boolean recordLocation= true;
-    String DeviceID = MyDeviceID.getInstance();
+    String DeviceID;
     /**
      * On create method
      * Handles the setup of home screen button and other functionalities
@@ -66,6 +66,7 @@ public class MainActivity extends HamburgerMenu implements ScanResultsFragment.O
         setContentView(R.layout.fragment_home_screen);
         Intent intent = getIntent();
         username = intent.getStringExtra("username");
+        DeviceID = new MyDeviceID(this).getInstance();
         AccountsCollection collectionReferenceAccount = new AccountsCollection();
         QRCodesCollection QRCodes = new QRCodesCollection();
         QRPlayerScans playerScans = new QRPlayerScans();
