@@ -66,6 +66,7 @@ public class ExploreScreenActivity extends HamburgerMenu
     private GpsTracker gpsTracker;
     private FirebaseFirestore db;
     private String username;
+    private String currentUser;
     double latitude;
     double longitude;
     Button nearbyBtn;
@@ -91,6 +92,7 @@ public class ExploreScreenActivity extends HamburgerMenu
         username = intent.getStringExtra("username");
         latitude = Double.parseDouble(intent.getStringExtra("latitude"));
         longitude = Double.parseDouble(intent.getStringExtra("longitude"));
+        currentUser = intent.getStringExtra("currentUser");
         mSearchText = findViewById(R.id.input_search);
 
 
@@ -262,7 +264,7 @@ public class ExploreScreenActivity extends HamburgerMenu
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
-        return useHamburgerMenu(item, username);
+        return useHamburgerMenu(item, currentUser);
 
     }
 
