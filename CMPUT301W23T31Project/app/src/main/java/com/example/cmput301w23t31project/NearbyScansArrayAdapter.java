@@ -87,10 +87,10 @@ public class NearbyScansArrayAdapter extends ArrayAdapter<QRCode> {
         Integer QRScore = QRCode.getScore();
 
         if (QRDistance < 1){
-            QRDistance = QRDistance * 100;
-            QRCodePoints.setText(QRScore + " pts | "+String.format("%.2f",QRDistance)+" m away");
+            QRDistance = QRDistance * 1000;
+            QRCodePoints.setText(QRScore + " pts | "+String.format("%.2f",QRDistance)+" m");
         }else{
-            QRCodePoints.setText(QRScore + " pts | "+String.format("%.2f",QRDistance)+" km away");
+            QRCodePoints.setText(QRScore + " pts | "+String.format("%.2f",QRDistance)+" km");
         }
 
         QRCodeName.setText(QRCode.getName());
