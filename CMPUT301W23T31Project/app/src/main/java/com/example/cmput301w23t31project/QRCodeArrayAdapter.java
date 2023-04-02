@@ -93,7 +93,6 @@ public class QRCodeArrayAdapter extends ArrayAdapter<QRCode> {
         // filling in details
         String QRName = QRCode.getName();
         Integer QRScore = QRCode.getScore();
-        Log.d(TAG,"ADAPT: " + QRName);
         QRCodeName.setText(QRName);
         QRCodePoints.setText("Points: " + QRScore);
 
@@ -106,7 +105,6 @@ public class QRCodeArrayAdapter extends ArrayAdapter<QRCode> {
         // delete button stuff
         if (!currentUser.equals(username)){
             delete.setVisibility(View.GONE);
-            Log.i("TAG", currentUser+":crnt   display:"+username);
         }else {
             delete.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -137,11 +135,8 @@ public class QRCodeArrayAdapter extends ArrayAdapter<QRCode> {
         CodeInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "REACHED HERE!!");
                 Intent intent = new Intent(context, QRCodeStatsActivity.class);
                 intent.putExtra("Hash", hash);
-                Log.i("rando2", username);
-                Log.i("real user", currentUser);
                 intent.putExtra("username", username);
                 intent.putExtra("currentUser",currentUser);
                 context.startActivity(intent);

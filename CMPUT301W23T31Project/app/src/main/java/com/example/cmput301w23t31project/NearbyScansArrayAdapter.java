@@ -111,10 +111,8 @@ public class NearbyScansArrayAdapter extends ArrayAdapter<QRCode> {
         CodeInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "REACHED HERE!!");
                 Intent intent = new Intent(context, QRCodeStatsActivity.class);
                 intent.putExtra("Hash", hash);
-                //intent.putExtra("username", username);
                 context.startActivity(intent);
             }
         });
