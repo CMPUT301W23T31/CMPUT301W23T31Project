@@ -116,9 +116,11 @@ public class Utilities {
     /**
      * Assigns a unique name to a QR code based on it's hash
      * @param hash the hash of the given QR code
-     * @param adjectives the list of adjectives to choose from for the QR code name
-     * @param colors the list of colors to choose from for the QR code name
-     * @param nouns the list of nouns to choose from for the QR code name
+     * @param names list of potential words for first word slot
+     * @param names2 list of potential words for second word slot
+     * @param names3 list of potential words for third word slot
+     * @param names4 list of potential words for fourth word slot
+     * @param names5 list of potential words for fifth word slot
      * @return the name generated from the QR code's hash
      */
     public static String getQRCodeName(String hash, String[] names, String[] names2, String[] names3, String[] names4, String[] names5) {
@@ -242,9 +244,7 @@ public class Utilities {
 
     public static float getMarkerColor(int QRScore) {
         float markerColor;
-        if (QRScore < 0) {
-            return -1;
-        } else if (QRScore < 20) {
+        if (QRScore < 20) {
             markerColor = 170.0f;
         } else if (QRScore < 200) {
             markerColor = 205.0f;
