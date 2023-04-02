@@ -133,7 +133,7 @@ public class MyScansScreenActivity extends HamburgerMenu implements SearchScanFr
         }
         else {
             for (int i = 0; i < l; i++) {
-                if ((datalist.get(i).getName()).contains(name.toLowerCase().trim())) {
+                if ((datalist.get(i).getName().toLowerCase()).contains(name.toLowerCase().trim())) {
                     datalist2.add(datalist.get(i));
                     QRCodeList = findViewById(R.id.leaderboard_list);
                     qrCodeAdapter = new QRCodeArrayAdapter(this, datalist2, username, currentUser);

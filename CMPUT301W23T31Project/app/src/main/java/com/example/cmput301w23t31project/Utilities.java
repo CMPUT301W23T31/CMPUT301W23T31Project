@@ -26,6 +26,8 @@ import android.content.ContextWrapper;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.provider.Settings;
+import android.util.Log;
+
 import androidx.appcompat.app.AppCompatActivity;
 import java.io.BufferedReader;
 import java.io.File;
@@ -38,6 +40,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 
 /**
@@ -118,23 +121,47 @@ public class Utilities {
      * @param nouns the list of nouns to choose from for the QR code name
      * @return the name generated from the QR code's hash
      */
-    public static String getQRCodeName(String hash, String[] adjectives, String[] colors, String[] nouns) {
-        String name = "";
-        int groupingSize = 16;
-        String[][] words = {adjectives, colors, nouns};
-        int tempScore;
+    public static String getQRCodeName(String hash, String[] names, String[] names2, String[] names3, String[] names4, String[] names5) {
 
-        for (int i = 0; i < 3; i++) {
-            if (i > 0) {name = name.concat(" ");}
-            // adding word
-            tempScore = 0;
-            for (int j = 0; j < groupingSize; j++) {
-                tempScore += hash.charAt(j + i * groupingSize) * 2 ^ j;
+         String name = "";
+         int [ ] list = new int[5];
+         int index =0;
+
+            for(int i=0;i<hash.length();i++){
+                if(i<12){
+                        list[0] += (int) (hash.charAt(i));
+                        list[0] %= names.length;
+                    }
+                else if(i>=12 && i<24){
+                    list[1] +=  (int) (hash.charAt(i));
+                    list[1] %= names2.length;
+                }
+                else if(i>=24 && i<38){
+                    list[2] +=  (int) (hash.charAt(i));
+                    list[2] %= names3.length;
+                }
+                else if(i>=38 && i<50){
+                    list[3] +=  (int) (hash.charAt(i));
+                    list[3] %= names4.length;
+                }
+                else if(i>=50 && i<64){
+                    list[4] +=  (int) (hash.charAt(i));
+                    list[4] %= names5.length;
+                }
             }
-            tempScore %= words[i].length;
-            name = name.concat(words[i][tempScore]);
-        }
-        return name;
+
+
+            name = name.concat(names[list[0]]);
+            name = name.concat(names2[list[1]]);
+            name = name.concat(names3[list[2]]);
+            name = name.concat(names4[list[3]]);
+            name = name.concat(names5[list[4]]);
+
+
+            for(int i=0;i<5;i++){
+                Log.d("List: ",list[i]+" ");
+            }
+          return name;
     }
 
     /**
