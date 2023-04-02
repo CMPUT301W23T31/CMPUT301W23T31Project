@@ -36,7 +36,7 @@ import java.util.Objects;
 public class MyAccountScreenActivity extends HamburgerMenu {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private String username;
-    String DeviceID = MyDeviceID.getInstance();
+    String DeviceID;
     ImageView image;
     /**
      * On Create method
@@ -59,6 +59,7 @@ public class MyAccountScreenActivity extends HamburgerMenu {
         TextView email = findViewById(R.id.account_info_email);
         TextView phone_number = findViewById(R.id.account_info_phone_number);
         image = findViewById(R.id.imgPicker);
+        DeviceID = new MyDeviceID(this).getInstance();
         db.collection("Accounts").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {

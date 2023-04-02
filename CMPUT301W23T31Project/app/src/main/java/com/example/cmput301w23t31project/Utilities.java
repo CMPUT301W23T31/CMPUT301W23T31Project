@@ -239,4 +239,20 @@ public class Utilities {
         }
         return "";
     }
+
+    public static float getMarkerColor(int QRScore) {
+        float markerColor;
+        if (QRScore < 0) {
+            return -1;
+        } else if (QRScore < 20) {
+            markerColor = 170.0f;
+        } else if (QRScore < 200) {
+            markerColor = 205.0f;
+        } else if (QRScore < 2000) {
+            markerColor = 270.0f;
+        } else {
+            markerColor = 320.0f;
+        }
+        return markerColor;
+    }
 }

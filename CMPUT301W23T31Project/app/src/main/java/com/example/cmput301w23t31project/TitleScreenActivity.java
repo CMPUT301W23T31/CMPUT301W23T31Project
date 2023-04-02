@@ -30,7 +30,7 @@ import java.util.Objects;
  * Also responsible for checking if the user device is recognized upon entry
  */
 public class TitleScreenActivity extends AppCompatActivity {
-    String DeviceID = MyDeviceID.getInstance();
+    String DeviceID;
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -43,7 +43,7 @@ public class TitleScreenActivity extends AppCompatActivity {
                 == PackageManager.PERMISSION_DENIED) {
             ActivityCompat.requestPermissions(this, new String[] {android.Manifest.permission.CAMERA}, 100);
         }
-
+        DeviceID = new MyDeviceID(this).getInstance();
 
 
     }

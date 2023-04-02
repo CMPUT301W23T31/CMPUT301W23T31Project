@@ -49,6 +49,7 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
     private ArrayList<QRCode> codeList;
     private LeaderboardArrayAdapter leaderboardArrayAdapter;
     private NearbyScansArrayAdapter qrCodeArrayAdapter;
+    LeaderBoardFunctions func = new LeaderBoardFunctions();
     private ArrayList<Player> dataList2 = new ArrayList<>();
 
     /**
@@ -123,7 +124,8 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
             rank_description.setVisibility(View.GONE);
             qrCodeArrayAdapter = new NearbyScansArrayAdapter(this,codeList, "leaderboard", username);
             CreateHighScores();
-            sortCodeList();
+            func.sortCodeList(codeList);
+            qrCodeArrayAdapter.notifyDataSetChanged();
 
         }else{
             LeaderboardList.setVisibility(View.VISIBLE);
@@ -180,7 +182,8 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
 
                     }
                     qrCodeArrayAdapter.notifyDataSetChanged();
-                    sortCodeList();
+                    func.sortCodeList(codeList);
+                    qrCodeArrayAdapter.notifyDataSetChanged();
                 }
             }
         });
@@ -217,8 +220,9 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
                         i++;
                     }
                     leaderboardArrayAdapter.notifyDataSetChanged();
-                    sortList();
-                    giveRank();
+                    func.sortList(state, dataList);
+                    leaderboardArrayAdapter.notifyDataSetChanged();
+                    func.giveRank(dataList);
                 }
             }
         });
@@ -245,16 +249,7 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
                 TopCodesBtn.setBackgroundColor(getColor(R.color.activity_selected_button_color));
                 break;}
     }
-    /**
-     * This method goes through each player in the list and gives them a rank
-     */
-    public void giveRank(){
 
-                    for(int i = 0;i < dataList.size();i++){
-                        int rank;
-                        rank = 1+i;
-                        dataList.get(i).setRank(rank);}
-    }
     /**
      * This method goes into the database and gets certain values from the user and displays them in the leaderboards
      */
@@ -353,47 +348,6 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
         intent.putExtra("username", username);
         intent.putExtra("state", "TOPCODES");
         startActivity(intent);
-    }
-    /**
-     * sort the list depending on state
-     */
-    public void sortList() {
-        for (int i = 0; i < dataList.size() - 1; i++)
-            for (int j = 0; j < dataList.size() - i - 1; j++)
-                if (state.equals("COUNT")&&dataList.get(j).getCount() < dataList.get(j + 1).getCount()) {
-                    Player temp = dataList.get(j);
-                    dataList.set(j, dataList.get(j + 1));
-                    dataList.set(j + 1, temp);
-                    leaderboardArrayAdapter.notifyDataSetChanged();
-                } else if (state.equals("HIGHSCORE")&& dataList.get(j).getHighestScoringQR() < dataList.get(j + 1).getHighestScoringQR()) {
-                    Player temp = dataList.get(j);
-                    dataList.set(j, dataList.get(j + 1));
-                    dataList.set(j + 1, temp);
-                    leaderboardArrayAdapter.notifyDataSetChanged();
-                } else if (state.equals("TOTALSCORE")&&dataList.get(j).getTotalScore() < dataList.get(j + 1).getTotalScore()) {
-                    Player temp = dataList.get(j);
-                    dataList.set(j, dataList.get(j + 1));
-                    dataList.set(j + 1, temp);
-                    leaderboardArrayAdapter.notifyDataSetChanged();
-                }
-    }
-    /**
-     * If the state is Top codes then sort this list
-     */
-    public void sortCodeList() {
-
-        for (int i = 0; i < codeList.size() - 1; i++) {
-            for (int j = 0; j < codeList.size() - i - 1; j++) {
-                if (codeList.get(j).getScore() < codeList.get(j + 1).getScore()) {
-
-                    QRCode temp = codeList.get(j);
-                    codeList.set(j, codeList.get(j + 1));
-                    codeList.set(j + 1, temp);
-                    qrCodeArrayAdapter.notifyDataSetChanged();
-                }
-            }
-        }
-
     }
 
 }
