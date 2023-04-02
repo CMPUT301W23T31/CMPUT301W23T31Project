@@ -125,7 +125,6 @@ public class Utilities {
         int tempScore;
 
         for (int i = 0; i < 3; i++) {
-            if (i > 0) {name = name.concat(" ");}
             // adding word
             tempScore = 0;
             for (int j = 0; j < groupingSize; j++) {

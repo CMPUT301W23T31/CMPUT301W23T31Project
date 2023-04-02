@@ -145,9 +145,9 @@ public class ScanResultsFragment extends DialogFragment {
 
 
         // Get access to adjectives, colors, and nouns to name scanned QR codes
-        QRNameAdjectives = Utilities.retrieveFileData(this.getResources(), 1010, R.raw.adjectives);
-        QRNameColors = Utilities.retrieveFileData(this.getResources(), 128, R.raw.colors);
-        QRNameNouns = Utilities.retrieveFileData(this.getResources(), 2876, R.raw.nouns);
+        QRNameAdjectives = Utilities.retrieveFileData(this.getResources(), 241, R.raw.adjectives);
+        QRNameColors = Utilities.retrieveFileData(this.getResources(), 16, R.raw.colors);
+        QRNameNouns = Utilities.retrieveFileData(this.getResources(), 1045, R.raw.nouns);
 
         // Calculates score and name from hash
         String name = Utilities.getQRCodeName(hash, QRNameAdjectives, QRNameColors, QRNameNouns);
