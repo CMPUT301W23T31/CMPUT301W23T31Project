@@ -14,6 +14,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.bumptech.glide.Glide;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -61,8 +63,11 @@ public class QRCodeStatsAdapter extends ArrayAdapter<Player> implements Serializ
         ImageView profileBtn = view.findViewById(R.id.player_detail_view_profile_button);
 
         playerName.setText(player.getUsername());
-        date.setText(String.valueOf(player.getTotalScore()));
+        date.setText(String.valueOf(player.getTotalScore())+" pts");
 
+        Glide.with(getContext())
+                .load("https://api.dicebear.com/6.x/pixel-art/png?seed="+player.getUsername())
+                .into(profileBtn);
         // functionality for 'view player profile' button
         profileBtn.setOnClickListener(new View.OnClickListener() {
             @Override

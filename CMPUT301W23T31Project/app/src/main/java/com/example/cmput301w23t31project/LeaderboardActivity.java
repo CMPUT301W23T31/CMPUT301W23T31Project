@@ -121,7 +121,7 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
             CodesList.setVisibility(View.VISIBLE);
             stats_layout.setVisibility(View.GONE);
             rank_description.setVisibility(View.GONE);
-            qrCodeArrayAdapter = new NearbyScansArrayAdapter(this,codeList, "leaderboard");
+            qrCodeArrayAdapter = new NearbyScansArrayAdapter(this,codeList, "leaderboard", username);
             CreateHighScores();
             sortCodeList();
 

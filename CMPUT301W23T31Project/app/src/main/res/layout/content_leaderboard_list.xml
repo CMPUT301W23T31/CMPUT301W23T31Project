@@ -16,8 +16,8 @@
         android:layout_marginStart="20dp"
         android:width="50dp"
         android:hint="Rank"
-        android:textSize="20dp"
-        style="@style/bold_mini_header"
+        android:textSize="22dp"
+        android:fontFamily="sans-serif-condensed-medium"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
@@ -48,24 +48,22 @@
             android:layout_marginHorizontal="5dp"
             android:ellipsize="end"
             android:singleLine="true"
-            android:textSize="20dp"
             android:hint="Username"
-            style="@style/bold_mini_header"
+            android:textSize="22dp"
+            android:fontFamily="sans-serif-condensed-medium"
             android:maxEms="8"/>
 
     </LinearLayout>
 
     <TextView
         android:id="@+id/leaderboard_content_count"
-        android:layout_width="wrap_content"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
-        android:paddingEnd="25dp"
         android:ellipsize="end"
         android:singleLine="true"
-        android:textSize="20dp"
         android:hint="Count"
-        style="@style/bold_mini_header"
+        android:textSize="23dp"
+        android:fontFamily="sans-serif-condensed-medium"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>

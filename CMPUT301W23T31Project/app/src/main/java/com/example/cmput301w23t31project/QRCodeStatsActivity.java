@@ -92,6 +92,7 @@ public class QRCodeStatsActivity extends HamburgerMenu {
         Intent intent = getIntent();
         hash = intent.getStringExtra("Hash");
         username = intent.getStringExtra("username");
+        Log.d("user",username);
         CurrentUser = intent.getStringExtra("currentUser");
         boolean res = intent.getStringExtra("user")==null;
 
