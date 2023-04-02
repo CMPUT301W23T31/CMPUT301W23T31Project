@@ -33,7 +33,7 @@ import java.util.Locale;
 /**
  * This class displays statistics for a particular QR code that has been scanned at least once
  */
-public class QRCodeStatsCommentsActivity extends AppCompatActivity implements AddCommentFragment.OnFragmentInteractionListener{
+public class QRCodeStatsCommentsActivity extends HamburgerMenu implements AddCommentFragment.OnFragmentInteractionListener{
     private FirebaseFirestore db;
     TextView nameView;
     TextView scoreView;

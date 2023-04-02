@@ -46,18 +46,16 @@ import java.util.Objects;
 /**
  * This class displays statistics for a particular QR code that has been scanned at least once
  */
-public class QRCodeStatsActivity extends AppCompatActivity {
+public class QRCodeStatsActivity extends HamburgerMenu {
     private FirebaseFirestore db;
     TextView nameView;
     TextView scoreView;
     TextView coordinatesView;
-    TextView likesView;
     String name;
     String sc;
     String lat;
     TextView date;
     TextView scanned;
-    TextView dislikesView;
     Button gotoComments;
     String hash;
     Button scanbtn;
@@ -88,7 +86,6 @@ public class QRCodeStatsActivity extends AppCompatActivity {
         username = intent.getStringExtra("username");
         CurrentUser = intent.getStringExtra("currentUser");
         boolean res = intent.getStringExtra("user")==null;
-        Log.d("loc_testing", " "+res);
 
         // Accesses all of the text fields
         nameView = findViewById(R.id.qr_code_stats_code_name);
@@ -153,7 +150,7 @@ public class QRCodeStatsActivity extends AppCompatActivity {
             });
 
 
-        //Toast.makeText(getApplicationContext(),"hashstats: "+hash,Toast.LENGTH_SHORT).show();
+
         db = FirebaseFirestore.getInstance();
         db.collection("PlayerScans").get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -177,7 +174,7 @@ public class QRCodeStatsActivity extends AppCompatActivity {
                           }
                       }
                 });
-        //setList(username);
+
         viewSurroundings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -211,21 +208,19 @@ public class QRCodeStatsActivity extends AppCompatActivity {
                                 // Adding the required statistics to the text fields
                                 if (document != null) {
                                     if(document.getId().equals(hash)){
-                                        Log.d("TAG", "Reached inside setting statsijgsoigjaslkg");
-                                    nameView.setText(document.getString("Name"));
-                                    Log.d("first name", document.getString("Name"));
-                                    scoreView.setText(document.getString("Score"));
-                                    if((Double.valueOf(document.getString("Latitude"))==200)){
-                                        coordinates = "No Location";
+                                            nameView.setText(document.getString("Name"));
+                                            scoreView.setText(document.getString("Score"));
+                                        if((Double.valueOf(document.getString("Latitude"))==200)){
+                                            coordinates = "No Location";
 
-                                    }else{
-                                        latitude = Double.parseDouble(document.getString("Latitude"));
-                                        longitude = Double.parseDouble(document.getString("Longitude"));
-                                        coordinates = latitude + ", " + longitude;
-                                    }
-                                    coordinatesView.setText(coordinates);
-                                    date.setText(document.getString("LastScanned"));
-                                    scanned.setText(document.getString("TimesScanned"));
+                                        }else{
+                                            latitude = Double.parseDouble(document.getString("Latitude"));
+                                            longitude = Double.parseDouble(document.getString("Longitude"));
+                                            coordinates = latitude + ", " + longitude;
+                                        }
+                                        coordinatesView.setText(coordinates);
+                                        date.setText(document.getString("LastScanned"));
+                                        scanned.setText(document.getString("TimesScanned"));
                                     }
 
 
@@ -245,8 +240,7 @@ public class QRCodeStatsActivity extends AppCompatActivity {
                 if(gpsTracker.canGetLocation()){
                     latitude = gpsTracker.getLatitude();
                     longitude = gpsTracker.getLongitude();
-                    //Toast.makeText(this, "l"+latitude+longitude, Toast.LENGTH_SHORT)
-                    //.show();
+
                 }else{
                     gpsTracker.showSettingsAlert();
                 }
@@ -275,14 +269,8 @@ public class QRCodeStatsActivity extends AppCompatActivity {
                             // if the snapshot is not empty we are
                             // hiding our progress bar and adding
                             // our data in a list.
-                            //List<DocumentSnapshot> list = ;
                             for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
                                 if(document.getId().equals(username)){
-                                    Log.i("TAG","TESTING SCAN");
-                                    int score = 0;
-                                    if(!scoreView.getText().toString().equals("")){
-                                        score = Integer.parseInt(scoreView.getText().toString());
-                                    }
                                     int totalScore = Integer.parseInt(document.getString("Total Score"));
                                     int totalScans = Integer.parseInt(document.getString("Total Scans"));
                                     int highestScoringQR = Integer.parseInt(document.getString("Highest Scoring QR Code"));

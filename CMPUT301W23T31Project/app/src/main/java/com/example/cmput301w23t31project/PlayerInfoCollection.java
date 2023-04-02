@@ -74,14 +74,14 @@ public class PlayerInfoCollection extends QRDatabase{
         CollectionReference scans = getReference();
         Map<String, Object> m = new HashMap<>();
         db = FirebaseFirestore.getInstance();
+        Log.i("rank",HighScoreRank);
         m.put("High Score Rank", HighScoreRank);
-        //Log.i("TAG",userName);
         db.collection("PlayerInfo").document(userName)
                 .set(m, SetOptions.merge())
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        //Log.d(TAG, "HighScore Rank successfully written!");
+                        Log.d(TAG, "HighScore Rank successfully written!");
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -237,7 +237,6 @@ public class PlayerInfoCollection extends QRDatabase{
 
                                     if(QRHash.contains(document.getId())){
                                         numberScore = Integer.parseInt(document.getString("Score"));
-                                        //Log.i("Score",document.getString("Score"));
                                         sumScore = sumScore + numberScore;
                                         if(min == 0){
                                             min = numberScore;
