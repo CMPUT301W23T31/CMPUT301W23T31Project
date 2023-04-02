@@ -34,6 +34,7 @@ public class NearbyScansArrayAdapter extends ArrayAdapter<QRCode> {
     private Context context;
     FirebaseFirestore QRdb;
     String activity;
+    String username;
 
     /**
      * Sets up listview for use
@@ -41,11 +42,12 @@ public class NearbyScansArrayAdapter extends ArrayAdapter<QRCode> {
      * @param context relevant context
      * @param codes   QR codes
      */
-    public NearbyScansArrayAdapter(Context context, ArrayList<QRCode> codes, String activity) {
+    public NearbyScansArrayAdapter(Context context, ArrayList<QRCode> codes, String activity,String username) {
         super(context, 0, codes);
         this.QRCodes = codes;
         this.context = context;
         this.activity = activity;
+        this.username= username;
     }
 
     /**
@@ -116,6 +118,7 @@ public class NearbyScansArrayAdapter extends ArrayAdapter<QRCode> {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, QRCodeStatsActivity.class);
+                intent.putExtra("username",username);
                 intent.putExtra("Hash", hash);
                 context.startActivity(intent);
             }

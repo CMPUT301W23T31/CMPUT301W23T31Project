@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -8,21 +8,22 @@
     android:descendantFocusability="blocksDescendants">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginHorizontal="10dp"
         android:gravity="center_vertical"
-
+        android:id="@+id/linear"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">
 
         <ImageView
             android:id="@+id/player_detail_view_profile_button"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:layout_marginHorizontal="5dp"
+            android:padding="5dp"
             app:srcCompat="@drawable/profile_icon" />
 
         <TextView
@@ -32,7 +33,8 @@
             android:layout_marginHorizontal="5dp"
 
             android:hint="Username"
-            style="@style/bold_mini_header"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:textSize="28dp"
             android:maxEms="10"/>
 
     </LinearLayout>
@@ -41,30 +43,18 @@
         android:id="@+id/player_detail_total_score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="10dp"
+        android:layout_marginVertical="12dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="5dp"
-
+        android:layout_gravity="center_vertical"
         android:hint="SCORE"
-        style="@style/italic_medium_text"
-
-        app:layout_constraintEnd_toStartOf="@id/player_detail_points_text"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:textSize="20dp"
+        app:layout_constraintStart_toEndOf="@id/linear"
+        app:layout_constraintEnd_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
-    <TextView
-        android:id="@+id/player_detail_points_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="10dp"
-        android:layout_marginHorizontal="5dp"
-
-        android:text="points"
-        style="@style/italic_medium_text"
-
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
 
 
     <!--
@@ -114,4 +104,4 @@
 
         -->
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
