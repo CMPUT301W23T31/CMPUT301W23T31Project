@@ -1,54 +1,31 @@
 package com.example.cmput301w23t31project;
 
 
-import static android.content.ContentValues.TAG;
-
-import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.drawable.PictureDrawable;
-import android.net.Uri;
 import android.os.Bundle;
 
-import android.os.Handler;
-import android.os.Message;
 import android.util.Log;
 import android.view.View;
 
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 
 //import com.ahmadrosid.svgloader.SvgLoader;
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.model.StreamEncoder;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.firestore.SetOptions;
 
-import java.io.InputStream;
-import java.util.HashMap;
 import java.util.List;
 
 import java.util.ArrayList;
-import java.util.Map;
-import java.util.Objects;
 
 
 /**
@@ -60,7 +37,7 @@ public class QRCodeStatsActivity extends HamburgerMenu {
     TextView scoreView;
     TextView coordinatesView;
     String name;
-    String sc;
+    String score;
     String lat;
     TextView date;
     TextView scanned;
@@ -94,7 +71,9 @@ public class QRCodeStatsActivity extends HamburgerMenu {
         username = intent.getStringExtra("username");
         CurrentUser = intent.getStringExtra("currentUser");
         boolean res = intent.getStringExtra("user")==null;
-
+        lat = intent.getStringExtra("lat");
+        name = intent.getStringExtra("name");
+        score = intent.getStringExtra("score");
         // Accesses all of the text fields
         nameView = findViewById(R.id.qr_code_stats_code_name);
         scoreView = findViewById(R.id.qr_code_stats_code_score);
@@ -141,9 +120,7 @@ public class QRCodeStatsActivity extends HamburgerMenu {
                 startActivity(intent);
             }
         });
-        lat = intent.getStringExtra("lat");
-        name = intent.getStringExtra("name");
-        sc = intent.getStringExtra("score");
+
         setexceptStats();
         setStats(hash);
 
@@ -250,7 +227,7 @@ public class QRCodeStatsActivity extends HamburgerMenu {
     public void setexceptStats(){
 
         nameView.setText(name);
-        scoreView.setText(sc);
+        scoreView.setText(score);
         if (lat != null){
             if((Double.valueOf(lat)==200)){
                 coordinates = "No Location";
