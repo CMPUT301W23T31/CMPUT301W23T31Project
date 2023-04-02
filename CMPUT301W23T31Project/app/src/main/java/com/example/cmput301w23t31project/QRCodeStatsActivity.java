@@ -137,6 +137,7 @@ public class QRCodeStatsActivity extends HamburgerMenu {
                                 ExploreScreenActivity.class);
                         intent.putExtra("latitude", String.valueOf(latitude));
                         intent.putExtra("longitude", String.valueOf(longitude));
+                        intent.putExtra("currentUser",CurrentUser);
                         intent.putExtra("username", username);
                         startActivity(intent);
                     }else{
@@ -178,6 +179,7 @@ public class QRCodeStatsActivity extends HamburgerMenu {
                 Intent intent = new Intent(QRCodeStatsActivity.this, SurroundingsActivity.class);
                 intent.putExtra("username", username);
                 intent.putExtra("hash", hash);
+                intent.putExtra("currentUser",CurrentUser);
                 startActivity(intent);
             }
         });

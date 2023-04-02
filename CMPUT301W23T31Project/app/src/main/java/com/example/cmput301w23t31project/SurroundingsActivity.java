@@ -34,6 +34,7 @@ public class SurroundingsActivity extends  HamburgerMenu{
 
     private String username;
     private String hash;
+    private String currentUser;
     ListView surroundList;
     ArrayAdapter<Image> surroundArrayAdapter;
     ArrayList<Image> datalist;
@@ -56,6 +57,7 @@ public class SurroundingsActivity extends  HamburgerMenu{
         Intent intent = getIntent();
         username = intent.getStringExtra("username");
         hash = intent.getStringExtra("hash");
+        currentUser = intent.getStringExtra("currentUser");
         setImages();
     }
 
@@ -78,7 +80,7 @@ public class SurroundingsActivity extends  HamburgerMenu{
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
-        return useHamburgerMenu(item, username);
+        return useHamburgerMenu(item, currentUser);
 
     }
 
