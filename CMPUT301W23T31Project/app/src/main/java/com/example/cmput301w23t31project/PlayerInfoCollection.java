@@ -31,7 +31,9 @@ public class PlayerInfoCollection extends QRDatabase{
     ArrayList<String> QRHash = new ArrayList<>();
     PlayerInfoSorts sortFunctions = new PlayerInfoSorts();
 
-
+    /**
+     * Constructor
+     */
     public PlayerInfoCollection() {
         super("PlayerInfo");
     }
@@ -64,6 +66,14 @@ public class PlayerInfoCollection extends QRDatabase{
         codes.document(username).set(PlayerInfo);
 
     }
+
+    /**
+     * Adds a high score rank to the user
+     * @param username
+     *      The username of the user
+     * @param HighScoreRank
+     *     The rank of the high score
+     */
     public void addHighScoreRank(String username, String HighScoreRank) {
         String userName = username;
         CollectionReference scans = getReference();
@@ -86,6 +96,14 @@ public class PlayerInfoCollection extends QRDatabase{
                     }
                 });
     }
+
+    /**
+     * Adds a count rank to the user
+     * @param username
+     *      The username of the user
+     * @param CountScoreRank
+     *      The count rank
+     */
     public void addCountScoreRank(String username, String CountScoreRank){
         String userName = username;
         CollectionReference scans = getReference();
@@ -107,6 +125,14 @@ public class PlayerInfoCollection extends QRDatabase{
                     }
                 });
     }
+
+    /**
+     * Adds a total rank to the user
+     * @param username
+     *      The username of the user
+     * @param TotalScoreRank
+     *      The total score rank
+     */
     public void addTotalScoreRank(String username, String TotalScoreRank){
         String userName = username;
         CollectionReference scans = getReference();
@@ -228,6 +254,10 @@ public class PlayerInfoCollection extends QRDatabase{
                 }
         });
     }
+
+    /**
+     * This method creates a leaderboard based on the desired statistic wanted to view by the user
+     */
     public void CreateLeaderBoard(){
         db = FirebaseFirestore.getInstance();
         db.collection("PlayerInfo").get() .addOnSuccessListener(
@@ -288,6 +318,9 @@ public class PlayerInfoCollection extends QRDatabase{
 
     }
 
+    /**
+     * Gives the count rank to each element in the data list
+     */
     public void giveCountRank(){
         for(int i = 0;i < CountScoreDataList.size();i++){
             int rank;
@@ -297,6 +330,10 @@ public class PlayerInfoCollection extends QRDatabase{
             addCountScoreRank(username,CountRank);
         }
     }
+
+    /**
+     * Gives the high score rank to each element in the data list
+     */
     public void giveHighScoreRank(){
         for(int i = 0;i < HighScoreDataList.size();i++){
             int rank;
@@ -306,6 +343,10 @@ public class PlayerInfoCollection extends QRDatabase{
             addHighScoreRank(username,HighScoreRank);
         }
     }
+
+    /**
+     * Gives the total score rank to each element in the data list
+     */
     public void giveTotalScoreRank(){
         for(int i = 0;i < TotalScoreDataList.size();i++){
             int rank;

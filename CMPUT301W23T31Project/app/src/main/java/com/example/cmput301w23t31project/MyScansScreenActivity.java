@@ -2,7 +2,6 @@ package com.example.cmput301w23t31project;
 
 
 import static android.content.ContentValues.TAG;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,11 +14,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.Set;
 

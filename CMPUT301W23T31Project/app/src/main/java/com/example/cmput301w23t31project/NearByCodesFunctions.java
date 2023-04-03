@@ -4,7 +4,16 @@ package com.example.cmput301w23t31project;
 import java.util.ArrayList;
 
 
+/**
+ * This class holds functions to help facilitate sorting of nearby QR codes
+ */
 public class NearByCodesFunctions {
+
+    /**
+     * This method sorts nearby QR codes by distance
+     * @param datalist
+     *      List of nearby QR codes
+     */
     public void sortList(ArrayList<QRCode> datalist) {
         for (int i = 0; i < datalist.size() - 1; i++)
             for (int j = 0; j < datalist.size() - i - 1; j++)
@@ -15,6 +24,19 @@ public class NearByCodesFunctions {
                 }
     }
 
+    /**
+     * This method calculates the distance to a QR code from the phone
+     * @param lat1
+     *      Latitude of first point
+     * @param lon1
+     *      Longitude of first point
+     * @param lat2
+     *      Latitude of second point
+     * @param lon2
+     *      Longitude of second point
+     * @return
+     *      The distance between phone location and QR code
+     */
     public static double distanceToCode(double lat1,double lon1,double lat2,double lon2){
         double p = 0.017453292519943295;    // Math.PI / 180
 

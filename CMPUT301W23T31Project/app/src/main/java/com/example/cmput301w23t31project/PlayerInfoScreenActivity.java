@@ -259,6 +259,10 @@ public class PlayerInfoScreenActivity extends HamburgerMenu {
             }
         });
     }
+
+    /**
+     * This function sets the rank of the player's based on what they are sorted on
+     */
     public void setRank(){
         playerHighScoreRank = findViewById(R.id.player_info_rank_by_unique_score);
         playerTotalScoreRank = findViewById(R.id.player_info_rank_by_total_score);
