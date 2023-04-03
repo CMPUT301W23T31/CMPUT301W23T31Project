@@ -19,7 +19,14 @@ import android.widget.ToggleButton;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 
@@ -227,6 +234,19 @@ public class ScanResultsFragment extends DialogFragment {
                             intent.putExtra("name", name);
                             intent.putExtra("timesScanned", timesScanned);
                             intent.putExtra("crnt_date", crnt_date);
+                            PlayerInfoCollection players = new PlayerInfoCollection();
+                            players.getPlayerScans();
+                            players.CreateLeaderBoard();
+                            players.getReference().get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                    for (QueryDocumentSnapshot doc: task.getResult()) {
+                                        Map<String, Object> m = doc.getData();
+                                        m.put("Total Score", doc.getString("Total Score")+score);
+                                        players.getReference().document(username).set(m);
+                                    }
+                                }
+                            });
                             if(codes.getLocation()==200){
                                 intent.putExtra("lat", "200");
                             }else{
@@ -246,6 +266,19 @@ public class ScanResultsFragment extends DialogFragment {
 
                     @Override
                     public void onClick(View view) {
+                        PlayerInfoCollection players = new PlayerInfoCollection();
+                        players.getPlayerScans();
+                        players.CreateLeaderBoard();
+                        players.getReference().get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                for (QueryDocumentSnapshot doc: task.getResult()) {
+                                    Map<String, Object> m = doc.getData();
+                                    m.put("Total Score", doc.getString("Total Score")+score);
+                                    players.getReference().document(username).set(m);
+                                }
+                            }
+                        });
                         // Head back to main menu and close the dialog fragment
                         if (codes.getLocation() == 300) {
                             Toast.makeText(getContext(), "Please select location permission",

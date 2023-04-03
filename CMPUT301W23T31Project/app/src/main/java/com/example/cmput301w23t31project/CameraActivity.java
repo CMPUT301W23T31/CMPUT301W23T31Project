@@ -121,7 +121,7 @@ public class CameraActivity extends Activity {
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
         byte[] data = baos.toByteArray();
 
-        if (data.length > 1024000) {
+        if (data.length > 102400) {
             imageView.setImageBitmap(null);
             imageView.setVisibility(View.INVISIBLE);
             confirmButton.setVisibility(View.INVISIBLE);
