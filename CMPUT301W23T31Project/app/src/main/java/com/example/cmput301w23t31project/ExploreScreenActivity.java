@@ -26,7 +26,6 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -183,6 +182,10 @@ public class ExploreScreenActivity extends HamburgerMenu
         init(googleMap);
     }
 
+    /**
+     * initializes the map to be displayed
+     * @param g- googleMap that is initialized
+     */
     private void init(GoogleMap g){
         mSearchText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -199,6 +202,10 @@ public class ExploreScreenActivity extends HamburgerMenu
         });
     }
 
+    /**
+     * zooms the map into the current location upon being called
+     * @param g- googleMap that is initialized
+     */
     private void geoLocate(GoogleMap g){
         String searchString = mSearchText.getText().toString();
         Geocoder geocoder = new Geocoder(ExploreScreenActivity.this);
@@ -215,11 +222,22 @@ public class ExploreScreenActivity extends HamburgerMenu
         }
     }
 
+    /**
+     * zooms the map into the current location upon being called
+     * @param latLng- latitute and longitude position to be zoomed into
+     * @param googleMap- googleMap that is initialized
+     */
     private void moveCamera(LatLng latLng, GoogleMap googleMap){
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, (float) 12.0));
     }
 
 
+    /**
+     * zooms the map into the current location upon being called
+     * @param currentLatitude- latituteposition to be zoomed into
+     * @param currentLongitude- longitude position to be zoomed into
+     * @param googleMap- googleMap that is initialized
+     */
     private void handleNewLocation(Double currentLatitude, Double currentLongitude,
                                    GoogleMap googleMap) {
         LatLng latLng = new LatLng(currentLatitude, currentLongitude);

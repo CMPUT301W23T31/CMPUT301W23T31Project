@@ -121,6 +121,11 @@ public class FinishLoginActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     *
+     * @param username- username of the person
+     * @param bitmap- bitmap of the image to be uploaded
+     */
     private void uploadImage(String username, Bitmap bitmap) {
         QRImages images = new QRImages();
         FirebaseStorage storage = FirebaseStorage.getInstance();
