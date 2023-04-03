@@ -27,7 +27,7 @@ public class QRCodeNotFoundFragment extends DialogFragment {
                 .setView(view)
                 .setTitle("Error!")
                 .setNegativeButton("Cancel",null)
-                .setPositiveButton("Search Again",((dialog, which) -> {
+                .setPositiveButton("SEARCH AGAIN",((dialog, which) -> {
                     new SearchScanFragment().show(getFragmentManager(), "Search Again");
                 }))
                 .create();
