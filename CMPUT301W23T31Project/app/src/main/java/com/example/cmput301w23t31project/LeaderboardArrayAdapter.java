@@ -9,12 +9,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
 import com.bumptech.glide.Glide;
-
 import java.util.ArrayList;
 
 
@@ -25,7 +22,8 @@ public class LeaderboardArrayAdapter extends ArrayAdapter<Player> {
     private Context context;
     private String currentUser;
     private String state;
-    public LeaderboardArrayAdapter(Context context, ArrayList<Player> players, String currentUser, String state){
+    public LeaderboardArrayAdapter(Context context, ArrayList<Player> players, String currentUser,
+                                   String state){
         super(context,0,players);
         this.context = context;
         this.currentUser = currentUser;
@@ -36,7 +34,8 @@ public class LeaderboardArrayAdapter extends ArrayAdapter<Player> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View view;
         if (convertView == null) {
-            view = LayoutInflater.from(context).inflate(R.layout.content_leaderboard_list, parent, false);
+            view = LayoutInflater.from(context).inflate(R.layout.content_leaderboard_list,
+                    parent, false);
         } else {
             view = convertView;
         }

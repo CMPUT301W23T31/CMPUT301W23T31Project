@@ -15,7 +15,6 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.Settings;
 import android.util.Log;
-
 import androidx.core.app.ActivityCompat;
 
 
@@ -72,8 +71,14 @@ class GpsTracker extends Service implements LocationListener {
                 // First get location from Network Provider
                 if (isNetworkEnabled) {
                     //check the network permission
-                    if (ActivityCompat.checkSelfPermission(mContext, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(mContext, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                        ActivityCompat.requestPermissions((Activity) mContext, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.ACCESS_COARSE_LOCATION}, 101);
+                    if (ActivityCompat.checkSelfPermission(mContext, android.Manifest.permission.
+                            ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                            ActivityCompat.checkSelfPermission(mContext, android.Manifest.
+                                    permission.ACCESS_COARSE_LOCATION) != PackageManager.
+                                    PERMISSION_GRANTED) {
+                        ActivityCompat.requestPermissions((Activity) mContext, new
+                                String[]{android.Manifest.permission.ACCESS_FINE_LOCATION, android.
+                                Manifest.permission.ACCESS_COARSE_LOCATION}, 101);
                     }
                     locationManager.requestLocationUpdates(
                             LocationManager.NETWORK_PROVIDER,
@@ -82,7 +87,8 @@ class GpsTracker extends Service implements LocationListener {
 
                     Log.d("Network", "Network");
                     if (locationManager != null) {
-                        location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                        location = locationManager.getLastKnownLocation(LocationManager.
+                                NETWORK_PROVIDER);
                         if (location != null) {
                             latitude = location.getLatitude();
                             longitude = location.getLongitude();
@@ -94,8 +100,16 @@ class GpsTracker extends Service implements LocationListener {
                 if (isGPSEnabled) {
                     if (location == null) {
                         //check the network permission
-                        if (ActivityCompat.checkSelfPermission(mContext, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(mContext, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                            ActivityCompat.requestPermissions((Activity) mContext, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.ACCESS_COARSE_LOCATION}, 101);
+                        if (ActivityCompat.checkSelfPermission(mContext,
+                                android.Manifest.permission.ACCESS_FINE_LOCATION) !=
+                                PackageManager.PERMISSION_GRANTED && ActivityCompat.
+                                checkSelfPermission(mContext, android.Manifest.permission.
+                                        ACCESS_COARSE_LOCATION) !=
+                                PackageManager.PERMISSION_GRANTED) {
+                            ActivityCompat.requestPermissions((Activity) mContext,
+                                    new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION,
+                                            android.Manifest.permission.ACCESS_COARSE_LOCATION},
+                                    101);
                         }
                         locationManager.requestLocationUpdates(
                                 LocationManager.GPS_PROVIDER,

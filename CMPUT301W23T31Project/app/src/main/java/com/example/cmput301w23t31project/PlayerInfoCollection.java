@@ -5,22 +5,16 @@ import android.os.Handler;
 import android.util.Log;
 import static android.content.ContentValues.TAG;
 import androidx.annotation.NonNull;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.SetOptions;
-
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import java.util.List;
-
 import java.util.Map;
 
 
@@ -51,7 +45,8 @@ public class PlayerInfoCollection extends QRDatabase{
      * @param SumScore total score of all QR codes scanned
      * @param rank global ranking of player (by total score)
      */
-    public void addPlayerInfoToCollection(String username, String max, String min, String count, String SumScore, String rank) {
+    public void addPlayerInfoToCollection(String username, String max, String min, String count,
+                                          String SumScore, String rank) {
         CollectionReference codes = getReference();
 
         // Add necessary fields of QR code data
@@ -155,8 +150,7 @@ public class PlayerInfoCollection extends QRDatabase{
 
                         for (DocumentSnapshot document : list) {
                             Map data = document.getData();
-                            data.entrySet()
-                                    .forEach((entry) ->
+                            data.entrySet().forEach((entry) ->
                                             QRHash.add(entry.toString().split("=")[0]));
                             QRHash.add(String.valueOf(data));
                             username = document.getId();
@@ -206,7 +200,8 @@ public class PlayerInfoCollection extends QRDatabase{
                                 for (DocumentSnapshot document : list) {
 
                                     if(QRHash.contains(document.getId())){
-                                        numberScore = Integer.parseInt(document.getString("Score"));
+                                        numberScore = Integer.parseInt(
+                                                document.getString("Score"));
                                         sumScore = sumScore + numberScore;
                                         if(min == 0){
                                             min = numberScore;
@@ -235,61 +230,60 @@ public class PlayerInfoCollection extends QRDatabase{
     }
     public void CreateLeaderBoard(){
         db = FirebaseFirestore.getInstance();
-        db.collection("PlayerInfo").get() .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-            @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                // after getting the data we are calling on success method
-                // and inside this method we are checking if the received
-                // query snapshot is empty or not.
-                if (!queryDocumentSnapshots.isEmpty()) {
-                    // if the snapshot is not empty we are
-                    // hiding our progress bar and adding
-                    // our data in a list.
-                    List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
-                    for (DocumentSnapshot document : list) {
-                        int i = 0;
-                        String userName = document.getId();
-                        int totalScore = Integer.parseInt(document.getString("Total Score"));
-                        int totalScans = Integer.parseInt(document.getString("Total Scans"));
-                        int highestScoringQR = Integer.parseInt(document.getString("Highest Scoring QR Code"));
-                        int lowestScoringQR = Integer.parseInt(document.getString("Lowest Scoring QR Code"));
-                        int rank = Integer.parseInt(document.getString("Rank"));
-                        HighScoreDataList.add(i,new Player(userName,totalScans,totalScore,highestScoringQR,lowestScoringQR,rank));
-                        CountScoreDataList.add(i,new Player(userName,totalScans,totalScore,highestScoringQR,lowestScoringQR,rank));
-                        TotalScoreDataList.add(i,new Player(userName,totalScans,totalScore,highestScoringQR,lowestScoringQR,rank));
-                        i++;
+        db.collection("PlayerInfo").get() .addOnSuccessListener(
+                queryDocumentSnapshots -> {
+            // after getting the data we are calling on success method
+            // and inside this method we are checking if the received
+            // query snapshot is empty or not.
+            if (!queryDocumentSnapshots.isEmpty()) {
+                // if the snapshot is not empty we are
+                // hiding our progress bar and adding
+                // our data in a list.
+                List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+                for (DocumentSnapshot document : list) {
+                    int i = 0;
+                    String userName = document.getId();
+                    int totalScore = Integer.parseInt(document.getString("Total Score"));
+                    int totalScans = Integer.parseInt(document.getString("Total Scans"));
+                    int highestScoringQR = Integer.parseInt(document.getString("Highest Scoring QR Code"));
+                    int lowestScoringQR = Integer.parseInt(document.getString("Lowest Scoring QR Code"));
+                    int rank = Integer.parseInt(document.getString("Rank"));
+                    HighScoreDataList.add(i,new Player(userName,totalScans,totalScore,highestScoringQR,lowestScoringQR,rank));
+                    CountScoreDataList.add(i,new Player(userName,totalScans,totalScore,highestScoringQR,lowestScoringQR,rank));
+                    TotalScoreDataList.add(i,new Player(userName,totalScans,totalScore,highestScoringQR,lowestScoringQR,rank));
+                    i++;
+                }
+                sortFunctions.sortByTotalScoreList(TotalScoreDataList);
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        sortFunctions.sortByTotalScoreList(TotalScoreDataList);
+                        giveTotalScoreRank();
                     }
-                    sortFunctions.sortByTotalScoreList(TotalScoreDataList);
-                    final Handler handler = new Handler();
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
+                },1000);
 
-                            sortFunctions.sortByTotalScoreList(TotalScoreDataList);
-                            giveTotalScoreRank();
-                        }
-                    },1000);
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
 
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
+                        sortFunctions.sortByCountList(CountScoreDataList);
+                        giveCountRank();
 
-                            sortFunctions.sortByCountList(CountScoreDataList);
-                            giveCountRank();
+                    }
+                },1000);
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
 
-                        }
-                    },1000);
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-
-                            sortFunctions.sortByHighScoreList(HighScoreDataList);
-                            giveHighScoreRank();
-                        }
-                    },1000);
+                        sortFunctions.sortByHighScoreList(HighScoreDataList);
+                        giveHighScoreRank();
+                    }
+                },1000);
 
 
-                }}});
+            }});
 
 
     }

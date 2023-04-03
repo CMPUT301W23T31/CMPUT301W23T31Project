@@ -3,30 +3,19 @@ package com.example.cmput301w23t31project;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
-import androidx.core.graphics.drawable.RoundedBitmapDrawable;
-import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
-
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.util.Objects;
 
 
@@ -60,22 +49,18 @@ public class MyAccountScreenActivity extends HamburgerMenu {
         TextView phone_number = findViewById(R.id.account_info_phone_number);
         image = findViewById(R.id.imgPicker);
         DeviceID = new MyDeviceID(this).getInstance();
-        db.collection("Accounts").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        if (Objects.equals(document.getString("DeviceID"), DeviceID)) {
-                            player_name.setText(document.getString("playername"));
-                            username.setText(document.getId());
-                            email.setText(document.getString("email"));
-                            phone_number.setText(document.getString("phone"));
-                            loadImageFromStorage(document.getString("path"));
-                        }
+        db.collection("Accounts").get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                for (QueryDocumentSnapshot document : task.getResult()) {
+                    if (Objects.equals(document.getString("DeviceID"), DeviceID)) {
+                        player_name.setText(document.getString("playername"));
+                        username.setText(document.getId());
+                        email.setText(document.getString("email"));
+                        phone_number.setText(document.getString("phone"));
+                        loadImageFromStorage(document.getString("path"));
                     }
                 }
             }
-
         });
     }
 
@@ -111,16 +96,13 @@ public class MyAccountScreenActivity extends HamburgerMenu {
         QRImages images = new QRImages();
         image = findViewById(R.id.imgPicker);
         try {
-            images.getReference().get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                    for (QueryDocumentSnapshot doc: task.getResult()) {
-                        if (doc.getId().equals(username) && doc.getData().containsKey("profile")) {
-                            String storage = doc.getString("profile");
-                            Glide.with(MyAccountScreenActivity.this)
-                                    .load(storage)
-                                    .into(image);
-                        }
+            images.getReference().get().addOnCompleteListener(task -> {
+                for (QueryDocumentSnapshot doc: task.getResult()) {
+                    if (doc.getId().equals(username) && doc.getData().containsKey("profile")) {
+                        String storage = doc.getString("profile");
+                        Glide.with(MyAccountScreenActivity.this)
+                                .load(storage)
+                                .into(image);
                     }
                 }
             });

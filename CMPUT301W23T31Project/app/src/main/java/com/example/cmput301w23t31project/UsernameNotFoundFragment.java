@@ -5,13 +5,12 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 
 
 /**
- * Creates fragment for usernames not found
+ * This class creates fragment for usernames not found
  */
 public class UsernameNotFoundFragment extends DialogFragment {
 

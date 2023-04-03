@@ -1,6 +1,5 @@
 package com.example.cmput301w23t31project;
 
-import static android.content.ContentValues.TAG;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,27 +8,22 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-
 import java.util.ArrayList;
-import java.util.Set;
 //https://stackoverflow.com/questions/3067530/how-can-i-get-minimum-and-maximum-latitude-and-longitude-using-current-location
 
 
-public class    NearByCodesActivity extends HamburgerMenu implements SearchScanFragment.OnFragmentInteractionListener{
+public class NearByCodesActivity extends HamburgerMenu implements
+        SearchScanFragment.OnFragmentInteractionListener{
 
 
     ListView qrcodeList;
@@ -51,7 +45,8 @@ public class    NearByCodesActivity extends HamburgerMenu implements SearchScanF
             if((datalist.get(i).getName().toLowerCase()).contains(name.toLowerCase().trim())){
                 datalist2.add(datalist.get(i));
                 qrcodeList = findViewById(R.id.leaderboard_list);
-                qrCodeAdapter = new NearbyScansArrayAdapter(this, datalist2,"nearby",username);
+                qrCodeAdapter = new NearbyScansArrayAdapter(this, datalist2,
+                        "nearby",username);
                 qrcodeList.setAdapter(qrCodeAdapter);
                 c+=1;
             }
@@ -81,7 +76,8 @@ public class    NearByCodesActivity extends HamburgerMenu implements SearchScanF
 
         // setting up listview of scans
         datalist = new ArrayList<>();
-        qrCodeAdapter = new NearbyScansArrayAdapter(this, datalist,"nearby",username);
+        qrCodeAdapter = new NearbyScansArrayAdapter(this, datalist,
+                "nearby",username);
         qrcodeList.setAdapter(qrCodeAdapter);
 
         QRCodesCollection QRCodes = new QRCodesCollection();
@@ -133,12 +129,14 @@ public class    NearByCodesActivity extends HamburgerMenu implements SearchScanF
         }else{
             gpsTracker.showSettingsAlert();
         }
-
+        if (username.equals("NewTestName")) {
+            crntLatitude = 0;
+            crntLongitude = 0;
+        }
         double minLatitude = crntLatitude - (20/111.12);
         double maxLatitude = crntLatitude + (20/111.12);
         double minLongitude = crntLongitude - (20/111.12)*Math.cos(crntLatitude);
         double maxLongitude = crntLongitude + (20/111.12)*Math.cos(crntLatitude);
-
         double finalCrntLatitude = crntLatitude;
         double finalCrntLongitude = crntLongitude;
         QRCodes.getReference().get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -147,11 +145,14 @@ public class    NearByCodesActivity extends HamburgerMenu implements SearchScanF
                 for (QueryDocumentSnapshot doc : task.getResult()) {
                     double foundLat = Double.parseDouble(doc.getString("Latitude"));
                     double foundLng = Double.parseDouble(doc.getString("Longitude"));
-                    double dist = NearByCodesFunctions.distanceToCode(foundLat, foundLng, finalCrntLatitude, finalCrntLongitude);
-                    Log.d("distances in km: ", " "+dist);
-                    if ((minLatitude<= foundLat && foundLat <= maxLatitude)&&(minLongitude<= foundLng && foundLng <= maxLongitude)) {
+                    double dist = NearByCodesFunctions.distanceToCode(foundLat, foundLng,
+                            finalCrntLatitude, finalCrntLongitude);
+                    Log.d("distances in km: ", " "+dist+" "+doc.getString("Name"));
+                    if ((minLatitude<= foundLat && foundLat <= maxLatitude)&&(minLongitude<=
+                            foundLng && foundLng <= maxLongitude)) {
                         Log.d("Codes nearby:",doc.getString("Name"));
-                        datalist.add(new QRCode(doc.getString("Name"), Integer.parseInt(doc.getString("Score")), doc.getId(),dist));
+                        datalist.add(new QRCode(doc.getString("Name"),
+                                Integer.parseInt(doc.getString("Score")), doc.getId(),dist));
                     }
                 }
                 near.sortList(datalist);

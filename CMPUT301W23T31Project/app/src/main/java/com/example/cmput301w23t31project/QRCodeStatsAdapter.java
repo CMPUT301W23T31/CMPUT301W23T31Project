@@ -7,15 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
 import com.bumptech.glide.Glide;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -51,7 +47,8 @@ public class QRCodeStatsAdapter extends ArrayAdapter<Player> implements Serializ
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View view;
         if (convertView == null) {
-            view = LayoutInflater.from(context).inflate(R.layout.content_player_detail, parent, false);
+            view = LayoutInflater.from(context).inflate(R.layout.content_player_detail,
+                    parent, false);
         } else {
             view = convertView;
         }

@@ -3,9 +3,7 @@ package com.example.cmput301w23t31project;
 
 import android.content.Intent;
 import android.view.MenuItem;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.zxing.integration.android.IntentIntegrator;
 
 

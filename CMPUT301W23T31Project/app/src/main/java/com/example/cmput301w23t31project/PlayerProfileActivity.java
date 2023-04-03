@@ -1,8 +1,7 @@
 package com.example.cmput301w23t31project;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
 
+import androidx.appcompat.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,15 +11,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-
 import java.util.List;
+
 
 /**
  * Creates Player Profile Activity
@@ -104,7 +102,8 @@ public class PlayerProfileActivity extends HamburgerMenu {
         view_scans.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(PlayerProfileActivity.this, MyScansScreenActivity.class);
+                Intent intent = new Intent(PlayerProfileActivity.this,
+                        MyScansScreenActivity.class);
                 intent.putExtra("username", username);
                 intent.putExtra("crnt_username", crnt_username);
 
@@ -140,24 +139,23 @@ public class PlayerProfileActivity extends HamburgerMenu {
         playerHighScoreRank = findViewById(R.id.player_info_rank_by_unique_score);
         playerTotalScoreRank = findViewById(R.id.player_info_rank_by_total_score);
         db = FirebaseFirestore.getInstance();
-        db.collection("PlayerInfo").get() .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-            @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                // after getting the data we are calling on success method
-                // and inside this method we are checking if the received
-                // query snapshot is empty or not.
-                if (!queryDocumentSnapshots.isEmpty()) {
-                    // if the snapshot is not empty we are
-                    // hiding our progress bar and adding
-                    // our data in a list.
-                    List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
-                    for (DocumentSnapshot document : list) {
-                        if(document.getId().equals(username)){
-                            playerHighScoreRank.setText(document.get("High Score Rank").toString());
-                            playerTotalScoreRank.setText(document.get("Total Score Rank").toString());
-                        }
-
+        db.collection("PlayerInfo").get() .addOnSuccessListener(
+                queryDocumentSnapshots -> {
+            // after getting the data we are calling on success method
+            // and inside this method we are checking if the received
+            // query snapshot is empty or not.
+            if (!queryDocumentSnapshots.isEmpty()) {
+                // if the snapshot is not empty we are
+                // hiding our progress bar and adding
+                // our data in a list.
+                List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+                for (DocumentSnapshot document : list) {
+                    if(document.getId().equals(username)){
+                        playerHighScoreRank.setText(document.get("High Score Rank").toString());
+                        playerTotalScoreRank.setText(document.get("Total Score Rank").toString());
                     }
+
                 }
-    }});}
+            }
+});}
 }

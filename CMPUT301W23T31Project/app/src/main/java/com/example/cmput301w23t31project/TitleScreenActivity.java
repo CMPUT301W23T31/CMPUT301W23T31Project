@@ -4,20 +4,13 @@ package com.example.cmput301w23t31project;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -26,7 +19,7 @@ import java.util.Objects;
 
 
 /**
- * Responsible for displaying the title screen to the user
+ * This class is responsible for displaying the title screen to the user
  * Also responsible for checking if the user device is recognized upon entry
  */
 public class TitleScreenActivity extends AppCompatActivity {
@@ -41,7 +34,8 @@ public class TitleScreenActivity extends AppCompatActivity {
         setContentView(R.layout.fragment_title_screen);
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA)
                 == PackageManager.PERMISSION_DENIED) {
-            ActivityCompat.requestPermissions(this, new String[] {android.Manifest.permission.CAMERA}, 100);
+            ActivityCompat.requestPermissions(this, new String[] {
+                    android.Manifest.permission.CAMERA}, 100);
         }
         DeviceID = new MyDeviceID(this).getInstance();
 

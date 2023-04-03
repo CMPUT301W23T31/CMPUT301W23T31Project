@@ -7,13 +7,12 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 
 
 /**
- * Used to search for scan by name
+ * A class that pops up a fragment so the user can search for scan by name
  */
 public class SearchScanFragment extends DialogFragment {
 

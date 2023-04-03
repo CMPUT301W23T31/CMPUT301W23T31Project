@@ -2,7 +2,6 @@ package com.example.cmput301w23t31project;
 
 
 import static android.content.ContentValues.TAG;
-
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -11,26 +10,16 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
-import android.os.Handler;
-import android.view.WindowManager;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-
 import java.util.Objects;
 
 
@@ -83,7 +72,8 @@ public class ScanResultsFragment extends DialogFragment {
      * @param latitude  longitude of QR code
      * @param longitude latitude of QR code
      */
-    public ScanResultsFragment(String hash, String username, TextView score, double latitude, double longitude) {
+    public ScanResultsFragment(String hash, String username, TextView score, double latitude,
+                               double longitude) {
         this.hash = hash;
         this.username = username;
         this.homeScore = score;
@@ -218,7 +208,8 @@ public class ScanResultsFragment extends DialogFragment {
                     @Override
                     public void onClick(View view) {
                         if(codes.getLocation()==300){
-                        Toast.makeText(getContext(),"Please select location permission",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(),"Please select location permission",
+                                Toast.LENGTH_SHORT).show();
                         if (username.equals("NewTestName")) {
                             codes.processQRCodeInDatabase(name, String.valueOf(score), hash);
                         }
@@ -249,20 +240,23 @@ public class ScanResultsFragment extends DialogFragment {
                     }
                 });
 
-                Button negative_button = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_NEGATIVE);
+                Button negative_button = ((AlertDialog) dialog).getButton(AlertDialog.
+                        BUTTON_NEGATIVE);
                 negative_button.setOnClickListener(new View.OnClickListener() {
 
                     @Override
                     public void onClick(View view) {
                         // Head back to main menu and close the dialog fragment
                         if (codes.getLocation() == 300) {
-                            Toast.makeText(getContext(), "Please select location permission", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), "Please select location permission",
+                                    Toast.LENGTH_SHORT).show();
                             if (username.equals("NewTestName")) {
                                 codes.processQRCodeInDatabase(name, String.valueOf(score), hash);
                             }
                         } else {
                             codes.processQRCodeInDatabase(name, String.valueOf(score), hash);
-                            MainActivity.setHomeScore(new QRPlayerScans(), homeScore, new QRCodesCollection(), username);
+                            MainActivity.setHomeScore(new QRPlayerScans(), homeScore,
+                                    new QRCodesCollection(), username);
                             dialogInterface.cancel();
                         }
                     }
@@ -274,25 +268,33 @@ public class ScanResultsFragment extends DialogFragment {
         return dialog;
     }
 
+    /**
+     * This method looks for a QR code matching hash and gets relevant data from it
+     * @param name
+     *      Name of a QR code
+     * @param score
+     *      Score of a QR code
+     * @param hash
+     *      Hash of a QR code
+     */
     public void processQRCode(String name, String score, String hash) {
         QRCodesCollection codes = new QRCodesCollection();
-        codes.getReference().get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    for (QueryDocumentSnapshot document: task.getResult()) {
-                        if (document.getId().equals(hash)) {
-                            likes = String.valueOf(Integer.
-                                    parseInt(Objects.requireNonNull(document.getString("Likes"))));
-                            dislikes = String.valueOf(Integer.
-                                    parseInt(Objects.requireNonNull(document.getString("Dislikes"))));
-                            lat = Objects.requireNonNull(document.getString("Latitude"));
-                            lng = Objects.requireNonNull(document.getString("Longitude"));
-                            timesScanned = String.valueOf(Integer.
-                                    parseInt(Objects.requireNonNull(document.getString("TimesScanned"))) + 1);
-                            crnt_date = Utilities.getCurrentDate();
-                            return;
-                        }
+        codes.getReference().get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                for (QueryDocumentSnapshot document: task.getResult()) {
+                    if (document.getId().equals(hash)) {
+                        likes = String.valueOf(Integer.
+                                parseInt(Objects.requireNonNull(document.getString("Likes"))));
+                        dislikes = String.valueOf(Integer.
+                                parseInt(Objects.requireNonNull(document.
+                                        getString("Dislikes"))));
+                        lat = Objects.requireNonNull(document.getString("Latitude"));
+                        lng = Objects.requireNonNull(document.getString("Longitude"));
+                        timesScanned = String.valueOf(Integer.
+                                parseInt(Objects.requireNonNull(document.
+                                        getString("TimesScanned"))) + 1);
+                        crnt_date = Utilities.getCurrentDate();
+                        return;
                     }
                 }
             }

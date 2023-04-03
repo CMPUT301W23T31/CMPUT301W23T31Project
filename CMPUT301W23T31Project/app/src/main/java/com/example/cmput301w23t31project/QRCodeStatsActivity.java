@@ -3,28 +3,21 @@ package com.example.cmput301w23t31project;
 
 import android.content.Intent;
 import android.os.Bundle;
-
 import android.util.Log;
 import android.view.View;
-
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.ActionBar;
-
-//import com.ahmadrosid.svgloader.SvgLoader;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-
 import java.util.List;
-
 import java.util.ArrayList;
 
 
@@ -141,7 +134,8 @@ public class QRCodeStatsActivity extends HamburgerMenu {
                         intent.putExtra("username", username);
                         startActivity(intent);
                     }else{
-                        Toast.makeText(QRCodeStatsActivity.this,"Code Has No Location",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(QRCodeStatsActivity.this,"Code Has No Location",
+                                Toast.LENGTH_SHORT).show();
                     }
 
                 }
@@ -165,7 +159,6 @@ public class QRCodeStatsActivity extends HamburgerMenu {
                               for (DocumentSnapshot document : list) {
                                   Log.d("TAG",  document.getData().keySet()+"   "+hash);
                                   if(document.getData().containsKey(hash)){
-                                      Log.d("TAG", "Reached inside setting stats found doc");
                                       setList(document.getId());}
 
                               }
@@ -176,7 +169,8 @@ public class QRCodeStatsActivity extends HamburgerMenu {
         viewSurroundings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(QRCodeStatsActivity.this, SurroundingsActivity.class);
+                Intent intent = new Intent(QRCodeStatsActivity.this,
+                        SurroundingsActivity.class);
                 intent.putExtra("username", username);
                 intent.putExtra("hash", hash);
                 intent.putExtra("currentUser",CurrentUser);
@@ -209,24 +203,27 @@ public class QRCodeStatsActivity extends HamburgerMenu {
                                     if(document.getId().equals(hash)){
                                             nameView.setText(document.getString("Name"));
                                             scoreView.setText(document.getString("Score"));
-                                        if((Double.valueOf(document.getString("Latitude"))==200)){
+                                        if((Double.valueOf(document.
+                                                getString("Latitude"))==200)){
                                             coordinates = "No Location";
-
                                         }else{
-                                            latitude = Double.parseDouble(document.getString("Latitude"));
-                                            longitude = Double.parseDouble(document.getString("Longitude"));
+                                            latitude = Double.parseDouble(
+                                                    document.getString("Latitude"));
+                                            longitude = Double.parseDouble(
+                                                    document.getString("Longitude"));
                                             coordinates = latitude + ", " + longitude;
                                         }
                                         coordinatesView.setText(coordinates);
                                         date.setText(document.getString("LastScanned"));
                                         scanned.setText(document.getString("TimesScanned"));
                                     }
-
-
         }
     }}}});
     }
 
+    /**
+     * This method 
+     */
     public void setexceptStats(){
 
         nameView.setText(name);

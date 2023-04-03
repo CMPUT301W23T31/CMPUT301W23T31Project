@@ -1,7 +1,7 @@
 package com.example.cmput301w23t31project;
 
-public class    Image {
-    private String link;
+public class Image {
+    private final String link;
     private String user;
     public Image(String storage, String user) {
         this.link = storage;
@@ -18,9 +18,5 @@ public class    Image {
 
     public void setUser(String user) {
         this.user = user;
-    }
-
-    public void setLink(String link) {
-        this.link = link;
     }
 }

@@ -1,23 +1,34 @@
 package com.example.cmput301w23t31project;
 
-import androidx.annotation.NonNull;
 
+import androidx.annotation.NonNull;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
+
+/**
+ * This class handles database functions regarding image access documents in the database
+ */
 public class QRImages extends QRDatabase {
 
     public QRImages() {
         super("QRImages");
     }
 
+    /**
+     * This method adds a uri link to the database for user to access image later
+     * @param username
+     *      The username of the user
+     * @param hash
+     *      The hash of the QR code
+     * @param new_uri
+     *      The uri cooresponding to the image in storage
+     */
     public void processQRImageInDatabase(String username, String hash, String new_uri) {
         CollectionReference images = getReference();
         collection.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {

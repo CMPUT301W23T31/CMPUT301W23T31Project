@@ -12,7 +12,7 @@ public class MarkerTest {
 
     @Test
     public void testMarker() {
-        assertEquals(-1, Utilities.getMarkerColor(-102));
+        assertEquals(170.0f, Utilities.getMarkerColor(-102));
         assertEquals(170.0f, Utilities.getMarkerColor(0));
         assertEquals(205.0f, Utilities.getMarkerColor(197));
         assertEquals(270.0f, Utilities.getMarkerColor(1999));

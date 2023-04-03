@@ -21,19 +21,10 @@ package com.example.cmput301w23t31project;
 // https://www.youtube.com/watch?v=oh4YOj9VkVE
 
 
-import android.content.Context;
-import android.content.ContextWrapper;
 import android.content.res.Resources;
-import android.graphics.Bitmap;
 import android.os.Build;
-import android.provider.Settings;
 import android.util.Log;
-
-import androidx.appcompat.app.AppCompatActivity;
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
@@ -41,7 +32,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 
 
 /**
@@ -127,7 +117,8 @@ public class Utilities {
      * @param names5 list of potential words for fifth word slot
      * @return the name generated from the QR code's hash
      */
-    public static String getQRCodeName(String hash, String[] names, String[] names2, String[] names3, String[] names4, String[] names5) {
+    public static String getQRCodeName(String hash, String[] names, String[] names2,
+                                       String[] names3, String[] names4, String[] names5) {
 
          String name = "";
          int [ ] list = new int[5];
@@ -212,6 +203,13 @@ public class Utilities {
         return "";
     }
 
+    /**
+     * This method determines the color of the marker on the map for a particular QR code
+     * @param QRScore
+     *      The score of a QR code
+     * @return
+     *      The marker color as a float
+     */
     public static float getMarkerColor(int QRScore) {
         float markerColor;
         if (QRScore < 20) {

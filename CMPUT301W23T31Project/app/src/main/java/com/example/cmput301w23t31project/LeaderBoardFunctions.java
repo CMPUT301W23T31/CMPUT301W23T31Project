@@ -1,6 +1,8 @@
 package com.example.cmput301w23t31project;
 
+
 import java.util.ArrayList;
+
 
 public class LeaderBoardFunctions {
     /**
@@ -19,15 +21,18 @@ public class LeaderBoardFunctions {
     public void sortList(String state, ArrayList<Player> dataList) {
         for (int i = 0; i < dataList.size() - 1; i++)
             for (int j = 0; j < dataList.size() - i - 1; j++)
-                if (state.equals("COUNT")&&dataList.get(j).getCount() < dataList.get(j + 1).getCount()) {
+                if (state.equals("COUNT")&&dataList.get(j).getCount() <
+                        dataList.get(j + 1).getCount()) {
                     Player temp = dataList.get(j);
                     dataList.set(j, dataList.get(j + 1));
                     dataList.set(j + 1, temp);
-                } else if (state.equals("HIGHSCORE")&& dataList.get(j).getHighestScoringQR() < dataList.get(j + 1).getHighestScoringQR()) {
+                } else if (state.equals("HIGHSCORE")&& dataList.get(j).getHighestScoringQR() <
+                        dataList.get(j + 1).getHighestScoringQR()) {
                     Player temp = dataList.get(j);
                     dataList.set(j, dataList.get(j + 1));
                     dataList.set(j + 1, temp);
-                } else if (state.equals("TOTALSCORE")&&dataList.get(j).getTotalScore() < dataList.get(j + 1).getTotalScore()) {
+                } else if (state.equals("TOTALSCORE")&&dataList.get(j).getTotalScore() <
+                        dataList.get(j + 1).getTotalScore()) {
                     Player temp = dataList.get(j);
                     dataList.set(j, dataList.get(j + 1));
                     dataList.set(j + 1, temp);

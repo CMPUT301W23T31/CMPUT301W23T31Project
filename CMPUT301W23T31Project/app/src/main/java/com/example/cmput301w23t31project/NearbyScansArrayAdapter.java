@@ -1,10 +1,8 @@
 package com.example.cmput301w23t31project;
 
-import static android.content.ContentValues.TAG;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,21 +10,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
 import com.bumptech.glide.Glide;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
-
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 
 public class NearbyScansArrayAdapter extends ArrayAdapter<QRCode> {
@@ -42,7 +30,8 @@ public class NearbyScansArrayAdapter extends ArrayAdapter<QRCode> {
      * @param context relevant context
      * @param codes   QR codes
      */
-    public NearbyScansArrayAdapter(Context context, ArrayList<QRCode> codes, String activity,String username) {
+    public NearbyScansArrayAdapter(Context context, ArrayList<QRCode> codes,
+                                   String activity,String username) {
         super(context, 0, codes);
         this.QRCodes = codes;
         this.context = context;
@@ -64,7 +53,8 @@ public class NearbyScansArrayAdapter extends ArrayAdapter<QRCode> {
 
         View view;
         if (convertView == null) {
-            view = LayoutInflater.from(context).inflate(R.layout.code_public_content_detail, parent, false);
+            view = LayoutInflater.from(context).inflate(R.layout.code_public_content_detail,
+                    parent, false);
         } else {
             view = convertView;
         }
@@ -94,9 +84,9 @@ public class NearbyScansArrayAdapter extends ArrayAdapter<QRCode> {
         }else{
             if (QRDistance < 1){
                 QRDistance = QRDistance * 1000;
-                QRCodePoints.setText(QRScore + " pts | "+String.format("%.2f",QRDistance)+" m away");
+                QRCodePoints.setText(QRScore +" pts | "+String.format("%.2f",QRDistance)+" m away");
             }else{
-                QRCodePoints.setText(QRScore + " pts | "+String.format("%.2f",QRDistance)+" km away");
+                QRCodePoints.setText(QRScore+" pts | "+String.format("%.2f",QRDistance)+" km away");
             }
         }
 

@@ -5,6 +5,7 @@ import static androidx.test.internal.runner.junit4.statement.UiThreadStatement.r
 import static org.junit.Assert.assertNotNull;
 import android.app.Activity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import org.junit.Before;
@@ -24,7 +25,7 @@ import java.util.Objects;
 
 public class ALoginActivityTest {
     private Solo solo;
-
+    private String myDeviceID;
     @Rule
     public ActivityTestRule<LoginActivity> rule = new ActivityTestRule<>
                     (LoginActivity.class, true, true);
@@ -51,6 +52,7 @@ public class ALoginActivityTest {
      */
     @Test
     public void enterLoginTest() {
+        myDeviceID = new MyDeviceID(solo.getCurrentActivity()).getInstance();
         AccountsCollection accounts = new AccountsCollection();
         accounts.getReference().get().addOnCompleteListener(
                 new OnCompleteListener<QuerySnapshot>() {
@@ -58,7 +60,7 @@ public class ALoginActivityTest {
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 for (QueryDocumentSnapshot account : task.getResult()) {
                     if (Objects.equals(account.getId(),
-                            "TestName")) {
+                            "TestName") || myDeviceID.equals(account.getString("DeviceID"))) {
                         account.getReference().delete().addOnSuccessListener(
                                 new OnSuccessListener<Void>() {
                             @Override

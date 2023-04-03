@@ -7,13 +7,12 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 
 
 /**
- * Used to search for player by username
+ * A class that pops up a fragment so the user can search for player by username
  */
 public class SearchUserFragment extends DialogFragment {
 

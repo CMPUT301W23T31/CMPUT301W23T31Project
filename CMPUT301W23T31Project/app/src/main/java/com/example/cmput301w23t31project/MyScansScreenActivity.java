@@ -2,11 +2,8 @@ package com.example.cmput301w23t31project;
 
 
 import static android.content.ContentValues.TAG;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,25 +11,15 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-
-import org.checkerframework.checker.units.qual.A;
-
 import java.util.ArrayList;
 import java.util.Set;
 
@@ -40,7 +27,8 @@ import java.util.Set;
 /**
  * Activity class for "My Scans" Screen
  */
-public class MyScansScreenActivity extends HamburgerMenu implements SearchScanFragment.OnFragmentInteractionListener {
+public class MyScansScreenActivity extends HamburgerMenu implements
+        SearchScanFragment.OnFragmentInteractionListener {
     private FirebaseFirestore db;
     ListView qrcodeList;
     ArrayAdapter<QRCode> qrCodeAdapter;
@@ -136,7 +124,8 @@ public class MyScansScreenActivity extends HamburgerMenu implements SearchScanFr
                 if ((datalist.get(i).getName().toLowerCase()).contains(name.toLowerCase().trim())) {
                     datalist2.add(datalist.get(i));
                     QRCodeList = findViewById(R.id.leaderboard_list);
-                    qrCodeAdapter = new QRCodeArrayAdapter(this, datalist2, username, currentUser);
+                    qrCodeAdapter = new QRCodeArrayAdapter(this, datalist2,
+                            username, currentUser);
                     QRCodeList.setAdapter(qrCodeAdapter);
                     c += 1;
                 }
@@ -156,32 +145,28 @@ public class MyScansScreenActivity extends HamburgerMenu implements SearchScanFr
      * @param username username of player whose scans are to be displayed
      */
     public void setList(QRPlayerScans playerScans, QRCodesCollection QRCodes, String username) {
-        playerScans.getReference().get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                Set<String> codes = null;
-                for (QueryDocumentSnapshot doc : task.getResult()) {
-                    if (doc.getId().equals(username)) {
-                        codes = doc.getData().keySet();
-                    }
+        playerScans.getReference().get().addOnCompleteListener(task -> {
+            Set<String> codes = null;
+            for (QueryDocumentSnapshot doc : task.getResult()) {
+                if (doc.getId().equals(username)) {
+                    codes = doc.getData().keySet();
                 }
-                if (codes != null) {
-                    Set<String> finalCodes = codes;
-                    QRCodes.getReference().get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                            for (QueryDocumentSnapshot doc : task.getResult()) {
-                                if (finalCodes.contains(doc.getId())) {
-                                    Log.d(TAG, "VAL:"+doc.getString("Name") + "  " + doc.getString("Score"));
-                                    datalist.add(new QRCode(doc.getString("Name"), Integer.parseInt(doc.getString("Score")), doc.getId()));
-                                }
-                            }
-                            qrCodeAdapter.notifyDataSetChanged();
-                        }
-                    });
-                }
-
             }
+            if (codes != null) {
+                Set<String> finalCodes = codes;
+                QRCodes.getReference().get().addOnCompleteListener(task1 -> {
+                    for (QueryDocumentSnapshot doc : task1.getResult()) {
+                        if (finalCodes.contains(doc.getId())) {
+                            Log.d(TAG, "VAL:"+doc.getString("Name") + "  " +
+                                    doc.getString("Score"));
+                            datalist.add(new QRCode(doc.getString("Name"),
+                                    Integer.parseInt(doc.getString("Score")), doc.getId()));
+                        }
+                    }
+                    qrCodeAdapter.notifyDataSetChanged();
+                });
+            }
+
         });
     }
 }

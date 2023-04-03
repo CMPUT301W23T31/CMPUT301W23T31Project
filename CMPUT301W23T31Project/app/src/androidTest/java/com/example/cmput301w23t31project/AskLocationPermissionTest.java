@@ -16,6 +16,9 @@ import com.robotium.solo.Solo;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 
@@ -85,5 +88,24 @@ public class AskLocationPermissionTest {
         solo.clickOnView(solo.getView(R.id.code_info_button));
         solo.assertCurrentActivity("Wrong Activity", QRCodeStatsActivity.class);
         assertTrue(solo.waitForText("No Location", 1, 3000));
+        qrCodes = new QRCodesCollection();
+        QRCodesCollection finalQrCodes = qrCodes;
+        qrCodes.getReference().get().addOnCompleteListener(
+                new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        for (QueryDocumentSnapshot code : task.getResult()) {
+                            if (Objects.equals(code.getId(),
+                                    "b138867051e7f22a7e1d4befdb1875beb17e28c6464afbdab7532dc7292f7489"
+                            )) {
+                                Map<String, Object> m = code.getData();
+                                m.put("Latitude", "0");
+                                finalQrCodes.getReference().document("b138867051e7f22a7e1d4befdb1875beb17e28c6464afbdab7532dc7292f7489").set(m);
+                                m.put("Longitude", "0");
+                                finalQrCodes.getReference().document("b138867051e7f22a7e1d4befdb1875beb17e28c6464afbdab7532dc7292f7489").set(m);
+                            }
+                        }
+                    }
+                });
     }
 }

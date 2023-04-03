@@ -1,37 +1,24 @@
 package com.example.cmput301w23t31project;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 
+import androidx.appcompat.app.ActionBar;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
-
-import com.bumptech.glide.Glide;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-
 import java.util.ArrayList;
 
-public class SurroundingsActivity extends  HamburgerMenu{
 
+/**
+ * This class serves as the activity where users can see pictures of a QR codes' location
+ */
+public class SurroundingsActivity extends HamburgerMenu{
     private String username;
     private String hash;
     private String currentUser;
@@ -39,9 +26,6 @@ public class SurroundingsActivity extends  HamburgerMenu{
     ArrayAdapter<Image> surroundArrayAdapter;
     ArrayList<Image> datalist;
 
-    private LeaderboardArrayAdapter surroundingsAdapter;
-    private TableLayout table;
-        private ImageView image;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +36,8 @@ public class SurroundingsActivity extends  HamburgerMenu{
         setContentView(R.layout.activity_surroundings);
         datalist = new ArrayList<>();
         surroundList = findViewById(R.id.surround_list);
-        surroundArrayAdapter = new SurroundingsArrayAdapter(SurroundingsActivity.this, datalist);
+        surroundArrayAdapter = new SurroundingsArrayAdapter(SurroundingsActivity.this,
+                datalist);
         surroundList.setAdapter(surroundArrayAdapter);
         Intent intent = getIntent();
         username = intent.getStringExtra("username");
@@ -84,24 +69,24 @@ public class SurroundingsActivity extends  HamburgerMenu{
 
     }
 
+    /**
+     * This method sets images to elements of the array adapter to show on the screen
+     */
     private void setImages() {
         QRImages images = new QRImages();
 
         try {
-            images.getReference().get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                    for (QueryDocumentSnapshot doc: task.getResult()) {
-                        if (/*doc.getId().equals(username) &&*/ doc.getData().containsKey(hash)) {
-                            Log.d("surround hash", hash+ " "+ doc.getId());
-                            String storage = doc.getString(hash);
-                            Log.d("surround", storage);
-                            datalist.add(new Image(storage,doc.getId()));
-                        }
+            images.getReference().get().addOnCompleteListener(task -> {
+                for (QueryDocumentSnapshot doc: task.getResult()) {
+                    if (/*doc.getId().equals(username) &&*/ doc.getData().containsKey(hash)) {
+                        Log.d("surround hash", hash+ " "+ doc.getId());
+                        String storage = doc.getString(hash);
+                        Log.d("surround", storage);
+                        datalist.add(new Image(storage,doc.getId()));
                     }
-                    surroundArrayAdapter.notifyDataSetChanged();
-
                 }
+                surroundArrayAdapter.notifyDataSetChanged();
+
             });
         } catch (Exception e) {
             e.printStackTrace();

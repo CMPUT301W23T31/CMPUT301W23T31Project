@@ -4,7 +4,6 @@ package com.example.cmput301w23t31project;
 import static android.content.ContentValues.TAG;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,18 +13,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
@@ -141,19 +133,16 @@ public class FinishLoginActivity extends AppCompatActivity {
             photo_text.setText("Error occurred uploading image");
             return;
         }
-        imagesRef.putBytes(data).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                Task<Uri> downloadUri = taskSnapshot.getStorage().getDownloadUrl();
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                String generatedFilePath = downloadUri.getResult().toString();
-                Log.d("## Stored path is ", generatedFilePath);
-                images.processQRImageInDatabase(username, "profile", generatedFilePath);
+        imagesRef.putBytes(data).addOnSuccessListener(taskSnapshot -> {
+            Task<Uri> downloadUri = taskSnapshot.getStorage().getDownloadUrl();
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
+            String generatedFilePath = downloadUri.getResult().toString();
+            Log.d("## Stored path is ", generatedFilePath);
+            images.processQRImageInDatabase(username, "profile", generatedFilePath);
         });
         photo_text.setText("Image successfully uploaded");
     }

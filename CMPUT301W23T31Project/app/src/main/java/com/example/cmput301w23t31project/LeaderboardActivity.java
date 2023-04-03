@@ -1,5 +1,6 @@
 package com.example.cmput301w23t31project;
 
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,23 +13,23 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import androidx.appcompat.app.ActionBar;
 import androidx.constraintlayout.widget.ConstraintLayout;
-
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
-
 import java.util.ArrayList;
 import java.util.List;
+
+
 /**
  * A class that displays a leaderboard of all players in the playerbase
  */
 
-public class LeaderboardActivity extends HamburgerMenu implements SearchUserFragment.SearchUserDialogListener{
+public class LeaderboardActivity extends HamburgerMenu implements
+        SearchUserFragment.SearchUserDialogListener{
     private FirebaseFirestore db;
 
     Button highScoreBtn;
@@ -68,11 +69,13 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
         }
         else {
             for (int i = 0; i < l; i++) {
-                if (dataList.get(i).getUsername().toLowerCase().contains(username.trim().toLowerCase())) {
+                if (dataList.get(i).getUsername().toLowerCase().contains(
+                        username.trim().toLowerCase())) {
                     Log.d("The username output:  ", username);
                     dataList2.add(dataList.get(i));
                     LeaderboardList = findViewById(R.id.leaderboard_count_list);
-                    leaderboardArrayAdapter = new LeaderboardArrayAdapter(this, dataList2, username, state);
+                    leaderboardArrayAdapter = new LeaderboardArrayAdapter(this, dataList2,
+                            username, state);
                     LeaderboardList.setAdapter(leaderboardArrayAdapter);
                     c += 1;
                 }
@@ -122,7 +125,8 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
             CodesList.setVisibility(View.VISIBLE);
             stats_layout.setVisibility(View.GONE);
             rank_description.setVisibility(View.GONE);
-            qrCodeArrayAdapter = new NearbyScansArrayAdapter(this,codeList, "leaderboard", username);
+            qrCodeArrayAdapter = new NearbyScansArrayAdapter(this, codeList,
+                    "leaderboard", username);
             CreateHighScores();
             func.sortCodeList(codeList);
             qrCodeArrayAdapter.notifyDataSetChanged();
@@ -132,7 +136,8 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
             CodesList.setVisibility(View.GONE);
             stats_layout.setVisibility(View.VISIBLE);
             rank_description.setVisibility(View.VISIBLE);
-            leaderboardArrayAdapter = new LeaderboardArrayAdapter(this, dataList,username, state);
+            leaderboardArrayAdapter = new LeaderboardArrayAdapter(this, dataList,
+                    username, state);
             final Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 @Override
@@ -176,7 +181,8 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
                     int i = 0;
                     for (DocumentSnapshot doc : list) {
                         if(i<101) {
-                            codeList.add(new QRCode(doc.getString("Name"), Integer.parseInt(doc.getString("Score")), doc.getId()));
+                            codeList.add(new QRCode(doc.getString("Name"),
+                                    Integer.parseInt(doc.getString("Score")), doc.getId()));
                         }
                         i++;
 
@@ -197,33 +203,35 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
      */
     public void CreateLeaderBoard(){
         db = FirebaseFirestore.getInstance();
-        db.collection("PlayerInfo").get() .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-            @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                // after getting the data we are calling on success method
-                // and inside this method we are checking if the received
-                // query snapshot is empty or not.
-                if (!queryDocumentSnapshots.isEmpty()) {
-                    // if the snapshot is not empty we are
-                    // hiding our progress bar and adding
-                    // our data in a list.
-                    List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
-                    for (DocumentSnapshot document : list) {
-                        int i = 0;
-                        String userName = document.getId();
-                        int totalScore = Integer.parseInt(document.getString("Total Score"));
-                        int totalScans = Integer.parseInt(document.getString("Total Scans"));
-                        int highestScoringQR = Integer.parseInt(document.getString("Highest Scoring QR Code"));
-                        int lowestScoringQR = Integer.parseInt(document.getString("Lowest Scoring QR Code"));
-                        int rank = Integer.parseInt(document.getString("Rank"));
-                        dataList.add(i,new Player(userName,totalScans,totalScore,highestScoringQR,lowestScoringQR,rank));
-                        i++;
-                    }
-                    leaderboardArrayAdapter.notifyDataSetChanged();
-                    func.sortList(state, dataList);
-                    leaderboardArrayAdapter.notifyDataSetChanged();
-                    func.giveRank(dataList);
+        db.collection("PlayerInfo").get() .addOnSuccessListener(
+                queryDocumentSnapshots -> {
+            // after getting the data we are calling on success method
+            // and inside this method we are checking if the received
+            // query snapshot is empty or not.
+            if (!queryDocumentSnapshots.isEmpty()) {
+                // if the snapshot is not empty we are
+                // hiding our progress bar and adding
+                // our data in a list.
+                List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+                for (DocumentSnapshot document : list) {
+                    int i = 0;
+                    String userName = document.getId();
+                    int totalScore = Integer.parseInt(document.getString("Total Score"));
+                    int totalScans = Integer.parseInt(document.getString("Total Scans"));
+                    int highestScoringQR = Integer.parseInt(
+                            document.getString("Highest Scoring QR Code"));
+                    int lowestScoringQR = Integer.parseInt(
+                            document.getString("Lowest Scoring QR Code"));
+                    int rank = Integer.parseInt(
+                            document.getString("Rank"));
+                    dataList.add(i,new Player(userName,totalScans,totalScore,highestScoringQR,
+                            lowestScoringQR,rank));
+                    i++;
                 }
+                leaderboardArrayAdapter.notifyDataSetChanged();
+                func.sortList(state, dataList);
+                leaderboardArrayAdapter.notifyDataSetChanged();
+                func.giveRank(dataList);
             }
         });
 
@@ -255,30 +263,29 @@ public class LeaderboardActivity extends HamburgerMenu implements SearchUserFrag
      */
     public void setStats(){
         db = FirebaseFirestore.getInstance();
-        db.collection("PlayerInfo").get() .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-            @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                // after getting the data we are calling on success method
-                // and inside this method we are checking if the received
-                // query snapshot is empty or not.
-                if (!queryDocumentSnapshots.isEmpty()) {
-                    // if the snapshot is not empty we are
-                    // hiding our progress bar and adding
-                    // our data in a list.
-                    List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
-                    for (DocumentSnapshot document : list) {
-                        if (document.getId().equals(username)) {
-                            total_score = document.getString("Total Score");
-                            high_score = document.getString("Highest Scoring QR Code");
-                            count = document.getString("Total Scans");
-                            high_score_text.setText(high_score);
-                            total_score_text.setText(total_score);
-                            count_text.setText(count);
-
-                        }
+        db.collection("PlayerInfo").get() .addOnSuccessListener(
+                queryDocumentSnapshots -> {
+            // after getting the data we are calling on success method
+            // and inside this method we are checking if the received
+            // query snapshot is empty or not.
+            if (!queryDocumentSnapshots.isEmpty()) {
+                // if the snapshot is not empty we are
+                // hiding our progress bar and adding
+                // our data in a list.
+                List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+                for (DocumentSnapshot document : list) {
+                    if (document.getId().equals(username)) {
+                        total_score = document.getString("Total Score");
+                        high_score = document.getString("Highest Scoring QR Code");
+                        count = document.getString("Total Scans");
+                        high_score_text.setText(high_score);
+                        total_score_text.setText(total_score);
+                        count_text.setText(count);
 
                     }
-                }}});}
+
+                }
+            }});}
 
 
     @Override

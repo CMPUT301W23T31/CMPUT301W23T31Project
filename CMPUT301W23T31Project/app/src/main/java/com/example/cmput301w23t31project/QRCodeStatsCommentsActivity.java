@@ -35,7 +35,8 @@ import java.util.Locale;
 /**
  * This class displays statistics for a particular QR code that has been scanned at least once
  */
-public class QRCodeStatsCommentsActivity extends HamburgerMenu implements AddCommentFragment.OnFragmentInteractionListener{
+public class QRCodeStatsCommentsActivity extends HamburgerMenu implements
+        AddCommentFragment.OnFragmentInteractionListener{
     private FirebaseFirestore db;
     TextView nameView;
     TextView scoreView;
@@ -58,7 +59,6 @@ public class QRCodeStatsCommentsActivity extends HamburgerMenu implements AddCom
     String latitude;
     String longitude;
     boolean hasQR;
-    DrawRepresentation visualRepresentation;
 
     /**
      * This method creates the activity to display QR code stats
@@ -95,7 +95,8 @@ public class QRCodeStatsCommentsActivity extends HamburgerMenu implements AddCom
 
         // Setting up Listview
         commentList = new ArrayList<>();
-        qrCodeStatsCommentsAdapter = new QRCodeStatsCommentsAdapter(this, commentList, username);
+        qrCodeStatsCommentsAdapter = new QRCodeStatsCommentsAdapter(this, commentList,
+                username);
         datalist.setAdapter(qrCodeStatsCommentsAdapter);
         QRCodesCollection qr_codes = new QRCodesCollection();
 
@@ -135,7 +136,8 @@ public class QRCodeStatsCommentsActivity extends HamburgerMenu implements AddCom
         viewSurroundings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(QRCodeStatsCommentsActivity.this, SurroundingsActivity.class);
+                Intent intent = new Intent(QRCodeStatsCommentsActivity.this,
+                        SurroundingsActivity.class);
                 intent.putExtra("username", username);
                 intent.putExtra("hash", hash);
                 startActivity(intent);
@@ -184,7 +186,8 @@ public class QRCodeStatsCommentsActivity extends HamburgerMenu implements AddCom
                     intent.putExtra("currentUser", CurrentUser);
                     startActivity(intent);
                 }else{
-                    Toast.makeText(QRCodeStatsCommentsActivity.this,"Code Has No Location",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(QRCodeStatsCommentsActivity.this,
+                            "Code Has No Location",Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -217,6 +220,10 @@ public class QRCodeStatsCommentsActivity extends HamburgerMenu implements AddCom
             scanned.setText(document.getString("TimesScanned"));
         }
     }
+
+    /**
+     * This comment makes the add comment button visible if we are on the comment screen
+     */
     public void setButtonVisibility(){
         add_comment.setVisibility(View.GONE);
         db = FirebaseFirestore.getInstance();
@@ -227,20 +234,12 @@ public class QRCodeStatsCommentsActivity extends HamburgerMenu implements AddCom
                         if (!queryDocumentSnapshots.isEmpty()) {
                             List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
                             for (DocumentSnapshot document : list) {
-                                Log.i("user", username);
-                                //Log.i("user", CurrentUser);
-                                Log.i("Testing QR comment", document.getId());
                                 if(document.getId().equals(CurrentUser)){
                                     if(document.getData().containsKey(hash)){
                                         hasQR = true;
                                         add_comment.setVisibility(View.VISIBLE);
-                                        Log.i("Testing QR comment", document.getId());
-                                        Log.i("user", CurrentUser);
                             }}}
-
-
                         }}});
-
     }
 
     /**
@@ -263,7 +262,9 @@ public class QRCodeStatsCommentsActivity extends HamburgerMenu implements AddCom
                             //List<DocumentSnapshot> list = ;
                             for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
                                 if(document.getString("QRhash").equals(hash)) {
-                                    commentList.add(new Comment(document.getString("user"), document.getString("comment"), document.getString("date")));
+                                    commentList.add(new Comment(document.getString("user"),
+                                            document.getString("comment"),
+                                            document.getString("date")));
                                 }
                             }
                             qrCodeStatsCommentsAdapter.notifyDataSetChanged();
@@ -272,7 +273,13 @@ public class QRCodeStatsCommentsActivity extends HamburgerMenu implements AddCom
                 });
     }
 
-    // Adds new comment to database w/ relevant details
+    /**
+     * This method adds a comment to the database when the user asks to do so
+     * @param comment
+     *      The content of the comment
+     * @param hash
+     *      The hash of the QR code commented on
+     */
     @Override
     public void onDisplayOkPressed(String comment, String hash) {
         commentList.add(new Comment(username,comment,date_text));

@@ -9,12 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 
 
@@ -30,7 +26,8 @@ public class QRCodeStatsCommentsAdapter  extends ArrayAdapter<Comment> {
      * @param context relevant context
      * @param comments comments on given QR code
      */
-    public QRCodeStatsCommentsAdapter (Context context, ArrayList<Comment> comments, String username){
+    public QRCodeStatsCommentsAdapter (Context context,
+                                       ArrayList<Comment> comments, String username){
         super(context,0,comments);
         this.context = context;
         this.username = username;
@@ -49,7 +46,8 @@ public class QRCodeStatsCommentsAdapter  extends ArrayAdapter<Comment> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View view;
         if (convertView == null) {
-            view = LayoutInflater.from(context).inflate(R.layout.content_comment_detail, parent, false);
+            view = LayoutInflater.from(context).inflate(R.layout.content_comment_detail,
+                    parent, false);
         } else {
             view = convertView;
         }

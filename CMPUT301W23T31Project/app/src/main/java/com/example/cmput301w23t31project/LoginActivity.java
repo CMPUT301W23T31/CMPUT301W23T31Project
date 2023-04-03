@@ -83,10 +83,4 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(intent);
         }
     }
-
-    /**
-     * This method returns the Device ID (used here for testing)
-     * @return
-     *      Device ID as a String
-     */
 }

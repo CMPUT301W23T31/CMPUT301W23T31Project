@@ -10,6 +10,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import org.junit.Before;
 import org.junit.Rule;
@@ -67,11 +68,13 @@ public class AddPhotoTest {
         assertNotNull(solo.getView(R.id.button1));
         assertNotNull(solo.getView(R.id.confirm_taken_photo));
         ImageView image = (ImageView) solo.getView(R.id.imageView1);
+        Button button = (Button) solo.getView(R.id.confirm_taken_photo);
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 image.setImageResource(R.drawable.back);
                 image.setVisibility(View.VISIBLE);
+                button.setVisibility(View.VISIBLE);
             }
         });
         solo.clickOnView(solo.getView(R.id.confirm_taken_photo));

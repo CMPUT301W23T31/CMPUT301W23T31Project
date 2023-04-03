@@ -42,16 +42,13 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.zxing.integration.android.IntentIntegrator;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 
@@ -79,7 +76,7 @@ public class ExploreScreenActivity extends HamburgerMenu
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.title_bar);
         TextView title = findViewById(R.id.myTitle);
-        ImageView search = findViewById(R.id.ic_magnify);
+        //ImageView search = findViewById(R.id.ic_magnify);
         title.setText("Explore");
         setContentView(R.layout.activity_explore_screen);
 
@@ -137,16 +134,19 @@ public class ExploreScreenActivity extends HamburgerMenu
                                         getString("Latitude")))==200)){
                                     String coordinates = "No Location";
                                 }else{
-                                    int QRScore = Integer.parseInt(document.getString("Score"));
+                                    int QRScore = Integer.parseInt(
+                                            document.getString("Score"));
                                     float markerColor = Utilities.getMarkerColor(QRScore);
-                                    LatLng location = new LatLng(Double.parseDouble(document.
-                                            getString("Latitude")), Double.parseDouble(
+                                    LatLng location = new LatLng(Double.parseDouble(
+                                            document.getString("Latitude")),
+                                            Double.parseDouble(
                                                     document.getString("Longitude")));
                                     googleMap.addMarker(new MarkerOptions()
                                             .position(location)
                                             .title(document.getString("Name"))
                                             .alpha(0.7f)  // transparency (for layering)
-                                            .icon(BitmapDescriptorFactory.defaultMarker(markerColor)));  // color in hsv (h only)
+                                            .icon(BitmapDescriptorFactory.
+                                                    defaultMarker(markerColor)));  // color in hsv
                                 }
                             }
                         }
@@ -154,7 +154,6 @@ public class ExploreScreenActivity extends HamburgerMenu
         googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(@NonNull Marker marker) {
-                QRCodesCollection qr_codes = new QRCodesCollection();
                 String codeName = marker.getTitle();
                 QRCodesCollection QR_codes = new QRCodesCollection();
                 CollectionReference codes = QR_codes.getReference();
@@ -167,7 +166,6 @@ public class ExploreScreenActivity extends HamburgerMenu
                                     String hash_return =  document.getId();
                                     Intent intent = new Intent(ExploreScreenActivity.
                                             this, QRCodeStatsActivity.class);
-                                    Log.i("TAG", hash_return+"  "+username);
                                     intent.putExtra("Hash", hash_return);
                                     intent.putExtra("username", username);
                                     startActivity(intent);
@@ -179,20 +177,13 @@ public class ExploreScreenActivity extends HamburgerMenu
                 return false;
             }
         });
-
-
         if (!username.equals("NewTestName")) {
             handleNewLocation(latitude, longitude, googleMap);
         }
-
         init(googleMap);
-
-
     }
 
     private void init(GoogleMap g){
-        //Log.d(TAG, "init: initializing");
-
         mSearchText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
@@ -200,21 +191,16 @@ public class ExploreScreenActivity extends HamburgerMenu
                         || actionId == EditorInfo.IME_ACTION_DONE
                         || keyEvent.getAction() == KeyEvent.ACTION_DOWN
                         || keyEvent.getAction() == KeyEvent.KEYCODE_ENTER){
-
                     //execute our method for searching
                     geoLocate(g);
                 }
-
                 return false;
             }
         });
     }
 
     private void geoLocate(GoogleMap g){
-        Log.d(TAG, "geoLocate: geolocating");
-
         String searchString = mSearchText.getText().toString();
-
         Geocoder geocoder = new Geocoder(ExploreScreenActivity.this);
         List<Address> list = new ArrayList<>();
         try{
@@ -222,36 +208,27 @@ public class ExploreScreenActivity extends HamburgerMenu
         }catch (IOException e){
             Log.e(TAG, "geoLocate: IOException: " + e.getMessage() );
         }
-
         if(list.size() > 0){
             Address address = list.get(0);
-
-            Log.d(TAG, "geoLocate: found a location: " + address.toString());
             LatLng latlng = new LatLng(address.getLatitude(), address.getLongitude());
-            moveCamera(latlng,12.0f, g);
-            //Toast.makeText(this, address.toString(), Toast.LENGTH_SHORT).show();
-
+            moveCamera(latlng, g);
         }
     }
 
-    private void moveCamera(LatLng latLng, float zoom, GoogleMap googleMap){
-        Log.d(TAG, "moveCamera: moving the camera to: lat: " + latLng.latitude + ", lng: " + latLng.longitude );
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
+    private void moveCamera(LatLng latLng, GoogleMap googleMap){
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, (float) 12.0));
     }
 
 
-    private void handleNewLocation(Double currentLatitude, Double currentLongitude, GoogleMap googleMap) {
-
-
+    private void handleNewLocation(Double currentLatitude, Double currentLongitude,
+                                   GoogleMap googleMap) {
         LatLng latLng = new LatLng(currentLatitude, currentLongitude);
-
-        //mMap.addMarker(new MarkerOptions().position(new LatLng(currentLatitude, currentLongitude)).title("Current Location"));
         MarkerOptions options = new MarkerOptions()
                 .position(latLng)
                 .title("I am here!");
         googleMap.addMarker(options);
-        //googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(currentLatitude, currentLongitude), 12.0f));
+        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(currentLatitude,
+                currentLongitude), 12.0f));
     }
 
 
@@ -290,16 +267,6 @@ public class ExploreScreenActivity extends HamburgerMenu
         // Return false so that we don't consume the event and the default behavior still occurs
         // (the camera animates to the user's current position).
         return false;
-    }
-
-    /**
-     * This method obtains the dimensions of the user's phone screen
-     * @return
-     *      The dimensions of the screen of the user's phone
-     */
-    public int[] getScreenDimensions() {
-        return new int[]{getResources().getDisplayMetrics().heightPixels,
-                getResources().getDisplayMetrics().widthPixels};
     }
 
 }

@@ -1,34 +1,24 @@
 package com.example.cmput301w23t31project;
 
-import static android.content.ContentValues.TAG;
 
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
 import com.bumptech.glide.Glide;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FieldValue;
-import com.google.firebase.firestore.FirebaseFirestore;
-
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
+
+/**
+ * This class serves as an adapter to help display images of QR code surroundings
+ */
 public class SurroundingsArrayAdapter extends ArrayAdapter<Image> {
-    ArrayList<Image> links;
     private Context context;
 
     public SurroundingsArrayAdapter(@NonNull Context context, ArrayList<Image> links) {
@@ -40,7 +30,8 @@ public class SurroundingsArrayAdapter extends ArrayAdapter<Image> {
 
         View view;
         if (convertView == null) {
-            view = LayoutInflater.from(getContext()).inflate(R.layout.content_surroundings, parent, false);
+            view = LayoutInflater.from(getContext()).inflate(R.layout.content_surroundings,
+                    parent, false);
         }
         else {
             view = convertView;

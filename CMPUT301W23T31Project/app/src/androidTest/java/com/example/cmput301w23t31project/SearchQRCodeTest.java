@@ -49,7 +49,7 @@ public class SearchQRCodeTest {
      * Tests searching nearby QR codes
      */
     @Test
-    public void SearchNearbyQRCodeTest(){
+    public void SearchNearbyQRCodeTest() throws InterruptedException {
         solo.assertCurrentActivity("Wrong Activity", TitleScreenActivity.class);
         solo.clickOnView(solo.getView(R.id.title));
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
@@ -61,15 +61,15 @@ public class SearchQRCodeTest {
 
         solo.clickOnView(solo.getView(R.id.nearby_scans_search_scan_button));
 
-        solo.enterText((EditText) solo.getView(R.id.search_scan), "BonyPikeGashDigUser");
+        solo.enterText((EditText) solo.getView(R.id.search_scan), "BonyPikeBigDimUser");
         solo.clickOnButton("SEARCH");
-        assertTrue(solo.waitForText("BonyPikeGashDigUser", 1, 2000));
+        assertTrue(solo.waitForText("BonyPikeBigDimUser", 1, 2000));
 
         solo.clickOnView(solo.getView(R.id.nearby_scans_search_scan_button));
 
-        solo.enterText((EditText) solo.getView(R.id.search_scan), "gashd");
+        solo.enterText((EditText) solo.getView(R.id.search_scan), "bigdi");
         solo.clickOnButton("SEARCH");
-        assertTrue(solo.waitForText("BonyPikeGashDigUser", 1, 2000));
+        assertTrue(solo.waitForText("BonyPikeBigDimUser", 1, 2000));
 
         solo.clickOnView(solo.getView(R.id.nearby_scans_search_scan_button));
 
@@ -95,15 +95,15 @@ public class SearchQRCodeTest {
 
         solo.clickOnView(solo.getView(R.id.my_scans_search_scan_button));
 
-        solo.enterText((EditText) solo.getView(R.id.search_scan), "BonyPikeGashDigUser");
+        solo.enterText((EditText) solo.getView(R.id.search_scan), "BonyPikeBigDimUser");
         solo.clickOnButton("SEARCH");
-        assertTrue(solo.waitForText("BonyPikeGashDigUser", 1, 2000));
+        assertTrue(solo.waitForText("BonyPikeBigDimUser", 1, 2000));
 
         solo.clickOnView(solo.getView(R.id.my_scans_search_scan_button));
 
-        solo.enterText((EditText) solo.getView(R.id.search_scan), "gashd");
+        solo.enterText((EditText) solo.getView(R.id.search_scan), "bigdi");
         solo.clickOnButton("SEARCH");
-        assertTrue(solo.waitForText("BonyPikeGashDigUser", 1, 2000));
+        assertTrue(solo.waitForText("BonyPikeBigDimUser", 1, 2000));
 
         solo.clickOnView(solo.getView(R.id.my_scans_search_scan_button));
 

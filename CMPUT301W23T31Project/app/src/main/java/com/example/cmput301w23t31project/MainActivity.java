@@ -4,7 +4,6 @@ package com.example.cmput301w23t31project;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -13,19 +12,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-
 import com.bumptech.glide.Glide;
-import com.google.android.gms.tasks.OnCompleteListener;
-
-import com.google.android.gms.tasks.Task;
-
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import java.security.NoSuchAlgorithmException;
@@ -43,7 +34,8 @@ import java.util.Set;
 /**
  * Main Activity Class for home screen of app (main menu)
  */
-public class MainActivity extends HamburgerMenu implements ScanResultsFragment.OnFragmentInteractionListener {
+public class MainActivity extends HamburgerMenu implements
+        ScanResultsFragment.OnFragmentInteractionListener {
     String username;
     TextView score;
     private GpsTracker gpsTracker;
@@ -104,8 +96,11 @@ public class MainActivity extends HamburgerMenu implements ScanResultsFragment.O
 
         // fine location access request
         try {
-            if (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ) {
-                ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 101);
+            if (ContextCompat.checkSelfPermission(getApplicationContext(),
+                    android.Manifest.permission.ACCESS_FINE_LOCATION) !=
+                    PackageManager.PERMISSION_GRANTED ) {
+                ActivityCompat.requestPermissions(this, new String[]{android.Manifest.
+                        permission.ACCESS_FINE_LOCATION}, 101);
             }
         } catch (Exception e){
             e.printStackTrace();
@@ -229,13 +224,15 @@ public class MainActivity extends HamburgerMenu implements ScanResultsFragment.O
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode,
+                resultCode, data);
         // if the intentResult is null then
         // toast a message as "cancelled"
         if (intentResult != null) {
             if (intentResult.getContents() == null) {
                 if (username.equals("NewTestName")) {
-                    new ScanResultsFragment("b138867051e7f22a7e1d4befdb1875beb17e28c6464afbdab7532dc7292f7489"
+                    new ScanResultsFragment(
+                            "b138867051e7f22a7e1d4befdb1875beb17e28c6464afbdab7532dc7292f7489"
                             , username, score, 0, 0).
                             show(getSupportFragmentManager(), "SCAN RESULTS");
                 } else {
@@ -244,7 +241,6 @@ public class MainActivity extends HamburgerMenu implements ScanResultsFragment.O
             } else {
                 // if the intentResult is not null we'll set
                 // the content and format of scan message
-                //new AllowLocationFragment().show(getSupportFragmentManager(), "Ask location permission");
                 String hash = "";
                 try {
                     hash = Utilities.hashQRCode(intentResult.getContents());
@@ -268,7 +264,8 @@ public class MainActivity extends HamburgerMenu implements ScanResultsFragment.O
             super.onActivityResult(requestCode, resultCode, data);
             String n = "";
 
-            new ScanResultsFragment(n, "", score,0,0).show(getSupportFragmentManager(), "SCAN RESULTS");
+            new ScanResultsFragment(n, "", score,0,0).
+                    show(getSupportFragmentManager(), "SCAN RESULTS");
 
         }
 
@@ -291,30 +288,24 @@ public class MainActivity extends HamburgerMenu implements ScanResultsFragment.O
      */
     public static void setHomeScore(QRPlayerScans playerScans, TextView score,
                                     QRCodesCollection QRCodes, String username) {
-        playerScans.getReference().get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                Set<String> codes = null;
-                for (QueryDocumentSnapshot doc : task.getResult()) {
-                    if (doc.getId().equals(username)) {
-                        codes = doc.getData().keySet();
+        playerScans.getReference().get().addOnCompleteListener(task -> {
+            Set<String> codes = null;
+            for (QueryDocumentSnapshot doc : task.getResult()) {
+                if (doc.getId().equals(username)) {
+                    codes = doc.getData().keySet();
+                }
+            }
+            if (codes != null) {
+                Set<String> finalCodes = codes;
+                QRCodes.getReference().get().addOnCompleteListener(task1 -> {
+                    int total_score = 0;
+                    for (QueryDocumentSnapshot doc : task1.getResult()) {
+                        if (finalCodes.contains(doc.getId())) {
+                            total_score += Integer.parseInt(doc.getString("Score"));
+                        }
                     }
-                }
-                if (codes != null) {
-                    Set<String> finalCodes = codes;
-                    QRCodes.getReference().get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                int total_score = 0;
-                                for (QueryDocumentSnapshot doc : task.getResult()) {
-                                    if (finalCodes.contains(doc.getId())) {
-                                        total_score += Integer.parseInt(doc.getString("Score"));
-                                    }
-                                }
-                                score.setText(String.valueOf(total_score));
-                            }
-                    });
-                }
+                    score.setText(String.valueOf(total_score));
+                });
             }
         });
     }
@@ -335,18 +326,16 @@ public class MainActivity extends HamburgerMenu implements ScanResultsFragment.O
         double minLongitude = crntLongitude - (20/111.12)*Math.cos(crntLatitude);
         double maxLongitude = crntLongitude + (20/111.12)*Math.cos(crntLatitude);
 
-        QRCodes.getReference().get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                for (QueryDocumentSnapshot doc : task.getResult()) {
-                    double foundLat = Double.parseDouble(doc.getString("Latitude"));
-                    double foundLng = Double.parseDouble(doc.getString("Longitude"));
-                    if ((minLatitude<= foundLat && foundLat <= maxLatitude)&&(minLongitude<= foundLng && foundLng <= maxLongitude)) {
-                        Log.d("Codes nearby:",doc.getString("Name"));
-                    }
+        QRCodes.getReference().get().addOnCompleteListener(task -> {
+            for (QueryDocumentSnapshot doc : task.getResult()) {
+                double foundLat = Double.parseDouble(doc.getString("Latitude"));
+                double foundLng = Double.parseDouble(doc.getString("Longitude"));
+                if ((minLatitude<= foundLat && foundLat <= maxLatitude)&&(minLongitude<=
+                        foundLng && foundLng <= maxLongitude)) {
+                    Log.d("Codes nearby:",doc.getString("Name"));
                 }
-
             }
+
         });
 
     }

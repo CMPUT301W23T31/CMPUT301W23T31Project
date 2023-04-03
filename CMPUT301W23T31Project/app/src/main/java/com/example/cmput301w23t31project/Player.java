@@ -44,7 +44,8 @@ public class Player implements Serializable {
      * @param lowestScoringQR score of lowest-scoring QR code scanned by player
      * @param rank rank position by total score (position in global leaderboard)
      */
-    public Player(String username, int count, int score, int highestScoringQR, int lowestScoringQR,int rank) {
+    public Player(String username, int count, int score, int highestScoringQR,
+                  int lowestScoringQR,int rank) {
         this.username = username;
         this.count = count;
         this.totalScore = score;

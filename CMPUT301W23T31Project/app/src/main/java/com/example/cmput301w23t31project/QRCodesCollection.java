@@ -1,16 +1,9 @@
 package com.example.cmput301w23t31project;
 
+
 import android.util.Log;
-
-
-import androidx.annotation.NonNull;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -44,30 +37,28 @@ public class QRCodesCollection extends QRDatabase {
      */
     public void processQRCodeInDatabase(String name, String score, String hash) {
         CollectionReference codes = getReference();
-        collection.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    for (QueryDocumentSnapshot document: task.getResult()) {
-                        if (document.getId().equals(hash)) {
-                            String timesScanned = String.valueOf(Integer.
-                                    parseInt(Objects.requireNonNull(document.getString("TimesScanned"))) + 1);
-                            if(!(latitude == 200)){
-                                Log.d("Updates: ", ""+latitude);
-                                codes.document(hash).update("Latitude", String.valueOf(latitude));
-                                codes.document(hash).update("Longitude", String.valueOf(longitude));
-                            } else {
-                                codes.document(hash).update("Latitude", String.valueOf(200));
-                                codes.document(hash).update("Longitude", String.valueOf(200));
-                            }
-                            codes.document(hash).update("TimesScanned", timesScanned);
-                            codes.document(hash).update("LastScanned", Utilities.getCurrentDate());
-                            return;
+        collection.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                for (QueryDocumentSnapshot document: task.getResult()) {
+                    if (document.getId().equals(hash)) {
+                        String timesScanned = String.valueOf(Integer.
+                                parseInt(Objects.requireNonNull(
+                                        document.getString("TimesScanned"))) + 1);
+                        if(!(latitude == 200)){
+                            Log.d("Updates: ", ""+latitude);
+                            codes.document(hash).update("Latitude", String.valueOf(latitude));
+                            codes.document(hash).update("Longitude",String.valueOf(longitude));
+                        } else {
+                            codes.document(hash).update("Latitude", String.valueOf(200));
+                            codes.document(hash).update("Longitude", String.valueOf(200));
                         }
+                        codes.document(hash).update("TimesScanned", timesScanned);
+                        codes.document(hash).update("LastScanned", Utilities.getCurrentDate());
+                        return;
                     }
-                    Log.d("RECORDED:", ""+latitude+longitude);
-                    addQRCodeToDatabase(name, score, hash, latitude, longitude);
                 }
+                Log.d("RECORDED:", ""+latitude+longitude);
+                addQRCodeToDatabase(name, score, hash, latitude, longitude);
             }
         });
     }
@@ -83,7 +74,8 @@ public class QRCodesCollection extends QRDatabase {
      * @param latitude latitude of QR code
      * @param longitude longitude of QR code
      */
-    public void addQRCodeToDatabase(String name, String score, String hash, double latitude, double longitude) {
+    public void addQRCodeToDatabase(String name, String score, String hash, double latitude,
+                                    double longitude) {
         // Get QR code name and score
         CollectionReference codes = getReference();
 
