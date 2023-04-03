@@ -53,8 +53,8 @@ public class MyScansScreenActivity extends HamburgerMenu implements
         Button searchScan;
         Intent intent = getIntent();
 
-        username = intent.getStringExtra("username");
-        currentUser = intent.getStringExtra("crnt_username");
+        username = intent.getStringExtra("Username");
+        currentUser = intent.getStringExtra("currentUser");
         searchScan = findViewById(R.id.my_scans_search_scan_button);
         qrcodeList = findViewById(R.id.leaderboard_list);
 
@@ -108,8 +108,8 @@ public class MyScansScreenActivity extends HamburgerMenu implements
         int c =0;
         int l = datalist.size();
         Intent intent = getIntent();
-        username = intent.getStringExtra("username");
-        currentUser = intent.getStringExtra("crnt_username");
+        username = intent.getStringExtra("Username");
+        currentUser = intent.getStringExtra("currentUser");
         datalist2 = new ArrayList<>();
         if(name.trim().isEmpty()){
             new QRCodeNotFoundFragment().show(getSupportFragmentManager(), "Error Message");

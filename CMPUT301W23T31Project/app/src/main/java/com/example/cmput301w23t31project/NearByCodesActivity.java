@@ -79,8 +79,8 @@ public class NearByCodesActivity extends HamburgerMenu implements
 
         Intent intent = getIntent();
 
-        username = intent.getStringExtra("username");
-        currentUser = intent.getStringExtra("crnt_username");
+        username = intent.getStringExtra("Username");
+        currentUser = intent.getStringExtra("currentUser");
         qrcodeList = findViewById(R.id.leaderboard_list);
 
         // setting up listview of scans

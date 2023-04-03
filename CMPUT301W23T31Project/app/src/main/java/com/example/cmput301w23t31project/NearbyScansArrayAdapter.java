@@ -111,7 +111,8 @@ public class NearbyScansArrayAdapter extends ArrayAdapter<QRCode> {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, QRCodeStatsActivity.class);
-                intent.putExtra("username",username);
+                intent.putExtra("Username",username);
+                intent.putExtra("currentUser", username);
                 intent.putExtra("Hash", hash);
                 context.startActivity(intent);
             }

@@ -35,6 +35,7 @@ public class PlayerInfoScreenActivity extends HamburgerMenu {
     TextView low_score;
     TextView score;
     private String username;
+    private String currentUser;
     String password;
 
     /**
@@ -52,9 +53,9 @@ public class PlayerInfoScreenActivity extends HamburgerMenu {
         setContentView(R.layout.activity_player_info_screen);
 
         Intent intent = getIntent();
-        username = intent.getStringExtra("username");
+        username = intent.getStringExtra("Username");
         password = intent.getStringExtra("password");
-
+        currentUser = intent.getStringExtra("currentUser");
         // getting needed attributes
         viewScanBtn = findViewById(R.id.player_info_see_scans_button);
         myAccountBtn = findViewById(R.id.player_info_my_account_button);
@@ -94,8 +95,8 @@ public class PlayerInfoScreenActivity extends HamburgerMenu {
                 //scans.processPlayerScansInDatabase(username);
                 Intent intent = new Intent(PlayerInfoScreenActivity.this,
                         MyScansScreenActivity.class);
-                intent.putExtra("username", username);
-                intent.putExtra("crnt_username", username);
+                intent.putExtra("Username", username);
+                intent.putExtra("currentUser", currentUser);
                 startActivity(intent);
             }
         });
@@ -107,7 +108,8 @@ public class PlayerInfoScreenActivity extends HamburgerMenu {
                 Intent intent = new Intent(PlayerInfoScreenActivity.this,
                         MyAccountScreenActivity.class);
                 intent.putExtra("player", username);
-                intent.putExtra("username", username);
+                intent.putExtra("Username", username);
+                intent.putExtra("currentUser", currentUser);
                 startActivity(intent);
             }
         });
@@ -133,7 +135,7 @@ public class PlayerInfoScreenActivity extends HamburgerMenu {
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
-        return useHamburgerMenu(item, username);
+        return useHamburgerMenu(item, currentUser);
 
     }
 

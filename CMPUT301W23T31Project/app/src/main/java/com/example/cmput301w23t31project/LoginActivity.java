@@ -77,7 +77,8 @@ public class LoginActivity extends AppCompatActivity {
         if (found == 0) {
             Intent intent = new Intent(
                     LoginActivity.this, FinishLoginActivity.class);
-            intent.putExtra("username", username.getText().toString());
+            intent.putExtra("Username", username.getText().toString());
+            intent.putExtra("currentUser", username.getText().toString());
             intent.putExtra("email", email.getText().toString());
             intent.putExtra("phone", phone.getText().toString());
             startActivity(intent);

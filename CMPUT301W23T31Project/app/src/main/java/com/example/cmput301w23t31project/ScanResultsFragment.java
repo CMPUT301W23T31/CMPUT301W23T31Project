@@ -192,6 +192,7 @@ public class ScanResultsFragment extends DialogFragment {
                 Intent intent = new Intent(getContext(), CameraActivity.class);
                 intent.putExtra("ImageDivider", hash);
                 intent.putExtra("Username", username);
+                intent.putExtra("currentUser", username);
                 startActivity(intent);
             }
         });
@@ -228,7 +229,7 @@ public class ScanResultsFragment extends DialogFragment {
                             processQRCode( name,  String.valueOf(score), hash);
                             Intent intent = new Intent(getContext(), QRCodeStatsActivity.class);
                             intent.putExtra("Hash", hash);
-                            intent.putExtra("username", username);
+                            intent.putExtra("Username", username);
                             intent.putExtra("currentUser", username);
                             intent.putExtra("score", String.valueOf(score));
                             intent.putExtra("name", name);

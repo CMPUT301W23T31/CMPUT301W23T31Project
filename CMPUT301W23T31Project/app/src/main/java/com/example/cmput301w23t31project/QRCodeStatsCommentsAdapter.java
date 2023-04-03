@@ -69,8 +69,8 @@ public class QRCodeStatsCommentsAdapter  extends ArrayAdapter<Comment> {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, PlayerProfileActivity.class);
-                intent.putExtra("username", comment.getUserName());
-                intent.putExtra("crnt_username", username);
+                intent.putExtra("Username", comment.getUserName());
+                intent.putExtra("currentUser", username);
                 context.startActivity(intent);
             }
         });

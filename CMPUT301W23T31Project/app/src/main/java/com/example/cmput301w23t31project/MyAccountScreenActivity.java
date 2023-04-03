@@ -23,6 +23,7 @@ public class MyAccountScreenActivity extends HamburgerMenu {
     private String username;
     String DeviceID;
     ImageView image;
+    private String currentUser;
     /**
      * On Create method
      * Sets up button (and other) functionality
@@ -38,7 +39,8 @@ public class MyAccountScreenActivity extends HamburgerMenu {
         title.setText("MY ACCOUNT");
         setContentView(R.layout.activity_my_account_screen);
         Intent intent = getIntent();
-        username = intent.getStringExtra("username");
+        username = intent.getStringExtra("Username");
+        currentUser = intent.getStringExtra("currentUser");
         TextView player_name = findViewById(R.id.account_info_name);
         TextView username = findViewById(R.id.account_info_total_username);
         TextView email = findViewById(R.id.account_info_email);
@@ -79,7 +81,7 @@ public class MyAccountScreenActivity extends HamburgerMenu {
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
-        return useHamburgerMenu(item, username);
+        return useHamburgerMenu(item, currentUser);
 
     }
 

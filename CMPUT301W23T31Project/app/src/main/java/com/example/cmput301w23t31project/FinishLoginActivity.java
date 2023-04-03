@@ -45,7 +45,7 @@ public class FinishLoginActivity extends AppCompatActivity {
         Intent oldIntent = getIntent();
         DeviceID = new MyDeviceID(this).getInstance();
         // Get the previous login page's information, and access necessary xml fields
-        username = oldIntent.getStringExtra("username");
+        username = oldIntent.getStringExtra("Username");
         String email = oldIntent.getStringExtra("email");
         String phone = oldIntent.getStringExtra("phone");
         EditText player_name = findViewById(R.id.finish_login_activity_player_name);
@@ -71,7 +71,8 @@ public class FinishLoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(
                         FinishLoginActivity.this, MainActivity.class);
-                intent.putExtra("username", username);
+                intent.putExtra("Username", username);
+                intent.putExtra("currentUser", username);
                 intent.putExtra("email", email);
                 intent.putExtra("phone", phone);
                 intent.putExtra("playername", player_name.getText().toString());
@@ -86,6 +87,7 @@ public class FinishLoginActivity extends AppCompatActivity {
                 Intent intent = new Intent(
                         FinishLoginActivity.this, CameraActivity.class);
                 intent.putExtra("Username", username);
+                intent.putExtra("currentUser", username);
                 intent.putExtra("ImageDivider", "profile");
                 startActivity(intent);
                 photo_text.setText("Image successfully taken");

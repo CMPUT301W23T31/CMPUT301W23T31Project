@@ -18,6 +18,7 @@ import java.util.Objects;
  */
 public class AppInfoScreenActivity extends HamburgerMenu {
     private String username;
+    private String currentUser;
     @SuppressLint("SetTextI18n")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,7 +29,8 @@ public class AppInfoScreenActivity extends HamburgerMenu {
         title.setText("App Info");
         setContentView(R.layout.fragment_app_info_screen);
         Intent intent = getIntent();
-        username = intent.getStringExtra("username");
+        username = intent.getStringExtra("Username");
+        currentUser = intent.getStringExtra("currentUser");
     }
 
     @Override
@@ -40,7 +42,7 @@ public class AppInfoScreenActivity extends HamburgerMenu {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
-        return useHamburgerMenu(item, username);
+        return useHamburgerMenu(item, currentUser);
 
     }
 }

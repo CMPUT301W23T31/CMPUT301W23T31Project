@@ -61,7 +61,7 @@ public class QRCodeStatsActivity extends HamburgerMenu {
         setContentView(R.layout.activity_qr_code_stats_screen);
         Intent intent = getIntent();
         hash = intent.getStringExtra("Hash");
-        username = intent.getStringExtra("username");
+        username = intent.getStringExtra("Username");
         Log.d("user",username);
         CurrentUser = intent.getStringExtra("currentUser");
         boolean res = intent.getStringExtra("user")==null;
@@ -80,7 +80,7 @@ public class QRCodeStatsActivity extends HamburgerMenu {
         scanbtn = findViewById(R.id.qr_code_stats_comment_like_button);
         // Setting up listview
         playerList = new ArrayList<>();
-        qrCodeStatsAdapter = new QRCodeStatsAdapter(this, playerList, username);
+        qrCodeStatsAdapter = new QRCodeStatsAdapter(this, playerList, username, CurrentUser);
         datalist.setAdapter(qrCodeStatsAdapter);
         QRCodesCollection qr_codes = new QRCodesCollection();
         viewSurroundings = findViewById(R.id.qr_code_stats_comments_view_surroundings);
@@ -107,7 +107,7 @@ public class QRCodeStatsActivity extends HamburgerMenu {
                 Intent intent = new Intent(QRCodeStatsActivity.this,
                         QRCodeStatsCommentsActivity.class);
                 intent.putExtra("Hash", hash);
-                intent.putExtra("username", username);
+                intent.putExtra("Username", username);
                 intent.putExtra("currentUser",CurrentUser);
                 intent.putExtra("latitude",String.valueOf(latitude));
                 intent.putExtra("longitude",String.valueOf(longitude));
@@ -131,7 +131,7 @@ public class QRCodeStatsActivity extends HamburgerMenu {
                         intent.putExtra("latitude", String.valueOf(latitude));
                         intent.putExtra("longitude", String.valueOf(longitude));
                         intent.putExtra("currentUser",CurrentUser);
-                        intent.putExtra("username", username);
+                        intent.putExtra("Username", username);
                         startActivity(intent);
                     }else{
                         Toast.makeText(QRCodeStatsActivity.this,"Code Has No Location",
@@ -171,7 +171,7 @@ public class QRCodeStatsActivity extends HamburgerMenu {
             public void onClick(View v) {
                 Intent intent = new Intent(QRCodeStatsActivity.this,
                         SurroundingsActivity.class);
-                intent.putExtra("username", username);
+                intent.putExtra("Username", username);
                 intent.putExtra("hash", hash);
                 intent.putExtra("currentUser",CurrentUser);
                 startActivity(intent);

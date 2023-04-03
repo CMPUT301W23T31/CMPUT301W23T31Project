@@ -23,16 +23,19 @@ import java.util.ArrayList;
 public class QRCodeStatsAdapter extends ArrayAdapter<Player> implements Serializable {
     private Context context;
     String username;
+    String currentUser;
 
     /**
      * Instantiates a new adapter
      * @param context relevant context
      * @param players player profiles who have scanned QR code
      */
-    public QRCodeStatsAdapter (Context context, ArrayList<Player> players, String username){
+    public QRCodeStatsAdapter (Context context, ArrayList<Player> players, String username,
+                               String currentUser){
         super(context,0,players);
         this.context = context;
         this.username = username;
+        this.currentUser = currentUser;
     }
 
     /**
@@ -70,8 +73,8 @@ public class QRCodeStatsAdapter extends ArrayAdapter<Player> implements Serializ
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, PlayerProfileActivity.class);
-                intent.putExtra("username", player.getUsername());
-                intent.putExtra("crnt_username", username);
+                intent.putExtra("Username", player.getUsername());
+                intent.putExtra("currentUser", currentUser);
                 context.startActivity(intent);
             }
         });
