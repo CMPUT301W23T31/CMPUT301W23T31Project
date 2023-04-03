@@ -123,13 +123,6 @@ Date: Unknown
 License: Unknown
 Purpose: To learn how to retrieve the current date in yyyy-MM-dd format
 
-
-Link: //stackoverflow.com/questions/7344497/android-canvas-draw-rectangle
-Author: DonGru, edited by Juan Cortes
-Date: Sep 8, 2011; edited Apr 27, 2013
-License: https://creativecommons.org/licenses/by-sa/3.0/
-Purpose: To help set up how to draw the visual representation, to learn how to do it
-
 Link: https://www.dicebear.com/how-to-use/http-api
 Author: OpenSource Library
 License:https://github.com/dicebear/api/blob/main/LICENSE
