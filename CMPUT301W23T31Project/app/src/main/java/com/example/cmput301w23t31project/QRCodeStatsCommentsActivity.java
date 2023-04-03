@@ -181,6 +181,7 @@ public class QRCodeStatsCommentsActivity extends HamburgerMenu implements AddCom
                     intent.putExtra("latitude", String.valueOf(latitude));
                     intent.putExtra("longitude", String.valueOf(longitude));
                     intent.putExtra("username", username);
+                    intent.putExtra("currentUser", CurrentUser);
                     startActivity(intent);
                 }else{
                     Toast.makeText(QRCodeStatsCommentsActivity.this,"Code Has No Location",Toast.LENGTH_SHORT).show();
@@ -262,7 +263,7 @@ public class QRCodeStatsCommentsActivity extends HamburgerMenu implements AddCom
                             //List<DocumentSnapshot> list = ;
                             for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
                                 if(document.getString("QRhash").equals(hash)) {
-                                    commentList.add(new Comment(document.getString("user"), document.getString("comment"), document.getString("date"), document.getString("QRhash")));
+                                    commentList.add(new Comment(document.getString("user"), document.getString("comment"), document.getString("date")));
                                 }
                             }
                             qrCodeStatsCommentsAdapter.notifyDataSetChanged();
@@ -274,7 +275,7 @@ public class QRCodeStatsCommentsActivity extends HamburgerMenu implements AddCom
     // Adds new comment to database w/ relevant details
     @Override
     public void onDisplayOkPressed(String comment, String hash) {
-        commentList.add(new Comment(username,comment,date_text,hash));
+        commentList.add(new Comment(username,comment,date_text));
         qrCodeStatsCommentsAdapter.notifyDataSetChanged();
         CommentsCollection collectionReferenceAccount = new CommentsCollection();
         collectionReferenceAccount.addCommentToCollection(username, comment, date_text, hash);

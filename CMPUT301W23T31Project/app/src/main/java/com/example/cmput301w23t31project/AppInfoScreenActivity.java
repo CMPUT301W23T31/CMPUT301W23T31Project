@@ -1,17 +1,15 @@
 package com.example.cmput301w23t31project;
 
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
-
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.google.zxing.integration.android.IntentIntegrator;
+import java.util.Objects;
 
 
 /**
@@ -20,9 +18,11 @@ import com.google.zxing.integration.android.IntentIntegrator;
  */
 public class AppInfoScreenActivity extends HamburgerMenu {
     private String username;
+    @SuppressLint("SetTextI18n")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        Objects.requireNonNull(getSupportActionBar()).
+                setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.title_bar);
         TextView title = findViewById(R.id.myTitle);
         title.setText("App Info");
@@ -30,6 +30,7 @@ public class AppInfoScreenActivity extends HamburgerMenu {
         Intent intent = getIntent();
         username = intent.getStringExtra("username");
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();

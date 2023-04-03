@@ -7,22 +7,19 @@ package com.example.cmput301w23t31project;
  */
 public class Comment {
     private String userName;
-    private String comment;
+    private final String comment;
     private String date;
-    private String QRHash;
 
     /**
      * Instantiates new Comment object (created when comment is added to code)
      * @param username username of player that made/added comment
      * @param comment body of comment
      * @param date date comment is made (will be current date at time of creation)
-     * @param QRHash hash of QR code being commented on (for identification)
      */
-    public Comment(String username, String comment, String date, String QRHash) {
+    public Comment(String username, String comment, String date) {
         this.userName = username;
         this.comment = comment;
         this.date = date;
-        this.QRHash = QRHash;
     }
 
     public String getUserName() {
@@ -43,10 +40,6 @@ public class Comment {
 
     public void setDate(String date) {
         this.date = date;
-    }
-
-    public String getQRHash() {
-        return QRHash;
     }
 
 }
