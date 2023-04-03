@@ -310,6 +310,11 @@ public class MainActivity extends HamburgerMenu implements
         });
     }
 
+    /**
+     * This method finds QR codes near the user
+     * @param QRCodes
+     *      Collection of QR codes
+     */
     public void findNearbyCodes(QRCodesCollection QRCodes){
         double crntLatitude = 0;
         double crntLongitude = 0;

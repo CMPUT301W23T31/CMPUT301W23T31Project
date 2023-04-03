@@ -17,6 +17,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.ArrayList;
 
 
+/**
+ * This class acts as an adapter to help user see nearby QR code scans
+ */
 public class NearbyScansArrayAdapter extends ArrayAdapter<QRCode> {
     private ArrayList<QRCode> QRCodes;
     private Context context;

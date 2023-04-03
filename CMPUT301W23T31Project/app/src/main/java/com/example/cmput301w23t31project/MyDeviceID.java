@@ -5,6 +5,9 @@ import android.content.Context;
 import android.provider.Settings;
 
 
+/**
+ * This class allows user to access the device ID using the singleton pattern
+ */
 public class MyDeviceID {
     String Id;
     public MyDeviceID(Context context) {

@@ -22,6 +22,9 @@ import java.util.ArrayList;
 //https://stackoverflow.com/questions/3067530/how-can-i-get-minimum-and-maximum-latitude-and-longitude-using-current-location
 
 
+/**
+ * This class represents an activity to view nearby QR codes within 20km
+ */
 public class NearByCodesActivity extends HamburgerMenu implements
         SearchScanFragment.OnFragmentInteractionListener{
 
@@ -32,6 +35,12 @@ public class NearByCodesActivity extends HamburgerMenu implements
     String username;
     String currentUser;
     NearByCodesFunctions near = new NearByCodesFunctions();
+
+    /**
+     * This function is invoked when the user tries to make a search
+     * @param name
+     *      The search value
+     */
     @Override
     public void onDisplayOkPressed(String name) {
         int c =0;
@@ -117,8 +126,11 @@ public class NearByCodesActivity extends HamburgerMenu implements
 
     }
 
-
-
+    /**
+     * This method finds nearby QR codes
+     * @param QRCodes
+     *      Collection of QR codes
+     */
     public void findNearbyCodes(QRCodesCollection QRCodes){
         double crntLatitude = 0;
         double crntLongitude = 0;

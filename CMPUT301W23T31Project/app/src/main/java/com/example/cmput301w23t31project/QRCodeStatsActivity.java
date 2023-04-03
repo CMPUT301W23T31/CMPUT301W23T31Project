@@ -222,7 +222,7 @@ public class QRCodeStatsActivity extends HamburgerMenu {
     }
 
     /**
-     * This method 
+     * This method sets up views with relevant data regarding QR code statistics
      */
     public void setexceptStats(){
 
