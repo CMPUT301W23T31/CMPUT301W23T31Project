@@ -277,6 +277,7 @@ public class MainActivity extends HamburgerMenu implements
      */
     @Override
     public void onOkPressed(){
+        setHomeScore(new QRPlayerScans(), score, new QRCodesCollection(), username);
     }
 
     /**

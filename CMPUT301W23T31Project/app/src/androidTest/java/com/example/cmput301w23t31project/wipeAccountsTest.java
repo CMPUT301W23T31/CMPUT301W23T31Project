@@ -50,6 +50,7 @@ public class wipeAccountsTest {
         QRCodesCollection codesCollection = new QRCodesCollection();
         QRPlayerScans playerScans = new QRPlayerScans();
         PlayerInfoCollection info = new PlayerInfoCollection();
+        QRImages images = new QRImages();
         accounts.getReference().document("TestName").delete();
         accounts.getReference().document("NewTestName").delete();
         codesCollection.getReference().document(
@@ -57,6 +58,7 @@ public class wipeAccountsTest {
                 delete();
         playerScans.getReference().document("NewTestName").delete();
         info.getReference().document("NewTestName").delete();
+        images.getReference().document("NewTestName").delete();
     }
 
     /**
