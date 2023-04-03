@@ -85,7 +85,7 @@ public class ExploreScreenActivity extends HamburgerMenu
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         Intent intent = getIntent();
-        username = intent.getStringExtra("username");
+        username = intent.getStringExtra("Username");
         latitude = Double.parseDouble(intent.getStringExtra("latitude"));
         longitude = Double.parseDouble(intent.getStringExtra("longitude"));
         currentUser = intent.getStringExtra("currentUser");
@@ -97,8 +97,8 @@ public class ExploreScreenActivity extends HamburgerMenu
             public void onClick(View v) {
                 Intent intent = new Intent(ExploreScreenActivity.this,
                         NearByCodesActivity.class);
-                intent.putExtra("username", username);
-                intent.putExtra("crnt_username", username);
+                intent.putExtra("Username", username);
+                intent.putExtra("currentUser", currentUser);
                 startActivity(intent);
             }
         });
@@ -166,7 +166,8 @@ public class ExploreScreenActivity extends HamburgerMenu
                                     Intent intent = new Intent(ExploreScreenActivity.
                                             this, QRCodeStatsActivity.class);
                                     intent.putExtra("Hash", hash_return);
-                                    intent.putExtra("username", username);
+                                    intent.putExtra("Username", username);
+                                    intent.putExtra("currentUser", currentUser);
                                     startActivity(intent);
                                 }
                             }

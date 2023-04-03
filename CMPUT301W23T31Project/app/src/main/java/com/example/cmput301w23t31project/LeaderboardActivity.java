@@ -45,6 +45,7 @@ public class LeaderboardActivity extends HamburgerMenu implements
     TextView count_text;
     TextView stat_text;
     private String username;
+    private String currentUser;
     private String state;
     private ArrayList<Player> dataList;
     private ArrayList<QRCode> codeList;
@@ -104,7 +105,8 @@ public class LeaderboardActivity extends HamburgerMenu implements
         Intent intent = getIntent();
 
         state = intent.getStringExtra("state");
-        username = intent.getStringExtra("username");
+        username = intent.getStringExtra("Username");
+        currentUser = intent.getStringExtra("currentUser");
         dataList = new ArrayList<>();
         codeList = new ArrayList<>();
 
@@ -137,7 +139,7 @@ public class LeaderboardActivity extends HamburgerMenu implements
             stats_layout.setVisibility(View.VISIBLE);
             rank_description.setVisibility(View.VISIBLE);
             leaderboardArrayAdapter = new LeaderboardArrayAdapter(this, dataList,
-                    username, state);
+                    currentUser, state);
             final Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 @Override
@@ -297,7 +299,7 @@ public class LeaderboardActivity extends HamburgerMenu implements
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
-        return useHamburgerMenu(item, username);
+        return useHamburgerMenu(item, currentUser);
 
     }
 
@@ -310,7 +312,8 @@ public class LeaderboardActivity extends HamburgerMenu implements
         state = "HIGHSCORE";
         finish();
         Intent intent = new Intent(this, LeaderboardActivity.class);
-        intent.putExtra("username", username);
+        intent.putExtra("Username", username);
+        intent.putExtra("currentUser", currentUser);
         intent.putExtra("state", "HIGHSCORE");
         startActivity(intent);
     }
@@ -324,7 +327,8 @@ public class LeaderboardActivity extends HamburgerMenu implements
         state="COUNT";
         finish();
         Intent intent = new Intent(this, LeaderboardActivity.class);
-        intent.putExtra("username", username);
+        intent.putExtra("Username", username);
+        intent.putExtra("currentUser", currentUser);
         intent.putExtra("state", "COUNT");
         startActivity(intent);
     }
@@ -338,7 +342,8 @@ public class LeaderboardActivity extends HamburgerMenu implements
         state="TOTALSCORE";
         finish();
         Intent intent = new Intent(this, LeaderboardActivity.class);
-        intent.putExtra("username", username);
+        intent.putExtra("Username", username);
+        intent.putExtra("currentUser", currentUser);
         intent.putExtra("state", "TOTALSCORE");
         startActivity(intent);
     }
@@ -352,7 +357,8 @@ public class LeaderboardActivity extends HamburgerMenu implements
         state="TOPCODES";
         finish();
         Intent intent = new Intent(this, LeaderboardActivity.class);
-        intent.putExtra("username", username);
+        intent.putExtra("Username", username);
+        intent.putExtra("currentUser", currentUser);
         intent.putExtra("state", "TOPCODES");
         startActivity(intent);
     }

@@ -40,7 +40,7 @@ public class SurroundingsActivity extends HamburgerMenu{
                 datalist);
         surroundList.setAdapter(surroundArrayAdapter);
         Intent intent = getIntent();
-        username = intent.getStringExtra("username");
+        username = intent.getStringExtra("Username");
         hash = intent.getStringExtra("hash");
         currentUser = intent.getStringExtra("currentUser");
         setImages();

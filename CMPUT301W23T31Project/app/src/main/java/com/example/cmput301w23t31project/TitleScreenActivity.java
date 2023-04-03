@@ -57,7 +57,8 @@ public class TitleScreenActivity extends AppCompatActivity {
                             DeviceID)) {
                         intent = new Intent(TitleScreenActivity.
                                 this, MainActivity.class);
-                        intent.putExtra("username", account.getId());
+                        intent.putExtra("Username", account.getId());
+                        intent.putExtra("currentUser", account.getId());
 
                         startActivity(intent);
                         return;
@@ -66,7 +67,8 @@ public class TitleScreenActivity extends AppCompatActivity {
 
                 // Otherwise, we proceed to log the user in for the first (only) time
                 intent = new Intent(TitleScreenActivity.this, LoginActivity.class);
-                intent.putExtra("username", "");
+                intent.putExtra("Username", "");
+                intent.putExtra("currentUser", "");
                 startActivity(intent);
             }
 

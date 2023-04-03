@@ -57,8 +57,8 @@ public class PlayerProfileActivity extends HamburgerMenu {
 
 
         Intent intent = getIntent();
-        username = intent.getStringExtra("username");
-        crnt_username = intent.getStringExtra("crnt_username");
+        username = intent.getStringExtra("Username");
+        crnt_username = intent.getStringExtra("currentUser");
         Log.i("myusername",crnt_username);
         Log.i("rando",username);
 
@@ -104,8 +104,8 @@ public class PlayerProfileActivity extends HamburgerMenu {
             public void onClick(View v) {
                 Intent intent = new Intent(PlayerProfileActivity.this,
                         MyScansScreenActivity.class);
-                intent.putExtra("username", username);
-                intent.putExtra("crnt_username", crnt_username);
+                intent.putExtra("Username", username);
+                intent.putExtra("currentUser", crnt_username);
 
                 startActivity(intent);
             }

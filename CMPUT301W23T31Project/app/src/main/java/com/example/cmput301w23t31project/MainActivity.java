@@ -4,6 +4,7 @@ package com.example.cmput301w23t31project;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -37,6 +38,7 @@ import java.util.Set;
 public class MainActivity extends HamburgerMenu implements
         ScanResultsFragment.OnFragmentInteractionListener {
     String username;
+    private String currentUser;
     TextView score;
     private GpsTracker gpsTracker;
     double latitude;
@@ -57,7 +59,8 @@ public class MainActivity extends HamburgerMenu implements
         title.setText("HOME");
         setContentView(R.layout.fragment_home_screen);
         Intent intent = getIntent();
-        username = intent.getStringExtra("username");
+        username = intent.getStringExtra("Username");
+        currentUser = intent.getStringExtra("currentUser");
         DeviceID = new MyDeviceID(this).getInstance();
         AccountsCollection collectionReferenceAccount = new AccountsCollection();
         QRCodesCollection QRCodes = new QRCodesCollection();
@@ -74,7 +77,7 @@ public class MainActivity extends HamburgerMenu implements
         if (intent.hasExtra("path")) {
             collectionReferenceAccount.addAccountToCollection(username, intent, DeviceID);
         } else {
-            username = intent.getStringExtra("username");
+            username = intent.getStringExtra("Username");
         }
 
         ImageView image = findViewById(R.id.player_image);
@@ -90,7 +93,9 @@ public class MainActivity extends HamburgerMenu implements
         ImageView playerInfoBtn = findViewById(R.id.home_screen_player_info_button);
         ImageView exploreBtn = findViewById(R.id.home_screen_explore_button);
         ImageView myScanBtn = findViewById(R.id.home_screen_my_scans_button);
-
+        if (intent.hasExtra("click")) {
+            clickFun();
+        }
         String home_username = "Welcome " + username + "!";
         home_screen_username.setText(home_username);
 
@@ -110,16 +115,7 @@ public class MainActivity extends HamburgerMenu implements
         scanBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                IntentIntegrator integrator = new IntentIntegrator(MainActivity.this);
-                integrator.setPrompt("Scan a barcode");
-                integrator.setCameraId(0); // Use a specific camera of the device
-                integrator.setOrientationLocked(true);
-                integrator.setBeepEnabled(true);
-                integrator.setCaptureActivity(CaptureActivityPortrait.class);
-                if (username.equals("NewTestName")) {
-                    integrator.setTimeout(50);
-                }
-                integrator.initiateScan();
+                clickFun();
             }
         });
 
@@ -129,7 +125,8 @@ public class MainActivity extends HamburgerMenu implements
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this,
                         PlayerInfoScreenActivity.class);
-                intent.putExtra("username", username);
+                intent.putExtra("Username", username);
+                intent.putExtra("currentUser", currentUser);
                 startActivity(intent);
             }
         });
@@ -151,7 +148,8 @@ public class MainActivity extends HamburgerMenu implements
                         ExploreScreenActivity.class);
                 intent.putExtra("latitude",String.valueOf(latitude));
                 intent.putExtra("longitude",String.valueOf(longitude));
-                intent.putExtra("username", username);
+                intent.putExtra("Username", username);
+                intent.putExtra("currentUser", currentUser);
                 startActivity(intent);
             }
         });
@@ -162,8 +160,8 @@ public class MainActivity extends HamburgerMenu implements
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this,
                         MyScansScreenActivity.class);
-                intent.putExtra("username", username);
-                intent.putExtra("crnt_username", username);
+                intent.putExtra("Username", username);
+                intent.putExtra("currentUser", currentUser);
                 startActivity(intent);
             }
         });
@@ -172,13 +170,27 @@ public class MainActivity extends HamburgerMenu implements
 
     }
 
+    public void clickFun() {
+        IntentIntegrator integrator = new IntentIntegrator(MainActivity.this);
+        integrator.setPrompt("Scan a barcode");
+        integrator.setCameraId(0); // Use a specific camera of the device
+        integrator.setOrientationLocked(true);
+        integrator.setBeepEnabled(true);
+        integrator.setCaptureActivity(CaptureActivityPortrait.class);
+        if (username.equals("NewTestName")) {
+            integrator.setTimeout(50);
+        }
+        integrator.initiateScan();
+    }
+
     /**
      * Handles functionality for App Info button
      * @param view relevant view
      */
     public void onClickAppInfo(View view){
         Intent intent = new Intent(this, AppInfoScreenActivity.class);
-        intent.putExtra("username", username);
+        intent.putExtra("Username", username);
+        intent.putExtra("currentUser", currentUser);
         startActivity(intent);
     }
 
@@ -200,7 +212,8 @@ public class MainActivity extends HamburgerMenu implements
      */
     public void onClickLeaderboard(View view){
         Intent intent = new Intent(this, LeaderboardActivity.class);
-        intent.putExtra("username", username);
+        intent.putExtra("Username", username);
+        intent.putExtra("currentUser", currentUser);
         intent.putExtra("state", "HIGHSCORE");
         startActivity(intent);
     }
@@ -212,7 +225,8 @@ public class MainActivity extends HamburgerMenu implements
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
-        return useHamburgerMenu(item, username);
+
+        return useHamburgerMenu(item, currentUser);
     }
 
     /**

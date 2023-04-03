@@ -75,7 +75,7 @@ public class QRCodeStatsCommentsActivity extends HamburgerMenu implements
         setContentView(R.layout.activity_qr_code_stats_comments);
         Intent intent = getIntent();
         hash = intent.getStringExtra("Hash");
-        username = intent.getStringExtra("username");
+        username = intent.getStringExtra("Username");
         CurrentUser = intent.getStringExtra("currentUser");
         latitude = intent.getStringExtra("latitude");
         longitude = intent.getStringExtra("longitude");
@@ -138,7 +138,8 @@ public class QRCodeStatsCommentsActivity extends HamburgerMenu implements
             public void onClick(View v) {
                 Intent intent = new Intent(QRCodeStatsCommentsActivity.this,
                         SurroundingsActivity.class);
-                intent.putExtra("username", username);
+                intent.putExtra("Username", username);
+                intent.putExtra("currentUser", CurrentUser);
                 intent.putExtra("hash", hash);
                 startActivity(intent);
             }
@@ -182,7 +183,7 @@ public class QRCodeStatsCommentsActivity extends HamburgerMenu implements
                             ExploreScreenActivity.class);
                     intent.putExtra("latitude", String.valueOf(latitude));
                     intent.putExtra("longitude", String.valueOf(longitude));
-                    intent.putExtra("username", username);
+                    intent.putExtra("Username", username);
                     intent.putExtra("currentUser", CurrentUser);
                     startActivity(intent);
                 }else{
