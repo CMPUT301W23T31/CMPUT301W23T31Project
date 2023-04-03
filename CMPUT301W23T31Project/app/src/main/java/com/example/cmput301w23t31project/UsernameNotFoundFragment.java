@@ -28,8 +28,8 @@ public class UsernameNotFoundFragment extends DialogFragment {
         return builder
             .setView(view)
             .setTitle("Error!")
-            .setNegativeButton("Cancel",null)
-            .setPositiveButton("Search Again",((dialog, which) -> {
+            .setNegativeButton("CANCEL",null)
+            .setPositiveButton("SEARCH AGAIN",((dialog, which) -> {
                 new SearchUserFragment().show(getFragmentManager(), "Search Again");
             }))
             .create();

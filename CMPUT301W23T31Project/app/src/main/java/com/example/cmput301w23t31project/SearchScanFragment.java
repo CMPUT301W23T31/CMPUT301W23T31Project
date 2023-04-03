@@ -54,8 +54,8 @@ public class SearchScanFragment extends DialogFragment {
         return builder
             .setView(view)
             .setTitle("Search Scan")
-            .setNegativeButton("Cancel",null)
-            .setPositiveButton("Search",((dialog, which) -> {
+            .setNegativeButton("CANCEL",null)
+            .setPositiveButton("SEARCH",((dialog, which) -> {
                 String name = searchScan.getText().toString();
                 listener.onDisplayOkPressed(name);}))
             .create();

@@ -48,7 +48,7 @@ public class    NearByCodesActivity extends HamburgerMenu implements SearchScanF
             c+=1;
         }
         for(int i=0;i<l;i++) {
-            if((datalist.get(i).getName()).contains(name.toLowerCase().trim())){
+            if((datalist.get(i).getName().toLowerCase()).contains(name.toLowerCase().trim())){
                 datalist2.add(datalist.get(i));
                 qrcodeList = findViewById(R.id.leaderboard_list);
                 qrCodeAdapter = new NearbyScansArrayAdapter(this, datalist2,"nearby",username);
