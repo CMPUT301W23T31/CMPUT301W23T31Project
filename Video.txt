@@ -1,0 +1,5 @@
+Here is a link to a video for the project demo: https://youtu.be/Og2pRQwQzpQ
+
+Some minor notes about the video:
+  1. Transitions between some screens may seem a bit slow. This is due to the emulator not being as fast as an actual android phone.
+  2. The location is always set at the googleplex in California. This is standaradized when using the emulator.
